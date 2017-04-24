@@ -22,6 +22,6 @@ public class ClassC {
 			this.a = a;
 	  }
 	  
-	  
+	  //이정수가 작성함 ㅎ
 	  
 }

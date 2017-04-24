@@ -7,4 +7,7 @@ public class B {
 		 System.out.println("안녕");
 	}
 		
+
+		int c = 7;
+
 }
