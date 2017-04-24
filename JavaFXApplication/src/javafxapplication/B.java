@@ -1,5 +1,5 @@
 package javafxapplication;
 
-public class A {
-	
+public class B {
+
 }
