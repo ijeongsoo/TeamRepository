@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import com.tomcatisbabycat.homepanel.menu.*;
 import java.io.IOException;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -86,7 +87,7 @@ public class MainController implements Initializable {
 			  
 			  parent.setTranslateX(800);
 			  KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-			  KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+			  KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), keyValue);
 			  
 			  Timeline timeline = new Timeline();
 			  timeline.getKeyFrames().add(keyFrame);

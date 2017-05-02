@@ -16,7 +16,7 @@
             <Button fx:id="mainBtn3" layoutX="576.0" layoutY="253.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="mainBackground" text="Button" />
             <Button fx:id="mainBtn4" layoutX="375.0" layoutY="253.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="specificBackground">
                <graphic>
-                  <ImageView id="#mainImage" fitHeight="77.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView id="mainImage" fitHeight="77.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../resources/icons/flat_menu_white.png" />
                      </image>

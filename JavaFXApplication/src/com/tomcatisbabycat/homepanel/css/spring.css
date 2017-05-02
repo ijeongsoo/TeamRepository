@@ -15,11 +15,14 @@ and open the template in the editor.
 .specificBackground{
     -fx-background-color: #85D03C; /* 푸른색 짝꿍 녹색*/
 }
+.controlButton{
+    -fx-background-color: white; /* 상단의 뒤로가기, 잠금, 홈 버튼의 배경색을 흰색으로 처리 하기위해 사용 */
+}
 
 .mainBackground:pressed{
     -fx-background-color: red;
 }
-.mainBackground:focused {
+.mainBackground:focused { 
     -fx-focus-color: #01C2F2;
     -fx-faint-focus-color: #01C2F2;
     -fx-inner-border: #01C2F2;
