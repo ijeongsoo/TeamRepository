@@ -37,152 +37,151 @@ import javafx.util.Duration;
  */
 public class MainController implements Initializable {
 
-	  @FXML
-	  private Button mainBtnLock;
-	  @FXML
-	  private Button mainBtnMenu;
-	  @FXML
-	  private ImageView mainImage;
-	  @FXML
-	  private BorderPane mainImagePane;
-	  @FXML
-	  private StackPane stackPane;
+	@FXML
+	private Button mainBtnLock;
+	@FXML
+	private Button mainBtnMenu;
+	@FXML
+	private ImageView mainImage;
+	@FXML
+	private BorderPane mainImagePane;
+	@FXML
+	private StackPane stackPane;
 
-	  private StackPane mainPane;
-	  @FXML
-	  private ImageView mainWeatherImage;
-	  @FXML
-	  private ImageView mainWeatherImageBack;
+	private StackPane mainPane;
+	@FXML
+	private ImageView mainWeatherImage;
+	@FXML
+	private ImageView mainWeatherImageBack;
 
+	private SampleStatus samplestatus = SampleStatus.getInstance();
 
-	  private SampleStatus samplestatus = SampleStatus.getInstance();
+	@FXML
+	private ImageView mainImageBack2;
 
-	  @FXML
-	  private ImageView mainImageBack2;
+	/**
+	 * Initializes the controller class.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
 
-	  /**
-	   * Initializes the controller class.
-	   */
-	  @Override
-	  public void initialize(URL url, ResourceBundle rb) {
+		//statusDetect();
+		mainPane = stackPane;
+		Image image = new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString());
+		double originalHight = image.getHeight();
+		double originalWidth = image.getWidth();
+		if (originalHight > originalWidth) {
+			mainImage.setFitWidth(180);
+			mainImage.setFitHeight(0);
+			double resizeHeight = (180 * originalHight) / originalWidth;
+			mainImage.setImage(image);
+			Circle clip = new Circle(mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2);
+			mainImage.setClip(clip);
+		} else {
+			double resizeWidth = (180 * originalWidth) / originalHight;
+			mainImage.setImage(image);
+			Circle clip = new Circle(resizeWidth / 2, mainImage.getFitHeight() / 2, mainImage.getFitHeight() / 2);
+			mainImage.setClip(clip);
+		}
 
-			//statusDetect();
-			mainPane = stackPane;
-			Image image = new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString());
-			double originalHight = image.getHeight();
-			double originalWidth = image.getWidth();
-			if (originalHight > originalWidth) {
-				  mainImage.setFitWidth(180);
-				  mainImage.setFitHeight(0);
-				  double resizeHeight = (180 * originalHight) / originalWidth;
-				  mainImage.setImage(image);
-				  Circle clip = new Circle(mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2);
-				  mainImage.setClip(clip);
+		mainBtnMenu.setOnAction((event) -> {
+			handleBtnMenu(event);
+		});
+
+		mainBtnLock.setOnAction((event) -> {
+			if (samplestatus.getWeather().equals("sunny")) {
+				samplestatus.setWeather("cloudy");
 			} else {
-				  double resizeWidth = (180 * originalWidth) / originalHight;
-				  mainImage.setImage(image);
-				  Circle clip = new Circle(resizeWidth / 2, mainImage.getFitHeight() / 2, mainImage.getFitHeight() / 2);
-				  mainImage.setClip(clip);
+				samplestatus.setWeather("sunny");
 			}
+		});
 
-			mainBtnMenu.setOnAction((event) -> {
-				  handleBtnMenu(event);
-			});
-
-			mainBtnLock.setOnAction((event) -> {
-				  if (samplestatus.getWeather().equals("sunny")) {
-						samplestatus.setWeather("cloudy");
-				  } else {
-						samplestatus.setWeather("sunny");
-				  }
-			});
-
-			Thread weatherthread = new Thread() {
-				  @Override
-				  public void run() {
-						double rotate = 0;
-						double movepoint = 0;
-						while (true) {
-							  if (samplestatus.getWeather().equals("sunny")) {
-									mainWeatherImage.setX(0);
-									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-									mainWeatherImageBack.setVisible(false);
-									double rotateTemp = rotate;
-									Platform.runLater(() -> {
-										  mainWeatherImage.setRotate(rotateTemp);
-									});
-									try {
-										  Thread.sleep(500);
-									} catch (InterruptedException ex) {
-									}
-									rotate += 10;
-									if (rotate == 360) {
-										  rotate = 0;
-									}
-							  } else if (samplestatus.getWeather().equals("cloudy")) {
-									mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));
-									mainWeatherImageBack.setVisible(true);
-									mainWeatherImage.setRotate(0);
-									while (movepoint < 15.0) {
-										  double movepointTemp = movepoint;
-										  Platform.runLater(() -> {
-												mainWeatherImage.setX(movepointTemp);
-										  });
-										  try {
-												Thread.sleep(10);
-										  } catch (InterruptedException ex) {
-										  }
-										  movepoint += 0.1;
-									}
-									while (movepoint > -15.0) {
-										  double movepointTemp = movepoint;
-										  Platform.runLater(() -> {
-												mainWeatherImage.setX(movepointTemp);
-										  });
-										  try {
-												Thread.sleep(10);
-										  } catch (InterruptedException ex) {
-										  }
-										  movepoint -= 0.1;
-									}
-							  } else if (samplestatus.getWeather().equals("rainny")) {
-
-									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("umbrella.png").toString()));
-									mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-									mainWeatherImageBack.setVisible(false);
-									mainWeatherImage.setRotate(0);
-
-							  }
+		Thread weatherthread = new Thread() {
+			@Override
+			public void run() {
+				double rotate = 0;
+				double movepoint = 0;
+				while (true) {
+					if (samplestatus.getWeather().equals("sunny")) {
+						mainWeatherImage.setX(0);
+						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+						mainWeatherImageBack.setVisible(false);
+						double rotateTemp = rotate;
+						Platform.runLater(() -> {
+							mainWeatherImage.setRotate(rotateTemp);
+						});
+						try {
+							Thread.sleep(500);
+						} catch (InterruptedException ex) {
 						}
+						rotate += 10;
+						if (rotate == 360) {
+							rotate = 0;
+						}
+					} else if (samplestatus.getWeather().equals("cloudy")) {
+						mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));
+						mainWeatherImageBack.setVisible(true);
+						mainWeatherImage.setRotate(0);
+						while (movepoint < 15.0) {
+							double movepointTemp = movepoint;
+							Platform.runLater(() -> {
+								mainWeatherImage.setX(movepointTemp);
+							});
+							try {
+								Thread.sleep(10);
+							} catch (InterruptedException ex) {
+							}
+							movepoint += 0.1;
+						}
+						while (movepoint > -15.0) {
+							double movepointTemp = movepoint;
+							Platform.runLater(() -> {
+								mainWeatherImage.setX(movepointTemp);
+							});
+							try {
+								Thread.sleep(10);
+							} catch (InterruptedException ex) {
+							}
+							movepoint -= 0.1;
+						}
+					} else if (samplestatus.getWeather().equals("rainny")) {
 
-				  }
+						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("umbrella.png").toString()));
+						mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+						mainWeatherImageBack.setVisible(false);
+						mainWeatherImage.setRotate(0);
 
-			};
+					}
+				}
 
-			weatherthread.setDaemon(true);
-			weatherthread.start();
-
-	  }
-
-	  private void handleBtnMenu(ActionEvent e) { // menu 화면 넘어가는 애니메이션 처리
-			try {
-				  Parent parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
-
-				  // 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
-				  stackPane.getChildren().add(parent);
-
-				  parent.setTranslateX(800);
-				  KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-				  KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
-
-				  Timeline timeline = new Timeline();
-				  timeline.getKeyFrames().add(keyFrame);
-
-				  timeline.play();
-			} catch (IOException ex) {
-				  ex.printStackTrace();
 			}
-	  }
+
+		};
+
+		weatherthread.setDaemon(true);
+		weatherthread.start();
+
+	}
+
+	private void handleBtnMenu(ActionEvent e) { // menu 화면 넘어가는 애니메이션 처리
+		try {
+			Parent parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+
+			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			stackPane.getChildren().add(parent);
+
+			parent.setTranslateX(800);
+			KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrame = new KeyFrame(Duration.seconds(2), keyValue);
+
+			Timeline timeline = new Timeline();
+			timeline.getKeyFrames().add(keyFrame);
+
+			timeline.play();
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 }
