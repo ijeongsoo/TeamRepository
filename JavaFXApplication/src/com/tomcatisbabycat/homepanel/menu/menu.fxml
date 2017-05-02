@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,17 +8,73 @@
 <?import javafx.scene.layout.*?>
 
 <StackPane prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.menu.MenuController">
-   <children>
-      <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
-         <children>
-            <Button layoutX="599.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="410.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="599.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="410.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="225.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="40.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" />
-            <Button layoutX="40.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="360.0" />
-         </children>
-      </AnchorPane>
-   </children>
+    <children>
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Button layoutX="599.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/single-wrench.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="410.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/blank-file.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="599.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/raining-day.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="410.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/video-camera-with-play-button.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="225.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/dollar-coin.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="40.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/day-two-calendar.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button layoutX="40.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="360.0" styleClass="mainBackground">
+                    <graphic>
+                        <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/bulb.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
 </StackPane>
