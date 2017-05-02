@@ -42,31 +42,31 @@ public class CctvController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		btnControlHome.setOnAction(event -> {
 			handleBtnControlHome(event);
-		}); 
-	}	
+		});
+	}
 
 	private void handleBtnControlHome(ActionEvent event) {
 		StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot();
-		
+
 		cctvStackPane.setTranslateX(0);
 		KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
 		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
-				e -> {
-					//rootPane.getChildren().removeAll(MainController.paneBasket);
-					//rootPane.getChildren().remove(cctvStackPane);
-					Iterator iterator = rootPane.getChildren().iterator();
-					while(iterator.hasNext()){
-						if(iterator.next() instanceof StackPane){
-							iterator.remove();
-						}
-					}
-					//rootPane.getChildren().clear(); // clear 자식으로 있는 모든 컴포넌트 삭제 ㅋㅋ
-				}, keyValue);
+			  e -> {
+				  //rootPane.getChildren().removeAll(MainController.paneBasket);
+				  //rootPane.getChildren().remove(cctvStackPane);
+				  Iterator iterator = rootPane.getChildren().iterator();
+				  while (iterator.hasNext()) {
+					  if (iterator.next() instanceof StackPane) {
+						  iterator.remove();
+					  }
+				  }
+				  //rootPane.getChildren().clear(); // clear 자식으로 있는 모든 컴포넌트 삭제 ㅋㅋ
+			  }, keyValue);
 
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(keyFrame);
 
 		timeline.play();
 	}
-	
+
 }

@@ -9,9 +9,12 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane fx:id="stackPaneLock" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.lock.LockController">
    <children>
-      <Button layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Unlock" />
-      <StackPane prefHeight="480.0" prefWidth="800.0" />
+      <AnchorPane prefHeight="480.0" prefWidth="800.0">
+         <children>
+            <Button fx:id="btnUnlock" layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Unlock" />
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

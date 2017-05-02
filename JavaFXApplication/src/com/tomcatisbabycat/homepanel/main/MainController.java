@@ -5,6 +5,7 @@
  */
 package com.tomcatisbabycat.homepanel.main;
 
+import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import com.tomcatisbabycat.homepanel.menu.*;
 import com.tomcatisbabycat.homepanel.resources.weatherIcon.WeatherIconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
+import static javafx.animation.Animation.Status.STOPPED;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -46,9 +48,7 @@ public class MainController implements Initializable {
 	@FXML
 	private BorderPane mainImagePane;
 	@FXML
-	private StackPane stackPane;
-
-	private StackPane mainPane;
+	private StackPane stackPaneMain;
 	@FXML
 	private ImageView mainWeatherImage;
 	@FXML
@@ -66,7 +66,6 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 		//statusDetect();
-		mainPane = stackPane;
 		Image image = new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString());
 		double originalHight = image.getHeight();
 		double originalWidth = image.getWidth();
@@ -169,20 +168,40 @@ public class MainController implements Initializable {
 			Parent parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
 
 			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
-			stackPane.getChildren().add(parent);
+			LockController.lockRootPane.getChildren().add(parent);
 			
 			parent.setTranslateX(800);
-			KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-<<<<<<< HEAD
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
-=======
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(5), keyValue);
->>>>>>> origin/master
+			
+			KeyValue keyValueStackPaneMenu = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrameStackPaneMenu = new KeyFrame(Duration.seconds(1), keyValueStackPaneMenu);
+			
+			KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
+			KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
 
 			Timeline timeline = new Timeline();
-			timeline.getKeyFrames().add(keyFrame);
-			
+			//timeline.getKeyFrames().add(keyFrameStackPaneMenu, keyFrameStackPaneMain);
+			timeline.getKeyFrames().addAll(keyFrameStackPaneMain, keyFrameStackPaneMenu);
 			timeline.play();
+			//System.out.println(timeline.getStatus());
+			
+			// 메뉴버튼을 클릭하면 메뉴화면생성과 동시에 메인화면을 삭제한다.
+			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+				Thread task = new Thread(){
+					@Override
+					public void run() {
+						Platform.runLater(()->{LockController.lockRootPane.getChildren().remove(stackPaneMain);});
+					}
+
+				};
+				task.start();
+			}
+			});
+			//LockController.lockRootPane.getChildren().remove(stackPaneMain);
+			
+			
+			
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
