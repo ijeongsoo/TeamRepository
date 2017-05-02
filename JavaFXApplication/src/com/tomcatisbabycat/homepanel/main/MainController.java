@@ -17,11 +17,16 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Circle;
 import com.tomcatisbabycat.homepanel.menu.*;
+import com.tomcatisbabycat.homepanel.resources.weatherIcon.WeatherIconSelector;
+import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
 import javafx.animation.Interpolator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
@@ -35,9 +40,9 @@ import javafx.util.Duration;
 public class MainController implements Initializable {
 
 	  @FXML
-	  private Button mainBtn3;
+	  private Button mainBtnLock;
 	  @FXML
-	  private Button mainBtn4;
+	  private Button mainBtnMenu;
 	  @FXML
 	  private ImageView mainImage;
 	  @FXML
@@ -46,6 +51,10 @@ public class MainController implements Initializable {
 	  private StackPane stackPane;
 	  
 	  private StackPane mainPane;
+	  @FXML
+	  private ImageView mainWeatherImage;
+	  @FXML
+	  private ImageView mainWeatherImageBack;
 
 
 	  /**
@@ -73,9 +82,63 @@ public class MainController implements Initializable {
 			}
 			
 			
-			mainBtn4.setOnAction((event) -> {
+			mainBtnMenu.setOnAction((event) -> {
 				  handleBtnMenu(event);
 			});
+			
+			if(SampleStatus.weather.equals("sunny")){
+				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+				  Thread thread = new Thread(){
+				  @Override
+				  public void run() {
+						double rotate=0;
+						while(true){
+							  double rotateTemp=rotate;
+							  Platform.runLater(() -> {
+									mainWeatherImage.setRotate(rotateTemp);
+							  });
+							  try {Thread.sleep(500);} catch (InterruptedException ex) {}
+							  rotate+=10;
+							  if(rotate==360)
+									rotate=0;
+						}
+				  };		  
+			};
+			thread.setDaemon(true);
+			thread.start();
+			}else if(SampleStatus.weather.equals("cloudy")){
+				  mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));				  
+				  Thread thread = new Thread(){
+				  @Override
+				  public void run() {
+						double rotate=0;
+						while(true){
+							  while(rotate<15.0){
+									double rotateTemp=rotate;
+									Platform.runLater(() -> {
+										  mainWeatherImage.setX(rotateTemp);
+									});
+									try {Thread.sleep(10);} catch (InterruptedException ex) {}
+									rotate+=0.1;
+							  }
+							  while(rotate>-15.0){
+									double rotateTemp=rotate;
+									Platform.runLater(() -> {
+										  mainWeatherImage.setX(rotateTemp);
+									});
+									try {Thread.sleep(10);} catch (InterruptedException ex) {}
+									rotate-=0.1;
+							  }
+						}
+				  };		  
+			};
+			thread.setDaemon(true);
+			thread.start();
+
+			}
+			
+			
 			
 	  }	
 	  private void handleBtnMenu(ActionEvent e){ // menu 화면 넘어가는 애니메이션 처리
