@@ -9,9 +9,9 @@ and open the template in the editor.
 */
 
 .mainBackground{
-  -fx-background-color: #01C2F2;
+  -fx-background-color: #01C2F2; /* 푸른색 처음에 우리가 정한 푸른색 */
 }
 
 .specificBackground{
-    -fx-background-color: #85D03C;
+    -fx-background-color: #85D03C; /* 푸른색 짝꿍 녹색*/
 }
