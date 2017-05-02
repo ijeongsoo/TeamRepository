@@ -11,7 +11,7 @@
 
 <StackPane id="StackPane" fx:id="stackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.main.MainController">
    <children>
-      <AnchorPane prefHeight="480.0" prefWidth="800.0">
+      <AnchorPane fx:id="anchorPane" prefHeight="480.0" prefWidth="800.0">
          <children>
             <Button fx:id="mainBtnLock" layoutX="576.0" layoutY="253.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="mainBackground">
                <graphic>
@@ -69,6 +69,7 @@
                         <Font name="Arial Black" size="18.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="mainImageBack2" fitHeight="64.0" fitWidth="61.0" layoutX="309.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
          </children>
