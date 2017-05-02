@@ -38,22 +38,22 @@ import javafx.util.Duration;
 public class MainController implements Initializable {
 
 
-	  @FXML
-	  private Button mainBtnLock;
-	  @FXML
-	  private Button mainBtnMenu;
-	  @FXML
-	  private ImageView mainImage;
-	  @FXML
-	  private BorderPane mainImagePane;
-	  @FXML
-	  private StackPane stackPane;
-	  
-	  private StackPane mainPane;
-	  @FXML
-	  private ImageView mainWeatherImage;
-	  @FXML
-	  private ImageView mainWeatherImageBack;
+//	  @FXML
+//	  private Button mainBtnLock;
+//	  @FXML
+//	  private Button mainBtnMenu;
+//	  @FXML
+//	  private ImageView mainImage;
+//	  @FXML
+//	  private BorderPane mainImagePane;
+//	  @FXML
+//	  private StackPane stackPane;
+//	  
+//	  private StackPane mainPane;
+//	  @FXML
+//	  private ImageView mainWeatherImage;
+//	  @FXML
+//	  private ImageView mainWeatherImageBack;
 	  
 	  
 	  private SampleStatus samplestatus = SampleStatus.getInstance();
