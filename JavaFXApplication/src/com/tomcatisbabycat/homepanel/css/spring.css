@@ -19,3 +19,13 @@ and open the template in the editor.
 .mainBackground:pressed{
     -fx-background-color: red;
 }
+.mainBackground:focused {
+    -fx-focus-color: #01C2F2;
+    -fx-faint-focus-color: #01C2F2;
+    -fx-inner-border: #01C2F2;
+    -fx-body-color: #01C2F2;
+ 
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: -2, -0.3, 1, 2;
+    -fx-background-radius: 7, 6, 4, 3;
+}

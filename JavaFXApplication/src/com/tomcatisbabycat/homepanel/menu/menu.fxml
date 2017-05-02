@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -11,7 +12,7 @@
     <children>
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
-                <Button layoutX="599.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
+                <Button layoutX="594.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
                     <graphic>
                         <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
                             <image>
@@ -29,7 +30,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="599.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                <Button layoutX="595.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
                     <graphic>
                         <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
                             <image>
@@ -74,6 +75,46 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <Label layoutX="46.0" layoutY="237.0" text="Light" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="416.0" layoutY="237.0" text="CCTV" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="607.0" layoutY="237.0" text="Condition" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="607.0" layoutY="422.0" text="Setting" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="416.0" layoutY="422.0" text="Notice" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="232.0" layoutY="422.0" text="Consume" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="46.0" layoutY="422.0" text="Schedule" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <Label layoutX="40.0" layoutY="27.0" text="menu">
+               <font>
+                  <Font name="Arial Bold" size="24.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>
