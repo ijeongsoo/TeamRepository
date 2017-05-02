@@ -40,12 +40,12 @@ public class CctvController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		btnControlHome.setOnAction(event -> {
-			handleBtnControlHome(event);
+		btnControlLock.setOnAction(event -> {
+			handleBtnControlLock(event);
 		});
 	}
 
-	private void handleBtnControlHome(ActionEvent event) {
+	private void handleBtnControlLock(ActionEvent event) {
 		StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot();
 
 		cctvStackPane.setTranslateX(0);
