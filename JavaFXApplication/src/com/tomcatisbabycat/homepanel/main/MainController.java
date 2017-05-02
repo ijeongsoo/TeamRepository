@@ -170,14 +170,14 @@ public class MainController implements Initializable {
 
 			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
 			stackPane.getChildren().add(parent);
-
+			
 			parent.setTranslateX(800);
 			KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
 			KeyFrame keyFrame = new KeyFrame(Duration.seconds(2), keyValue);
 
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().add(keyFrame);
-
+			
 			timeline.play();
 		} catch (IOException ex) {
 			ex.printStackTrace();
