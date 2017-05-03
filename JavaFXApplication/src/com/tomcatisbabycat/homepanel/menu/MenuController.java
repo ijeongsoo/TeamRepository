@@ -144,7 +144,7 @@ public class MenuController implements Initializable {
                   Parent parent = FXMLLoader.load(ConditionController.class.getResource("condition.fxml"));
                   //condition.fxml을 로딩시키는 것으로써 condition.fxml파일이 해당 패키지안에 있지않으므로 그 경로를 찾기위해 conditionControl.class가 있는 패키지에서 getResource를 통해 condition.fxml의 경로를 찾아 로딩.
 
-                  menuStackPane.getChildren().add(parent); //메뉴의 stackpane에 또하나의 stack(condition.fxml을 로딩한 parent)를 추가한것
+                  LockController.lockRootPane.getChildren().add(2, parent); //메뉴의 stackpane에 또하나의 stack(condition.fxml을 로딩한 parent)를 추가한것
                   
                   parent.setTranslateX(800); //추가된 stack을 x좌표 800에 생성시킴.frame에서 벗어나 생성된것이므로 화면에 보이지는 않는다.
                   KeyValue keyValue = new KeyValue(parent.translateXProperty(),0);//변화시킬 translateX 속성을 얻어내고, frame밖에서 생성된 stack을 화면frame으로(0좌표를 종료값으로) 갖다놓는것.
@@ -152,8 +152,15 @@ public class MenuController implements Initializable {
                   
                   Timeline timeline = new Timeline();// 애니메이션을 실현하기 위해 timeline객체 생성.
                   timeline.getKeyFrames().add(keyFrame);//생성된 timeline객체에 설정한 keyframe를 셋팅.
-                  
                   timeline.play();//애니메이션 실행.
+                  
+                  timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+					// 애니메이션이 끝났을때 메뉴페이지 삭제
+					// 삭제를 하면 리스트의 사이즈는 2로 변하고 인덱스 1 에는 cctv페이지가 들어간다.
+					LockController.lockRootPane.getChildren().remove(1);
+				}
+			});
                   
             } catch (IOException ex) {
                   ex.printStackTrace();
