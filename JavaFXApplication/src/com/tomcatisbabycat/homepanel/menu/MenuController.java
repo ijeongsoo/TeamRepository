@@ -8,8 +8,11 @@ package com.tomcatisbabycat.homepanel.menu;
 import com.tomcatisbabycat.homepanel.Condition.ConditionController;
 import com.tomcatisbabycat.homepanel.cctv.CctvController;
 import com.tomcatisbabycat.homepanel.consume.ConsumeController;
+import com.tomcatisbabycat.homepanel.light.LightController;
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
+import com.tomcatisbabycat.homepanel.notice.NoticeController;
+import com.tomcatisbabycat.homepanel.schedule.ScheduleController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,6 +47,12 @@ public class MenuController implements Initializable {
       private Button btnControlLock;
 	@FXML
 	private Button btnConsume;
+	@FXML
+	private Button btnLight;
+	@FXML
+	private Button btnNotice;
+	@FXML
+	private Button btnSchedule;
 
 	/**
 	 * Initializes the controller class.
@@ -61,6 +70,18 @@ public class MenuController implements Initializable {
             });
 		btnConsume.setOnAction(event->{
 			handleBtnConsume(event);
+		});
+		btnControlLock.setOnAction(event->{
+			handleBtnControlLock(event);
+		});
+		btnLight.setOnAction(event->{
+			handleBtnLight(event);
+		});
+		btnNotice.setOnAction(event->{
+			handleBtnNotice(event);
+		});
+		btnSchedule.setOnAction(event->{
+			handleBtnSchedule(event);
 		});
 	}
 	private void handleBtnControlHome(ActionEvent event) {
@@ -85,6 +106,10 @@ public class MenuController implements Initializable {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	private void handleBtnControlLock(ActionEvent event){
+		// menu에서의 Lock 이벤트처리 일단 안함
+		LockController.lockRootPane.getChildren().remove(menuStackPane);
 	}
 
 	private void handleBtnCCTV(ActionEvent event) {
@@ -136,7 +161,92 @@ public class MenuController implements Initializable {
       }
 
 	private void handleBtnConsume(ActionEvent event) {
-		//Parent parent = FXMLLoader.load(ConsumeController.class.getResource(name))
+		try {
+			Parent parent = FXMLLoader.load(ConsumeController.class.getResource("consume.fxml"));
+			
+			LockController.lockRootPane.getChildren().add(2, parent);
+			parent.setTranslateX(800);
+			
+			KeyValue keyValueStackPaneConsume = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrameStackPaneConsume = new KeyFrame(Duration.seconds(1), keyValueStackPaneConsume);
+			
+			Timeline timeline = new Timeline(keyFrameStackPaneConsume);
+			timeline.play();
+			
+			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+					LockController.lockRootPane.getChildren().remove(1);
+				}
+			});
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	private void handleBtnLight(ActionEvent event){
+		try {
+			Parent parent = FXMLLoader.load(LightController.class.getResource("light.fxml"));
+			
+			LockController.lockRootPane.getChildren().add(2, parent);
+			parent.setTranslateX(800);
+			
+			KeyValue keyValueStackPaneLight = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrameStackPaneLight = new KeyFrame(Duration.seconds(1), keyValueStackPaneLight);
+			
+			Timeline timeline = new Timeline(keyFrameStackPaneLight);
+			timeline.play();
+			
+			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+					LockController.lockRootPane.getChildren().remove(1);
+				}
+			});
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	private void handleBtnNotice(ActionEvent event){
+		try {
+			Parent parent = FXMLLoader.load(NoticeController.class.getResource("notice.fxml"));
+			
+			LockController.lockRootPane.getChildren().add(2, parent);
+			parent.setTranslateX(800);
+			
+			KeyValue keyValueStackPaneNotice = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrameStackPaneNotice = new KeyFrame(Duration.seconds(1), keyValueStackPaneNotice);
+			
+			Timeline timeline = new Timeline(keyFrameStackPaneNotice);
+			timeline.play();
+			
+			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+					LockController.lockRootPane.getChildren().remove(1);
+				}
+			});
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+	private void handleBtnSchedule(ActionEvent event){
+		try {
+			Parent parent = FXMLLoader.load(ScheduleController.class.getResource("schedule.fxml"));
+			
+			LockController.lockRootPane.getChildren().add(2, parent);
+			parent.setTranslateX(800);
+			
+			KeyValue keyValueStackPaneSchedule = new KeyValue(parent.translateXProperty(), 0);
+			KeyFrame keyFrameStackPaneSchedule = new KeyFrame(Duration.seconds(1), keyValueStackPaneSchedule);
+			
+			Timeline timeline = new Timeline(keyFrameStackPaneSchedule);
+			timeline.play();
+			
+			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				if(newValue.toString().equals("STOPPED")){
+					LockController.lockRootPane.getChildren().remove(1);
+				}
+			});
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
 	}
 
 }

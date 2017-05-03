@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="scheduleStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.schedule.ScheduleController">
+    <children>
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="40.0" layoutY="27.0" text="Schedule">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
