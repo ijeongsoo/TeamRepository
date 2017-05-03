@@ -5,10 +5,12 @@
  */
 package com.tomcatisbabycat.homepanel.main;
 
+import com.tomcatisbabycat.homepanel.controller.knob.knobfx.Knob;
 import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
 import com.tomcatisbabycat.homepanel.main.statusthread.TemperatureThread;
 import com.tomcatisbabycat.homepanel.main.statusthread.MoistureThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
+import com.tomcatisbabycat.homepanel.main.statusthread.ClockThread;
 import com.tomcatisbabycat.homepanel.main.statusthread.DustThread;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,16 +23,19 @@ import javafx.scene.layout.BorderPane;
 import com.tomcatisbabycat.homepanel.menu.*;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
-import java.util.Iterator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Line;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 
 /**
@@ -74,12 +79,50 @@ public class MainController implements Initializable {
 	private ImageView imgMainDust;
 	@FXML
 	private Label lblMainDust;
+	@FXML
+	private Knob knob;
+	@FXML
+	private Line houreHand;
+	@FXML
+	private Line minuateHand;
+	@FXML
+	private Line secondHand;
+	
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		 /*Timeline timeline = new Timeline(
+                new KeyFrame(Duration.ZERO, new KeyValue(rotation.angleProperty(), 100)),
+                new KeyFrame(Duration.seconds(10), new KeyValue(rotation.angleProperty(), 360))
+		 );
+		 timeline.play();*/
+		
+		knob.setValue(28);
+			
+			knob.setOnMouseDragged((event) -> {
+				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
+			  if((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI)>0)
+				   knob.setValue((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI)/3);
+			  else if(((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI))/3>-30)
+					knob.setValue(0);
+			else if(((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI))/3<-30)
+				  knob.setValue(60);
+			});
+			
+			knob.setOnMouseClicked((event) -> {
+				  System.out.println(event.getX()+","+event.getY());
+			});
+			
+			knob.valueProperty().addListener(new ChangeListener<Number>(){
+				  @Override
+				  public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+						
+						//tempo.setText(newValue.intValue()+"°");
+				  };
+			});
 		//statusDetect();
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();
@@ -91,19 +134,18 @@ public class MainController implements Initializable {
 		mainBtnLock.setOnAction((event) -> {
 			int a = (int) (Math.random() * 4);
 			System.out.println(a);
-			switch (a) {
-				case 0:
-					samplestatus.setWeather("sunny");
-					break;
-				case 1:
-					samplestatus.setWeather("cloudy");
-					break;
-				case 2:
-					samplestatus.setWeather("rainny");
-					break;
-				case 3:
-					samplestatus.setWeather("snow");
-					break;
+			switch(a){
+				case 0:samplestatus.setWeather("sunny");
+				samplestatus.setDust(160);
+				break;
+				case 1:samplestatus.setWeather("cloudy");
+				samplestatus.setMoisture(20);
+				break;
+				case 2:samplestatus.setWeather("rainny");
+				break;
+				case 3:samplestatus.setWeather("snow");
+				samplestatus.setTemperature(8.2);
+				break;
 			}
 		});
 
@@ -122,8 +164,17 @@ public class MainController implements Initializable {
 		DustThread dustThread = new DustThread(imgMainDust, lblMainDust);
 		dustThread.setDaemon(true);
 		dustThread.start();
+		
+		ClockThread clockThread = new ClockThread(houreHand, minuateHand, secondHand);
+		clockThread.setDaemon(true);
+		clockThread.start();
+		
+		
 
 	}
+	
+	
+	
 
 	private void handleBtnMenu(ActionEvent e) { // menu 화면 넘어가는 애니메이션 처리
 		try {
