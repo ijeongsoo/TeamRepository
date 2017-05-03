@@ -35,8 +35,6 @@ public class LockController implements Initializable {
 	private StackPane stackPaneLock;
 	
 	public static StackPane lockRootPane;
-	@FXML
-	private Button btnTest;
 
 	/**
 	 * Initializes the controller class.
@@ -47,9 +45,6 @@ public class LockController implements Initializable {
 		
 		btnUnlock.setOnAction(event->{
 			handleBtnUnlock(event);
-		});
-		btnTest.setOnAction(event->{
-			handleBtnTest(event);
 		});
 	}	
 
@@ -76,9 +71,4 @@ public class LockController implements Initializable {
 			ex.printStackTrace();
 		}
 	}
-
-	private void handleBtnTest(ActionEvent event) {
-		System.out.println("test 버튼이 눌렸습니다.");
-	}
-	
 }

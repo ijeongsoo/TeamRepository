@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tomcatisbabycat.homepanel.cctv;
+package com.tomcatisbabycat.homepanel.consume;
 
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
@@ -27,16 +27,15 @@ import javafx.util.Duration;
  *
  * @author kang
  */
-public class CctvController implements Initializable {
-
-	@FXML
-	private StackPane cctvStackPane;
+public class ConsumeController implements Initializable {
 	@FXML
 	private Button btnControlHome;
 	@FXML
 	private Button btnControlLock;
 	@FXML
 	private Button btnControlBack;
+	@FXML
+	private StackPane consumeStackPane;
 
 	/**
 	 * Initializes the controller class.
@@ -54,15 +53,15 @@ public class CctvController implements Initializable {
 		});
 	}
 	private void handleBtnControlBack(ActionEvent event){
-		cctvStackPane.setTranslateX(0);
+		consumeStackPane.setTranslateX(0);
 		
-		KeyValue keyValueStackPaneCCTV = new KeyValue(cctvStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneCCTV = new KeyFrame(Duration.seconds(1), 
+		KeyValue keyValueStackPaneConsume = new KeyValue(consumeStackPane.translateXProperty(), 800);
+		KeyFrame keyFrameStackPaneConsume = new KeyFrame(Duration.seconds(1), 
 			  e->{
 				LockController.lockRootPane.getChildren().remove(2);
-		}, keyValueStackPaneCCTV);
+		}, keyValueStackPaneConsume);
 		
-		Timeline timeline = new Timeline(keyFrameStackPaneCCTV);
+		Timeline timeline = new Timeline(keyFrameStackPaneConsume);
 		timeline.play();
 		
 		try {
@@ -74,32 +73,32 @@ public class CctvController implements Initializable {
 	
 
 	private void handleBtnControlLock(ActionEvent event) {
-		//StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
+		//StackPane rootPane = (StackPane) consumeStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
 
-		cctvStackPane.setTranslateX(0);
-		KeyValue keyValueStackPaneCCTV = new KeyValue(cctvStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneCCTV = new KeyFrame(Duration.seconds(1),
+		consumeStackPane.setTranslateX(0);
+		KeyValue keyValueStackPaneConsume = new KeyValue(consumeStackPane.translateXProperty(), 800);
+		KeyFrame keyFrameStackPaneConsume = new KeyFrame(Duration.seconds(1),
 			  e -> {
 				  //
-				  LockController.lockRootPane.getChildren().remove(cctvStackPane);
-			  }, keyValueStackPaneCCTV);
+				  LockController.lockRootPane.getChildren().remove(consumeStackPane);
+			  }, keyValueStackPaneConsume);
 
 		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrameStackPaneCCTV);
+		timeline.getKeyFrames().add(keyFrameStackPaneConsume);
 
 		timeline.play();
 	}
 
 	private void handleBtnControlHome(ActionEvent event) {
 
-		KeyValue keyValueStackPaneCCTV = new KeyValue(cctvStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneCCTV = new KeyFrame(Duration.seconds(1),
+		KeyValue keyValueStackPaneConsume = new KeyValue(consumeStackPane.translateXProperty(), 800);
+		KeyFrame keyFrameStackPaneConsume = new KeyFrame(Duration.seconds(1),
 			  e -> {
 				  LockController.lockRootPane.getChildren().remove(2, LockController.lockRootPane.getChildren().size());
-			  }, keyValueStackPaneCCTV);
+			  }, keyValueStackPaneConsume);
 
 		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrameStackPaneCCTV);
+		timeline.getKeyFrames().add(keyFrameStackPaneConsume);
 
 		timeline.play();
 		try {

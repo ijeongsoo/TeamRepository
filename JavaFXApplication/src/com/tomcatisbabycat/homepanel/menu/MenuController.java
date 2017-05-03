@@ -7,17 +7,15 @@ package com.tomcatisbabycat.homepanel.menu;
 
 import com.tomcatisbabycat.homepanel.Condition.ConditionController;
 import com.tomcatisbabycat.homepanel.cctv.CctvController;
+import com.tomcatisbabycat.homepanel.consume.ConsumeController;
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -45,7 +43,7 @@ public class MenuController implements Initializable {
       @FXML
       private Button btnControlLock;
 	@FXML
-	private Button testBtn;
+	private Button btnConsume;
 
 	/**
 	 * Initializes the controller class.
@@ -61,15 +59,10 @@ public class MenuController implements Initializable {
             btnCondition.setOnAction(event -> {
                   handleBtnCondition(event);
             });
-		testBtn.setOnAction(event -> {
-			handleBtnTest(event);
+		btnConsume.setOnAction(event->{
+			handleBtnConsume(event);
 		});
 	}
-
-	private void handleBtnTest(ActionEvent event) {
-
-	}
-
 	private void handleBtnControlHome(ActionEvent event) {
 		//menuStackPane.setTranslateX(0);
 
@@ -141,5 +134,9 @@ public class MenuController implements Initializable {
                   ex.printStackTrace();
             }
       }
+
+	private void handleBtnConsume(ActionEvent event) {
+		//Parent parent = FXMLLoader.load(ConsumeController.class.getResource(name))
+	}
 
 }
