@@ -8,6 +8,7 @@ package com.tomcatisbabycat.homepanel.lock;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -55,8 +56,11 @@ public class LockController implements Initializable {
 	private void handleBtnUnlock(ActionEvent event) {
 		try {
 			Parent parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
-
-			lockRootPane.getChildren().add(parent);
+			// StackPane의 자식 리스트에 AnchorPane하나만 있는상태(index-0, size 1)
+			// 여기서 Main의 화면을 추가하면서 size를 이용해 인덱스를 지정하면서 추가 ~.add(int index, Node element)
+			lockRootPane.getChildren().add(lockRootPane.getChildren().size(), parent);
+			// 메인페이지를 추가한 후에는 리스트의 사이즈가 2가 되있는 상태
+			// System.out.println(lockRootPane.getChildren().size()) // 사이즈 확인 출력문
 			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
 			// 차후에 화면전환 애니메이션 수정필요(5/3 02:30)
 			parent.setTranslateX(800);
@@ -68,7 +72,6 @@ public class LockController implements Initializable {
 			timeline.getKeyFrames().add(keyFrame);
 			
 			timeline.play();
-//			System.out.println(lockRootPane.getChildren().indexOf(lockRootPane));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
