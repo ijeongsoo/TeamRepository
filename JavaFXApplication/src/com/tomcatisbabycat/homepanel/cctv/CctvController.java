@@ -33,77 +33,63 @@ import javafx.util.Duration;
  */
 public class CctvController implements Initializable {
 
-	@FXML
-	private StackPane cctvStackPane;
-	@FXML
-	private Button btnControlHome;
-	@FXML
-	private Button btnControlLock;
-	@FXML
-	private Button btnControlBack;
+      @FXML
+      private StackPane cctvStackPane;
+      @FXML
+      private Button btnControlHome;
+      @FXML
+      private Button btnControlLock;
+      @FXML
+      private Button btnControlBack;
 
-	/**
-	 * Initializes the controller class.
-	 */
-	@Override
-	public void initialize(URL url, ResourceBundle rb) {
-		btnControlLock.setOnAction(event -> {
-			handleBtnControlLock(event);
-		});
-		btnControlHome.setOnAction(event -> {
-			handleBtnControlHome(event);
-		});
-	}
+      /**
+       * Initializes the controller class.
+       */
+      @Override
+      public void initialize(URL url, ResourceBundle rb) {
+            btnControlLock.setOnAction(event -> {
+                  handleBtnControlLock(event);
+            });
+            btnControlHome.setOnAction(event -> {
+                  handleBtnControlHome(event);
+            });
+      }
 
-	private void handleBtnControlLock(ActionEvent event) {
-		//StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
+      private void handleBtnControlLock(ActionEvent event) {
+            //StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
 
-		cctvStackPane.setTranslateX(0);
-		KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  //
-				  LockController.lockRootPane.getChildren().remove(cctvStackPane);
-			  }, keyValue);
+            cctvStackPane.setTranslateX(0);
+            KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
+            KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
+                    e -> {
+                          //
+                          LockController.lockRootPane.getChildren().remove(cctvStackPane);
+                    }, keyValue);
 
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrame);
-		
-		timeline.play();
-	}
+            Timeline timeline = new Timeline();
+            timeline.getKeyFrames().add(keyFrame);
 
-	private void handleBtnControlHome(ActionEvent event) {
-		KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(2, LockController.lockRootPane.getChildren().size());
-			  }, keyValue);
+            timeline.play();
+      }
 
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrame);
+      private void handleBtnControlHome(ActionEvent event) {
+            
+                  KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
+                  KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
+                          e -> {
+                                LockController.lockRootPane.getChildren().remove(2, LockController.lockRootPane.getChildren().size());
+                          }, keyValue);
 
-		timeline.play();
+                  Timeline timeline = new Timeline();
+                  timeline.getKeyFrames().add(keyFrame);
 
-		Thread task = new Thread() {
-			@Override
-			public void run() {
-				try {
-					//Thread.sleep(1000);
-					Platform.runLater(() -> {
-						try {
-							LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MainController.class.getResource("main.fxml")));
-						} catch (IOException ex) {
-							Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-						}
+                  timeline.play();
+            try {
+                  LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MainController.class.getResource("main.fxml")));
+            } catch (Exception ex) {
+                  Logger.getLogger(CctvController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
-					});
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-			}
-
-		};
-		task.start();
-	}
+      }
 
 }
