@@ -37,7 +37,7 @@ public class DustThread extends Thread{
 	public void run() {
 		while(true){
 			Platform.runLater(() -> {
-				lblMainDust.setText(samplestatus.getDust()+"");
+				lblMainDust.setText(samplestatus.getDust()+"㎍/㎥");
 			});
 			
 			if(samplestatus.getDust()>=0&&samplestatus.getDust()<=30){
