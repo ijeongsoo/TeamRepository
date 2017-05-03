@@ -30,7 +30,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="595.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                <Button fx:id="btnCondition" layoutX="595.0" layoutY="86.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
                     <graphic>
                         <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
                             <image>
