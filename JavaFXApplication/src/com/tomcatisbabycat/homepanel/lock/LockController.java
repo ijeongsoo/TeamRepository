@@ -34,16 +34,21 @@ public class LockController implements Initializable {
 	private StackPane stackPaneLock;
 	
 	public static StackPane lockRootPane;
+	@FXML
+	private Button btnTest;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		lockRootPane = stackPaneLock;
+		lockRootPane = stackPaneLock; // 다른 클래스에서도 접근할 수 있게 public static 변수에 객체를 넘겨주었다.
 		
 		btnUnlock.setOnAction(event->{
 			handleBtnUnlock(event);
+		});
+		btnTest.setOnAction(event->{
+			handleBtnTest(event);
 		});
 	}	
 
@@ -63,10 +68,14 @@ public class LockController implements Initializable {
 			timeline.getKeyFrames().add(keyFrame);
 			
 			timeline.play();
-			System.out.println(lockRootPane.getChildren().indexOf(lockRootPane));
+//			System.out.println(lockRootPane.getChildren().indexOf(lockRootPane));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+
+	private void handleBtnTest(ActionEvent event) {
+		System.out.println("test 버튼이 눌렸습니다.");
 	}
 	
 }

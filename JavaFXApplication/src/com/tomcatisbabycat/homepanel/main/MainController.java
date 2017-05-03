@@ -138,13 +138,14 @@ public class MainController implements Initializable {
 			KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
 
 			Timeline timeline = new Timeline();
-			//timeline.getKeyFrames().add(keyFrameStackPaneMenu, keyFrameStackPaneMain);
-			timeline.getKeyFrames().addAll(keyFrameStackPaneMain, keyFrameStackPaneMenu);
+			//timeline.getKeyFrames().addAll(keyFrameStackPaneMenu, keyFrameStackPaneMain);
+			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
 			//System.out.println(timeline.getStatus());
-			
+			//System.out.println(timeline.getStatus().toString());
 			// 메뉴버튼을 클릭하면 메뉴화면생성과 동시에 메인화면을 삭제한다.
 			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
+				//System.out.println(newValue);
 				if(newValue.toString().equals("STOPPED")){
 				Thread task = new Thread(){
 					@Override

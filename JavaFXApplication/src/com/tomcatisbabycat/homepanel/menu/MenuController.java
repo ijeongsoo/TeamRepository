@@ -56,7 +56,7 @@ public class MenuController implements Initializable {
 	private void handleBtnControlHome(ActionEvent event) {
 		StackPane rootPane = (StackPane) btnControlHome.getScene().getRoot();
 
-		menuStackPane.setTranslateX(0);
+		//menuStackPane.setTranslateX(0);
 
 		KeyValue keyValue = new KeyValue(menuStackPane.translateXProperty(), 800);
 		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
@@ -73,7 +73,7 @@ public class MenuController implements Initializable {
 			@Override
 			public void run() {
 				try {
-					Thread.sleep(1000);
+					//Thread.sleep(1000);
 					Platform.runLater(() -> {
 						try {
 							LockController.lockRootPane.getChildren().add(FXMLLoader.load(MainController.class.getResource("main.fxml")));

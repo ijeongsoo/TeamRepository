@@ -5,6 +5,7 @@
  */
 package com.tomcatisbabycat.homepanel.cctv;
 
+import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import java.net.URL;
 import java.util.Iterator;
@@ -46,7 +47,7 @@ public class CctvController implements Initializable {
 	}
 
 	private void handleBtnControlLock(ActionEvent event) {
-		StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot();
+		//StackPane rootPane = (StackPane) cctvStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
 
 		cctvStackPane.setTranslateX(0);
 		KeyValue keyValue = new KeyValue(cctvStackPane.translateXProperty(), 800);
@@ -54,7 +55,7 @@ public class CctvController implements Initializable {
 			  e -> {
 				  //rootPane.getChildren().removeAll(MainController.paneBasket);
 				  //rootPane.getChildren().remove(cctvStackPane);
-				  Iterator iterator = rootPane.getChildren().iterator();
+				  Iterator iterator = LockController.lockRootPane.getChildren().iterator();
 				  while (iterator.hasNext()) {
 					  if (iterator.next() instanceof StackPane) {
 						  iterator.remove();

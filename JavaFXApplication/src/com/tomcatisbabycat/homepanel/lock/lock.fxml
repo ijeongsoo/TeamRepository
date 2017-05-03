@@ -8,12 +8,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <StackPane fx:id="stackPaneLock" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.lock.LockController">
    <children>
       <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
          <children>
             <Button fx:id="btnUnlock" layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Unlock" />
+            <Button fx:id="btnTest" layoutX="300.0" layoutY="213.0" mnemonicParsing="false" text="Button" />
          </children>
       </AnchorPane>
    </children>
