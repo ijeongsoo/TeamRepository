@@ -32,6 +32,9 @@ public class TemperatureThread extends Thread{
 	
 	@Override
 	public void run() {
+		Image coldImage =new Image(IconSelector.class.getResource("temperature-2.png").toString());
+		Image sosoImage =new Image(IconSelector.class.getResource("temperature-3.png").toString());
+		Image hotImage = new Image(IconSelector.class.getResource("temperature-4.png").toString());
 		while(true){
 			
 			Platform.runLater(() -> {
@@ -40,15 +43,15 @@ public class TemperatureThread extends Thread{
 			
 			if(samplestatus.getTemperature()<20.0){
 				Platform.runLater(() -> {
-					imgMainTemperature.setImage(new Image(IconSelector.class.getResource("temperature-2.png").toString()));
+					imgMainTemperature.setImage(coldImage);
 				});
 			}else if(samplestatus.getTemperature()>=20.0&&samplestatus.getTemperature()<30.0){
 				Platform.runLater(() -> {
-					imgMainTemperature.setImage(new Image(IconSelector.class.getResource("temperature-3.png").toString()));
+					imgMainTemperature.setImage(sosoImage);
 				});
 			}else{
 				Platform.runLater(() -> {
-					imgMainTemperature.setImage(new Image(IconSelector.class.getResource("temperature-4.png").toString()));
+					imgMainTemperature.setImage(hotImage);
 				});
 			}
 			
@@ -61,6 +64,7 @@ public class TemperatureThread extends Thread{
 				break;
 			}
 		}
+		System.out.println("온도 스레드 종료");
 
 	}
 }
