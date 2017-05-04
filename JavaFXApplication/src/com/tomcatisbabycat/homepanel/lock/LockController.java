@@ -169,8 +169,8 @@ public class LockController implements Initializable {
 		// event를 통해 어떤 버튼의 이벤트가 발생한거지 getSource를 통해 해당 객체를 가져온다.
 		Button passBtn = (Button) event.getSource();
 		inputPassword += passBtn.getText();
-//		System.out.println(inputPassword);
-//		System.out.println("");
+		System.out.println(inputPassword);
+		System.out.println("");
 
 		System.out.println(inputPassword.length());
 		fillCircle(inputPassword.length());
@@ -183,7 +183,7 @@ public class LockController implements Initializable {
 			String getSHA = EncryptSHA256.encryptSHA256(inputPassword);
 
 			if (getSHA.equals(sha256.getPassWord())) {
-				//System.out.println("패스워드가 일치합니다.");
+				System.out.println("패스워드가 일치합니다.");
 				lblPassword.setText("패스워드가 일치합니다.");
 				inputPassword = "";
 				Thread t = new Thread() {
@@ -201,7 +201,7 @@ public class LockController implements Initializable {
 				t.start();
 				correctPassword();
 			} else {
-//				System.out.println("패스워드가 일치하지 않습니다. 다시 입력하세요");
+				System.out.println("패스워드가 일치하지 않습니다. 다시 입력하세요");
 				lblPassword.setText("패스워드가 일치하지 않습니다. 다시 입력하세요");
 				inputPassword = "";
 				Thread t = new Thread() {
@@ -231,12 +231,12 @@ public class LockController implements Initializable {
 //		System.out.println(circles.get(1));
 //		System.out.println(circles.get(2));
 //		System.out.println(circles.get(3));
-//		System.out.println(Thread.currentThread().getName());
+		System.out.println(Thread.currentThread().getName());
 		for (int i = 0; i < length; i++) {
 			circles.get(i).setFill(Color.rgb(41, 110, 168));
 		}
 		for (int j = 3; j > length - 1; j--) {
-//			System.out.println(circles.get(j));
+			System.out.println(circles.get(j));
 			circles.get(j).setFill(Color.TRANSPARENT);
 		}
 	}

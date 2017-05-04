@@ -13,15 +13,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 /**
@@ -38,27 +40,32 @@ public class CctvController implements Initializable {
       @FXML
       private Button btnControlLock;
       @FXML
-
       private Button btnControlBack;
 
-      StackPane stackPaneMedia;
-      Button btnControlMedia;
       @FXML
-      private ImageView imageView1;
+      private Button btnControlMedia1;
       @FXML
-      private ImageView imageView2;
+      private Button btnControlMedia2;
       @FXML
-      private ImageView imageView3;
+      private Button btnControlMedia4;
       @FXML
-      private ImageView imageView4;
+      private Button btnControlMedia3;
       @FXML
-      private Button btnControlImage1;
+      private StackPane stackPaneMedia1;
       @FXML
-      private Button btnControlImage2;
+      private MediaView mediaView1;
       @FXML
-      private Button btnControllmage3;
+      private StackPane stackPaneMedia2;
       @FXML
-      private Button btnControlImage4;
+      private MediaView mediaView2;
+      @FXML
+      private StackPane stackPaneMedia4;
+      @FXML
+      private MediaView mediaView4;
+      @FXML
+      private StackPane stackPaneMedia3;
+      @FXML
+      private MediaView mediaView3;
 
       /**
        * Initializes the controller class.
@@ -74,12 +81,67 @@ public class CctvController implements Initializable {
             btnControlBack.setOnAction(event -> {
                   handleBtnControlBack(event);
             });
-            btnControlImage2.setOnAction(event -> {
-                  handleBtnControlImage2(event);
+            btnControlMedia2.setOnAction(event -> {
+                  handleBtnControlMedia(event);
+            });
+
+            //cctv영상 재생
+            //1영상(큰화면) 재생.
+            Media media1 = new Media(getClass().getResource("media/cctvSample1.mp4").toString());
+            MediaPlayer mediaPlayer1 = new MediaPlayer(media1);
+            mediaView1.setMediaPlayer(mediaPlayer1);
+            mediaPlayer1.setOnReady(new Runnable() {
+                  @Override
+                  public void run() {
+                        setAutoPlay(true);
+                  }
+                  private void setAutoPlay(boolean b) {
+                        mediaPlayer1.play();
+                  }
+            });
+
+            //2영상(작은화면) 재생
+            Media media2 = new Media(getClass().getResource("media/cctvSample2.mp4").toString());
+            MediaPlayer mediaPlayer2 = new MediaPlayer(media2);
+            mediaView2.setMediaPlayer(mediaPlayer2);
+            mediaPlayer2.setOnReady(new Runnable() {
+                  @Override
+                  public void run() {
+                        setAutoPlay(true);
+                  }
+                  private void setAutoPlay(boolean b) {
+                        mediaPlayer2.play();
+                  }
+            });
+
+            //3영상(작은화면) 재생
+            Media media3 = new Media(getClass().getResource("media/cctvSample3.mp4").toString());
+            MediaPlayer mediaPlayer3 = new MediaPlayer(media3);
+            mediaView3.setMediaPlayer(mediaPlayer3);
+            mediaPlayer3.setOnReady(new Runnable() {
+                  @Override
+                  public void run() {
+                        setAutoPlay(true);
+                  }
+                  private void setAutoPlay(boolean b) {
+                        mediaPlayer3.play();
+                  }
+            });
+
+            //4영상(작은화면) 재생
+            Media media4 = new Media(getClass().getResource("media/cctvSample4.mp4").toString());
+            MediaPlayer mediaPlayer4 = new MediaPlayer(media4);
+            mediaView4.setMediaPlayer(mediaPlayer4);
+            mediaPlayer4.setOnReady(new Runnable() {
+                  @Override
+                  public void run() {
+                        setAutoPlay(true);
+                  }
+                  private void setAutoPlay(boolean b) {
+                        mediaPlayer4.play();
+                  }
             });
       }
-      
-      
 
       private void handleBtnControlBack(ActionEvent event) {
             cctvStackPane.setTranslateX(0);
@@ -89,7 +151,7 @@ public class CctvController implements Initializable {
                     e -> {
                           LockController.lockRootPane.getChildren().remove(2);
                     }, keyValueStackPaneCCTV);
-
+            
             Timeline timeline = new Timeline(keyFrameStackPaneCCTV);
             timeline.play();
 
@@ -137,9 +199,23 @@ public class CctvController implements Initializable {
 
       }
 
-      private void handleBtnControlImage2(ActionEvent event) {
+      private void handleBtnControlMedia(ActionEvent event) {
+
+            ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(1), btnControlMedia2); // 
+            scaleTransition.setByX(1.5);
+            scaleTransition.setByY(1.5);
+            scaleTransition.play();
             
-            //imageView1.setImage(new Image(getClass().getResource("image2\"+)));
+            
+            KeyValue keyValueStackPaneMedia2 = new KeyValue(stackPaneMedia2.translateXProperty(), 23);
+            KeyFrame keyFrameStackPaneMedia2 = new KeyFrame(Duration.seconds(1), keyValueStackPaneMedia2);
+
+            Timeline timeline = new Timeline();
+            timeline.getKeyFrames().add(keyFrameStackPaneMedia2);
+
+            timeline.play();
+            
+
       }
 
 }

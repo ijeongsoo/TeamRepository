@@ -6,7 +6,7 @@
 package com.tomcatisbabycat.homepanel.menu;
 
 import com.tomcatisbabycat.homepanel.Condition.ConditionController;
-import com.tomcatisbabycat.homepanel.cctv1.Cctv1Controller;
+import com.tomcatisbabycat.homepanel.cctv.CctvController;
 import com.tomcatisbabycat.homepanel.consume.ConsumeController;
 import com.tomcatisbabycat.homepanel.light.LightController;
 import com.tomcatisbabycat.homepanel.lock.LockController;
@@ -123,7 +123,7 @@ public class MenuController implements Initializable {
 
 	private void handleBtnCCTV(ActionEvent event) {
 		try {
-			Parent parent = FXMLLoader.load(Cctv1Controller.class.getResource("cctv1.fxml"));
+			Parent parent = FXMLLoader.load(CctvController.class.getResource("cctv.fxml"));
 			
 			// 메뉴페이지 위에다 CCTV페이지를 추가한다 현재 리스트의 사이즈는 2이고, 메뉴페이지는 1 인덱스를 가지고 있다
 			LockController.lockRootPane.getChildren().add(2, parent);
