@@ -129,9 +129,11 @@ public class ClockThread extends Thread {
 			else datestr=String.valueOf(date);
 			
 			//시간*30+분
-			hourRotation.setAngle(hour*30+minuate*0.5+second*(1/120));
-			minuateRotation.setAngle(minuate*6+second*0.1);
 			secondRotation.setAngle(second*6);
+			minuateRotation.setAngle(minuate*6+second*0.1);
+			hourRotation.setAngle(hour*30+minuate*0.5);
+			
+			
 
 			Platform.runLater(() -> {
 				lblMainClock.setText(ampm+" "+hourstr+":"+minuatestr+":"+secondstr);
@@ -153,7 +155,10 @@ public class ClockThread extends Thread {
 			
 		}
 		
+		System.out.println("clock스레드 종료");
+		System.gc();
 	}
+	
 
 }
 

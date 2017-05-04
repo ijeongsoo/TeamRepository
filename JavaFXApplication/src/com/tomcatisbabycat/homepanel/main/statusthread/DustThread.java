@@ -22,6 +22,7 @@ public class DustThread extends Thread{
 	private SampleStatus samplestatus=SampleStatus.getInstance();
 	private ImageView imgMainDust;
 	private Label lblMainDust;
+	
 
 	public DustThread(ThreadGroup threadGroup, String threadName,ImageView imgMainDust, Label lblMainDust) {
 		super(threadGroup, threadName);
@@ -36,6 +37,10 @@ public class DustThread extends Thread{
 	
 	@Override
 	public void run() {
+		Image forestImage=new Image(IconSelector.class.getResource("forest.png").toString());
+		Image hillsImage=new Image(IconSelector.class.getResource("hills.png").toString());
+		Image fieldsImage=new Image(IconSelector.class.getResource("fields.png").toString());
+		Image capeImage=new Image(IconSelector.class.getResource("cape.png").toString());
 		while(true){
 			if(Thread.interrupted()){
 				break;
@@ -46,19 +51,19 @@ public class DustThread extends Thread{
 			
 			if(samplestatus.getDust()>=0&&samplestatus.getDust()<=30){
 				Platform.runLater(() -> {
-					imgMainDust.setImage(new Image(IconSelector.class.getResource("forest.png").toString()));
+					imgMainDust.setImage(forestImage);
 				});
 			}else if(samplestatus.getDust()>30&&samplestatus.getDust()<=80){
 				Platform.runLater(() -> {
-					imgMainDust.setImage(new Image(IconSelector.class.getResource("hills.png").toString()));
+					imgMainDust.setImage(hillsImage);
 				});
 			}else if(samplestatus.getDust()>80&&samplestatus.getDust()<=150){
 				Platform.runLater(() -> {
-					imgMainDust.setImage(new Image(IconSelector.class.getResource("fields.png").toString()));
+					imgMainDust.setImage(fieldsImage);
 				});
 			}else{
 				Platform.runLater(() -> {
-					imgMainDust.setImage(new Image(IconSelector.class.getResource("cape.png").toString()));
+					imgMainDust.setImage(capeImage);
 				});
 			}
 			
@@ -68,6 +73,8 @@ public class DustThread extends Thread{
 				break;
 			}
 		}
+		System.out.println("더스트 스레드 종료");
+		System.gc();
 
 	}
 }
