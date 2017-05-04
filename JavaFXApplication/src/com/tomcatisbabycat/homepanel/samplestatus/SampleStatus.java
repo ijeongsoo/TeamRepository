@@ -13,7 +13,7 @@ public class SampleStatus {
 	  public  double temperature= 24.5;
 	  public  int moisture=70;
 	  public  int dust=37;
-	  public  String weather="rainny";
+	  public  String weather="snow";
 	  
 	  private static SampleStatus samplestatus=new SampleStatus();
 	  

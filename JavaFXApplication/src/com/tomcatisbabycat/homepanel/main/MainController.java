@@ -26,6 +26,7 @@ import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
@@ -48,7 +49,6 @@ public class MainController implements Initializable {
 	@FXML
 	private StackPane stackPane;
 
-	private StackPane mainPane;
 	@FXML
 	private ImageView mainWeatherImage;
 	@FXML
@@ -57,7 +57,17 @@ public class MainController implements Initializable {
 	private SampleStatus samplestatus = SampleStatus.getInstance();
 
 	@FXML
-	private ImageView mainImageBack2;
+	private ImageView mainWeatherImageBack2;
+	@FXML
+	private AnchorPane anchorPane;
+	@FXML
+	private ImageView imgMainTemperature;
+	@FXML
+	private Label lblMainTemperature;
+	@FXML
+	private ImageView imgMainMoisture;
+	@FXML
+	private Label lblMainMoisture;
 
 	/**
 	 * Initializes the controller class.
@@ -66,101 +76,40 @@ public class MainController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 		//statusDetect();
-		mainPane = stackPane;
-		Image image = new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString());
-		double originalHight = image.getHeight();
-		double originalWidth = image.getWidth();
-		if (originalHight > originalWidth) {
-			mainImage.setFitWidth(180);
-			mainImage.setFitHeight(0);
-			double resizeHeight = (180 * originalHight) / originalWidth;
-			mainImage.setImage(image);
-			Circle clip = new Circle(mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2, mainImage.getFitWidth() / 2);
-			mainImage.setClip(clip);
-		} else {
-			double resizeWidth = (180 * originalWidth) / originalHight;
-			mainImage.setImage(image);
-			Circle clip = new Circle(resizeWidth / 2, mainImage.getFitHeight() / 2, mainImage.getFitHeight() / 2);
-			mainImage.setClip(clip);
-		}
+		MainImageSet mainImageSet = new MainImageSet(mainImage);
+		mainImageSet.mainImageSet();
+		
 
 		mainBtnMenu.setOnAction((event) -> {
 			handleBtnMenu(event);
 		});
 
 		mainBtnLock.setOnAction((event) -> {
-			if (samplestatus.getWeather().equals("sunny")) {
-				samplestatus.setWeather("cloudy");
-			} else {
-				samplestatus.setWeather("sunny");
+			int a = (int)(Math.random()*4);
+			System.out.println(a);
+			switch(a){
+				case 0:samplestatus.setWeather("sunny");
+				break;
+				case 1:samplestatus.setWeather("cloudy");
+				break;
+				case 2:samplestatus.setWeather("rainny");
+				break;
+				case 3:samplestatus.setWeather("snow");
+				break;
 			}
 		});
 
-		Thread weatherthread = new Thread() {
-			@Override
-			public void run() {
-				double rotate = 0;
-				double movepoint = 0;
-				while (true) {
-					if (samplestatus.getWeather().equals("sunny")) {
-						mainWeatherImage.setX(0);
-						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-						mainWeatherImageBack.setVisible(false);
-						double rotateTemp = rotate;
-						Platform.runLater(() -> {
-							mainWeatherImage.setRotate(rotateTemp);
-						});
-						try {
-							Thread.sleep(500);
-						} catch (InterruptedException ex) {
-						}
-						rotate += 10;
-						if (rotate == 360) {
-							rotate = 0;
-						}
-					} else if (samplestatus.getWeather().equals("cloudy")) {
-						mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));
-						mainWeatherImageBack.setVisible(true);
-						mainWeatherImage.setRotate(0);
-						while (movepoint < 15.0) {
-							double movepointTemp = movepoint;
-							Platform.runLater(() -> {
-								mainWeatherImage.setX(movepointTemp);
-							});
-							try {
-								Thread.sleep(10);
-							} catch (InterruptedException ex) {
-							}
-							movepoint += 0.1;
-						}
-						while (movepoint > -15.0) {
-							double movepointTemp = movepoint;
-							Platform.runLater(() -> {
-								mainWeatherImage.setX(movepointTemp);
-							});
-							try {
-								Thread.sleep(10);
-							} catch (InterruptedException ex) {
-							}
-							movepoint -= 0.1;
-						}
-					} else if (samplestatus.getWeather().equals("rainny")) {
-
-						mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("umbrella.png").toString()));
-						mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-						mainWeatherImageBack.setVisible(false);
-						mainWeatherImage.setRotate(0);
-
-					}
-				}
-
-			}
-
-		};
-
-		weatherthread.setDaemon(true);
-		weatherthread.start();
+		WeatherThread weatherThread = new WeatherThread(mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
+		weatherThread.setDaemon(true);
+		weatherThread.start();
+		
+		TemperatureThread temperatureThread = new TemperatureThread(imgMainTemperature, lblMainTemperature);
+		temperatureThread.setDaemon(true);
+		temperatureThread.start();
+		
+		MoistureThread moistureThread = new MoistureThread(imgMainMoisture, lblMainMoisture);
+		moistureThread.setDaemon(true);
+		moistureThread.start();
 
 	}
 
@@ -173,12 +122,7 @@ public class MainController implements Initializable {
 			
 			parent.setTranslateX(800);
 			KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-<<<<<<< HEAD
 			KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
-=======
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(5), keyValue);
->>>>>>> origin/master
-
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().add(keyFrame);
 			
