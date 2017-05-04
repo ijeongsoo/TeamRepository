@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -10,9 +12,33 @@
 
 <StackPane fx:id="stackPaneLock" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.lock.LockController">
    <children>
-      <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+      <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: #D5EFFD;">
          <children>
-            <Button fx:id="btnUnlock" layoutX="371.0" layoutY="14.0" mnemonicParsing="false" text="Unlock" />
+            <Button fx:id="btnUnlock" layoutX="24.0" layoutY="15.0" mnemonicParsing="false" text="Unlock" />
+            <Label fx:id="lblPassword" layoutX="113.0" layoutY="19.0" prefHeight="0.0" prefWidth="64.0" text="패스워드">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <AnchorPane layoutX="285.0" layoutY="20.0" prefHeight="440.0" prefWidth="230.0">
+               <children>
+                  <Button fx:id="btnOne" layoutX="15.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="1" />
+                  <Button fx:id="btnTwo" layoutX="85.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="2" />
+                  <Button fx:id="btnThree" layoutX="155.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="3" />
+                  <Button fx:id="btnFour" layoutX="15.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="4" />
+                  <Button fx:id="btnFive" layoutX="85.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="5" />
+                  <Button fx:id="btnSix" layoutX="155.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="6" />
+                  <Button fx:id="btnSeven" layoutX="15.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="7" />
+                  <Button fx:id="btnEight" layoutX="85.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="8" />
+                  <Button fx:id="btnNine" layoutX="155.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="9" />
+                  <Button fx:id="btnZero" layoutX="85.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="0" />
+                  <Button fx:id="btnCancel" layoutX="155.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="C" />
+                  <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="46.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword"/>
+                  <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="92.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword"/>
+                  <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="138.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword"/>
+                  <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="184.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword"/>
+               </children>
+            </AnchorPane>
          </children>
       </AnchorPane>
    </children>

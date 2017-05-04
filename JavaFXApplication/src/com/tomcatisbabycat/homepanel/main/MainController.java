@@ -132,7 +132,7 @@ public class MainController implements Initializable {
 		});
 
 		mainBtnLock.setOnAction((event) -> {
-			
+			handleBtnLock(event);
 		});
 
 		WeatherThread weatherThread = new WeatherThread(mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
@@ -197,6 +197,10 @@ public class MainController implements Initializable {
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
+	}
+	private void handleBtnLock(ActionEvent event){
+		// main에서의 Lock 이벤트처리 일단 안함
+		LockController.lockRootPane.getChildren().remove(stackPaneMain);
 	}
 
 }

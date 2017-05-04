@@ -32,3 +32,12 @@ and open the template in the editor.
     -fx-background-insets: -2, -0.3, 1, 2;
     -fx-background-radius: 7, 6, 4, 3;
 }
+.lockBtnPassword{
+    -fx-background-radius: 30;
+    -fx-background-color: #A1DCFC;
+    -fx-font-size : 30px;
+}
+.circlePassword{
+    -fx-fill: transparent;
+    -fx-stroke: #296EA8;
+}

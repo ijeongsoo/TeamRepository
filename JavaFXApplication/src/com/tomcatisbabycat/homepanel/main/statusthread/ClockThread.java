@@ -56,7 +56,7 @@ public class ClockThread extends Thread {
 			
 			minuateRotation.setAngle(minuate*6+second*0.1);
 			secondRotation.setAngle(second*6);
-			System.out.println(hour+":"+minuate+":"+second);
+			//System.out.println(hour+":"+minuate+":"+second);
 			
 		}
 		
