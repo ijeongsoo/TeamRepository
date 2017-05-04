@@ -13,9 +13,12 @@ import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import com.tomcatisbabycat.homepanel.notice.NoticeController;
 import com.tomcatisbabycat.homepanel.schedule.ScheduleController;
+import com.tomcatisbabycat.homepanel.setting.SettingController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -53,6 +56,8 @@ public class MenuController implements Initializable {
 	private Button btnNotice;
 	@FXML
 	private Button btnSchedule;
+      @FXML
+      private Button btnSetting;
 
 	/**
 	 * Initializes the controller class.
@@ -83,6 +88,10 @@ public class MenuController implements Initializable {
 		btnSchedule.setOnAction(event->{
 			handleBtnSchedule(event);
 		});
+            btnSetting.setOnAction(event->{
+                  handleBtnSchedule(event);
+            });
+            
 	}
 	private void handleBtnControlHome(ActionEvent event) {
 		//menuStackPane.setTranslateX(0);
@@ -255,5 +264,28 @@ public class MenuController implements Initializable {
 			ex.printStackTrace();
 		}
 	}
+      
+      private void handleBtnSetting(ActionEvent event){
+            try {
+                  Parent parent = FXMLLoader.load(SettingController.class.getResource("setting.fxml"));
+                  
+                  LockController.lockRootPane.getChildren().add(2,parent);
+                  parent.setTranslateX(800);
+                  
+                  KeyValue keyValue = new KeyValue(parent.translateXProperty(),0);
+                  KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+                  
+                  Timeline timeline = new Timeline(keyFrame);
+                  timeline.play();
+                  
+                  timeline.statusProperty().addListener((observable, oldValue, newValue)->{
+                        if(newValue.toString().equals("STOPPED")){
+                              LockController.lockRootPane.getChildren().remove(1);
+                        }
+                  });
+            } catch (IOException ex) {
+                  ex.printStackTrace();
+            }
+      }
 
 }

@@ -12,7 +12,7 @@
     <children>
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
-                <Button layoutX="594.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
+                <Button fx:id="btnSetting" layoutX="594.0" layoutY="273.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="specificBackground">
                     <graphic>
                         <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
                             <image>
