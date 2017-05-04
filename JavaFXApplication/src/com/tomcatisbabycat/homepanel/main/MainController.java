@@ -23,25 +23,18 @@ import com.tomcatisbabycat.homepanel.menu.*;
 import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -126,7 +119,6 @@ public class MainController implements Initializable {
 		mainBtnLock.setOnAction((event) -> {
 			handleBtnLock(event);
 		});
-
 		mainImage.setOnMouseClicked((event) -> {
 			try {
 				Popup pu = new Popup();
@@ -142,8 +134,8 @@ public class MainController implements Initializable {
 					KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
 						Timeline timeline2 = new Timeline();
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
-						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200),(e2) -> {
-						pu.hide();
+						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+							pu.hide();
 						}, keyvalue2);
 						timeline2.getKeyFrames().add(keyFrame2);
 						timeline2.play();
@@ -205,12 +197,15 @@ public class MainController implements Initializable {
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
-
+			stackPaneMain.setDisable(true);
+			//stackPaneMain.heightProperty().
 			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
 				//System.out.println(newValue);
 				if (newValue.toString().equals("STOPPED")) {
 					// 애니메이션이 끝난순간, 인덱스번호를 사용해 메인페이지를 제거한다
 					mainThreadGroup.interrupt();
+					//System.out.println(LockController.lockRootPane.getChildren().getClass());
+					System.gc();
 					LockController.lockRootPane.getChildren().remove(1);
 					// 메인페이지를 삭제하는 순간, 리스트의 사이즈는 2로 바뀌고 메뉴페이지의 인덱스는 1로 바뀐다
 					//System.out.println("메뉴의 인덱스" + LockController.lockRootPane.getChildren().indexOf(parent)); // 인덱스 확인 출력문
@@ -220,10 +215,10 @@ public class MainController implements Initializable {
 			ex.printStackTrace();
 		}
 	}
-	private void handleBtnLock(ActionEvent event){
+
+	private void handleBtnLock(ActionEvent event) {
 		// main에서의 Lock 이벤트처리 일단 안함
 		mainThreadGroup.interrupt();
 		LockController.lockRootPane.getChildren().remove(stackPaneMain);
 	}
-
 }

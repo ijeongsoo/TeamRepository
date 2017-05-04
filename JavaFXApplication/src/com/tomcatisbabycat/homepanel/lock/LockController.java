@@ -154,7 +154,7 @@ public class LockController implements Initializable {
 			//KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
 			parent.setOpacity(0);
 			KeyValue keyValue = new KeyValue(parent.opacityProperty(), 1);
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), keyValue);
+			KeyFrame keyFrame = new KeyFrame(Duration.seconds(0.3), keyValue);
 
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().add(keyFrame);
@@ -191,7 +191,7 @@ public class LockController implements Initializable {
 					public void run() {
 						//System.out.println(Thread.currentThread().getName());
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(300);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
@@ -209,7 +209,7 @@ public class LockController implements Initializable {
 					public void run() {
 						//System.out.println(Thread.currentThread().getName());
 						try {
-							Thread.sleep(1000);
+							Thread.sleep(300);
 						} catch (Exception ex) {
 							ex.printStackTrace();
 						}
@@ -240,4 +240,5 @@ public class LockController implements Initializable {
 			circles.get(j).setFill(Color.TRANSPARENT);
 		}
 	}
+	
 }
