@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.media.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="cctvStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.cctv.CctvController">
+    <children>
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <StackPane fx:id="stackPaneMedia1" layoutX="25.0" layoutY="95.0">
+                    <children>
+                        <Button fx:id="btnControlMedia1" mnemonicParsing="false">
+                            <graphic>
+                                <MediaView fx:id="mediaView1" fitHeight="350.0" fitWidth="500.0" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </StackPane>
+              
+              
+                <StackPane fx:id="stackPaneMedia2" layoutX="560.0" layoutY="70.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button fx:id="btnControlMedia2" mnemonicParsing="false">
+                            <graphic>
+                                <MediaView fx:id="mediaView2" fitHeight="120.0" fitWidth="200.0" />
+                            </graphic>
+                        </Button>
+                    </children>
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </StackPane>
+               
+           
+                <StackPane fx:id="stackPaneMedia3" layoutX="560.0" layoutY="205.0" BorderPane.alignment="CENTER">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                    <children>
+                        <Button fx:id="btnControlMedia3" mnemonicParsing="false">
+                            <graphic>
+                                <MediaView fx:id="mediaView3" fitHeight="120.0" fitWidth="200.0" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </StackPane>
+                <StackPane fx:id="stackPaneMedia4" layoutX="565.0" layoutY="345.0">
+                    <children>
+                        <Button fx:id="btnControlMedia4" mnemonicParsing="false">
+                            <graphic>
+                                <MediaView fx:id="mediaView4" fitHeight="120.0" fitWidth="200.0" />
+                            </graphic>
+                        </Button>
+                    </children>
+                </StackPane>
+             
+           
+                <Label layoutX="40.0" layoutY="27.0" text="CCTV">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
