@@ -174,7 +174,7 @@ public class MainController implements Initializable {
 
 				  parent.setTranslateX(800);
 				  KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-				  KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), keyValue);
+				  KeyFrame keyFrame = new KeyFrame(Duration.seconds(3), keyValue);
 
 				  Timeline timeline = new Timeline();
 				  timeline.getKeyFrames().add(keyFrame);
