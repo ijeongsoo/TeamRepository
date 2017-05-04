@@ -34,6 +34,8 @@ public class MoistureThread extends Thread{
 	
 	@Override
 	public void run() {
+		Image cactusImage=new Image(IconSelector.class.getResource("cactus.png").toString());
+		Image dropsImage=new Image(IconSelector.class.getResource("drops.png").toString());
 		while(true){
 			if(Thread.interrupted()){
 				break;
@@ -44,11 +46,11 @@ public class MoistureThread extends Thread{
 			
 			if(samplestatus.getMoisture()<50.0){
 				Platform.runLater(() -> {
-					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("cactus.png").toString()));
+					imgMainMoisture.setImage(cactusImage);
 				});
 			}else{
 				Platform.runLater(() -> {
-					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("drops.png").toString()));
+					imgMainMoisture.setImage(dropsImage);
 				});
 			}
 			
@@ -58,6 +60,7 @@ public class MoistureThread extends Thread{
 				break;
 			}
 		}
-
+		System.out.println("moisture스레드 종료");
 	}
+
 }

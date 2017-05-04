@@ -11,6 +11,7 @@ import com.tomcatisbabycat.homepanel.main.statusthread.MoistureThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.statusthread.ClockThread;
 import com.tomcatisbabycat.homepanel.main.statusthread.DustThread;
+import com.tomcatisbabycat.homepanel.main.statusthread.RionThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -23,25 +24,19 @@ import com.tomcatisbabycat.homepanel.menu.*;
 import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Modality;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -103,12 +98,18 @@ public class MainController implements Initializable {
 	private Label lblMainDay;
 	@FXML
 	private Label lblMainDate;
+	@FXML
+	private ImageView imgRion;
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		
+		PauseTransition delay = new PauseTransition(Duration.seconds(10));
+		delay.setOnFinished( event -> handleBtnLock(event));
+		delay.play();
 		/*Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation.angleProperty(), 100)),
                 new KeyFrame(Duration.seconds(10), new KeyValue(rotation.angleProperty(), 360))
@@ -126,11 +127,17 @@ public class MainController implements Initializable {
 		mainBtnLock.setOnAction((event) -> {
 			handleBtnLock(event);
 		});
+		
+		stackPaneMain.setOnMouseClicked((event) -> {
+			delay.stop();
+			delay.play();
+		});
 
 		mainImage.setOnMouseClicked((event) -> {
 			try {
-				Popup pu = new Popup();
+				
 				Parent parent = FXMLLoader.load(getClass().getResource("mainImagePopup.fxml"));
+				stackPaneMain.getChildren().add( parent);
 				ImageView popupImage = (ImageView) parent.lookup("#imgPopup");
 				popupImage.setImage(new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString()));
 				Button btnExit = (Button) parent.lookup("#btnExit");
@@ -143,7 +150,8 @@ public class MainController implements Initializable {
 						Timeline timeline2 = new Timeline();
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
 						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200),(e2) -> {
-						pu.hide();
+							
+							stackPaneMain.getChildren().remove(1);
 						}, keyvalue2);
 						timeline2.getKeyFrames().add(keyFrame2);
 						timeline2.play();
@@ -153,9 +161,7 @@ public class MainController implements Initializable {
 					timeline.play();
 				});
 
-				pu.getContent().add(parent);
 
-				pu.show(mainImage.getScene().getWindow(), mainImage.getScene().getWindow().getX(), mainImage.getScene().getWindow().getY());
 			} catch (IOException ie) {
 			}
 		});
@@ -181,6 +187,10 @@ public class MainController implements Initializable {
 		ClockThread clockThread = new ClockThread(mainThreadGroup, "clockThread", houreHand, minuateHand, secondHand, lblMainClock, lblMainYear, lblMainMonth, lblMainDate, lblMainDay);
 		clockThread.setDaemon(true);
 		clockThread.start();
+		
+		RionThread rionThread= new RionThread(mainThreadGroup, "rionThread", imgRion);
+		rionThread.setDaemon(true);
+		rionThread.start();
 
 	}
 
@@ -222,8 +232,8 @@ public class MainController implements Initializable {
 	}
 	private void handleBtnLock(ActionEvent event){
 		// main에서의 Lock 이벤트처리 일단 안함
-		mainThreadGroup.interrupt();
 		LockController.lockRootPane.getChildren().remove(stackPaneMain);
+		System.gc();
 	}
 
 }
