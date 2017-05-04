@@ -36,34 +36,24 @@ public class RootController implements Initializable {
 			
 			knob.setOnMouseDragged((event) -> {
 				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
-			  if((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI)>0)
-				   knob.setValue((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI)/3);
-			  else if(((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI))/3>-30)
+			  if((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI)>0)
+				   knob.setValue((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI)/3);
+			  else if(((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI))/3>-30)
 					knob.setValue(0);
-			else if(((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI))/3<-30)
+			else if(((Math.atan2(knob.getHeight()/2-event.getY(),knob.getWidth()/2-event.getX())*180/Math.PI))/3<-30)
 				  knob.setValue(60);
 			});
 			
 			knob.setOnMouseClicked((event) -> {
-				  System.out.println(event.getSceneX()+","+event.getSceneY());
+				  System.out.println(event.getX()+","+event.getY());
 			});
 			
 			knob.valueProperty().addListener(new ChangeListener<Number>(){
 				  @Override
 				  public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
 						
-						tempo.setText(newValue.intValue()+"°");
+						//tempo.setText(newValue.intValue()+"°");
 				  };
-			});
-			
-			knob2.setOnMouseDragged((event) -> {
-				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
-			  if((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI)>0)
-				   knob2.setValue((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI)/3);
-			  else if(((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI))/3>-30)
-					knob2.setValue(0);
-			else if(((Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI))/3<-30)
-				  knob2.setValue(60);
 			});
 	  }	  
 	  

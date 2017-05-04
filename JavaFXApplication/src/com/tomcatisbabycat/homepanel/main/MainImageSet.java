@@ -6,8 +6,11 @@
 package com.tomcatisbabycat.homepanel.main;
 
 import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -40,6 +43,11 @@ public class MainImageSet {
 			Circle clip = new Circle(resizeWidth / 2, mainImage.getFitHeight() / 2, mainImage.getFitHeight() / 2);
 			mainImage.setClip(clip);
 		}
+		SnapshotParameters parameters = new SnapshotParameters();
+            parameters.setFill(Color.TRANSPARENT);
+            WritableImage circleImage = mainImage.snapshot(parameters, null);
+		mainImage.setClip(null);
+		mainImage.setImage(circleImage);
 	}
 
 	

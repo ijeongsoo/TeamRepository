@@ -23,7 +23,8 @@ public class DustThread extends Thread{
 	private ImageView imgMainDust;
 	private Label lblMainDust;
 
-	public DustThread(ImageView imgMainDust, Label lblMainDust) {
+	public DustThread(ThreadGroup threadGroup, String threadName,ImageView imgMainDust, Label lblMainDust) {
+		super(threadGroup, threadName);
 		this.imgMainDust = imgMainDust;
 		this.lblMainDust = lblMainDust;
 	}
@@ -36,6 +37,9 @@ public class DustThread extends Thread{
 	@Override
 	public void run() {
 		while(true){
+			if(Thread.interrupted()){
+				break;
+			}
 			Platform.runLater(() -> {
 				lblMainDust.setText(samplestatus.getDust()+"㎍/㎥");
 			});
@@ -61,6 +65,7 @@ public class DustThread extends Thread{
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException ex) {
+				break;
 			}
 		}
 
