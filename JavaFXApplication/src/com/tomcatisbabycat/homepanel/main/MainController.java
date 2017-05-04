@@ -55,6 +55,15 @@ public class MainController implements Initializable {
 	  private ImageView mainWeatherImage;
 	  @FXML
 	  private ImageView mainWeatherImageBack;
+	  
+	  
+	  private SampleStatus samplestatus = SampleStatus.getInstance();
+//	  private double currentTemperature;
+//	  private String currentWeather;
+//	  private int currentMoisture;
+//	  private int currentDust;
+	  @FXML
+	  private ImageView mainImageBack2;
 
 
 	  /**
@@ -62,6 +71,10 @@ public class MainController implements Initializable {
 	   */
 	  @Override
 	  public void initialize(URL url, ResourceBundle rb) {
+			
+			//statusDetect();
+					
+			
 			
 			mainPane = stackPane;
 			Image image = new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString());
@@ -86,61 +99,132 @@ public class MainController implements Initializable {
 				  handleBtnMenu(event);
 			});
 			
-			if(SampleStatus.weather.equals("sunny")){
-				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-				  Thread thread = new Thread(){
+			mainBtnLock.setOnAction((event) -> {
+				  if(samplestatus.getWeather().equals("sunny")){
+						samplestatus.setWeather("cloudy");
+				  }else{
+						samplestatus.setWeather("sunny");
+				  }
+			});
+			
+			
+			
+			Thread weatherthread = new Thread(){
 				  @Override
 				  public void run() {
 						double rotate=0;
+						double movepoint=0;
 						while(true){
-							  double rotateTemp=rotate;
-							  Platform.runLater(() -> {
-									mainWeatherImage.setRotate(rotateTemp);
-							  });
-							  try {Thread.sleep(500);} catch (InterruptedException ex) {}
-							  rotate+=10;
-							  if(rotate==360)
-									rotate=0;
-						}
-				  };		  
-			};
-			thread.setDaemon(true);
-			thread.start();
-			}else if(SampleStatus.weather.equals("cloudy")){
-				  mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
-				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));				  
-				  Thread thread = new Thread(){
-				  @Override
-				  public void run() {
-						double rotate=0;
-						while(true){
-							  while(rotate<15.0){
+							  if(samplestatus.getWeather().equals("sunny")){
+									mainWeatherImage.setX(0);
+									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+									mainWeatherImageBack.setVisible(false);
 									double rotateTemp=rotate;
 									Platform.runLater(() -> {
-										  mainWeatherImage.setX(rotateTemp);
+										mainWeatherImage.setRotate(rotateTemp);
 									});
-									try {Thread.sleep(10);} catch (InterruptedException ex) {}
-									rotate+=0.1;
-							  }
-							  while(rotate>-15.0){
-									double rotateTemp=rotate;
-									Platform.runLater(() -> {
-										  mainWeatherImage.setX(rotateTemp);
-									});
-									try {Thread.sleep(10);} catch (InterruptedException ex) {}
-									rotate-=0.1;
+									try {Thread.sleep(500);} catch (InterruptedException ex) {}
+									rotate+=10;
+									if(rotate==360)
+										rotate=0;
+							  }else if(samplestatus.getWeather().equals("cloudy")){
+									mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));
+									mainWeatherImageBack.setVisible(true);
+									mainWeatherImage.setRotate(0);
+									while(movepoint<15.0){
+										  double movepointTemp=movepoint;
+										  Platform.runLater(() -> {
+										  	  mainWeatherImage.setX(movepointTemp);
+										  });
+										  try {Thread.sleep(10);} catch (InterruptedException ex) {}
+										  movepoint+=0.1;
+									}
+									while(movepoint>-15.0){
+										  double movepointTemp=movepoint;
+										  Platform.runLater(() -> {
+												mainWeatherImage.setX(movepointTemp);
+										  });
+										  try {Thread.sleep(10);} catch (InterruptedException ex) {}
+										  movepoint-=0.1;
+									}
+							  }else if(samplestatus.getWeather().equals("rainny")){
+									
+									mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("umbrella.png").toString()));
+									mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+									mainWeatherImageBack.setVisible(false);
+									mainWeatherImage.setRotate(0);
+									
 							  }
 						}
-				  };		  
+						
+				  }
+				  
 			};
-			thread.setDaemon(true);
-			thread.start();
-
-			}
+			
+			weatherthread.setDaemon(true);
+			weatherthread.start();
+			
+			
+			
+//			if(SampleStatus.weather.equals("sunny")){
+//				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+//				  Thread thread = new Thread(){
+//				  @Override
+//				  public void run() {
+//						double rotate=0;
+//						while(true){
+//							  double rotateTemp=rotate;
+//							  Platform.runLater(() -> {
+//									mainWeatherImage.setRotate(rotateTemp);
+//							  });
+//							  try {Thread.sleep(500);} catch (InterruptedException ex) {}
+//							  rotate+=10;
+//							  if(rotate==360)
+//									rotate=0;
+//						}
+//				  };		  
+//			};
+//			thread.setDaemon(true);
+//			thread.start();
+//			}else if(SampleStatus.weather.equals("cloudy")){
+//				  mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
+//				  mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));				  
+//				  Thread thread = new Thread(){
+//				  @Override
+//				  public void run() {
+//						double rotate=0;
+//						while(true){
+//							  while(rotate<15.0){
+//									double rotateTemp=rotate;
+//									Platform.runLater(() -> {
+//										  mainWeatherImage.setX(rotateTemp);
+//									});
+//									try {Thread.sleep(10);} catch (InterruptedException ex) {}
+//									rotate+=0.1;
+//							  }
+//							  while(rotate>-15.0){
+//									double rotateTemp=rotate;
+//									Platform.runLater(() -> {
+//										  mainWeatherImage.setX(rotateTemp);
+//									});
+//									try {Thread.sleep(10);} catch (InterruptedException ex) {}
+//									rotate-=0.1;
+//							  }
+//						}
+//				  };		  
+//			};
+//			thread.setDaemon(true);
+//			thread.start();
+//
+//			}
 			
 			
 			
 	  }	
+	  
+	  
+	  
 	  private void handleBtnMenu(ActionEvent e){ // menu 화면 넘어가는 애니메이션 처리
 		  try {
 			  Parent parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
@@ -160,6 +244,22 @@ public class MainController implements Initializable {
 			  ex.printStackTrace();
 		  }
 	  }
-
+	  
+//	  public void statusDetect(){
+//			Thread thread = new Thread(){
+//				  @Override
+//				  public void run() {
+//						while(true){
+//							   currentTemperature=samplestatus.getTemperature();
+//							   currentDust=samplestatus.getDust();
+//							   currentMoisture=samplestatus.getMoisture();
+//							   currentWeather=samplestatus.getWeather();
+//						}
+//				  }
+//			
+//			};
+//			thread.setDaemon(true);
+//			thread.start();
+//	  }
 	  
 }
