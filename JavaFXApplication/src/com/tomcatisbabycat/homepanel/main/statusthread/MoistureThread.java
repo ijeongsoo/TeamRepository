@@ -23,7 +23,8 @@ public class MoistureThread extends Thread{
 	private ImageView imgMainMoisture;
 	private Label lblMainMoisture;
 
-	public MoistureThread(ImageView imgMainMoisture, Label lblMainMoisture) {
+	public MoistureThread(ThreadGroup threadGroup, String threadName,ImageView imgMainMoisture, Label lblMainMoisture) {
+		super(threadGroup, threadName);
 		this.imgMainMoisture = imgMainMoisture;
 		this.lblMainMoisture = lblMainMoisture;
 	}
@@ -34,6 +35,9 @@ public class MoistureThread extends Thread{
 	@Override
 	public void run() {
 		while(true){
+			if(Thread.interrupted()){
+				break;
+			}
 			Platform.runLater(() -> {
 				lblMainMoisture.setText(samplestatus.getMoisture()+"%");
 			});
@@ -51,6 +55,7 @@ public class MoistureThread extends Thread{
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException ex) {
+				break;
 			}
 		}
 

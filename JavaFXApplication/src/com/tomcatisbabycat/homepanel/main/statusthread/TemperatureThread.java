@@ -23,7 +23,8 @@ public class TemperatureThread extends Thread{
 	private ImageView imgMainTemperature;
 	private Label lblMainTemperature;
 
-	public TemperatureThread(ImageView imgMainTemperature, Label lblMainTemperature) {
+	public TemperatureThread(ThreadGroup threadGroup, String threadName,ImageView imgMainTemperature, Label lblMainTemperature) {
+		super(threadGroup, threadName);
 		this.imgMainTemperature = imgMainTemperature;
 		this.lblMainTemperature = lblMainTemperature;
 	}
@@ -32,6 +33,7 @@ public class TemperatureThread extends Thread{
 	@Override
 	public void run() {
 		while(true){
+			
 			Platform.runLater(() -> {
 				lblMainTemperature.setText(samplestatus.getTemperature()+"°");
 			});
@@ -53,6 +55,10 @@ public class TemperatureThread extends Thread{
 			try {
 				Thread.sleep(10000);
 			} catch (InterruptedException ex) {
+				break;
+			}
+			if(Thread.interrupted()){
+				break;
 			}
 		}
 

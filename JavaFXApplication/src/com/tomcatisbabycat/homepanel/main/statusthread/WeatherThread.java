@@ -21,7 +21,8 @@ public class WeatherThread extends Thread {
 	private ImageView mainWeatherImageBack;
 	private ImageView mainWeatherImageBack2;
 
-	public WeatherThread(ImageView mainWeatherImage, ImageView mainWeatherImageBack, ImageView mainWeatherImageBack2) {
+	public WeatherThread(ThreadGroup threadGroup, String threadName,ImageView mainWeatherImage, ImageView mainWeatherImageBack, ImageView mainWeatherImageBack2) {
+		super(threadGroup, threadName);
 		this.mainWeatherImage = mainWeatherImage;
 		this.mainWeatherImageBack = mainWeatherImageBack;
 		this.mainWeatherImageBack2 = mainWeatherImageBack2;
@@ -32,7 +33,11 @@ public class WeatherThread extends Thread {
 		double rotate = 0;
 		double movepoint = 0;
 		double rainrotate=0;
+		boolean stop=false;
 		while (true) {
+			if(Thread.interrupted()||stop==true){
+				break;
+			}
 			if (samplestatus.getWeather().equals("sunny")) {
 				mainWeatherImage.setX(0);
 				mainWeatherImageBack.setVisible(false);
@@ -48,6 +53,7 @@ public class WeatherThread extends Thread {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException ex) {
+					break;
 				}
 				rotate += 10;
 				if (rotate == 360) {
@@ -70,6 +76,8 @@ public class WeatherThread extends Thread {
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException ex) {
+						stop=true;
+						break;
 					}
 					movepoint += 0.1;
 				}
@@ -81,6 +89,8 @@ public class WeatherThread extends Thread {
 					try {
 						Thread.sleep(10);
 					} catch (InterruptedException ex) {
+						stop=true;
+						break;
 					}
 					movepoint -= 0.1;
 				}
@@ -109,6 +119,7 @@ public class WeatherThread extends Thread {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException ex) {
+					break;
 				}
 				rainrotate += 180;
 				if (rainrotate == 360) {
@@ -140,6 +151,7 @@ public class WeatherThread extends Thread {
 				try {
 					Thread.sleep(500);
 				} catch (InterruptedException ex) {
+					break;
 				}
 				rainrotate += 180;
 				if (rainrotate == 360) {
