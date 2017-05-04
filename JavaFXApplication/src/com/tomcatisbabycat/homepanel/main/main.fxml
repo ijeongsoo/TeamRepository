@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane id="StackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.main.MainController">
+   <children>
+      <AnchorPane prefHeight="480.0" prefWidth="800.0">
+         <children>
+            <Button fx:id="mainBtn3" layoutX="576.0" layoutY="253.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="mainBackground" text="Button" />
+            <Button fx:id="mainBtn4" layoutX="375.0" layoutY="253.0" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="specificBackground">
+               <graphic>
+                  <ImageView id="#mainImage" fitHeight="77.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icons/flat_menu_white.png" />
+                     </image>
+                  </ImageView>
+               </graphic></Button>
+            <StackPane layoutX="375.0" layoutY="36.0" prefHeight="207.0" prefWidth="390.0" styleClass="mainBackground" />
+            <Label layoutX="383.0" layoutY="417.0" text="메뉴" textFill="WHITE">
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Label>
+            <BorderPane fx:id="mainImagePane" layoutX="34.0" layoutY="36.0" prefHeight="408.0" prefWidth="331.0" styleClass="mainBackground">
+               <top>
+                  <ImageView fx:id="mainImage" fitHeight="180.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@../resources/images/2013090307203981268_1.jpg" />
+                     </image>
+                     <BorderPane.margin>
+                        <Insets top="20.0" />
+                     </BorderPane.margin>
+                  </ImageView>
+               </top>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

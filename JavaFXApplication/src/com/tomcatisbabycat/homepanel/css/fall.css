@@ -1,0 +1,17 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017. 5. 1, 오후 5:49:53
+    Author     : ijeongsu
+*/
+
+StackPane{
+  -fx-background-color: brown;
+}
+
+Button{
+  -fx-background-color: brown;
+}
