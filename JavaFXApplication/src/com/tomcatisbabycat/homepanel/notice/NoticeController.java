@@ -19,6 +19,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -37,6 +40,24 @@ public class NoticeController implements Initializable {
 	private Button btnControlLock;
 	@FXML
 	private Button btnControlBack;
+      @FXML
+      private Button btnControlReg;
+      @FXML
+      private TextArea noticeTextArea;
+      @FXML
+      private ComboBox<?> yearCombo;
+      @FXML
+      private ComboBox<?> monthCombo;
+      @FXML
+      private ComboBox<?> dayCombo;
+      @FXML
+      private Button btnControlAdd;
+      @FXML
+      private TableView<?> noticeTableView;
+      @FXML
+      private StackPane regStackPane;
+      @FXML
+      private StackPane reviseStackPane;
 
 	/**
 	 * Initializes the controller class.
@@ -52,6 +73,9 @@ public class NoticeController implements Initializable {
 		btnControlBack.setOnAction(event->{
 			handleBtnControlBack(event);
 		});
+            btnControlAdd.setOnAction(event->{
+                  handleBtnControlAdd(event);
+            });
 	}
 	private void handleBtnControlBack(ActionEvent event){
 		noticeStackPane.setTranslateX(0);
@@ -108,6 +132,14 @@ public class NoticeController implements Initializable {
 			ex.printStackTrace();
 		}
 
-	}	
+	}
+
+      private void handleBtnControlAdd(ActionEvent event) {
+           // regStackPane.getChildren().remove(0);//regStackPane 본인 제거
+           reviseStackPane.getChildren().remove(0); //reviseStackPane 제거.
+           
+      }
+      
+      
 	
 }
