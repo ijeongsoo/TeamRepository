@@ -64,7 +64,7 @@
                      </image></ImageView>
                </graphic>
             </Button>
-            <Button fx:id="btnControllmage3" layoutX="570.0" layoutY="210.0" mnemonicParsing="false">
+            <Button fx:id="btnControlImage3" layoutX="570.0" layoutY="210.0" mnemonicParsing="false">
                <graphic>
                   <ImageView fx:id="imageView3" fitHeight="120.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>

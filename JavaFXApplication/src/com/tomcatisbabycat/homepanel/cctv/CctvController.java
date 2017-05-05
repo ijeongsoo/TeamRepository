@@ -41,8 +41,7 @@ public class CctvController implements Initializable {
 
       private Button btnControlBack;
 
-      StackPane stackPaneMedia;
-      Button btnControlMedia;
+
       @FXML
       private ImageView imageView1;
       @FXML
@@ -52,14 +51,13 @@ public class CctvController implements Initializable {
       @FXML
       private ImageView imageView4;
       @FXML
-      private Button btnControlImage1;
-      @FXML
       private Button btnControlImage2;
       @FXML
-      private Button btnControllmage3;
+      private Button btnControlImage3;
       @FXML
       private Button btnControlImage4;
 
+      //Image image1;
       /**
        * Initializes the controller class.
        */
@@ -77,9 +75,13 @@ public class CctvController implements Initializable {
             btnControlImage2.setOnAction(event -> {
                   handleBtnControlImage2(event);
             });
+            btnControlImage3.setOnAction(event -> {
+                  handleBtnControlImage3(event);
+            });
+            btnControlImage4.setOnAction(event -> {
+                  handleBtnControlImage4(event);
+            });
       }
-      
-      
 
       private void handleBtnControlBack(ActionEvent event) {
             cctvStackPane.setTranslateX(0);
@@ -138,8 +140,21 @@ public class CctvController implements Initializable {
       }
 
       private void handleBtnControlImage2(ActionEvent event) {
-            
-            //imageView1.setImage(new Image(getClass().getResource("image2\"+)));
+            Image image1 = imageView1.getImage();
+            imageView1.setImage(imageView2.getImage());
+            imageView2.setImage(image1);
+      }
+
+      private void handleBtnControlImage3(ActionEvent event) {
+            Image image2 = imageView1.getImage();
+            imageView1.setImage(imageView3.getImage());
+            imageView3.setImage(image2);
+      }
+
+      private void handleBtnControlImage4(ActionEvent event) {
+            Image image3 = imageView1.getImage();
+            imageView1.setImage(imageView4.getImage());
+            imageView4.setImage(image3);
       }
 
 }
