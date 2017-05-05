@@ -21,14 +21,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-
 /**
  * FXML Controller class
  *
  * @author kang
  */
 public class ScheduleController implements Initializable {
-
 	@FXML
 	private StackPane scheduleStackPane;
 	@FXML
@@ -37,7 +35,14 @@ public class ScheduleController implements Initializable {
 	private Button btnControlLock;
 	@FXML
 	private Button btnControlBack;
-
+	@FXML
+	private Button btnTV;
+	@FXML
+	private Button btnAirCondition;
+	@FXML
+	private Button btnWashingMachine;
+	@FXML
+	private Button btnLight;
 	/**
 	 * Initializes the controller class.
 	 */
@@ -64,15 +69,12 @@ public class ScheduleController implements Initializable {
 		
 		Timeline timeline = new Timeline(keyVFrameStackPaneSchedule);
 		timeline.play();
-		
 		try {
 			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MenuController.class.getResource("menu.fxml")));
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
 	}
-	
-
 	private void handleBtnControlLock(ActionEvent event) {
 		//StackPane rootPane = (StackPane) scheduleStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
 
@@ -83,10 +85,8 @@ public class ScheduleController implements Initializable {
 				  //
 				  LockController.lockRootPane.getChildren().remove(scheduleStackPane);
 			  }, keyValueStackPaneSchedule);
-
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(keyVFrameStackPaneSchedule);
-
 		timeline.play();
 	}
 
@@ -100,14 +100,12 @@ public class ScheduleController implements Initializable {
 
 		Timeline timeline = new Timeline();
 		timeline.getKeyFrames().add(keyVFrameStackPaneSchedule);
-
 		timeline.play();
 		try {
 			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MainController.class.getResource("main.fxml")));
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
-
 	}	
 	
 }

@@ -44,6 +44,47 @@
                         </ImageView>
                     </graphic>
                 </Button>
+                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0" />
+                <AnchorPane layoutX="410.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+                    <children>
+                        <Button fx:id="btnTV" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/television.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnAirCondition" layoutX="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/air-conditioner.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnWashingMachine" layoutY="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/washing-machine.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnLight" layoutX="185.0" layoutY="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/idea.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </AnchorPane>
             </children>
         </AnchorPane>
     </children>
