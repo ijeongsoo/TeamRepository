@@ -5,6 +5,9 @@
  */
 package com.tomcatisbabycat.homepanel.main.statusthread;
 
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 
@@ -26,20 +29,37 @@ public class ClockThread extends Thread {
 
 	@Override
 	public void run() {
-		Rotate rotation = new Rotate();
-		rotation.pivotXProperty().bind(houreHand.startXProperty());
-		rotation.pivotYProperty().bind(houreHand.startYProperty());
-		houreHand.getTransforms().add(rotation);
-		int aasdg = 0;
-		while (aasdg < 13) {
-			try {
-				rotation.setAngle(aasdg * 20);
-				Thread.sleep(1000);
-			} catch (InterruptedException ex) {
-			}
-			aasdg++;
-
+		Rotate hourRotation = new Rotate();
+		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
+		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
+		houreHand.getTransforms().add(hourRotation);
+		
+		Rotate minuateRotation = new Rotate();
+		minuateRotation.pivotXProperty().bind(minuateHand.startXProperty());
+		minuateRotation.pivotYProperty().bind(minuateHand.startYProperty());
+		minuateHand.getTransforms().add(minuateRotation);
+		
+		Rotate secondRotation = new Rotate();
+		secondRotation.pivotXProperty().bind(secondHand.startXProperty());
+		secondRotation.pivotYProperty().bind(secondHand.startYProperty());
+		secondHand.getTransforms().add(secondRotation);
+		
+		Calendar calendar;
+		while(true){
+			calendar = Calendar.getInstance();
+			int hour =calendar.get(Calendar.HOUR);
+			int minuate = calendar.get(Calendar.MINUTE);
+			int second = calendar.get(Calendar.SECOND);
+			try {Thread.sleep(1000);} catch (InterruptedException ex) {}
+			//시간*30+분
+			hourRotation.setAngle(hour*30+minuate*0.5+second*(1/120));
+			
+			minuateRotation.setAngle(minuate*6+second*0.1);
+			secondRotation.setAngle(second*6);
+			System.out.println(hour+":"+minuate+":"+second);
+			
 		}
+		
 	}
 
 }

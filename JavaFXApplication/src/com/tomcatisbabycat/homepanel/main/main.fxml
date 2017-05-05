@@ -66,9 +66,11 @@
                               <Image url="@../resources/icons/circular-clock-2.png" />
                            </image>
                         </ImageView>
-                        <Line fx:id="houreHand" endX="30.0" layoutX="75.0" layoutY="55.0" rotate="-90.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
-                        <Line fx:id="minuateHand" endX="30.0" layoutX="85.0" layoutY="65.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
-                        <Line fx:id="secondHand" endX="30.0" layoutX="85.0" layoutY="84.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="3.0" />
+                        <Line fx:id="secondHand" endX="35.0" layoutX="73.0" layoutY="53.0" rotate="-90.0" stroke="RED" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="4.0" />
+                        <Line fx:id="minuateHand" endX="34.0" layoutX="73.0" layoutY="54.0" rotate="-90.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
+                        <Line fx:id="houreHand" endX="25.0" layoutX="78.0" layoutY="58.0" rotate="-90.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
+                        <Circle fill="#524e4d" layoutX="90.0" layoutY="71.0" radius="6.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <Circle fill="#1f93ff00" layoutX="90.0" layoutY="71.0" radius="57.0" stroke="#ff9c39" strokeType="INSIDE" strokeWidth="10.0" />
                      </children>
                   </AnchorPane>
                </right>

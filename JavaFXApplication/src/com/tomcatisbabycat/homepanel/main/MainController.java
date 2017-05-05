@@ -132,21 +132,7 @@ public class MainController implements Initializable {
 		});
 
 		mainBtnLock.setOnAction((event) -> {
-			int a = (int) (Math.random() * 4);
-			System.out.println(a);
-			switch(a){
-				case 0:samplestatus.setWeather("sunny");
-				samplestatus.setDust(160);
-				break;
-				case 1:samplestatus.setWeather("cloudy");
-				samplestatus.setMoisture(20);
-				break;
-				case 2:samplestatus.setWeather("rainny");
-				break;
-				case 3:samplestatus.setWeather("snow");
-				samplestatus.setTemperature(8.2);
-				break;
-			}
+			
 		});
 
 		WeatherThread weatherThread = new WeatherThread(mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
