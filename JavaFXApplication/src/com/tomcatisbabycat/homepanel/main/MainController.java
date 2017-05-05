@@ -87,7 +87,7 @@ public class MainController implements Initializable {
 	@FXML
 	private Line secondHand;
 
-	private ThreadGroup mainThreadGroup;
+	private static ThreadGroup mainThreadGroup=new ThreadGroup("mainThreadGroup");
 	@FXML
 	private Label lblMainClock;
 	@FXML
@@ -106,10 +106,9 @@ public class MainController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		PauseTransition delay = new PauseTransition(Duration.seconds(10));
-		delay.setOnFinished( event -> handleBtnLock(event));
-		delay.play();
+//		PauseTransition delay = new PauseTransition(Duration.seconds(10));
+//		delay.setOnFinished( event -> handleBtnLock(event));
+//		delay.play();
 		/*Timeline timeline = new Timeline(
                 new KeyFrame(Duration.ZERO, new KeyValue(rotation.angleProperty(), 100)),
                 new KeyFrame(Duration.seconds(10), new KeyValue(rotation.angleProperty(), 360))
@@ -128,10 +127,10 @@ public class MainController implements Initializable {
 			handleBtnLock(event);
 		});
 		
-		stackPaneMain.setOnMouseClicked((event) -> {
-			delay.stop();
-			delay.play();
-		});
+//		stackPaneMain.setOnMouseClicked((event) -> {
+//			delay.stop();
+//			delay.play();
+//		});
 
 		mainImage.setOnMouseClicked((event) -> {
 			try {
@@ -165,7 +164,7 @@ public class MainController implements Initializable {
 			}
 		});
 
-		mainThreadGroup = new ThreadGroup("mainThreadGroup");
+		//mainThreadGroup = new ThreadGroup("mainThreadGroup");
 
 		WeatherThread weatherThread = new WeatherThread(mainThreadGroup, "weatherThread", mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
 		weatherThread.setDaemon(true);
@@ -215,7 +214,6 @@ public class MainController implements Initializable {
 			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
 			stackPaneMain.setDisable(true);
-			//stackPaneMain.heightProperty().
 			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
 				//System.out.println(newValue);
 				if (newValue.toString().equals("STOPPED")) {
@@ -235,7 +233,11 @@ public class MainController implements Initializable {
 
 	private void handleBtnLock(ActionEvent event) {
 		// main에서의 Lock 이벤트처리 일단 안함
+		mainThreadInterrupt();
 		LockController.lockRootPane.getChildren().remove(stackPaneMain);
 		System.gc();
+	}
+	public static void mainThreadInterrupt(){
+		mainThreadGroup.interrupt();
 	}
 }

@@ -11,11 +11,15 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -36,8 +40,20 @@ public class LockController implements Initializable {
       @Override
       public void initialize(URL url, ResourceBundle rb) {
             lockRootPane = stackPaneLock;
-		
-            stackPaneLock.setOnMouseClicked((event) -> {
+		PauseTransition delay = new PauseTransition(Duration.seconds(10));
+		delay.setOnFinished( e -> {
+			if(stackPaneLock.getChildren().size()!=1){
+				MainController.mainThreadInterrupt();
+				LockController.lockRootPane.getChildren().remove(1);
+			}
+		});
+		delay.play();
+		stackPaneLock.addEventFilter(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent mouseEvent) {
+				System.out.println("클릭");
+			delay.stop();
+			delay.play();
 			if(stackPaneLock.getChildren().size()==1){
 				try {
 					Parent parent = FXMLLoader.load(Lock_viewController.class.getResource("lock_view.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
@@ -53,7 +69,8 @@ public class LockController implements Initializable {
 					ex.printStackTrace();
 				}
 			}
-            });
+			}
+		});
       }
 
 }
