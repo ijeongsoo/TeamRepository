@@ -5,6 +5,7 @@
  */
 package com.tomcatisbabycat.homepanel.lock;
 
+import com.tomcatisbabycat.homepanel.light.LightController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import java.io.IOException;
 import java.net.URL;

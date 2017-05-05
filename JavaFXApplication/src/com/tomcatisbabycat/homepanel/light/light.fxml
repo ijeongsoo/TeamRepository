@@ -45,68 +45,105 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="164.0" layoutX="602.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="168.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="164.0" layoutX="602.0" layoutY="279.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="168.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="92.0" layoutX="484.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="101.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="243.0" layoutX="484.0" layoutY="201.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="101.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="83.0" layoutX="40.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="86.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="83.0" layoutX="141.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="86.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="139.0" layoutX="243.0" layoutY="94.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="222.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="188.0" layoutX="243.0" layoutY="253.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="222.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="SILVER" height="164.0" layoutX="40.0" layoutY="192.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="190.0" />
-            <ImageView fitHeight="72.0" fitWidth="75.0" layoutX="40.0" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="40.5" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/icons/idea-2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgLight" fitHeight="72.0" fitWidth="75.0" layoutX="40.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../resources/icons/idea.png" />
                </image>
             </ImageView>
-            <Label layoutX="126.0" layoutY="378.0" text="0/9">
+            <Button fx:id="boilRoom" alignment="BOTTOM_LEFT" layoutX="40.0" layoutY="94.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="86.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="보일러실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="multiRoom" alignment="BOTTOM_LEFT" layoutX="141.0" layoutY="94.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="86.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="다용도실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="innerRoom" alignment="BOTTOM_LEFT" layoutX="40.0" layoutY="192.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="190.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="안방" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="kichinRoom" alignment="BOTTOM_LEFT" layoutX="243.0" layoutY="94.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="222.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="주방" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="livingRoom" alignment="BOTTOM_LEFT" layoutX="243.0" layoutY="253.0" mnemonicParsing="false" prefHeight="188.0" prefWidth="222.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="거실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="bathRoom" alignment="BOTTOM_LEFT" layoutX="484.0" layoutY="94.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="101.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="욕실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="doorRoom" alignment="BOTTOM_LEFT" layoutX="484.0" layoutY="201.0" mnemonicParsing="false" prefHeight="243.0" prefWidth="101.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="현관" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="num1Room" alignment="BOTTOM_LEFT" layoutX="602.0" layoutY="94.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="168.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="방-1" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="num2Room" alignment="BOTTOM_LEFT" layoutX="602.0" layoutY="279.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="168.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="방-2" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Label fx:id="lblLight" layoutX="126.0" layoutY="378.0" text="0">
                <font>
                   <Font size="51.0" />
                </font>
             </Label>
-            <Label layoutX="45.0" layoutY="152.0" text="보일러실" textFill="WHITE">
+            <Label layoutX="157.0" layoutY="378.0" text="/9">
                <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="146.0" layoutY="152.0" text="다용도실" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="45.0" layoutY="330.0" text="안방" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="248.0" layoutY="414.0" text="거실" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="248.0" layoutY="206.0" text="주방" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="488.0" layoutY="160.0" text="욕실" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="488.0" layoutY="417.0" text="현관" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="606.0" layoutY="417.0" text="방-2" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
-               </font>
-            </Label>
-            <Label layoutX="606.0" layoutY="229.0" text="방-1" textFill="WHITE">
-               <font>
-                  <Font size="17.0" />
+                  <Font size="51.0" />
                </font>
             </Label>
             </children>
