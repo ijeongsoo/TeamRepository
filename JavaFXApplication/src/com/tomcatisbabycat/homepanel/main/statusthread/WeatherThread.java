@@ -36,8 +36,8 @@ public class WeatherThread extends Thread {
 			if (samplestatus.getWeather().equals("sunny")) {
 				mainWeatherImage.setX(0);
 				mainWeatherImageBack.setVisible(false);
-				mainWeatherImage.setLayoutX(242);
-				mainWeatherImage.setLayoutY(34);
+				mainWeatherImage.setLayoutX(254);
+				mainWeatherImage.setLayoutY(22);
 				mainWeatherImageBack2.setVisible(false);
 				mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
 				
@@ -57,8 +57,8 @@ public class WeatherThread extends Thread {
 				mainWeatherImage.setRotate(0);
 				mainWeatherImageBack.setVisible(true);
 				mainWeatherImageBack2.setVisible(false);
-				mainWeatherImage.setLayoutX(242);
-				mainWeatherImage.setLayoutY(34);
+				mainWeatherImage.setLayoutX(250);
+				mainWeatherImage.setLayoutY(26);
 				mainWeatherImageBack.setImage(new Image(WeatherIconSelector.class.getResource("sunny.png").toString()));
 				mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("cloud.png").toString()));
 				
@@ -89,18 +89,18 @@ public class WeatherThread extends Thread {
 				mainWeatherImageBack.setVisible(false);
 				mainWeatherImageBack2.setVisible(true);
 				mainWeatherImageBack2.setPreserveRatio(false);
-				mainWeatherImageBack2.setLayoutX(235);
+				mainWeatherImageBack2.setLayoutX(243);
 				mainWeatherImageBack2.setLayoutY(8);
-				mainWeatherImageBack2.setFitWidth(133);
-				mainWeatherImageBack2.setFitHeight(61);
+				mainWeatherImageBack2.setFitWidth(141);
+				mainWeatherImageBack2.setFitHeight(53);
 				mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("umbrella.png").toString()));
 				mainWeatherImageBack2.setImage(new Image(WeatherIconSelector.class.getResource("raining.png").toString()));
 				
 				Platform.runLater(() -> {
 					mainWeatherImageBack2.toFront();
 				});
-				mainWeatherImage.setLayoutX(242);
-				mainWeatherImage.setLayoutY(34);
+				mainWeatherImage.setLayoutX(250);
+				mainWeatherImage.setLayoutY(26);
 				mainWeatherImage.setX(0);
 				double rotateTemp = rainrotate;
 				Platform.runLater(() -> {
@@ -119,15 +119,15 @@ public class WeatherThread extends Thread {
 				mainWeatherImageBack.setVisible(false);
 				mainWeatherImageBack2.setVisible(true);
 				mainWeatherImageBack2.setPreserveRatio(true);
-				mainWeatherImageBack2.setLayoutX(258);
-				mainWeatherImageBack2.setLayoutY(75);
+				mainWeatherImageBack2.setLayoutX(270);
+				mainWeatherImageBack2.setLayoutY(67);
 				mainWeatherImageBack2.setFitWidth(75);
 				mainWeatherImageBack2.setFitHeight(75);
 				Platform.runLater(() -> {
 					mainWeatherImageBack2.toBack();
 				});
-				mainWeatherImage.setLayoutX(232);
-				mainWeatherImage.setLayoutY(10);
+				mainWeatherImage.setLayoutX(250);
+				mainWeatherImage.setLayoutY(2);
 				mainWeatherImage.setRotate(0);
 				mainWeatherImage.setX(0);
 				mainWeatherImage.setImage(new Image(WeatherIconSelector.class.getResource("clouds.png").toString()));
