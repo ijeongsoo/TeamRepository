@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tomcatisbabycat.homepanel.main;
+package com.tomcatisbabycat.homepanel.main.statusthread;
 
 import com.tomcatisbabycat.homepanel.resources.icons.IconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
@@ -38,17 +38,13 @@ public class MoistureThread extends Thread{
 				lblMainMoisture.setText(samplestatus.getMoisture()+"%");
 			});
 			
-			if(samplestatus.getTemperature()<20.0){
+			if(samplestatus.getMoisture()<50.0){
 				Platform.runLater(() -> {
-					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("temperature-2.png").toString()));
-				});
-			}else if(samplestatus.getTemperature()>=20.0||samplestatus.getTemperature()<30.0){
-				Platform.runLater(() -> {
-					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("temperature-3.png").toString()));
+					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("cactus.png").toString()));
 				});
 			}else{
 				Platform.runLater(() -> {
-					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("temperature-4.png").toString()));
+					imgMainMoisture.setImage(new Image(IconSelector.class.getResource("drops.png").toString()));
 				});
 			}
 			

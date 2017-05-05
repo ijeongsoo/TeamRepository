@@ -5,23 +5,22 @@
  */
 package com.tomcatisbabycat.homepanel.main;
 
+import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
+import com.tomcatisbabycat.homepanel.main.statusthread.TemperatureThread;
+import com.tomcatisbabycat.homepanel.main.statusthread.MoistureThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
-import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
+import com.tomcatisbabycat.homepanel.main.statusthread.DustThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.shape.Circle;
 import com.tomcatisbabycat.homepanel.menu.*;
-import com.tomcatisbabycat.homepanel.resources.weatherIcon.WeatherIconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
-import static javafx.animation.Animation.Status.STOPPED;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -70,6 +69,10 @@ public class MainController implements Initializable {
 	private ImageView imgMainMoisture;
 	@FXML
 	private Label lblMainMoisture;
+	@FXML
+	private ImageView imgMainDust;
+	@FXML
+	private Label lblMainDust;
 
 	/**
 	 * Initializes the controller class.
@@ -112,6 +115,10 @@ public class MainController implements Initializable {
 		MoistureThread moistureThread = new MoistureThread(imgMainMoisture, lblMainMoisture);
 		moistureThread.setDaemon(true);
 		moistureThread.start();
+		
+		DustThread dustThread = new DustThread(imgMainDust, lblMainDust);
+		dustThread.setDaemon(true);
+		dustThread.start();
 
 	}
 

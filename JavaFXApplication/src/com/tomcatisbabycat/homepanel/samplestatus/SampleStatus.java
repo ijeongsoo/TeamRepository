@@ -10,7 +10,7 @@ package com.tomcatisbabycat.homepanel.samplestatus;
  * @author ijeongsu
  */
 public class SampleStatus {
-	  public  double temperature= 24.5;
+	  public  double temperature= 14.5;
 	  public  int moisture=70;
 	  public  int dust=37;
 	  public  String weather="snow";

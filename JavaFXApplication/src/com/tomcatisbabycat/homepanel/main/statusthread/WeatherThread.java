@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tomcatisbabycat.homepanel.main;
+package com.tomcatisbabycat.homepanel.main.statusthread;
 
 import com.tomcatisbabycat.homepanel.resources.weatherIcon.WeatherIconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.tomcatisbabycat.homepanel.main;
+package com.tomcatisbabycat.homepanel.main.statusthread;
 
 import com.tomcatisbabycat.homepanel.resources.icons.IconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
@@ -40,7 +40,7 @@ public class TemperatureThread extends Thread{
 				Platform.runLater(() -> {
 					imgMainTemperature.setImage(new Image(IconSelector.class.getResource("temperature-2.png").toString()));
 				});
-			}else if(samplestatus.getTemperature()>=20.0||samplestatus.getTemperature()<30.0){
+			}else if(samplestatus.getTemperature()>=20.0&&samplestatus.getTemperature()<30.0){
 				Platform.runLater(() -> {
 					imgMainTemperature.setImage(new Image(IconSelector.class.getResource("temperature-3.png").toString()));
 				});
