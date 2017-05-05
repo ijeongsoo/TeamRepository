@@ -40,6 +40,8 @@ public class NoticeController implements Initializable {
 	private Button btnControlLock;
 	@FXML
 	private Button btnControlBack;
+      
+      
       @FXML
       private Button btnControlReg;
       @FXML
@@ -75,6 +77,9 @@ public class NoticeController implements Initializable {
 		});
             btnControlAdd.setOnAction(event->{
                   handleBtnControlAdd(event);
+            });
+            btnControlReg.setOnAction(event->{
+                  handleBtnControlReg(event);
             });
 	}
 	private void handleBtnControlBack(ActionEvent event){
@@ -136,7 +141,12 @@ public class NoticeController implements Initializable {
 
       private void handleBtnControlAdd(ActionEvent event) {
            // regStackPane.getChildren().remove(0);//regStackPane 본인 제거
-           reviseStackPane.getChildren().remove(0); //reviseStackPane 제거.
+          // reviseStackPane.getChildren().remove(0); //reviseStackPane 제거.
+           
+      }
+
+      private void handleBtnControlReg(ActionEvent event) {
+           //noticeTableView.setSelectionModel(noticeTextArea.getText().);
            
       }
       
