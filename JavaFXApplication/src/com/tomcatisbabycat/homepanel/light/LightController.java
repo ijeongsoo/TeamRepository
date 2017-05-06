@@ -76,7 +76,6 @@ public class LightController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
 		if (!light.isNum2Room()) {
 			num2Room.setStyle("-fx-background-color:#c0c0c0;");
 		} else {

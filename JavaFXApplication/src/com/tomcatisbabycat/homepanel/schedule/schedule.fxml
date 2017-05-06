@@ -44,7 +44,27 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0" />
+                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+               <children>
+                  <BorderPane prefHeight="360.0" prefWidth="360.0">
+                     <top>
+                        <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button mnemonicParsing="false" opacity="0.0" text="Button" />
+                              <Label fx:id="lblSchedule">
+                                 <font>
+                                    <Font name="Arial Black" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="btnAdd" mnemonicParsing="false" text="추가" />
+                           </children>
+                        </HBox>
+                     </top>
+                     <center>
+                        <ListView fx:id="scheduleListview" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                     </center>
+                  </BorderPane>
+               </children></AnchorPane>
                 <AnchorPane layoutX="410.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
                     <children>
                         <Button fx:id="btnTV" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
