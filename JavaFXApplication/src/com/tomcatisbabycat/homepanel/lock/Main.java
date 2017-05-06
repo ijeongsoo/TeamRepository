@@ -34,6 +34,9 @@ public class Main extends Application {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
+		Thread thread = new statusThread();
+		thread.setDaemon(true);
+		thread.start();
 		launch(args);
 	}
 

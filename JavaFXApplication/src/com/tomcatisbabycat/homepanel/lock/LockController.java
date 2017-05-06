@@ -41,7 +41,7 @@ public class LockController implements Initializable {
       @Override
       public void initialize(URL url, ResourceBundle rb) {
             lockRootPane = stackPaneLock;
-		PauseTransition delay = new PauseTransition(Duration.seconds(10));
+		PauseTransition delay = new PauseTransition(Duration.seconds(10000));
 		delay.setOnFinished( e -> {
 			if(stackPaneLock.getChildren().size()!=1){
 				MainController.mainThreadInterrupt();

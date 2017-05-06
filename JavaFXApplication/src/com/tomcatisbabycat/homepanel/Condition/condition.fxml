@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -12,6 +14,7 @@
     <children>
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
+            <StackPane fx:id="graphStackPane" layoutX="31.0" layoutY="90.0" prefHeight="363.0" prefWidth="552.0" />
                 <Label layoutX="40.0" layoutY="27.0" text="Condition">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
@@ -44,6 +47,9 @@
                         </ImageView>
                     </graphic>
                 </Button>
+            <Button fx:id="btnTemp" layoutX="598.0" layoutY="91.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
+            <Button fx:id="btnMoist" layoutX="598.0" layoutY="218.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
+            <Button fx:id="btnDust" layoutX="597.0" layoutY="344.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
             </children>
         </AnchorPane>
     </children>
