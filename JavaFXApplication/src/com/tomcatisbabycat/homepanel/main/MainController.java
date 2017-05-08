@@ -6,12 +6,7 @@
 package com.tomcatisbabycat.homepanel.main;
 
 import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.TemperatureThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.MoistureThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
-import com.tomcatisbabycat.homepanel.main.statusthread.ClockThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.DustThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.RionThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -30,7 +25,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
