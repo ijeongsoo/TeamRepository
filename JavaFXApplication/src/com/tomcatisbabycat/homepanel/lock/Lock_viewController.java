@@ -154,7 +154,7 @@ public class Lock_viewController implements Initializable {
 			//KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
 			parent.setOpacity(0);
 			KeyValue keyValue = new KeyValue(parent.opacityProperty(), 1);
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),(event) -> {
+			KeyFrame keyFrame = new KeyFrame(Duration.millis(500),(event) -> {
 				LockController.lockRootPane.getChildren().remove(1);
 			},keyValue);
 
