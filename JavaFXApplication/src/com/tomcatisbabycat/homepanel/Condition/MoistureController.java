@@ -5,6 +5,7 @@
  */
 package com.tomcatisbabycat.homepanel.Condition;
 
+import com.tomcatisbabycat.homepanel.controller.knob.knobfx.Knob;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.net.URL;
 import java.util.Calendar;
@@ -13,11 +14,15 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 /**
@@ -37,6 +42,16 @@ public class MoistureController implements Initializable {
 	private double sequence = 0;
 	NumberAxis xAxis ;
 	NumberAxis yAxis ;
+			SampleStatus ss = SampleStatus.getInstance();
+	@FXML
+	private Knob currentTempKnob;
+	@FXML
+	private Knob wishTempKnob;
+	@FXML
+	private Label lblKnobTemp;
+	@FXML
+	private Label lblWishKnobTemp;
+
 
 	private String getTime() {
 		Calendar ca = Calendar.getInstance();
@@ -45,8 +60,7 @@ public class MoistureController implements Initializable {
 		return time;
 	}
 
-	private double getMoisture() {
-		SampleStatus ss = SampleStatus.getInstance();
+	private int getMoisture() {
 		return ss.getMoisture();
 		
 	}
@@ -109,9 +123,53 @@ public class MoistureController implements Initializable {
 		Timeline graphTl = new Timeline();
 		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
 			timeToGrape();
+			timeToMost();
 		}));
 		graphTl.setCycleCount(Animation.INDEFINITE);
 		graphTl.play();
+		
+		currentTempKnob.setControl(false);
+		currentTempKnob.setMarkerColor(Color.rgb(1, 194, 242));
+		currentTempKnob.setValue(ss.getMoisture());
+		lblKnobTemp.setText(ss.getMoisture()+"%");
+		lblKnobTemp.setTextFill(Color.rgb(1, 194, 242));
+		lblKnobTemp.textProperty().addListener(new ChangeListener<String>(){
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				String clean = newValue.replaceAll("[^0-9]", "");
+				currentTempKnob.setValue(Integer.parseInt(clean));
+			}
+		});
+		
+		
+		wishTempKnob.setMarkerColor(Color.rgb(1, 194, 242));
+		wishTempKnob.setValue(ss.getWishMoisture());
+		lblWishKnobTemp.setText(ss.getWishMoisture()+"%");
+		lblWishKnobTemp.setTextFill(Color.rgb(1, 194, 242));
+		wishTempKnob.setOnMouseDragged((event) -> {
+				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
+			  if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>0)
+				   wishTempKnob.setValue((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)*100/180);
+			  else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>-90)
+					wishTempKnob.setValue(0);
+			else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)<-90)
+				  wishTempKnob.setValue(100);
+			});
+		
+			
+			wishTempKnob.valueProperty().addListener(new ChangeListener<Number>(){
+				  @Override
+				  public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+						
+						lblWishKnobTemp.setText(newValue.intValue()+"%");
+						ss.setWishMoisture(newValue.intValue());
+				  };
+
+			});
 	}	
+
+	private void timeToMost() {
+		lblKnobTemp.setText((int)getMoisture()+"%");
+	}
 	
 }

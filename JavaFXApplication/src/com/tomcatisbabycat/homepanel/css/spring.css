@@ -38,3 +38,16 @@ and open the template in the editor.
     -fx-fill: transparent;
     -fx-stroke: #296EA8;
 }
+
+.conditionBtn{
+  -fx-background-color: #01C2F2;
+}
+.conditionBtnFocused{
+  -fx-focus-color: #85D03C;
+    -fx-faint-focus-color: #85D03C;
+    -fx-inner-border: #85D03C;
+    -fx-body-color: #85D03C;
+ 
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+    
+}

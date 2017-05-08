@@ -47,9 +47,57 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Button fx:id="btnTemp" layoutX="598.0" layoutY="91.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
-            <Button fx:id="btnMoist" layoutX="598.0" layoutY="218.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
-            <Button fx:id="btnDust" layoutX="597.0" layoutY="344.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" text="Button" />
+            <Button fx:id="btnTemp" layoutX="598.0" layoutY="91.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnTemp" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/temperature-3.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnTemp" opacity="0.0" text="온도" textFill="WHITE">
+                           <font>
+                              <Font size="39.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
+            <Button fx:id="btnMoist" layoutX="598.0" layoutY="218.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnMoist" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/drops.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnMoist" opacity="0.0" text="습도" textFill="WHITE">
+                           <font>
+                              <Font size="39.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
+            <Button fx:id="btnDust" layoutX="597.0" layoutY="344.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnDust" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/fields.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnDust" opacity="0.0" prefHeight="68.0" prefWidth="142.0" text="미세먼지" textFill="WHITE">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
             </children>
         </AnchorPane>
     </children>

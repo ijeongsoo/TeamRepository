@@ -6,12 +6,7 @@
 package com.tomcatisbabycat.homepanel.main;
 
 import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.TemperatureThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.MoistureThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
-import com.tomcatisbabycat.homepanel.main.statusthread.ClockThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.DustThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.RionThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -30,7 +25,6 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
@@ -110,6 +104,10 @@ public class MainController implements Initializable {
 	Rotate secondRotation;
 	Calendar calendar;
 
+	Timeline animationTL;
+	Timeline lionAnimationTL;
+	
+	
 	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
 	Image hillsImage = new Image(IconSelector.class.getResource("hills.png").toString());
 	Image fieldsImage = new Image(IconSelector.class.getResource("fields.png").toString());
@@ -265,7 +263,7 @@ public class MainController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		System.gc();
 		hourRotation = new Rotate();
 		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
 		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
@@ -282,20 +280,19 @@ public class MainController implements Initializable {
 		secondHand.getTransforms().add(secondRotation);
 		animation();
 
-		Timeline animationTL = new Timeline();
+		animationTL = new Timeline();
 		animationTL.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
 			animation();
 		}));
 		animationTL.setCycleCount(Animation.INDEFINITE);
 		animationTL.play();
-		
-		Timeline lionAnimationTL=new Timeline();
+
+		lionAnimationTL = new Timeline();
 		lionAnimationTL.getKeyFrames().add(new KeyFrame(Duration.millis(100), (event) -> {
 			lionAnimation();
 		}));
 		lionAnimationTL.setCycleCount(Animation.INDEFINITE);
 		lionAnimationTL.play();
-		
 
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();
@@ -303,7 +300,6 @@ public class MainController implements Initializable {
 		mainBtnMenu.setOnAction((event) -> {
 			handleBtnMenu(event);
 		});
-
 		mainBtnLock.setOnAction((event) -> {
 			handleBtnLock(event);
 		});
@@ -325,7 +321,8 @@ public class MainController implements Initializable {
 						Timeline timeline2 = new Timeline();
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
 						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
-							stackPaneMain.getChildren().remove(1);
+							stackPaneMain.getChildren().remove(2);
+							
 						}, keyvalue2);
 						timeline2.getKeyFrames().add(keyFrame2);
 						timeline2.play();
@@ -339,33 +336,15 @@ public class MainController implements Initializable {
 			}
 		});
 
-		//mainThreadGroup = new ThreadGroup("mainThreadGroup");
 		WeatherThread weatherThread = new WeatherThread(mainThreadGroup, "weatherThread", mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
 		weatherThread.setDaemon(true);
 		weatherThread.start();
 
-//		TemperatureThread temperatureThread = new TemperatureThread(mainThreadGroup, "temperatureThread", imgMainTemperature, lblMainTemperature);
-//		temperatureThread.setDaemon(true);
-//		temperatureThread.start();
-//
-//		MoistureThread moistureThread = new MoistureThread(mainThreadGroup, "moistureThread", imgMainMoisture, lblMainMoisture);
-//		moistureThread.setDaemon(true);
-//		moistureThread.start();
-//
-//		DustThread dustThread = new DustThread(mainThreadGroup, "dustThread", imgMainDust, lblMainDust);
-//		dustThread.setDaemon(true);
-//		dustThread.start();
-//		ClockThread clockThread = new ClockThread(mainThreadGroup, "clockThread", houreHand, minuateHand, secondHand, lblMainClock, lblMainYear, lblMainMonth, lblMainDate, lblMainDay);
-//		clockThread.setDaemon(true);
-//		clockThread.start();
-//		RionThread rionThread = new RionThread(mainThreadGroup, "rionThread", imgRion);
-//		rionThread.setDaemon(true);
-//		rionThread.start();
 	}
 
 	private void handleBtnMenu(ActionEvent e) { // menu 화면 넘어가는 애니메이션 처리
 		try {
-			Parent parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
 
 			// 메인 페이지가 추가된상태에서 현재 리스트의 사이즈는 2 이다 , 이 사이즈를 가지고 다음에 추가할 메뉴의 인덱스를 설정하면서 메뉴페이지를 추가한다.
 			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
@@ -373,10 +352,23 @@ public class MainController implements Initializable {
 			// 현재상태에서 메뉴의 인덱스는 2
 
 			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
-			parent.setTranslateX(800);
+			parent.getChildren().get(0).setOpacity(0);
+			parent.getChildren().get(1).setOpacity(0);
+			//parent.setTranslateX(800);
 
-			KeyValue keyValueStackPaneMenu = new KeyValue(parent.translateXProperty(), 0);
-			KeyFrame keyFrameStackPaneMenu = new KeyFrame(Duration.seconds(1), keyValueStackPaneMenu);
+			KeyValue keyValueStackPaneMenu = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
+			KeyFrame keyFrameStackPaneMenu = new KeyFrame(Duration.millis(500), (event) -> {
+				Timeline timeline2 = new Timeline();
+				KeyValue keyvalue2 = new KeyValue(parent.getChildren().get(1).opacityProperty(), 1);
+				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
+				timeline2.getKeyFrames().add(keyFrame2);
+				timeline2.play();
+				mainThreadGroup.interrupt();
+				
+				LockController.lockRootPane.getChildren().remove(1);
+			}, keyValueStackPaneMenu);
+			
+			
 
 			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
 			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
@@ -384,19 +376,7 @@ public class MainController implements Initializable {
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
-			stackPaneMain.setDisable(true);
-			timeline.statusProperty().addListener((observable, oldValue, newValue) -> {
-				//System.out.println(newValue);
-				if (newValue.toString().equals("STOPPED")) {
-					// 애니메이션이 끝난순간, 인덱스번호를 사용해 메인페이지를 제거한다
-					mainThreadGroup.interrupt();
-					//System.out.println(LockController.lockRootPane.getChildren().getClass());
-					System.gc();
-					LockController.lockRootPane.getChildren().remove(1);
-					// 메인페이지를 삭제하는 순간, 리스트의 사이즈는 2로 바뀌고 메뉴페이지의 인덱스는 1로 바뀐다
-					//System.out.println("메뉴의 인덱스" + LockController.lockRootPane.getChildren().indexOf(parent)); // 인덱스 확인 출력문
-				}
-			});
+			
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -406,7 +386,6 @@ public class MainController implements Initializable {
 		// main에서의 Lock 이벤트처리 일단 안함
 		mainThreadInterrupt();
 		LockController.lockRootPane.getChildren().remove(stackPaneMain);
-		System.gc();
 	}
 
 	public static void mainThreadInterrupt() {

@@ -6,8 +6,6 @@ import com.tomcatisbabycat.homepanel.menu.MenuController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,6 +15,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
@@ -30,48 +30,104 @@ public class ConditionController implements Initializable {
 	private Button btnControlLock;
 	@FXML
 	private Button btnControlBack;
-	
+
 	@FXML
 	private Button btnTemp;
 	@FXML
 	private Button btnMoist;
 	@FXML
 	private Button btnDust;
-	
+
 	private Parent temperature;
 	private Parent moisture;
 	private Parent dust;
 	@FXML
 	private StackPane graphStackPane;
-	
+	@FXML
+	private Label lblBtnTemp;
+	@FXML
+	private Label lblBtnMoist;
+	@FXML
+	private Label lblBtnDust;
+	@FXML
+	private ImageView imgBtnTemp;
+	@FXML
+	private ImageView imgBtnMoist;
+	@FXML
+	private ImageView imgBtnDust;
+
+	private void handleBackground(ActionEvent event, Button btn, ImageView img, Label lbl, ImageView img2, Label lbl2, ImageView img3, Label lbl3) {
+		btnTemp.getStyleClass().removeAll("conditionBtnFocused");
+		btnTemp.getStyleClass().add("conditionBtn");
+		btnMoist.getStyleClass().removeAll("conditionBtnFocused");
+		btnMoist.getStyleClass().add("conditionBtn");
+		btnDust.getStyleClass().removeAll("conditionBtnFocused");
+		btnDust.getStyleClass().add("conditionBtn");
+
+		btn.getStyleClass().removeAll("conditionBtn");
+		btn.getStyleClass().add("conditionBtnFocused");
+
+		Timeline btnImageChange = new Timeline();
+		KeyValue kv = new KeyValue(img.opacityProperty(), 0);
+		KeyValue kv2 = new KeyValue(lbl2.opacityProperty(), 0);
+		KeyValue kv3 = new KeyValue(lbl3.opacityProperty(), 0);
+		KeyFrame kf = new KeyFrame(Duration.millis(200), (e) -> {
+			Timeline btnlblChange = new Timeline();
+			KeyValue kiv = new KeyValue(lbl.opacityProperty(), 1);
+			KeyValue kiv2 = new KeyValue(img2.opacityProperty(), 1);
+			KeyValue kiv3 = new KeyValue(img3.opacityProperty(), 1);
+			KeyFrame kif = new KeyFrame(Duration.millis(200), kiv, kiv2, kiv3);
+			btnlblChange.getKeyFrames().add(kif);
+			btnlblChange.play();
+		}, kv, kv2, kv3);
+		btnImageChange.getKeyFrames().add(kf);
+		btnImageChange.play();
+	}
+
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
 
 		try {
-			temperature=FXMLLoader.load(getClass().getResource("temperature.fxml"));
-			moisture=FXMLLoader.load(getClass().getResource("moisture.fxml"));
-			dust=FXMLLoader.load(getClass().getResource("dust.fxml"));
+			temperature = FXMLLoader.load(getClass().getResource("temperature.fxml"));
+			moisture = FXMLLoader.load(getClass().getResource("moisture.fxml"));
+			dust = FXMLLoader.load(getClass().getResource("dust.fxml"));
 		} catch (IOException ex) {
 		}
-		
-		graphStackPane.getChildren().add(temperature);
-		graphStackPane.getChildren().add(moisture);
+
 		graphStackPane.getChildren().add(dust);
-		
-		
+		graphStackPane.getChildren().add(moisture);
+		graphStackPane.getChildren().add(temperature);
+
+		handleBackground(new ActionEvent(), btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
+
 		btnTemp.setOnAction((event) -> {
+			handleBackground(event, btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
+			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(temperature)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(temperature)).toFront();
-			
+			KeyValue kv = new KeyValue(graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(temperature)).opacityProperty(), 1);
+			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
+			Timeline timeline = new Timeline(kf);
+			timeline.play();
+
 		});
 		btnMoist.setOnAction((event) -> {
+			handleBackground(event, btnMoist, imgBtnMoist, lblBtnMoist, imgBtnTemp, lblBtnTemp, imgBtnDust, lblBtnDust);
+			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(moisture)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(moisture)).toFront();
+			KeyValue kv = new KeyValue(graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(moisture)).opacityProperty(), 1);
+			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
+			Timeline timeline = new Timeline(kf);
+			timeline.play();
 		});
 		btnDust.setOnAction((event) -> {
+			handleBackground(event, btnDust, imgBtnDust, lblBtnDust, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist);
+			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(dust)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(dust)).toFront();
+			KeyValue kv = new KeyValue(graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(dust)).opacityProperty(), 1);
+			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
+			Timeline timeline = new Timeline(kf);
+			timeline.play();
 		});
-		
-		
 
 		btnControlLock.setOnAction(event -> {
 			handleBtnControlLock(event);
