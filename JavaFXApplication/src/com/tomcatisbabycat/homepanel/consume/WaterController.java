@@ -13,6 +13,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,6 +21,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -44,6 +46,9 @@ public class WaterController implements Initializable {
 	static Timeline graphTl = new Timeline();
 	@FXML
 	private BarChart<?, ?> barChartWater;
+	@FXML
+	private AnchorPane AnchorWater;
+	
 
 	private int getMoisture() {
 		return ss.getMoisture();
@@ -97,12 +102,24 @@ public class WaterController implements Initializable {
 		chartMost.getData().add(series);
 		chartMost.getStylesheets().add(getClass().getResource("waterChart.css").toString());
 		chartMost.applyCss();
+		
 
-		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			timeToGrape();
-		}));
-		graphTl.setCycleCount(Animation.INDEFINITE);
-		graphTl.play();
+		Thread thread = new Thread(() -> {
+			while (AnchorWater.isVisible()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+				}
+				Platform.runLater(() -> {
+					timeToGrape();
+				});
+				
+			}
+			System.out.println("수도 스레드 종료");
+
+		});
+		
+		thread.start();
 		
 		barChartWater.getStylesheets().add(getClass().getResource("waterChart.css").toString());
 		barChartWater.applyCss();

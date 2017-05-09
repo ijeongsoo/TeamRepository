@@ -10,10 +10,10 @@ import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -35,14 +36,12 @@ public class DustController implements Initializable {
 	@FXML
 	private LineChart chartDust;
 
-	
-	
 	private XYChart.Series<Number, Number> series;
 	private static final int MAX_DATA_POINTS = 8;
 	private double sequence = 0;
-	NumberAxis xAxis ;
-	NumberAxis yAxis ;
-			SampleStatus ss = SampleStatus.getInstance();
+	NumberAxis xAxis;
+	NumberAxis yAxis;
+	SampleStatus ss = SampleStatus.getInstance();
 	@FXML
 	private Knob currentTempKnob;
 	@FXML
@@ -52,7 +51,9 @@ public class DustController implements Initializable {
 	@FXML
 	private Label lblWishKnobTemp;
 
-	static Timeline graphTl = new Timeline();
+	@FXML
+	private AnchorPane AnchorDust;
+	
 
 	private String getTime() {
 		Calendar ca = Calendar.getInstance();
@@ -63,17 +64,17 @@ public class DustController implements Initializable {
 
 	private int getDust() {
 		return ss.getDust();
-		
+
 	}
 
 	private void timeToGrape() {
-		
+
 		series.getData().add(new XYChart.Data<Number, Number>(sequence++, getDust()));
 		if (sequence > MAX_DATA_POINTS + 2) {
 			series.getData().remove(0);
 
 		}
-		
+
 		if (sequence > MAX_DATA_POINTS + 1) {
 			//xAxis.setLowerBound(xAxis.getLowerBound());
 			Timeline tl = new Timeline();
@@ -89,18 +90,18 @@ public class DustController implements Initializable {
 			//xAxis.setUpperBound(xAxis.getUpperBound() +1);
 		}
 	}
+
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		yAxis=(NumberAxis) chartDust.getYAxis();
+		yAxis = (NumberAxis) chartDust.getYAxis();
 		yAxis.setAutoRanging(true);
 		yAxis.setForceZeroInRange(false);
 		chartDust.setAnimated(true);
 		chartDust.setLegendVisible(false);
-		xAxis= (NumberAxis)chartDust.getXAxis();
+		xAxis = (NumberAxis) chartDust.getXAxis();
 		xAxis.setAnimated(false);
 		xAxis.setLowerBound(0);
 		xAxis.setUpperBound(MAX_DATA_POINTS + 1);
@@ -114,66 +115,73 @@ public class DustController implements Initializable {
 		series = new XYChart.Series();
 		series.setName("Dust");
 		series.getData().add(new XYChart.Data<Number, Number>(sequence++, getDust()));
-		
 
 		chartDust.getData().add(series);
-		//series.getNode().lookup(".default-color0.chart-series-line").setStyle("-fx-stroke: rgb(" + 255 + "," + 255 + "," + 255 + "); ");
 		chartDust.getStylesheets().add(getClass().getResource("DustChart.css").toString());
 		chartDust.applyCss();
-		
-		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			timeToGrape();
-			timeToDust();
-		}));
-		graphTl.setCycleCount(Animation.INDEFINITE);
-		graphTl.play();
-		
+
+		Thread thread = new Thread(() -> {
+			while (AnchorDust.isVisible()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+
+				}
+				Platform.runLater(() -> {
+					timeToGrape();
+				timeToDust();
+				});
+				
+
+			}
+			System.out.println("먼지쓰레드 종료");
+
+		});
+		thread.start();
+
 		currentTempKnob.setControl(false);
 		currentTempKnob.setMarkerColor(Color.rgb(167, 113, 20));
-		currentTempKnob.setValue(ss.getDust()*100/200);
-		lblKnobTemp.setText(ss.getDust()+"㎍/㎥");
+		currentTempKnob.setValue(ss.getDust() * 100 / 200);
+		lblKnobTemp.setText(ss.getDust() + "㎍/㎥");
 		lblKnobTemp.setTextFill(Color.rgb(167, 113, 20));
-		lblKnobTemp.textProperty().addListener(new ChangeListener<String>(){
+		lblKnobTemp.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				String clean = newValue.replaceAll("[^0-9]", "");
-				currentTempKnob.setValue(Integer.parseInt(clean)*100/200);
+				currentTempKnob.setValue(Integer.parseInt(clean) * 100 / 200);
 			}
 		});
-		
-		
+
 		wishTempKnob.setMarkerColor(Color.rgb(167, 113, 20));
 		wishTempKnob.setValue(ss.getWishDust());
-		lblWishKnobTemp.setText(ss.getWishDust()+"㎍/㎥");
+		lblWishKnobTemp.setText(ss.getWishDust() + "㎍/㎥");
 		lblWishKnobTemp.setTextFill(Color.rgb(167, 113, 20));
 		wishTempKnob.setOnMouseDragged((event) -> {
-				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
-			  if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>0)
-				   wishTempKnob.setValue((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)*100/180);
-			  else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>-90)
-					wishTempKnob.setValue(0);
-			else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)<-90)
-				  wishTempKnob.setValue(100);
-			});
-		
-			
-			wishTempKnob.valueProperty().addListener(new ChangeListener<Number>(){
-				  @Override
-				  public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-						
-						lblWishKnobTemp.setText(newValue.intValue()*100/100+"㎍/㎥");
-						ss.setWishDust(newValue.intValue());
-				  };
-			});
+			//System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
+			if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) > 0) {
+				wishTempKnob.setValue((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) * 100 / 180);
+			} else if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) > -90) {
+				wishTempKnob.setValue(0);
+			} else if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) < -90) {
+				wishTempKnob.setValue(100);
+			}
+		});
+
+		wishTempKnob.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+				lblWishKnobTemp.setText(newValue.intValue() * 100 / 100 + "㎍/㎥");
+				ss.setWishDust(newValue.intValue());
+			}
+		;
+	}
+
+	);
 	}	
 
 	private void timeToDust() {
-		lblKnobTemp.setText(getDust()+"㎍/㎥");
+		lblKnobTemp.setText(getDust() + "㎍/㎥");
 	}
-	
 
-
-	
-	
-	
 }

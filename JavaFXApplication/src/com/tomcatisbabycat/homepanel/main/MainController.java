@@ -7,6 +7,8 @@ package com.tomcatisbabycat.homepanel.main;
 
 import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
+import com.tomcatisbabycat.homepanel.main.statusthread.ClockAndEnvThread;
+import com.tomcatisbabycat.homepanel.main.statusthread.RionThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -99,200 +101,200 @@ public class MainController implements Initializable {
 	@FXML
 	private ImageView imgRion;
 
-	Rotate hourRotation;
-	Rotate minuateRotation;
-	Rotate secondRotation;
-	Calendar calendar;
-
-	static Timeline animationTL;
-	static Timeline lionAnimationTL;
-	
-	
-	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
-	Image hillsImage = new Image(IconSelector.class.getResource("hills.png").toString());
-	Image fieldsImage = new Image(IconSelector.class.getResource("fields.png").toString());
-	Image capeImage = new Image(IconSelector.class.getResource("cape.png").toString());
-	Image cactusImage = new Image(IconSelector.class.getResource("cactus.png").toString());
-	Image dropsImage = new Image(IconSelector.class.getResource("drops.png").toString());
-	Image coldImage = new Image(IconSelector.class.getResource("temperature-2.png").toString());
-	Image sosoImage = new Image(IconSelector.class.getResource("temperature-3.png").toString());
-	Image hotImage = new Image(IconSelector.class.getResource("temperature-4.png").toString());
-	int lionImagenum = 1;
-
-	/**
-	 * Initializes the controller class.
-	 */
-	private void animation() {
-
-		calendar = Calendar.getInstance();
-		int hour = calendar.get(Calendar.HOUR);
-		String hourstr;
-		if (hour < 10) {
-			hourstr = "0" + hour;
-		} else {
-			hourstr = String.valueOf(hour);
-		}
-
-		int minuate = calendar.get(Calendar.MINUTE);
-		String minuatestr;
-		if (minuate < 10) {
-			minuatestr = "0" + minuate;
-		} else {
-			minuatestr = String.valueOf(minuate);
-		}
-
-		int second = calendar.get(Calendar.SECOND);
-		String secondstr;
-		if (second < 10) {
-			secondstr = "0" + second;
-		} else {
-			secondstr = String.valueOf(second);
-		}
-
-		String ampm;
-		if (calendar.get(Calendar.AM_PM) == 1) {
-			ampm = "PM";
-		} else {
-			ampm = "AM";
-		}
-
-		int year = calendar.get(Calendar.YEAR);
-		String yearstr = String.valueOf(year);
-
-		int month = calendar.get(Calendar.MONTH) + 1;
-		String monthstr;
-		if (month < 10) {
-			monthstr = "0" + month;
-		} else {
-			monthstr = String.valueOf(month);
-		}
-
-		int day = calendar.get(Calendar.DAY_OF_WEEK);
-
-		String daystr = null;
-		switch (day) {
-			case 1:
-				daystr = "Sun";
-				break;
-			case 2:
-				daystr = "Mon";
-				break;
-			case 3:
-				daystr = "Tue";
-				break;
-			case 4:
-				daystr = "Wed";
-				break;
-			case 5:
-				daystr = "Thu";
-				break;
-			case 6:
-				daystr = "Fri";
-				break;
-			case 7:
-				daystr = "Sat";
-				break;
-		}
-		String daystrTemp = daystr;
-
-		int date = calendar.get(Calendar.DAY_OF_MONTH);
-		String datestr;
-		if (date < 10) {
-			datestr = "0" + date;
-		} else {
-			datestr = String.valueOf(date);
-		}
-
-		//시간*30+분
-		secondRotation.setAngle(second * 6);
-		minuateRotation.setAngle(minuate * 6 + second * 0.1);
-		hourRotation.setAngle(hour * 30 + minuate * 0.5);
-
-		lblMainClock.setText(ampm + " " + hourstr + ":" + minuatestr + ":" + secondstr);
-		lblMainYear.setText(yearstr);
-		lblMainMonth.setText(monthstr);
-		lblMainDate.setText(datestr);
-		if (day == 1 || day == 7) {
-			lblMainDay.setTextFill(Color.RED);
-		} else {
-			lblMainDay.setTextFill(Color.rgb(97, 121, 137));
-
-		}
-		lblMainDay.setText(daystrTemp);
-
-		lblMainDust.setText(samplestatus.getDust() + "㎍/㎥");
-
-		if (samplestatus.getDust() >= 0 && samplestatus.getDust() <= 30) {
-
-			imgMainDust.setImage(forestImage);
-
-		} else if (samplestatus.getDust() > 30 && samplestatus.getDust() <= 80) {
-
-			imgMainDust.setImage(hillsImage);
-
-		} else if (samplestatus.getDust() > 80 && samplestatus.getDust() <= 150) {
-
-			imgMainDust.setImage(fieldsImage);
-
-		} else {
-			imgMainDust.setImage(capeImage);
-		}
-
-		lblMainMoisture.setText(samplestatus.getMoisture() + "%");
-
-		if (samplestatus.getMoisture() < 50.0) {
-
-			imgMainMoisture.setImage(cactusImage);
-
-		} else {
-
-			imgMainMoisture.setImage(dropsImage);
-
-		}
-		lblMainTemperature.setText(samplestatus.getTemperature() + "°");
-
-		if (samplestatus.getTemperature() < 20.0) {
-			imgMainTemperature.setImage(coldImage);
-		} else if (samplestatus.getTemperature() >= 20.0 && samplestatus.getTemperature() < 30.0) {
-			imgMainTemperature.setImage(sosoImage);
-		} else {
-			imgMainTemperature.setImage(hotImage);
-		}
-
-	}
+//	Rotate hourRotation;
+//	Rotate minuateRotation;
+//	Rotate secondRotation;
+//	Calendar calendar;
+//
+//	private static Timeline animationTL = new Timeline();
+//	private static Timeline lionAnimationTL = new Timeline();
+//	
+//	
+//	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
+//	Image hillsImage = new Image(IconSelector.class.getResource("hills.png").toString());
+//	Image fieldsImage = new Image(IconSelector.class.getResource("fields.png").toString());
+//	Image capeImage = new Image(IconSelector.class.getResource("cape.png").toString());
+//	Image cactusImage = new Image(IconSelector.class.getResource("cactus.png").toString());
+//	Image dropsImage = new Image(IconSelector.class.getResource("drops.png").toString());
+//	Image coldImage = new Image(IconSelector.class.getResource("temperature-2.png").toString());
+//	Image sosoImage = new Image(IconSelector.class.getResource("temperature-3.png").toString());
+//	Image hotImage = new Image(IconSelector.class.getResource("temperature-4.png").toString());
+//	int lionImagenum = 1;
+//
+//	/**
+//	 * Initializes the controller class.
+//	 */
+//	private void animation() {
+//
+//		calendar = Calendar.getInstance();
+//		int hour = calendar.get(Calendar.HOUR);
+//		String hourstr;
+//		if (hour < 10) {
+//			hourstr = "0" + hour;
+//		} else {
+//			hourstr = String.valueOf(hour);
+//		}
+//
+//		int minuate = calendar.get(Calendar.MINUTE);
+//		String minuatestr;
+//		if (minuate < 10) {
+//			minuatestr = "0" + minuate;
+//		} else {
+//			minuatestr = String.valueOf(minuate);
+//		}
+//
+//		int second = calendar.get(Calendar.SECOND);
+//		String secondstr;
+//		if (second < 10) {
+//			secondstr = "0" + second;
+//		} else {
+//			secondstr = String.valueOf(second);
+//		}
+//
+//		String ampm;
+//		if (calendar.get(Calendar.AM_PM) == 1) {
+//			ampm = "PM";
+//		} else {
+//			ampm = "AM";
+//		}
+//
+//		int year = calendar.get(Calendar.YEAR);
+//		String yearstr = String.valueOf(year);
+//
+//		int month = calendar.get(Calendar.MONTH) + 1;
+//		String monthstr;
+//		if (month < 10) {
+//			monthstr = "0" + month;
+//		} else {
+//			monthstr = String.valueOf(month);
+//		}
+//
+//		int day = calendar.get(Calendar.DAY_OF_WEEK);
+//
+//		String daystr = null;
+//		switch (day) {
+//			case 1:
+//				daystr = "Sun";
+//				break;
+//			case 2:
+//				daystr = "Mon";
+//				break;
+//			case 3:
+//				daystr = "Tue";
+//				break;
+//			case 4:
+//				daystr = "Wed";
+//				break;
+//			case 5:
+//				daystr = "Thu";
+//				break;
+//			case 6:
+//				daystr = "Fri";
+//				break;
+//			case 7:
+//				daystr = "Sat";
+//				break;
+//		}
+//		String daystrTemp = daystr;
+//
+//		int date = calendar.get(Calendar.DAY_OF_MONTH);
+//		String datestr;
+//		if (date < 10) {
+//			datestr = "0" + date;
+//		} else {
+//			datestr = String.valueOf(date);
+//		}
+//
+//		//시간*30+분
+//		secondRotation.setAngle(second * 6);
+//		minuateRotation.setAngle(minuate * 6 + second * 0.1);
+//		hourRotation.setAngle(hour * 30 + minuate * 0.5);
+//
+//		lblMainClock.setText(ampm + " " + hourstr + ":" + minuatestr + ":" + secondstr);
+//		lblMainYear.setText(yearstr);
+//		lblMainMonth.setText(monthstr);
+//		lblMainDate.setText(datestr);
+//		if (day == 1 || day == 7) {
+//			lblMainDay.setTextFill(Color.RED);
+//		} else {
+//			lblMainDay.setTextFill(Color.rgb(97, 121, 137));
+//
+//		}
+//		lblMainDay.setText(daystrTemp);
+//
+//		lblMainDust.setText(samplestatus.getDust() + "㎍/㎥");
+//
+//		if (samplestatus.getDust() >= 0 && samplestatus.getDust() <= 30) {
+//
+//			imgMainDust.setImage(forestImage);
+//
+//		} else if (samplestatus.getDust() > 30 && samplestatus.getDust() <= 80) {
+//
+//			imgMainDust.setImage(hillsImage);
+//
+//		} else if (samplestatus.getDust() > 80 && samplestatus.getDust() <= 150) {
+//
+//			imgMainDust.setImage(fieldsImage);
+//
+//		} else {
+//			imgMainDust.setImage(capeImage);
+//		}
+//
+//		lblMainMoisture.setText(samplestatus.getMoisture() + "%");
+//
+//		if (samplestatus.getMoisture() < 50.0) {
+//
+//			imgMainMoisture.setImage(cactusImage);
+//
+//		} else {
+//
+//			imgMainMoisture.setImage(dropsImage);
+//
+//		}
+//		lblMainTemperature.setText(samplestatus.getTemperature() + "°");
+//
+//		if (samplestatus.getTemperature() < 20.0) {
+//			imgMainTemperature.setImage(coldImage);
+//		} else if (samplestatus.getTemperature() >= 20.0 && samplestatus.getTemperature() < 30.0) {
+//			imgMainTemperature.setImage(sosoImage);
+//		} else {
+//			imgMainTemperature.setImage(hotImage);
+//		}
+//
+//	}
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		System.gc();
-		hourRotation = new Rotate();
-		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
-		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
-		houreHand.getTransforms().add(hourRotation);
-
-		minuateRotation = new Rotate();
-		minuateRotation.pivotXProperty().bind(minuateHand.startXProperty());
-		minuateRotation.pivotYProperty().bind(minuateHand.startYProperty());
-		minuateHand.getTransforms().add(minuateRotation);
-
-		secondRotation = new Rotate();
-		secondRotation.pivotXProperty().bind(secondHand.startXProperty());
-		secondRotation.pivotYProperty().bind(secondHand.startYProperty());
-		secondHand.getTransforms().add(secondRotation);
-		animation();
-
-		animationTL = new Timeline();
-		animationTL.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			animation();
-		}));
-		animationTL.setCycleCount(Animation.INDEFINITE);
-		animationTL.play();
-
-		lionAnimationTL = new Timeline();
-		lionAnimationTL.getKeyFrames().add(new KeyFrame(Duration.millis(100), (event) -> {
-			lionAnimation();
-		}));
-		lionAnimationTL.setCycleCount(Animation.INDEFINITE);
-		lionAnimationTL.play();
+//		hourRotation = new Rotate();
+//		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
+//		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
+//		houreHand.getTransforms().add(hourRotation);
+//
+//		minuateRotation = new Rotate();
+//		minuateRotation.pivotXProperty().bind(minuateHand.startXProperty());
+//		minuateRotation.pivotYProperty().bind(minuateHand.startYProperty());
+//		minuateHand.getTransforms().add(minuateRotation);
+//
+//		secondRotation = new Rotate();
+//		secondRotation.pivotXProperty().bind(secondHand.startXProperty());
+//		secondRotation.pivotYProperty().bind(secondHand.startYProperty());
+//		secondHand.getTransforms().add(secondRotation);
+//		animation();
+//
+//		
+//		animationTL.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
+//			animation();
+//		}));
+//		animationTL.setCycleCount(Animation.INDEFINITE);
+//		animationTL.play();
+//
+//		
+//		lionAnimationTL.getKeyFrames().add(new KeyFrame(Duration.millis(100), (event) -> {
+//			lionAnimation();
+//		}));
+//		lionAnimationTL.setCycleCount(Animation.INDEFINITE);
+//		lionAnimationTL.play();
 
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();
@@ -339,6 +341,12 @@ public class MainController implements Initializable {
 		WeatherThread weatherThread = new WeatherThread(mainThreadGroup, "weatherThread", mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
 		weatherThread.setDaemon(true);
 		weatherThread.start();
+		ClockAndEnvThread clockThread = new ClockAndEnvThread(mainThreadGroup, "clockThread", houreHand, minuateHand, secondHand, lblMainClock, lblMainYear, lblMainMonth, lblMainDate, lblMainDay,imgMainDust, lblMainDust, imgMainMoisture, lblMainMoisture, imgMainTemperature, lblMainTemperature);
+		clockThread.setDaemon(true);
+		clockThread.start();
+		RionThread rionThread = new RionThread(mainThreadGroup, "rionThread", imgRion);
+		rionThread.setDaemon(true);
+		rionThread.start();
 
 	}
 
@@ -354,7 +362,6 @@ public class MainController implements Initializable {
 			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
 			parent.getChildren().get(0).setOpacity(0);
 			parent.getChildren().get(1).setOpacity(0);
-			//parent.setTranslateX(800);
 
 			KeyValue keyValueStackPaneMenu = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
 			KeyFrame keyFrameStackPaneMenu = new KeyFrame(Duration.millis(500), (event) -> {
@@ -367,11 +374,6 @@ public class MainController implements Initializable {
 				LockController.lockRootPane.getChildren().remove(1);
 			}, keyValueStackPaneMenu);
 			
-			
-
-			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
-			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
-			//KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
@@ -389,19 +391,19 @@ public class MainController implements Initializable {
 
 	public static void mainThreadInterrupt() {
 		mainThreadGroup.interrupt();
-		animationTL.stop();
-		lionAnimationTL.stop();
+//		animationTL.stop();
+//		lionAnimationTL.stop();
 		
 		
 	}
 
-	private void lionAnimation() {
-		imgRion.setImage(new Image(ImageResourceFinder.class.getResource("rion-" + lionImagenum + ".png").toString()));
-		lionImagenum++;
-		if (lionImagenum == 16) {
-			lionImagenum = 1;
-		}
-	}
+//	private void lionAnimation() {
+//		imgRion.setImage(new Image(ImageResourceFinder.class.getResource("rion-" + lionImagenum + ".png").toString()));
+//		lionImagenum++;
+//		if (lionImagenum == 16) {
+//			lionImagenum = 1;
+//		}
+//	}
 
 	@Override
 	protected void finalize() throws Throwable {

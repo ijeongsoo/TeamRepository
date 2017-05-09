@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import com.tomcatisbabycat.homepanel.controller.knob.knobfx.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="363.0" prefWidth="552.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.consume.WaterController">
+<AnchorPane id="AnchorPane" fx:id="AnchorWater" prefHeight="363.0" prefWidth="552.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.consume.WaterController">
    <children>
       <LineChart fx:id="chartMost" layoutX="-5.0" layoutY="11.0" prefHeight="166.0" prefWidth="555.0">
         <xAxis>

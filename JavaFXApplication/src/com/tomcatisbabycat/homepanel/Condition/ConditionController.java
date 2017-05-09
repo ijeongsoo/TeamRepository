@@ -43,6 +43,7 @@ public class ConditionController implements Initializable {
 	private Parent dust;
 	@FXML
 	private StackPane graphStackPane;
+	static StackPane staticGraphStackPane;
 	@FXML
 	private Label lblBtnTemp;
 	@FXML
@@ -55,6 +56,7 @@ public class ConditionController implements Initializable {
 	private ImageView imgBtnMoist;
 	@FXML
 	private ImageView imgBtnDust;
+	
 
 	private void handleBackground(ActionEvent event, Button btn, ImageView img, Label lbl, ImageView img2, Label lbl2, ImageView img3, Label lbl3) {
 		btnTemp.getStyleClass().removeAll("conditionBtnFocused");
@@ -86,7 +88,7 @@ public class ConditionController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		staticGraphStackPane=graphStackPane;
 		try {
 			temperature = FXMLLoader.load(getClass().getResource("temperature.fxml"));
 			moisture = FXMLLoader.load(getClass().getResource("moisture.fxml"));
@@ -142,63 +144,89 @@ public class ConditionController implements Initializable {
 
 	public void handleBtnControlBack(ActionEvent event) {
 
-		//1. 먼저 conditionStack을 현재창(0)->180으로 이동시키고 제거.
-		conditionStackPane.setTranslateX(0);
-		KeyValue keyValueStackPane = new KeyValue(conditionStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPane = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(2);
-			  }, keyValueStackPane);
-		Timeline timeline = new Timeline(keyFrameStackPane);
-		timeline.play();
-
-		//2. 사실상 2번이 먼저실행되는데, menu.fxml을 로딩하여 스택페인 추가해놓고 그걸 1번인덱스에 위치시킨다.
-		//그러면 기존에 1번인덱스에 있던 control스택이 2번인덱스로 밀리는 상태가 된다. 그후 1번처럼 하면 추가된 메뉴페이지가 보이게된다.
-		//참고로 add(스택을 추가할 인덱스위치, 인덱스에 추가할 스택내용)
 		try {
-			//graphStackPane.getChildren().clear();
-			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MenuController.class
-				  .getResource("menu.fxml")));
+			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
+			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
+			// 현재상태에서 메뉴의 인덱스는 2
+
+			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			parent.getChildren().get(0).setOpacity(0);
+			parent.getChildren().get(1).setOpacity(0);
+			//parent.setTranslateX(800);
+
+			KeyValue keyValueStackPane = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
+			KeyFrame keyFrameStackPane = new KeyFrame(Duration.millis(500), (e) -> {
+				Timeline timeline2 = new Timeline();
+				KeyValue keyvalue2 = new KeyValue(parent.getChildren().get(1).opacityProperty(), 1);
+				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
+				timeline2.getKeyFrames().add(keyFrame2);
+				timeline2.play();
+				stopthread();
+				LockController.lockRootPane.getChildren().remove(1);
+			}, keyValueStackPane);
+
+			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
+			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
+			//KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
+			Timeline timeline = new Timeline();
+			timeline.getKeyFrames().addAll(keyFrameStackPane);
+			timeline.play();
 		} catch (IOException ex) {
-			ex.printStackTrace();
 		}
 
 	}
+	
+	public static void stopthread(){
+			staticGraphStackPane.getChildren().get(0).setVisible(false);
+			staticGraphStackPane.getChildren().get(1).setVisible(false);
+			staticGraphStackPane.getChildren().get(2).setVisible(false);
+			staticGraphStackPane.getChildren().clear();
+	}
 
 	public void handleBtnControlLock(ActionEvent event) {
+		stopthread();
 
-		conditionStackPane.setTranslateX(0);
-		KeyValue keyValue = new KeyValue(conditionStackPane.translateXProperty(), 800);
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(conditionStackPane); //lock스택 위에 있는 condition스택 제거
-			  }, keyValue);
-
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrame);
-
-		timeline.play();
+		LockController.lockRootPane.getChildren().remove(conditionStackPane);
 	}
 
 	public void handleBtnControlHome(ActionEvent event) {
 
-		KeyValue keyValue = new KeyValue(conditionStackPane.translateXProperty(), 800);   // 현재 화면상에 놓여진 스택인 conditonStackPane을 x좌표 800으로 치워버림
-		KeyFrame keyFrame = new KeyFrame(Duration.seconds(1), // 800좌표로 치우는 시간을 1초로 설정.
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(2, LockController.lockRootPane.getChildren().size());   //치우는 동안 이벤트를 설정하여 해당스택을 제거해버린다.(치운후에 별도로 삭제해줘도 된긴함)
-			  }, keyValue);
-
-		Timeline timeline = new Timeline();  //위와 같은 설정으로 애니메이션 진행하기 위해 Timeline객체 생성
-		timeline.getKeyFrames().add(keyFrame);// 위에서 설정한 설정을 timeline객체에 셋팅
-
-		timeline.play();   //애니메이션 실행.
-
 		try {
-			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MainController.class
-				  .getResource("main.fxml")));
+			StackPane parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
+			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
+			// 현재상태에서 메뉴의 인덱스는 2
+
+			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			parent.getChildren().get(0).setOpacity(0);
+			parent.getChildren().get(1).setOpacity(0);
+			//parent.setTranslateX(800);
+
+			KeyValue keyValueStackPane = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
+			KeyFrame keyFrameStackPane = new KeyFrame(Duration.millis(500), (e) -> {
+				Timeline timeline2 = new Timeline();
+				KeyValue keyvalue2 = new KeyValue(parent.getChildren().get(1).opacityProperty(), 1);
+				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
+				timeline2.getKeyFrames().add(keyFrame2);
+				timeline2.play();
+				stopthread();
+				LockController.lockRootPane.getChildren().remove(1);
+			}, keyValueStackPane);
+
+			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
+			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
+			//KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
+			Timeline timeline = new Timeline();
+			timeline.getKeyFrames().addAll(keyFrameStackPane);
+			timeline.play();
 		} catch (IOException ex) {
-			ex.printStackTrace();
 		}
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("컨트롤 나옴");
 	}
 
 

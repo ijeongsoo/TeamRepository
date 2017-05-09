@@ -12,6 +12,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -44,6 +46,8 @@ public class GasController implements Initializable {
 				static Timeline graphTl = new Timeline();
 	@FXML
 	private BarChart<?, ?> barChartGas;
+	@FXML
+	private AnchorPane AnchorGas;
 
 				private int getDust() {
 		return ss.getDust();
@@ -100,11 +104,21 @@ public class GasController implements Initializable {
 		chartDust.getStylesheets().add(getClass().getResource("gasChart.css").toString());
 		chartDust.applyCss();
 		
-		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			timeToGrape();
-		}));
-		graphTl.setCycleCount(Animation.INDEFINITE);
-		graphTl.play();
+		Thread thread = new Thread(() -> {
+			while (AnchorGas.isVisible()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+				}
+				Platform.runLater(() -> {
+					timeToGrape();
+				});
+				
+			}
+			System.out.println("온도 스레드 종료");
+
+		});
+		thread.start();
 		
 		barChartGas.getStylesheets().add(getClass().getResource("gasChart.css").toString());
 		barChartGas.applyCss();

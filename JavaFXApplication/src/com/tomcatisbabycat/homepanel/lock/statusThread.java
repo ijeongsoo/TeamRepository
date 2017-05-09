@@ -12,7 +12,7 @@ import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
  * @author ijeongsu
  */
 public class statusThread extends Thread{
-
+	
 	SampleStatus ss= SampleStatus.getInstance();
 	@Override
 	public void run() {

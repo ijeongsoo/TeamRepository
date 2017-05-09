@@ -12,6 +12,7 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,6 +20,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
 
 /**
@@ -44,6 +46,8 @@ public class ElectricController implements Initializable {
 	static Timeline graphTl = new Timeline();
 	@FXML
 	private BarChart<?, ?> barChartElec;
+	@FXML
+	private AnchorPane AnchorElec;
 	
 	private double getTemperature() {
 		return ss.getTemperature();
@@ -98,12 +102,22 @@ public class ElectricController implements Initializable {
 		chartTemp.applyCss();
 
 		
-		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			timeToGrape();
-		}));
-		graphTl.setCycleCount(Animation.INDEFINITE);
-		graphTl.play();
 		
+		Thread thread = new Thread(() -> {
+			while (AnchorElec.isVisible()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+				}
+				Platform.runLater(() -> {
+					timeToGrape();
+				});
+				
+			}
+			System.out.println("온도 스레드 종료");
+
+		});
+		thread.start();
 		
 		barChartElec.getStylesheets().add(getClass().getResource("electricChart.css").toString());
 		barChartElec.applyCss();

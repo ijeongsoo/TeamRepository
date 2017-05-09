@@ -10,10 +10,10 @@ import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.net.URL;
 import java.util.Calendar;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -22,6 +22,7 @@ import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -35,14 +36,12 @@ public class MoistureController implements Initializable {
 	@FXML
 	private LineChart chartMost;
 
-	
-	
 	private XYChart.Series<Number, Number> series;
 	private static final int MAX_DATA_POINTS = 8;
 	private double sequence = 0;
-	NumberAxis xAxis ;
-	NumberAxis yAxis ;
-			SampleStatus ss = SampleStatus.getInstance();
+	NumberAxis xAxis;
+	NumberAxis yAxis;
+	SampleStatus ss = SampleStatus.getInstance();
 	@FXML
 	private Knob currentTempKnob;
 	@FXML
@@ -51,9 +50,10 @@ public class MoistureController implements Initializable {
 	private Label lblKnobTemp;
 	@FXML
 	private Label lblWishKnobTemp;
-	
-	static Timeline graphTl = new Timeline();
 
+	static Timeline graphTl = new Timeline();
+	@FXML
+	private AnchorPane AnchorMoist;
 
 	private String getTime() {
 		Calendar ca = Calendar.getInstance();
@@ -64,11 +64,11 @@ public class MoistureController implements Initializable {
 
 	private int getMoisture() {
 		return ss.getMoisture();
-		
+
 	}
 
 	private void timeToGrape() {
-		
+
 		series.getData().add(new XYChart.Data<Number, Number>(sequence++, getMoisture()));
 		if (sequence > MAX_DATA_POINTS + 2) {
 			series.getData().remove(0);
@@ -89,18 +89,19 @@ public class MoistureController implements Initializable {
 			//xAxis.setUpperBound(xAxis.getUpperBound() +1);
 		}
 	}
+
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
-		yAxis=(NumberAxis) chartMost.getYAxis();
+
+		yAxis = (NumberAxis) chartMost.getYAxis();
 		yAxis.setAutoRanging(true);
 		yAxis.setForceZeroInRange(false);
 		chartMost.setAnimated(true);
 		chartMost.setLegendVisible(false);
-		xAxis= (NumberAxis)chartMost.getXAxis();
+		xAxis = (NumberAxis) chartMost.getXAxis();
 		xAxis.setAnimated(false);
 		xAxis.setLowerBound(0);
 		xAxis.setUpperBound(MAX_DATA_POINTS + 1);
@@ -118,59 +119,69 @@ public class MoistureController implements Initializable {
 		chartMost.getData().add(series);
 		chartMost.getStylesheets().add(getClass().getResource("MoistureChart.css").toString());
 		chartMost.applyCss();
-		
 
-		
-		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-			timeToGrape();
-			timeToMost();
-		}));
-		graphTl.setCycleCount(Animation.INDEFINITE);
-		graphTl.play();
-		
+//		
+		Thread thread = new Thread(() -> {
+			while (AnchorMoist.isVisible()) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException ex) {
+				}
+				Platform.runLater(() -> {
+					timeToGrape();
+				timeToMost();
+				});
+				
+			}
+			System.out.println("수분 스레드 종료");
+
+		});
+		thread.start();
+
 		currentTempKnob.setControl(false);
 		currentTempKnob.setMarkerColor(Color.rgb(1, 194, 242));
 		currentTempKnob.setValue(ss.getMoisture());
-		lblKnobTemp.setText(ss.getMoisture()+"%");
+		lblKnobTemp.setText(ss.getMoisture() + "%");
 		lblKnobTemp.setTextFill(Color.rgb(1, 194, 242));
-		lblKnobTemp.textProperty().addListener(new ChangeListener<String>(){
+		lblKnobTemp.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
 				String clean = newValue.replaceAll("[^0-9]", "");
 				currentTempKnob.setValue(Integer.parseInt(clean));
 			}
 		});
-		
-		
+
 		wishTempKnob.setMarkerColor(Color.rgb(1, 194, 242));
 		wishTempKnob.setValue(ss.getWishMoisture());
-		lblWishKnobTemp.setText(ss.getWishMoisture()+"%");
+		lblWishKnobTemp.setText(ss.getWishMoisture() + "%");
 		lblWishKnobTemp.setTextFill(Color.rgb(1, 194, 242));
 		wishTempKnob.setOnMouseDragged((event) -> {
-				  //System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
-			  if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>0)
-				   wishTempKnob.setValue((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)*100/180);
-			  else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)>-90)
-					wishTempKnob.setValue(0);
-			else if((Math.atan2(wishTempKnob.getHeight()/2-event.getY(),wishTempKnob.getWidth()/2-event.getX())*180/Math.PI)<-90)
-				  wishTempKnob.setValue(100);
-			});
-		
-			
-			wishTempKnob.valueProperty().addListener(new ChangeListener<Number>(){
-				  @Override
-				  public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-						
-						lblWishKnobTemp.setText(newValue.intValue()+"%");
-						ss.setWishMoisture(newValue.intValue());
-				  };
+			//System.out.println(Math.atan2(225-event.getSceneY(),225-event.getSceneX())*180/Math.PI);
+			if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) > 0) {
+				wishTempKnob.setValue((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) * 100 / 180);
+			} else if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) > -90) {
+				wishTempKnob.setValue(0);
+			} else if ((Math.atan2(wishTempKnob.getHeight() / 2 - event.getY(), wishTempKnob.getWidth() / 2 - event.getX()) * 180 / Math.PI) < -90) {
+				wishTempKnob.setValue(100);
+			}
+		});
 
-			});
+		wishTempKnob.valueProperty().addListener(new ChangeListener<Number>() {
+			@Override
+			public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+
+				lblWishKnobTemp.setText(newValue.intValue() + "%");
+				ss.setWishMoisture(newValue.intValue());
+			}
+		;
+
+	}
+
+	);
 	}	
 
 	private void timeToMost() {
-		lblKnobTemp.setText((int)getMoisture()+"%");
+		lblKnobTemp.setText((int) getMoisture() + "%");
 	}
-	
-	
+
 }
