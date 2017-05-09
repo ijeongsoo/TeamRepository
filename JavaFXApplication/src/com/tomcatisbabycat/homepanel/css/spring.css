@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 
 .mainBackground{
-  -fx-background-color: #01C2F2; /* 푸른색 처음에 우리가 정한 푸른색 */
+    -fx-background-color: #01C2F2; /* 푸른색 처음에 우리가 정한 푸른색 */
 }
 
 .specificBackground{
@@ -24,7 +24,7 @@ and open the template in the editor.
     -fx-faint-focus-color: #01C2F2;
     -fx-inner-border: #01C2F2;
     -fx-body-color: #01C2F2;
- 
+
     -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
     -fx-background-insets: -2, -0.3, 1, 2;
     -fx-background-radius: 7, 6, 4, 3;
@@ -39,15 +39,48 @@ and open the template in the editor.
     -fx-stroke: #296EA8;
 }
 
+.root{
+    /*-fx-font-size: 24pt;*/
+    /*    -fx-base: rgb(255,0,0);*/
+    /*    -fx-background: rgb(50,50,50);*/
+}
+#NumberField {
+    -fx-border-width: 1;
+    -fx-border-color: lightgray;
+    -fx-background-insets:1;
+    -fx-border-radius:3 0 0 3;
+    /*    -fx-border-radius:0 0 0 0;*/
+}
+#NumberSpinnerArrow {
+    -fx-fill: gray;
+    -fx-stroke: gray;
+    /*        -fx-effect: innershadow( gaussian , black , 2 , 0.6 , 1 , 1 )*/
+}
+#ButtonsBox {
+    -fx-border-color:lightgray;
+    -fx-border-width: 1 1 1 0;
+    -fx-border-radius: 0 3 3 0;
+    /*    -fx-border-radius: 0 0 0 0;*/
+}
+#SpinnerButtonUp {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 3 0 0;
+    /*    -fx-background-radius:0;*/
+}
+#SpinnerButtonDown {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 0 3 0;
+    /*    -fx-background-radius:0;*/
+
+}
 .conditionBtn{
-  -fx-background-color: #01C2F2;
+    -fx-background-color: #01C2F2;
 }
 .conditionBtnFocused{
-  -fx-focus-color: #85D03C;
+    -fx-focus-color: #85D03C;
     -fx-faint-focus-color: #85D03C;
     -fx-inner-border: #85D03C;
     -fx-body-color: #85D03C;
- 
+
     -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
-    
 }

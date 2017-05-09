@@ -13,21 +13,18 @@ public class Appliances {
 	private String category = "";
 	private String lblName = "";
 	private String turnTime = "";
-	private boolean noon = true; // true -> 오후
-	private boolean on = true; // true -> on , false -> off;
+	private String on = "";
 	public Appliances() {
 		
 	}
 	public Appliances(String lblName, String turnTime, boolean noon){
 		this.lblName = lblName;
 		this.turnTime = turnTime;
-		this.noon = noon;
 	}
-	public Appliances(String category, String lblName, String turnTime, boolean noon, boolean on){
+	public Appliances(String category, String lblName, String turnTime, String on){
 		this.category = category;
 		this.lblName = lblName;
 		this.turnTime = turnTime;
-		this.noon = noon;
 		this.on = on;
 	}
 	public String getCategory() {
@@ -54,24 +51,12 @@ public class Appliances {
 		this.turnTime = turnTime;
 	}
 
-	public String getNoon() {
-		if(noon){
-			return "오후";
-		}
-		else{
-			return "오전";
-		}
-	}
-
-	public void setNoon(boolean noon) {
-		this.noon = noon;
-	}
-	
-	public boolean isOn(){
+	public String getOn() {
 		return on;
 	}
-	
-	public void setOn(boolean on){
+
+	public void setOn(String on) {
 		this.on = on;
 	}
+	
 }
