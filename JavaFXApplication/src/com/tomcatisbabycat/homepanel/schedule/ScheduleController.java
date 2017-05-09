@@ -8,6 +8,7 @@ package com.tomcatisbabycat.homepanel.schedule;
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import com.tomcatisbabycat.homepanel.menu.MenuController;
+import com.tomcatisbabycat.homepanel.sampleAppliance.AList;
 import com.tomcatisbabycat.homepanel.sampleAppliance.Appliances;
 import java.io.IOException;
 import java.net.URL;
@@ -15,8 +16,8 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -64,7 +64,7 @@ public class ScheduleController implements Initializable {
 	@FXML
 	private Button btnAdd;
 	
-	private ObservableList<Appliances> value = FXCollections.observableArrayList();
+	private AList aList = AList.getInstance();
 
 	/**
 	 * Initializes the controller class.
@@ -85,17 +85,25 @@ public class ScheduleController implements Initializable {
 		if (btnTV.isDefaultButton()) {
 			defaultButton();
 		}
+		// 처음 씬에 들어갔을때
+		scheduleListview.setItems(aList.getTv());
+		
 		btnTV.setOnAction(event -> {
 			handleBackground(event);
+			scheduleListview.setItems(aList.getTv());
 		});
 		btnAirCondition.setOnAction(event -> {
 			handleBackground(event);
+			scheduleListview.setItems(aList.getAc());
 		});
 		btnWashingMachine.setOnAction(event -> {
 			handleBackground(event);
+			scheduleListview.setItems(aList.getWm());
 		});
 		btnLight.setOnAction(event -> {
 			handleBackground(event);
+			scheduleListview.setItems(aList.getLight());
+			
 		});
 		scheduleListview.setCellFactory(new Callback<ListView<Appliances>, ListCell<Appliances>>() {
 			@Override
@@ -112,11 +120,17 @@ public class ScheduleController implements Initializable {
 							Label lblName = (Label) a.lookup("#name");
 							Label lblTime = (Label) a.lookup("#turnTime");
 							Label lblNoon = (Label) a.lookup("#noon");
+							Label lblOnOff = (Label) a.lookup("#onOff");
 
 							lblName.setText(item.getLblName());
 							lblTime.setText(item.getTurnTime());
-
+							lblNoon.setText(item.getTurnNoon());
+							lblOnOff.setText(item.getOn());
+							
+							aList.lightOnOff(item.getTurnTime(), item.getOn(), item.getLblName());
+							
 							setGraphic(a);
+							
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
@@ -126,7 +140,14 @@ public class ScheduleController implements Initializable {
 				return listCell;
 			}
 		});
-
+		
+		scheduleListview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appliances>(){
+			@Override
+			public void changed(ObservableValue<? extends Appliances> observable, Appliances oldValue, Appliances newValue) {
+				scheduleListview.getItems().remove(newValue);
+			}
+		});
+		
 		btnAdd.setOnAction(e -> {
 			handleAddButton(e);
 		});
@@ -134,12 +155,23 @@ public class ScheduleController implements Initializable {
 
 	private void handleBackground(ActionEvent event) {
 		Button btn = (Button) event.getSource();
-		btnTV.setStyle("-fx-background-color: #01C2F2;");
-		btnAirCondition.setStyle("-fx-background-color: #01C2F2;");
-		btnWashingMachine.setStyle("-fx-background-color: #01C2F2;");
-		btnLight.setStyle("-fx-background-color: #01C2F2;");
+		
+		btnTV.getStyleClass().removeAll("conditionBtnFocused");
+		btnTV.getStyleClass().add("conditionBtn");
+		btnAirCondition.getStyleClass().removeAll("conditionBtnFocused");
+		btnAirCondition.getStyleClass().add("conditionBtn");
+		btnWashingMachine.getStyleClass().removeAll("conditionBtnFocused");
+		btnWashingMachine.getStyleClass().add("conditionBtn");
+		btnLight.getStyleClass().removeAll("conditionBtnFocused");
+		btnLight.getStyleClass().add("conditionBtn");
 
-		btn.setStyle("-fx-background-color: #85D03C;");
+		btn.getStyleClass().removeAll("conditionBtn");
+		btn.getStyleClass().add("conditionBtnFocused");
+		
+	}
+	
+	private void defaultButton() {
+		btnTV.getStyleClass().add("conditionBtnFocused");
 	}
 
 	private void handleBtnControlBack(ActionEvent event) {
@@ -192,16 +224,7 @@ public class ScheduleController implements Initializable {
 		}
 	}
 
-	private void defaultButton() {
-		btnTV.setStyle("-fx-background-color: #85D03C;");
-	}
-
 	private void handleAddButton(ActionEvent e) {
-
-		//		ObservableList<Appliances> value = FXCollections.observableArrayList();
-//		//value.add(new Appliances("보일러실", "17:00", true));
-//
-//		scheduleListview.setItems(value);
 		try {
 			Parent parent = FXMLLoader.load(getClass().getResource("scheduleAdd.fxml"));
 			scheduleStackPane.getChildren().add(parent);
@@ -213,7 +236,7 @@ public class ScheduleController implements Initializable {
 			Button btnAdd = (Button) parent.lookup("#btnAdd");
 			ComboBox<String> category = (ComboBox<String>) parent.lookup("#comboCategory");
 			ComboBox<String> name = (ComboBox<String>) parent.lookup("#comboName");
-			ToggleButton btnOnOff = (ToggleButton) parent.lookup("#btnOnOff");
+			ToggleSwitch btnOnOff = (ToggleSwitch) parent.lookup("#btnOnOff");
 			TimeSpinner timeSpinner = (TimeSpinner) parent.lookup("#timeSpinner");
 
 			btnExit.setOnAction(event -> {
@@ -233,13 +256,7 @@ public class ScheduleController implements Initializable {
 				timeline.play();
 			});
 			btnAdd.setOnAction(event -> {
-				
-				value.add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
-					  name.getSelectionModel().getSelectedItem().toString(),
-					  timeSpinner.getEditor().getText(),
-					  btnOnOff.getText()));
-				
-				scheduleListview.setItems(value);
+				addListView(category, name, timeSpinner, btnOnOff);
 
 				Timeline timeline = new Timeline();
 				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
@@ -252,12 +269,40 @@ public class ScheduleController implements Initializable {
 					timeline2.getKeyFrames().add(keyFrame2);
 					timeline2.play();
 				}, keyvalue);
-				
+
 				timeline.getKeyFrames().add(keyFrame);
 				timeline.play();
 			});
 		} catch (IOException ex) {
 
+		}
+	}
+
+	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitch btnOnOff) {
+		if (category.getSelectionModel().getSelectedItem().toString().equals("전등")) {
+			System.out.println(btnOnOff.buttonString());
+			aList.getLight().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
+				  name.getSelectionModel().getSelectedItem().toString(),
+				  timeSpinner.getEditor().getText(),
+				  btnOnOff.buttonString()));
+		} else if (category.getSelectionModel().getSelectedItem().toString().equals("TV")) {
+			
+			aList.getTv().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
+				  name.getSelectionModel().getSelectedItem().toString(),
+				  timeSpinner.getEditor().getText(),
+				  btnOnOff.buttonString()));
+		} else if (category.getSelectionModel().getSelectedItem().toString().equals("에어컨")) {
+			
+			aList.getAc().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
+				  name.getSelectionModel().getSelectedItem().toString(),
+				  timeSpinner.getEditor().getText(),
+				  btnOnOff.buttonString()));
+		} else if (category.getSelectionModel().getSelectedItem().toString().equals("세탁기")) {
+			
+			aList.getWm().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
+				  name.getSelectionModel().getSelectedItem().toString(),
+				  timeSpinner.getEditor().getText(),
+				  btnOnOff.buttonString()));
 		}
 	}
 }

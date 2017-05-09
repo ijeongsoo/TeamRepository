@@ -5,28 +5,30 @@
  */
 package com.tomcatisbabycat.homepanel.sampleAppliance;
 
+import java.util.Calendar;
+
 /**
  *
  * @author kang
  */
 public class Appliances {
+
 	private String category = "";
 	private String lblName = "";
 	private String turnTime = "";
 	private String on = "";
+	
 	public Appliances() {
-		
+
 	}
-	public Appliances(String lblName, String turnTime, boolean noon){
-		this.lblName = lblName;
-		this.turnTime = turnTime;
-	}
-	public Appliances(String category, String lblName, String turnTime, String on){
+
+	public Appliances(String category, String lblName, String turnTime, String on) {
 		this.category = category;
 		this.lblName = lblName;
 		this.turnTime = turnTime;
 		this.on = on;
 	}
+
 	public String getCategory() {
 		return category;
 	}
@@ -47,16 +49,38 @@ public class Appliances {
 		return turnTime;
 	}
 
+	public String getTurnNoon() {
+		String[] tokens = turnTime.split(":");
+		int hours = getIntField(tokens, 0);
+		if(hours < 12){
+			return "오전";
+		}else{
+			return "오후";
+		}
+	}
+
 	public void setTurnTime(String turnTime) {
 		this.turnTime = turnTime;
 	}
 
 	public String getOn() {
-		return on;
+		if(on.equals("true")){
+			return "ON";
+		}else{
+			return "OFF";
+		}
 	}
 
 	public void setOn(String on) {
 		this.on = on;
 	}
-	
+
+	private int getIntField(String[] tokens, int index) {
+		if (tokens.length <= index || tokens[index].isEmpty()) {
+			return 0;
+		}
+		//System.out.println(Integer.parseInt(tokens[index]));
+		return Integer.parseInt(tokens[index]);
+	}
+
 }

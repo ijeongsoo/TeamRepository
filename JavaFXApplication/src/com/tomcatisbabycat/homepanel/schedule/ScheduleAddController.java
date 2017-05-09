@@ -87,10 +87,15 @@ public class ScheduleAddController implements Initializable {
 	private void addLight() {
 		comboName.getItems().clear();
 		
-		name.add("전등");
-		name.add("전등");
-		name.add("전등");
-		name.add("전등");
+		name.add("안방");
+		name.add("방-1");
+		name.add("방-2");
+		name.add("욕실");
+		name.add("거실");
+		name.add("주방");
+		name.add("현관");
+		name.add("다용도실");
+		name.add("보일러실");
 		
 		comboName.setItems(name);
 	}
@@ -98,10 +103,8 @@ public class ScheduleAddController implements Initializable {
 	private void addTV() {
 		comboName.getItems().clear();
 		
-		name.add("TV");
-		name.add("TV");
-		name.add("TV");
-		name.add("TV");
+		name.add("TV-1");
+		name.add("TV-2");
 		
 		comboName.setItems(name);
 	}
@@ -109,10 +112,8 @@ public class ScheduleAddController implements Initializable {
 	private void addAC() {
 		comboName.getItems().clear();
 		
-		name.add("에어컨");
-		name.add("에어컨");
-		name.add("에어컨");
-		name.add("에어컨");
+		name.add("에어컨-1");
+		name.add("에어컨-2");
 		
 		comboName.setItems(name);
 	}
@@ -120,10 +121,8 @@ public class ScheduleAddController implements Initializable {
 	private void addWM() {
 		comboName.getItems().clear();
 		
-		name.add("세탁기");
-		name.add("세탁기");
-		name.add("세탁기");
-		name.add("세탁기");
+		name.add("세탁기-1");
+		name.add("세탁기-2");
 		
 		comboName.setItems(name);
 	}

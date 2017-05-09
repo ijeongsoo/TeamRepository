@@ -7,8 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane prefHeight="100.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label id="noon" layoutX="8.0" layoutY="42.0" text="오후">
          <font>
@@ -23,6 +22,12 @@
       <Label id="name" layoutX="62.0" layoutY="65.0" text="보일러실">
          <font>
             <Font size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="152.0" layoutY="42.0" />
+      <Label id="onOff" layoutX="200.0" layoutY="35.0" text="OFF">
+         <font>
+            <Font name="Arial" size="30.0" />
          </font>
       </Label>
    </children>

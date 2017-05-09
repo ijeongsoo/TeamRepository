@@ -12,17 +12,24 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -35,8 +42,6 @@ import javafx.util.Duration;
  */
 public class Lock_viewController implements Initializable {
 
-	@FXML
-	private Button btnUnlock;
 	@FXML
 	private StackPane stackPaneLock;
 	@FXML
@@ -80,78 +85,233 @@ public class Lock_viewController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		
-		btnUnlock.setOnAction(event -> {
-			handleBtnUnlock(event);
-		});
 		btnOne.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnOne.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnOne.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnTwo.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnTwo.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnTwo.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnThree.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnThree.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnThree.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnFour.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnFour.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnFour.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnFive.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnFive.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnFive.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnSix.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnSix.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnSix.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnSeven.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnSeven.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnSeven.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnEight.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnEight.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnEight.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnNine.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnNine.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnNine.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
 		btnZero.setOnAction(event -> {
 			handleBtnPassword(event);
+			final Animation ani = new Transition() {
+				{
+					setCycleDuration(Duration.millis(100));
+					setOnFinished(e->{
+						btnZero.getStyleClass().add("lockBtnPassword");
+					});
+					setInterpolator(Interpolator.EASE_OUT);
+				}
+				
+				@Override
+				protected void interpolate(double frac) {
+					//Color vColor = new Color(41.0, 110.0, 168.0, 1 - frac); 
+					//Color vColor = new Color(0.16, 0.43, 0.66, 1 - frac);
+					//Color vColor = new Color(0, 0, 0, 1 - frac);
+					Color vColor = new Color(1, 1, 1, 1 - frac);
+					btnZero.setBackground(new Background(new BackgroundFill(vColor, new CornerRadii(30), Insets.EMPTY)));
+				}
+			};
+			ani.play();
 		});
-	}
-
-	private void handleBtnUnlock(ActionEvent event) {
-		try {
-			Parent parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
-			// StackPane의 자식 리스트에 AnchorPane하나만 있는상태(index-0, size 1)
-			// 여기서 Main의 화면을 추가하면서 size를 이용해 인덱스를 지정하면서 추가 ~.add(int index, Node element)
-			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
-			// 메인페이지를 추가한 후에는 리스트의 사이즈가 2가 되있는 상태
-			// System.out.println(lockRootPane.getChildren().size()) // 사이즈 확인 출력문
-			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
-			// 차후에 화면전환 애니메이션 수정필요(5/3 02:30)
-			parent.setTranslateX(800);
-			KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
-			KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),(e) -> {
-				LockController.lockRootPane.getChildren().remove(1);
-			}, keyValue);
-
-			Timeline timeline = new Timeline();
-			timeline.getKeyFrames().add(keyFrame);
-
-			timeline.play();
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
 	}
 
 	private void correctPassword() {
 		try {
 			Parent parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
-			// StackPane의 자식 리스트에 AnchorPane하나만 있는상태(index-0, size 1)
-			// 여기서 Main의 화면을 추가하면서 size를 이용해 인덱스를 지정하면서 추가 ~.add(int index, Node element)
+			
 			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
-			// 메인페이지를 추가한 후에는 리스트의 사이즈가 2가 되있는 상태
-			// System.out.println(lockRootPane.getChildren().size()) // 사이즈 확인 출력문
-			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
-			// 차후에 화면전환 애니메이션 수정필요(5/3 02:30)
-			//parent.setTranslateX(800);
-			//KeyValue keyValue = new KeyValue(parent.translateXProperty(), 0);
 			parent.setOpacity(0);
 			KeyValue keyValue = new KeyValue(parent.opacityProperty(), 1);
 			KeyFrame keyFrame = new KeyFrame(Duration.millis(500),(event) -> {
@@ -171,10 +331,9 @@ public class Lock_viewController implements Initializable {
 		// event를 통해 어떤 버튼의 이벤트가 발생한거지 getSource를 통해 해당 객체를 가져온다.
 		Button passBtn = (Button) event.getSource();
 		inputPassword += passBtn.getText();
-		System.out.println(inputPassword);
-		System.out.println("");
-
-		System.out.println(inputPassword.length());
+		
+		
+		
 		fillCircle(inputPassword.length());
 
 		SHA256 sha256 = new SHA256();
