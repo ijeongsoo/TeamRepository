@@ -52,6 +52,7 @@ public class DustController implements Initializable {
 	@FXML
 	private Label lblWishKnobTemp;
 
+	static Timeline graphTl = new Timeline();
 
 	private String getTime() {
 		Calendar ca = Calendar.getInstance();
@@ -93,9 +94,7 @@ public class DustController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
-		final double MIN = 0;
-		final double MAX = 60;
+		
 		yAxis=(NumberAxis) chartDust.getYAxis();
 		yAxis.setAutoRanging(true);
 		yAxis.setForceZeroInRange(false);
@@ -122,7 +121,6 @@ public class DustController implements Initializable {
 		chartDust.getStylesheets().add(getClass().getResource("DustChart.css").toString());
 		chartDust.applyCss();
 		
-		Timeline graphTl = new Timeline();
 		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
 			timeToGrape();
 			timeToDust();
@@ -172,5 +170,10 @@ public class DustController implements Initializable {
 	private void timeToDust() {
 		lblKnobTemp.setText(getDust()+"㎍/㎥");
 	}
+	
+
+
+	
+	
 	
 }

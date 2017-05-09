@@ -21,6 +21,7 @@ public class statusThread extends Thread{
 		int dust;
 		
 		while(true){
+			System.gc();
 			temp=Math.round(((Math.random()*(35-8+1))+8)*10d)/10d;
 			moist=(int)(Math.random()*(90-30+1))+30;
 			dust=(int)(Math.random()*(200-50+1))+50;

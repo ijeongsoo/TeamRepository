@@ -104,8 +104,8 @@ public class MainController implements Initializable {
 	Rotate secondRotation;
 	Calendar calendar;
 
-	Timeline animationTL;
-	Timeline lionAnimationTL;
+	static Timeline animationTL;
+	static Timeline lionAnimationTL;
 	
 	
 	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
@@ -363,8 +363,7 @@ public class MainController implements Initializable {
 				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
 				timeline2.getKeyFrames().add(keyFrame2);
 				timeline2.play();
-				mainThreadGroup.interrupt();
-				
+				mainThreadInterrupt();
 				LockController.lockRootPane.getChildren().remove(1);
 			}, keyValueStackPaneMenu);
 			
@@ -390,6 +389,10 @@ public class MainController implements Initializable {
 
 	public static void mainThreadInterrupt() {
 		mainThreadGroup.interrupt();
+		animationTL.stop();
+		lionAnimationTL.stop();
+		
+		
 	}
 
 	private void lionAnimation() {
@@ -399,4 +402,11 @@ public class MainController implements Initializable {
 			lionImagenum = 1;
 		}
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("끝");
+	}
+	
+	
 }

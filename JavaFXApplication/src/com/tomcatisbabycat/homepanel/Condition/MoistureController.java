@@ -51,6 +51,8 @@ public class MoistureController implements Initializable {
 	private Label lblKnobTemp;
 	@FXML
 	private Label lblWishKnobTemp;
+	
+	static Timeline graphTl = new Timeline();
 
 
 	private String getTime() {
@@ -92,9 +94,7 @@ public class MoistureController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		// TODO
-		final double MIN = 0;
-		final double MAX = 100;
+		
 		yAxis=(NumberAxis) chartMost.getYAxis();
 		yAxis.setAutoRanging(true);
 		yAxis.setForceZeroInRange(false);
@@ -120,7 +120,7 @@ public class MoistureController implements Initializable {
 		chartMost.applyCss();
 		
 
-		Timeline graphTl = new Timeline();
+		
 		graphTl.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
 			timeToGrape();
 			timeToMost();
@@ -171,5 +171,6 @@ public class MoistureController implements Initializable {
 	private void timeToMost() {
 		lblKnobTemp.setText((int)getMoisture()+"%");
 	}
+	
 	
 }

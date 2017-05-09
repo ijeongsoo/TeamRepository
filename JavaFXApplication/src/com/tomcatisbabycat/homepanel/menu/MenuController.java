@@ -66,7 +66,7 @@ public class MenuController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		System.gc();
 		btnControlHome.setOnAction(event -> {
 			handleBtnControlHome(event);
 		});
@@ -92,7 +92,7 @@ public class MenuController implements Initializable {
 			handleBtnSchedule(event);
 		});
 		btnSetting.setOnAction(event -> {
-			handleBtnSchedule(event);
+			handleBtnSetting(event);
 		});
 
 	}
@@ -317,4 +317,11 @@ public class MenuController implements Initializable {
 		}
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("메뉴 종료");
+	}
+
+	
+	
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.tomcatisbabycat.homepanel.controller.knob.knobfx.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="363.0" prefWidth="552.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.consume.GasController">
+   <children>
+      <LineChart fx:id="chartDust" layoutX="-5.0" layoutY="11.0" prefHeight="166.0" prefWidth="555.0">
+        <xAxis>
+          <NumberAxis minorTickCount="0" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Label layoutY="-3.0" text="실시간 사용량" textFill="#7b5551" />
+      <Label layoutY="185.0" text="최근 5개월 사용량" textFill="#7b5551" />
+      <BarChart fx:id="barChartGas" barGap="0.0" categoryGap="60.0" layoutX="-21.0" layoutY="199.0" legendVisible="false" prefHeight="176.0" prefWidth="566.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
+	
+   </children>
+</AnchorPane>

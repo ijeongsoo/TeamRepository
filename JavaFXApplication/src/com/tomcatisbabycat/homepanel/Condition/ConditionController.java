@@ -156,6 +156,7 @@ public class ConditionController implements Initializable {
 		//그러면 기존에 1번인덱스에 있던 control스택이 2번인덱스로 밀리는 상태가 된다. 그후 1번처럼 하면 추가된 메뉴페이지가 보이게된다.
 		//참고로 add(스택을 추가할 인덱스위치, 인덱스에 추가할 스택내용)
 		try {
+			//graphStackPane.getChildren().clear();
 			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MenuController.class
 				  .getResource("menu.fxml")));
 		} catch (IOException ex) {
@@ -199,5 +200,8 @@ public class ConditionController implements Initializable {
 			ex.printStackTrace();
 		}
 	}
+
+
+	
 
 }

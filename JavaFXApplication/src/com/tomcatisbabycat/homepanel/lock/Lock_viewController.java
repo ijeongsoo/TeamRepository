@@ -242,5 +242,11 @@ public class Lock_viewController implements Initializable {
 			circles.get(j).setFill(Color.TRANSPARENT);
 		}
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("aaabbb");
+	}
+	
 }
 

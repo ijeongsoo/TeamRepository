@@ -94,7 +94,7 @@ public class SettingController implements Initializable {
             KeyValue keyValue = new KeyValue(settingStackPane.translateXProperty(),800);
             KeyFrame keyFrame = new KeyFrame(Duration.seconds(1),
                     e -> {
-                          LockController.lockRootPane.getChildren().remove(2,LockController.lockRootPane.getChildren().size());
+                          LockController.lockRootPane.getChildren().remove(2);
                     },keyValue);
             
             Timeline timeline = new Timeline();
@@ -107,7 +107,6 @@ public class SettingController implements Initializable {
                   ex.printStackTrace();
             }
       }
-
       
       
 }
