@@ -5,9 +5,13 @@
  */
 package com.tomcatisbabycat.homepanel.main.statusthread;
 
+import com.tomcatisbabycat.homepanel.resources.icons.IconSelector;
+import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.util.Calendar;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
@@ -16,7 +20,7 @@ import javafx.scene.transform.Rotate;
  *
  * @author ijeongsu
  */
-public class ClockThread extends Thread {
+public class ClockAndEnvThread extends Thread {
 
 	private Line houreHand;
 	private Line minuateHand;
@@ -26,8 +30,27 @@ public class ClockThread extends Thread {
 	private Label lblMainMonth;
 	private Label lblMainDate;
 	private Label lblMainDay;
+	private ImageView imgMainDust;
+	private Label lblMainDust;
+	private ImageView imgMainMoisture;
+	private Label lblMainMoisture;
+	private ImageView imgMainTemperature;
+	private Label lblMainTemperature;
+	private SampleStatus samplestatus = SampleStatus.getInstance();
+	
+	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
+	Image hillsImage = new Image(IconSelector.class.getResource("hills.png").toString());
+	Image fieldsImage = new Image(IconSelector.class.getResource("fields.png").toString());
+	Image capeImage = new Image(IconSelector.class.getResource("cape.png").toString());
+	Image cactusImage = new Image(IconSelector.class.getResource("cactus.png").toString());
+	Image dropsImage = new Image(IconSelector.class.getResource("drops.png").toString());
+	Image coldImage = new Image(IconSelector.class.getResource("temperature-2.png").toString());
+	Image sosoImage = new Image(IconSelector.class.getResource("temperature-3.png").toString());
+	Image hotImage = new Image(IconSelector.class.getResource("temperature-4.png").toString());
+	
+	
 
-	public ClockThread(
+	public ClockAndEnvThread(
 		  ThreadGroup threadGroup, 
 		  String threadName,
 		  Line houreHand, 
@@ -37,7 +60,14 @@ public class ClockThread extends Thread {
 		  Label lblMainYear,
 		  Label lblMainMonth,
 		  Label lblMainDate,
-		  Label lblMainDay ) {
+		  Label lblMainDay,
+		  ImageView imgMainDust,
+		  Label lblMainDust,
+		  ImageView imgMainMoisture,
+		  Label lblMainMoisture,
+		  ImageView imgMainTemperature,
+		  Label lblMainTemperature
+		  ) {
 		super(threadGroup, threadName);
 		this.houreHand = houreHand;
 		this.minuateHand = minuateHand;
@@ -47,6 +77,12 @@ public class ClockThread extends Thread {
 		this.lblMainMonth=lblMainMonth;
 		this.lblMainDate=lblMainDate;
 		this.lblMainDay=lblMainDay;
+		this.lblMainDust=lblMainDust;
+		this.imgMainDust=imgMainDust;
+		this.lblMainMoisture=lblMainMoisture;
+		this.imgMainMoisture=imgMainMoisture;
+		this.imgMainTemperature=imgMainTemperature;
+		this.lblMainTemperature=lblMainTemperature;
 	}
 
 	@Override
@@ -148,6 +184,59 @@ public class ClockThread extends Thread {
 				}
 				lblMainDay.setText(daystrTemp);
 			});
+			
+			
+			if(samplestatus.getDust()>=0&&samplestatus.getDust()<=30){
+				Platform.runLater(() -> {
+					imgMainDust.setImage(forestImage);
+				});
+			}else if(samplestatus.getDust()>30&&samplestatus.getDust()<=80){
+				Platform.runLater(() -> {
+					imgMainDust.setImage(hillsImage);
+				});
+			}else if(samplestatus.getDust()>80&&samplestatus.getDust()<=150){
+				Platform.runLater(() -> {
+					imgMainDust.setImage(fieldsImage);
+				});
+			}else{
+				Platform.runLater(() -> {
+					imgMainDust.setImage(capeImage);
+				});
+			}
+			
+			
+			if(samplestatus.getMoisture()<50.0){
+				Platform.runLater(() -> {
+					imgMainMoisture.setImage(cactusImage);
+				});
+			}else{
+				Platform.runLater(() -> {
+					imgMainMoisture.setImage(dropsImage);
+				});
+			}
+			
+			
+			Platform.runLater(() -> {
+				lblMainTemperature.setText(samplestatus.getTemperature()+"°");
+				lblMainMoisture.setText(samplestatus.getMoisture()+"%");
+								lblMainDust.setText(samplestatus.getDust()+"㎍/㎥");
+
+			});
+			
+			if(samplestatus.getTemperature()<20.0){
+				Platform.runLater(() -> {
+					imgMainTemperature.setImage(coldImage);
+				});
+			}else if(samplestatus.getTemperature()>=20.0&&samplestatus.getTemperature()<30.0){
+				Platform.runLater(() -> {
+					imgMainTemperature.setImage(sosoImage);
+				});
+			}else{
+				Platform.runLater(() -> {
+					imgMainTemperature.setImage(hotImage);
+				});
+			}
+			
 			
 			
 			try {Thread.sleep(1000);} catch (InterruptedException ex) {break;}

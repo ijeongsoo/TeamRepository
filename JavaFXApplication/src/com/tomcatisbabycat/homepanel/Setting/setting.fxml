@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import java.lang.*?>
@@ -10,6 +11,7 @@
 
 <StackPane fx:id="settingStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.setting.SettingController">
     <children>
+      <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
                 <Label layoutX="40.0" layoutY="27.0" text="Setting">

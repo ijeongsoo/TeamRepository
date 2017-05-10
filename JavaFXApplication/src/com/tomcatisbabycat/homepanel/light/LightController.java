@@ -12,6 +12,8 @@ import com.tomcatisbabycat.homepanel.sampleAppliance.Light;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -63,95 +65,92 @@ public class LightController implements Initializable {
 	private Button innerRoom;
 	@FXML
 	private Button boilRoom;
-	
+
 	private Light light = Light.getInstance();
 	@FXML
 	private Label lblLight;
 	@FXML
 	private ImageView imgLight;
-	
 
 	/**
 	 * Initializes the controller class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		
 		if (!light.isNum2Room()) {
 			num2Room.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			num2Room.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isNum1Room()) {
 			num1Room.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			num1Room.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isMultiRoom()) {
 			multiRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			multiRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isBoilRoom()) {
 			boilRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			boilRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isLivingRoom()) {
 			livingRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			livingRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isKeachinRoom()) {
 			kichinRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			kichinRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isInnerRoom()) {
 			innerRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			innerRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isDoorRoom()) {
 			doorRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			doorRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		if (!light.isBathRoom()) {
 			bathRoom.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
 			bathRoom.setStyle("-fx-background-color:#FFCC66;");
 		}
-		
+
 		lblLight.setText(String.valueOf(countLight()));
-		imgLight.setOpacity(((double)countLight())/9);
-		
-		
+		imgLight.setOpacity(((double) countLight()) / 9);
+
 		btnControlLock.setOnAction(event -> {
 			handleBtnControlLock(event);
 		});
 		btnControlHome.setOnAction(event -> {
 			handleBtnControlHome(event);
 		});
-		btnControlBack.setOnAction(event->{
+		btnControlBack.setOnAction(event -> {
 			handleBtnControlBack(event);
 		});
-		
+
 		boilRoom.setOnAction((event) -> {
-			if(light.isBoilRoom()==false){
+			if (light.isBoilRoom() == false) {
 				light.setBoilRoom(true);
 				Platform.runLater(() -> {
 					boilRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setBoilRoom(false);
 				Platform.runLater(() -> {
 					boilRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -159,14 +158,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		multiRoom.setOnAction((event) -> {
-			if(light.isMultiRoom()==false){
+			if (light.isMultiRoom() == false) {
 				light.setMultiRoom(true);
 				Platform.runLater(() -> {
 					multiRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setMultiRoom(false);
 				Platform.runLater(() -> {
 					multiRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -174,14 +173,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		innerRoom.setOnAction((event) -> {
-			if(light.isInnerRoom()==false){
+			if (light.isInnerRoom() == false) {
 				light.setInnerRoom(true);
 				Platform.runLater(() -> {
 					innerRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setInnerRoom(false);
 				Platform.runLater(() -> {
 					innerRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -189,14 +188,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		kichinRoom.setOnAction((event) -> {
-			if(light.isKeachinRoom()==false){
+			if (light.isKeachinRoom() == false) {
 				light.setKeachinRoom(true);
 				Platform.runLater(() -> {
 					kichinRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setKeachinRoom(false);
 				Platform.runLater(() -> {
 					kichinRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -204,14 +203,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		livingRoom.setOnAction((event) -> {
-			if(light.isLivingRoom()==false){
+			if (light.isLivingRoom() == false) {
 				light.setLivingRoom(true);
 				Platform.runLater(() -> {
 					livingRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setLivingRoom(false);
 				Platform.runLater(() -> {
 					livingRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -219,14 +218,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		bathRoom.setOnAction((event) -> {
-			if(light.isBathRoom()==false){
+			if (light.isBathRoom() == false) {
 				light.setBathRoom(true);
 				Platform.runLater(() -> {
 					bathRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setBathRoom(false);
 				Platform.runLater(() -> {
 					bathRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -234,14 +233,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		doorRoom.setOnAction((event) -> {
-			if(light.isDoorRoom()==false){
+			if (light.isDoorRoom() == false) {
 				light.setDoorRoom(true);
 				Platform.runLater(() -> {
 					doorRoom.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setDoorRoom(false);
 				Platform.runLater(() -> {
 					doorRoom.setStyle("-fx-background-color:#c0c0c0;");
@@ -249,14 +248,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		num1Room.setOnAction((event) -> {
-			if(light.isNum1Room()==false){
+			if (light.isNum1Room() == false) {
 				light.setNum1Room(true);
 				Platform.runLater(() -> {
 					num1Room.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setNum1Room(false);
 				Platform.runLater(() -> {
 					num1Room.setStyle("-fx-background-color:#c0c0c0;");
@@ -264,14 +263,14 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
+
 		num2Room.setOnAction((event) -> {
-			if(light.isNum2Room()==false){
+			if (light.isNum2Room() == false) {
 				light.setNum2Room(true);
 				Platform.runLater(() -> {
 					num2Room.setStyle("-fx-background-color:#FFCC66;");
 				});
-			}else{
+			} else {
 				light.setNum2Room(false);
 				Platform.runLater(() -> {
 					num2Room.setStyle("-fx-background-color:#c0c0c0;");
@@ -279,101 +278,123 @@ public class LightController implements Initializable {
 			}
 			lblLight.setText(String.valueOf(countLight()));
 		});
-		
-		
+
 		lblLight.textProperty().addListener(new ChangeListener<String>() {
 			@Override
 			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-				imgLight.setOpacity(((double)Integer.parseInt(newValue))/9);
+				imgLight.setOpacity(((double) Integer.parseInt(newValue)) / 9);
 			}
 		});
-		
-		
-		
-		
-		
-		
-	}
-	
-	private int countLight(){
-			int lightNum=0;
-			if(light.isBathRoom())
-				lightNum++;
-			if(light.isBoilRoom())
-				lightNum++;
-			if(light.isDoorRoom())
-				lightNum++;
-			if(light.isInnerRoom())
-				lightNum++;
-			if(light.isKeachinRoom())
-				lightNum++;
-			if(light.isLivingRoom())
-				lightNum++;
-			if(light.isMultiRoom())
-				lightNum++;
-			if(light.isNum1Room())
-				lightNum++;
-			if(light.isNum2Room())
-				lightNum++;
-			
-			return lightNum;
+
 	}
 
-	
-	private void handleBtnControlBack(ActionEvent event){
-		lightStackPane.setTranslateX(0);
-		
-		KeyValue keyValueStackPaneLight = new KeyValue(lightStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneLight = new KeyFrame(Duration.seconds(1), 
-			  e->{
-				LockController.lockRootPane.getChildren().remove(2);
-		}, keyValueStackPaneLight);
-		
-		Timeline timeline = new Timeline(keyFrameStackPaneLight);
-		timeline.play();
-		
-		try {
-			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MenuController.class.getResource("menu.fxml")));
-		} catch (IOException ex) {
-			ex.printStackTrace();
+	private int countLight() {
+		int lightNum = 0;
+		if (light.isBathRoom()) {
+			lightNum++;
 		}
+		if (light.isBoilRoom()) {
+			lightNum++;
+		}
+		if (light.isDoorRoom()) {
+			lightNum++;
+		}
+		if (light.isInnerRoom()) {
+			lightNum++;
+		}
+		if (light.isKeachinRoom()) {
+			lightNum++;
+		}
+		if (light.isLivingRoom()) {
+			lightNum++;
+		}
+		if (light.isMultiRoom()) {
+			lightNum++;
+		}
+		if (light.isNum1Room()) {
+			lightNum++;
+		}
+		if (light.isNum2Room()) {
+			lightNum++;
+		}
+
+		return lightNum;
 	}
-	
+
+	private void handleBtnControlBack(ActionEvent event) {
+		
+
+		try {
+			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
+			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
+			// 현재상태에서 메뉴의 인덱스는 2
+
+			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			parent.getChildren().get(0).setOpacity(0);
+			parent.getChildren().get(1).setOpacity(0);
+			//parent.setTranslateX(800);
+
+			KeyValue keyValueStackPane = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
+			KeyFrame keyFrameStackPane = new KeyFrame(Duration.millis(500), (e) -> {
+				Timeline timeline2 = new Timeline();
+				KeyValue keyvalue2 = new KeyValue(parent.getChildren().get(1).opacityProperty(), 1);
+				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
+				timeline2.getKeyFrames().add(keyFrame2);
+				timeline2.play();
+				LockController.lockRootPane.getChildren().remove(1);
+			}, keyValueStackPane);
+
+			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
+			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
+			//KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
+			Timeline timeline = new Timeline();
+			timeline.getKeyFrames().addAll(keyFrameStackPane);
+			timeline.play();
+		} catch (IOException ex) {
+		}
+
+		// 메인 페이지가 추가된상태에서 현재 리스트의 사이즈는 2 이다 , 이 사이즈를 가지고 다음에 추가할 메뉴의 인덱스를 설정하면서 메뉴페이지를 추가한다.
+	}
 
 	private void handleBtnControlLock(ActionEvent event) {
-		//StackPane rootPane = (StackPane) lightStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
-
-		lightStackPane.setTranslateX(0);
-		KeyValue keyValueStackPaneLight = new KeyValue(lightStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneLight = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(lightStackPane);
-			  }, keyValueStackPaneLight);
-
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrameStackPaneLight);
-
-		timeline.play();
+		
+		LockController.lockRootPane.getChildren().remove(lightStackPane);
+			
 	}
 
 	private void handleBtnControlHome(ActionEvent event) {
 
-		KeyValue keyValueStackPaneLight = new KeyValue(lightStackPane.translateXProperty(), 800);
-		KeyFrame keyFrameStackPaneLight = new KeyFrame(Duration.seconds(1),
-			  e -> {
-				  LockController.lockRootPane.getChildren().remove(2, LockController.lockRootPane.getChildren().size());
-			  }, keyValueStackPaneLight);
-
-		Timeline timeline = new Timeline();
-		timeline.getKeyFrames().add(keyFrameStackPaneLight);
-
-		timeline.play();
 		try {
-			LockController.lockRootPane.getChildren().add(1, FXMLLoader.load(MainController.class.getResource("main.fxml")));
-		} catch (Exception ex) {
-			ex.printStackTrace();
+			StackPane parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
+			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
+			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
+			// 현재상태에서 메뉴의 인덱스는 2
+
+			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			parent.getChildren().get(0).setOpacity(0);
+			parent.getChildren().get(1).setOpacity(0);
+			//parent.setTranslateX(800);
+
+			KeyValue keyValueStackPane = new KeyValue(parent.getChildren().get(0).opacityProperty(), 1);
+			KeyFrame keyFrameStackPane = new KeyFrame(Duration.millis(500), (e) -> {
+				Timeline timeline2 = new Timeline();
+				KeyValue keyvalue2 = new KeyValue(parent.getChildren().get(1).opacityProperty(), 1);
+				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
+				timeline2.getKeyFrames().add(keyFrame2);
+				timeline2.play();
+				LockController.lockRootPane.getChildren().remove(1);
+			}, keyValueStackPane);
+
+			// 삭제될 메인페이지의 이벤트를 처리하는 부분, 차후에 애니메이션 설정에따라 사용할지도?!
+			//KeyValue keyValueStackPaneMain = new KeyValue(stackPaneMain.translateXProperty(), -800);
+			//KeyFrame keyFrameStackPaneMain = new KeyFrame(Duration.seconds(1), keyValueStackPaneMain);
+			Timeline timeline = new Timeline();
+			timeline.getKeyFrames().addAll(keyFrameStackPane);
+			timeline.play();
+		} catch (IOException ex) {
 		}
 
-	}	
-	
+	}
+
 }

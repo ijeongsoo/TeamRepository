@@ -7,8 +7,6 @@ package com.tomcatisbabycat.homepanel.main.statusthread;
 
 import com.tomcatisbabycat.homepanel.resources.icons.IconSelector;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
