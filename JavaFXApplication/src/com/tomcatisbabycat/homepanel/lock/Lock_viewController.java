@@ -321,15 +321,15 @@ public class Lock_viewController implements Initializable {
 					setCycleDuration(Duration.millis(500));
 					setOnFinished(e -> {
 						btnCancel.getStyleClass().add("lockBtnPassword");
-						KeyValue kv=new KeyValue(anchorPaneLockView.opacityProperty(), 0);
+						KeyValue kv = new KeyValue(anchorPaneLockView.opacityProperty(), 0);
 						KeyFrame keyFrameStackPaneMenu = new KeyFrame(Duration.millis(500), (event) -> {
 							Timeline timeline2 = new Timeline();
-							KeyValue keyvalue1 = new KeyValue(((BoxBlur)((StackPane)btnCancel.getScene().getRoot()).getChildren().get(0).getEffect()).heightProperty(), 0);
-							KeyValue keyvalue2 = new KeyValue(((BoxBlur)((StackPane)btnCancel.getScene().getRoot()).getChildren().get(0).getEffect()).widthProperty(), 0);
+							KeyValue keyvalue1 = new KeyValue(((BoxBlur) ((StackPane) btnCancel.getScene().getRoot()).getChildren().get(0).getEffect()).heightProperty(), 0);
+							KeyValue keyvalue2 = new KeyValue(((BoxBlur) ((StackPane) btnCancel.getScene().getRoot()).getChildren().get(0).getEffect()).widthProperty(), 0);
 							KeyValue keyvalue3 = new KeyValue(lock_viewBack.opacityProperty(), 0);
-							KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500),(ev) -> {
+							KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), (ev) -> {
 								LockController.lockRootPane.getChildren().remove(1);
-							} ,keyvalue1,keyvalue2, keyvalue3);
+							}, keyvalue1, keyvalue2, keyvalue3);
 							timeline2.getKeyFrames().add(keyFrame2);
 							timeline2.play();
 						}, kv);
@@ -337,8 +337,7 @@ public class Lock_viewController implements Initializable {
 						Timeline timeline = new Timeline();
 						timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 						timeline.play();
-						
-						
+
 					});
 					setInterpolator(Interpolator.EASE_OUT);
 				}
@@ -407,6 +406,11 @@ public class Lock_viewController implements Initializable {
 		inputPassword += passBtn.getText();
 
 		fillCircle(inputPassword.length());
+//		try {
+//					Thread.sleep(3000);
+//				} catch (Exception ex) {
+//					ex.printStackTrace();
+//				}
 
 		SHA256 sha256 = new SHA256();
 		//System.out.println(sha256.getPassWord());
@@ -421,18 +425,19 @@ public class Lock_viewController implements Initializable {
 				Thread t = new Thread() {
 					@Override
 					public void run() {
-						//System.out.println(Thread.currentThread().getName());
 						try {
-							Thread.sleep(1000);
-						} catch (Exception ex) {
-							ex.printStackTrace();
+							Thread.sleep(500);
+							Platform.runLater(() -> {
+								correctPassword();
+							});
+							
+						} catch (InterruptedException ex) {
 						}
-						fillCircle(inputPassword.length());
-						
 					}
 				};
+				
 				t.start();
-				correctPassword();
+				
 			} else {
 				System.out.println("패스워드가 일치하지 않습니다. 다시 입력하세요");
 				inputPassword = "";
@@ -501,7 +506,7 @@ public class Lock_viewController implements Initializable {
 //		System.out.println(circles.get(1));
 //		System.out.println(circles.get(2));
 //		System.out.println(circles.get(3));
-		System.out.println(Thread.currentThread().getName());
+//		System.out.println(Thread.currentThread().getName());
 		for (int i = 0; i < length; i++) {
 			circles.get(i).setFill(Color.rgb(213, 239, 253));
 		}
