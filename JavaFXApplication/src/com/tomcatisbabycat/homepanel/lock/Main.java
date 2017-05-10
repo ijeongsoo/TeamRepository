@@ -23,9 +23,15 @@ public class Main extends Application {
 	public void start(Stage stage) throws Exception {
 		Parent root = FXMLLoader.load(getClass().getResource("lock.fxml"));
 
+		
+		
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(CSSSelector.class.getResource(CSSSelector.getSeasonCSS()).toString());
 		stage.initStyle(StageStyle.UNDECORATED);
+		
+		stage.setFullScreen(true);
+		stage.setFullScreenExitHint("");
+		
 		stage.setScene(scene);
 		stage.show();
 	}
