@@ -86,6 +86,8 @@ public class Lock_viewController implements Initializable {
 	private Rectangle lock_viewBack;
 	@FXML
 	private AnchorPane anchorPaneLockView;
+	
+	private boolean buttonFlag=true;
 
 	/**
 	 * Initializes the controller class. sha256
@@ -94,10 +96,11 @@ public class Lock_viewController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 
 		btnOne.setOnAction(event -> {
-			handleBtnPassword(event);
+			if(buttonFlag){
+				handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnOne.getStyleClass().add("lockBtnPassword");
 					});
@@ -114,12 +117,15 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
+			
 		});
 		btnTwo.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnTwo.getStyleClass().add("lockBtnPassword");
 					});
@@ -136,12 +142,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnThree.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnThree.getStyleClass().add("lockBtnPassword");
 					});
@@ -158,12 +166,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnFour.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnFour.getStyleClass().add("lockBtnPassword");
 					});
@@ -180,12 +190,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnFive.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnFive.getStyleClass().add("lockBtnPassword");
 					});
@@ -202,12 +214,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnSix.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnSix.getStyleClass().add("lockBtnPassword");
 					});
@@ -224,12 +238,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnSeven.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnSeven.getStyleClass().add("lockBtnPassword");
 					});
@@ -246,12 +262,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnEight.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnEight.getStyleClass().add("lockBtnPassword");
 					});
@@ -268,12 +286,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 		btnNine.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnNine.getStyleClass().add("lockBtnPassword");
 					});
@@ -290,13 +310,15 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 
 		btnZero.setOnAction(event -> {
+			if(buttonFlag){
 			handleBtnPassword(event);
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnZero.getStyleClass().add("lockBtnPassword");
 					});
@@ -313,12 +335,14 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 
 		btnCancel.setOnAction(event -> {
+			if(buttonFlag){
 			final Animation ani = new Transition() {
 				{
-					setCycleDuration(Duration.millis(500));
+					setCycleDuration(Duration.millis(300));
 					setOnFinished(e -> {
 						btnCancel.getStyleClass().add("lockBtnPassword");
 						KeyValue kv = new KeyValue(anchorPaneLockView.opacityProperty(), 0);
@@ -341,6 +365,7 @@ public class Lock_viewController implements Initializable {
 					});
 					setInterpolator(Interpolator.EASE_OUT);
 				}
+				  
 
 				@Override
 				protected void interpolate(double frac) {
@@ -353,9 +378,10 @@ public class Lock_viewController implements Initializable {
 
 			};
 			ani.play();
-
+			}
 		});
 		btnDel.setOnAction(event -> {
+			if(buttonFlag){
 			inputPassword = "";
 			fillCircle(inputPassword.length());
 			final Animation ani = new Transition() {
@@ -377,6 +403,7 @@ public class Lock_viewController implements Initializable {
 				}
 			};
 			ani.play();
+			}
 		});
 	}
 
@@ -406,19 +433,15 @@ public class Lock_viewController implements Initializable {
 		inputPassword += passBtn.getText();
 
 		fillCircle(inputPassword.length());
-//		try {
-//					Thread.sleep(3000);
-//				} catch (Exception ex) {
-//					ex.printStackTrace();
-//				}
+//		
 
 		SHA256 sha256 = new SHA256();
 		//System.out.println(sha256.getPassWord());
 		//System.out.println(inputPassword.length() + " length");
 		//System.out.println(sha256.getPassWord());
 		if (inputPassword.length() == 4) {
+			buttonFlag=false;
 			String getSHA = EncryptSHA256.encryptSHA256(inputPassword);
-
 			if (getSHA.equals(sha256.getPassWord())) {
 				System.out.println("패스워드가 일치합니다.");
 				inputPassword = "";
@@ -426,7 +449,7 @@ public class Lock_viewController implements Initializable {
 					@Override
 					public void run() {
 						try {
-							Thread.sleep(500);
+							Thread.sleep(300);
 							Platform.runLater(() -> {
 								correctPassword();
 							});
@@ -446,7 +469,7 @@ public class Lock_viewController implements Initializable {
 					public void run() {
 						//System.out.println(Thread.currentThread().getName());
 						try {
-							Thread.sleep(500);
+							Thread.sleep(200);
 
 							Timeline tl = new Timeline();
 							KeyValue kv1 = new KeyValue(circle1.layoutXProperty(), 16);
@@ -489,6 +512,7 @@ public class Lock_viewController implements Initializable {
 							ex.printStackTrace();
 						}
 						fillCircle(inputPassword.length());
+						buttonFlag=true;
 					}
 				};
 				t.start();

@@ -62,7 +62,7 @@ public class MoistureController implements Initializable {
 		return time;
 	}
 
-	private int getMoisture() {
+	private double getMoisture() {
 		return ss.getMoisture();
 
 	}
