@@ -29,8 +29,8 @@ public class Main extends Application {
 		scene.getStylesheets().add(CSSSelector.class.getResource(CSSSelector.getSeasonCSS()).toString());
 		stage.initStyle(StageStyle.UNDECORATED);
 		
-		stage.setFullScreen(true);
-		stage.setFullScreenExitHint("");
+		//stage.setFullScreen(true);
+		//stage.setFullScreenExitHint("");
 		
 		stage.setScene(scene);
 		stage.show();

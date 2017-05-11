@@ -16,8 +16,6 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,6 +26,8 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
@@ -63,7 +63,7 @@ public class ScheduleController implements Initializable {
 	private ListView<Appliances> scheduleListview;
 	@FXML
 	private Button btnAdd;
-	
+
 	private AList aList = AList.getInstance();
 
 	/**
@@ -87,23 +87,27 @@ public class ScheduleController implements Initializable {
 		}
 		// 처음 씬에 들어갔을때
 		scheduleListview.setItems(aList.getTv());
-		
+
 		btnTV.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.setItems(aList.getTv());
+			System.out.println(scheduleListview.getItems().size());
 		});
 		btnAirCondition.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.setItems(aList.getAc());
+			System.out.println(scheduleListview.getItems().size());
 		});
 		btnWashingMachine.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.setItems(aList.getWm());
+			System.out.println(scheduleListview.getItems().size());
 		});
 		btnLight.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.setItems(aList.getLight());
-			
+			System.out.println(scheduleListview.getItems().size());
+
 		});
 		scheduleListview.setCellFactory(new Callback<ListView<Appliances>, ListCell<Appliances>>() {
 			@Override
@@ -113,49 +117,100 @@ public class ScheduleController implements Initializable {
 					protected void updateItem(Appliances item, boolean empty) {
 						super.updateItem(item, empty);
 						if (empty) {
+							setText(null);
+							setGraphic(null);
 							return;
 						}
 						try {
 							AnchorPane a = (AnchorPane) FXMLLoader.load(getClass().getResource("appliances.fxml"));
 							Label lblName = (Label) a.lookup("#name");
 							Label lblTime = (Label) a.lookup("#turnTime");
-							Label lblNoon = (Label) a.lookup("#noon");
+							ImageView btnDelImg = (ImageView) a.lookup("#btnDelImg");
 							Label lblOnOff = (Label) a.lookup("#onOff");
 
 							lblName.setText(item.getLblName());
 							lblTime.setText(item.getTurnTime());
-							lblNoon.setText(item.getTurnNoon());
 							lblOnOff.setText(item.getOn());
-							
-							aList.lightOnOff(item.getTurnTime(), item.getOn(), item.getLblName());
-							
+							btnDelImg.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+								selectedDelete(item);
+								
+							});
+
 							setGraphic(a);
-							
+
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
 					}
 
 				};
+				
 				return listCell;
 			}
 		});
-		
-		scheduleListview.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Appliances>(){
-			@Override
-			public void changed(ObservableValue<? extends Appliances> observable, Appliances oldValue, Appliances newValue) {
-				scheduleListview.getItems().remove(newValue);
-			}
-		});
-		
+
 		btnAdd.setOnAction(e -> {
 			handleAddButton(e);
 		});
 	}
 
+	private void selectedDelete(Appliances item) {
+		try {
+			//scheduleListview.getItems().remove(newValue);
+			Parent parent = FXMLLoader.load(getClass().getResource("scheduleDelete.fxml"));
+			scheduleStackPane.getChildren().add(parent);
+			System.out.println("Parent : " + parent);
+			Rectangle rec = (Rectangle) parent.lookup("#deleteBackground");
+			AnchorPane anp = (AnchorPane) parent.lookup("#deleteAnchorPane");
+			Button btnOk = (Button) parent.lookup("#btnOk");
+			Button btnCancel = (Button) parent.lookup("#btnCancel");
+
+			System.out.println("btnOk : " + btnOk);
+			System.out.println("btnOk : " + btnCancel);
+
+			btnCancel.setOnAction(event -> {
+				Timeline timeline = new Timeline();
+				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
+				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
+					Timeline timeline2 = new Timeline();
+					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+						scheduleStackPane.getChildren().remove(2);
+					}, keyvalue2);
+					timeline2.getKeyFrames().add(keyFrame2);
+					timeline2.play();
+				}, keyvalue);
+
+				timeline.getKeyFrames().add(keyFrame);
+				timeline.play();
+			});
+			btnOk.setOnAction(event -> {
+				scheduleListview.getItems().remove(item);
+				item.getExec().shutdown();
+
+				Timeline timeline = new Timeline();
+				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
+				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
+					Timeline timeline2 = new Timeline();
+					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+						scheduleStackPane.getChildren().remove(2);
+					}, keyvalue2);
+					timeline2.getKeyFrames().add(keyFrame2);
+					timeline2.play();
+				}, keyvalue);
+
+				timeline.getKeyFrames().add(keyFrame);
+				timeline.play();
+			});
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+	}
+
 	private void handleBackground(ActionEvent event) {
 		Button btn = (Button) event.getSource();
-		
+
 		btnTV.getStyleClass().removeAll("conditionBtnFocused");
 		btnTV.getStyleClass().add("conditionBtn");
 		btnAirCondition.getStyleClass().removeAll("conditionBtnFocused");
@@ -167,9 +222,9 @@ public class ScheduleController implements Initializable {
 
 		btn.getStyleClass().removeAll("conditionBtn");
 		btn.getStyleClass().add("conditionBtnFocused");
-		
+
 	}
-	
+
 	private void defaultButton() {
 		btnTV.getStyleClass().add("conditionBtnFocused");
 	}
@@ -297,30 +352,36 @@ public class ScheduleController implements Initializable {
 	}
 
 	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitch btnOnOff) {
+		System.out.println("addListView\n");
+		//System.out.println(scheduleListview.getItems().size());
 		if (category.getSelectionModel().getSelectedItem().toString().equals("전등")) {
-			System.out.println(btnOnOff.buttonString());
 			aList.getLight().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
 				  name.getSelectionModel().getSelectedItem().toString(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
-		} else if (category.getSelectionModel().getSelectedItem().toString().equals("TV")) {
 			
+		} else if (category.getSelectionModel().getSelectedItem().toString().equals("TV")) {
+
 			aList.getTv().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
 				  name.getSelectionModel().getSelectedItem().toString(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
+
 		} else if (category.getSelectionModel().getSelectedItem().toString().equals("에어컨")) {
-			
+
 			aList.getAc().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
 				  name.getSelectionModel().getSelectedItem().toString(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
+
 		} else if (category.getSelectionModel().getSelectedItem().toString().equals("세탁기")) {
-			
+
 			aList.getWm().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
 				  name.getSelectionModel().getSelectedItem().toString(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
+
 		}
+
 	}
 }

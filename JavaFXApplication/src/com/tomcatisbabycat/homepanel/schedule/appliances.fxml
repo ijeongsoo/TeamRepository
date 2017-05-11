@@ -6,29 +6,32 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import com.tomcatisbabycat.homepanel.schedule.*?>
 
 <AnchorPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label id="noon" layoutX="8.0" layoutY="42.0" text="오후">
-         <font>
-            <Font name="Arial" size="20.0" />
-         </font>
-      </Label>
-      <Label id="turnTime" layoutX="62.0" layoutY="24.0" text="12:00">
-         <font>
-            <Font name="Arial" size="30.0" />
-         </font>
-      </Label>
-      <Label id="name" layoutX="62.0" layoutY="65.0" text="보일러실">
-         <font>
-            <Font size="12.0" />
-         </font>
-      </Label>
-      <Label layoutX="152.0" layoutY="42.0" />
-      <Label id="onOff" layoutX="200.0" layoutY="35.0" text="OFF">
-         <font>
-            <Font name="Arial" size="30.0" />
-         </font>
-      </Label>
-   </children>
+    <children>
+        <Label id="turnTime" layoutX="62.0" layoutY="24.0" text="12:00">
+            <font>
+                <Font name="Arial" size="30.0" />
+            </font>
+        </Label>
+        <ToggleSwitch id="btnRun" layoutX="200" layoutY="24.0" />
+        <Label id="name" layoutX="62.0" layoutY="65.0" text="보일러실">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="152.0" layoutY="42.0" />
+        <Label id="onOff" layoutX="126.0" layoutY="65.0" text="OFF">
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font>
+        </Label>
+          <ImageView id="btnDelImg" fitHeight="30.0" fitWidth="30.0" layoutX="13.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                  <Image url="@../resources/icons/round-remove-button.png" />
+              </image>
+          </ImageView>
+    </children>
 </AnchorPane>

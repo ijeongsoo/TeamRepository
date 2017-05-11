@@ -6,6 +6,8 @@
 package com.tomcatisbabycat.homepanel.sampleAppliance;
 
 import java.util.Calendar;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -17,6 +19,8 @@ public class Appliances {
 	private String lblName = "";
 	private String turnTime = "";
 	private String on = "";
+	private ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+	private Light lightInstance = Light.getInstance();
 	
 	public Appliances() {
 
@@ -27,7 +31,15 @@ public class Appliances {
 		this.lblName = lblName;
 		this.turnTime = turnTime;
 		this.on = on;
+		if(category.equals("전등")){
+			lightOnOff(this.turnTime, this.lblName, this.on);
+		}
 	}
+
+	public ScheduledThreadPoolExecutor getExec() {
+		return exec;
+	}
+	
 
 	public String getCategory() {
 		return category;
@@ -73,6 +85,55 @@ public class Appliances {
 
 	public void setOn(String on) {
 		this.on = on;
+	}
+	
+	private void lightOnOff(String turnTime, String name, String on){
+//		System.out.println("turnTime :" + turnTime);
+//		System.out.println("name :" + name);
+//		System.out.println("on :" + on);
+		int sleepSec = 10;
+
+		//final ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+		exec.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					Calendar cal = Calendar.getInstance();
+					String[] tokens = turnTime.split(":");
+					int tHour = getIntField(tokens, 0);
+					int tMin = getIntField(tokens, 1);
+					System.out.println(tHour + " " + tMin + " : " + cal.get(Calendar.HOUR_OF_DAY) + " " + cal.get(Calendar.MINUTE));
+					System.out.println();
+
+					if ((cal.get(Calendar.HOUR_OF_DAY) == tHour) && (cal.get(Calendar.MINUTE) == tMin)) {
+						if (name.equals("안방")) {
+							lightInstance.setInnerRoom(on.equals("true"));
+						} else if (name.equals("방-1")) {
+							lightInstance.setNum1Room(on.equals("true"));
+						} else if (name.equals("방-2")) {
+							lightInstance.setNum2Room(on.equals("true"));
+						} else if (name.equals("욕실")) {
+							lightInstance.setBathRoom(on.equals("true"));
+						} else if (name.equals("거실")) {
+							lightInstance.setLivingRoom(on.equals("true"));
+						} else if (name.equals("주방")) {
+							lightInstance.setKeachinRoom(on.equals("true"));
+						} else if (name.equals("다용도실")) {
+							lightInstance.setMultiRoom(on.equals("true"));
+						} else if (name.equals("보일러실")) {
+							lightInstance.setBoilRoom(on.equals("true"));
+						} else if (name.equals("현관")) {
+							lightInstance.setDoorRoom(on.equals("true"));
+						}
+
+						throw new RuntimeException();
+					}
+				} catch (Exception ex) {
+					exec.shutdown();
+				}
+
+			}
+		}, 0, sleepSec, TimeUnit.SECONDS);
 	}
 
 	private int getIntField(String[] tokens, int index) {
