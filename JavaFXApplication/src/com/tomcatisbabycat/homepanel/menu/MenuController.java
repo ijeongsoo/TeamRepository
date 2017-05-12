@@ -304,7 +304,7 @@ public class MenuController implements Initializable {
 			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
 			// 현재상태에서 메뉴의 인덱스는 2
 
-			// 수업시간에 했던 화면 오른쪽에서 왼쪽으로 1초동안 이동하는 애니매이션
+			// 수업시간에 했던 화면 오른쪽에서' 왼쪽으로 1초동안 이동하는 애니매이션
 			parent.getChildren().get(0).setOpacity(0);
 			parent.getChildren().get(1).setOpacity(0);
 			//parent.setTranslateX(800);
