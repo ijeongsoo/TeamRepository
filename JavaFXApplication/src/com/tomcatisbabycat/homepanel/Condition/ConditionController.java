@@ -103,6 +103,8 @@ public class ConditionController implements Initializable {
 		handleBackground(new ActionEvent(), btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
 
 		btnTemp.setOnAction((event) -> {
+			
+			if(graphStackPane.getChildren().indexOf(temperature)!=2){
 			handleBackground(event, btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(temperature)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(temperature)).toFront();
@@ -110,9 +112,11 @@ public class ConditionController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+		}
 
 		});
 		btnMoist.setOnAction((event) -> {
+			if(graphStackPane.getChildren().indexOf(moisture)!=2){
 			handleBackground(event, btnMoist, imgBtnMoist, lblBtnMoist, imgBtnTemp, lblBtnTemp, imgBtnDust, lblBtnDust);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(moisture)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(moisture)).toFront();
@@ -120,8 +124,10 @@ public class ConditionController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+			}
 		});
 		btnDust.setOnAction((event) -> {
+			if(graphStackPane.getChildren().indexOf(dust)!=2){
 			handleBackground(event, btnDust, imgBtnDust, lblBtnDust, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(dust)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(dust)).toFront();
@@ -129,6 +135,7 @@ public class ConditionController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+			}
 		});
 
 		btnControlLock.setOnAction(event -> {

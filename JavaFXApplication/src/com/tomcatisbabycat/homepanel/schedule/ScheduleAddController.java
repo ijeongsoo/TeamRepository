@@ -68,8 +68,6 @@ public class ScheduleAddController implements Initializable {
 		comboCategory.valueProperty().addListener((observable, oldValue, newValue) -> {
 			handleComboCategory(newValue);
 		});
-		//System.out.println(timeSpinner.getEditor().getText()); // 시간 가져오는 메소드
-		//System.out.println("?" + timeSpinner.toString());
 	}	
 
 	private void handleComboCategory(String value) {
@@ -126,5 +124,11 @@ public class ScheduleAddController implements Initializable {
 		
 		comboName.setItems(name);
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("scheduleAddController is OUT!!");
+	}
+	
 	
 }

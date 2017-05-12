@@ -8,7 +8,6 @@ package com.tomcatisbabycat.homepanel.consume;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,6 +16,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
@@ -44,8 +44,8 @@ public class ElectricController implements Initializable {
 	SampleStatus ss = SampleStatus.getInstance();
 	
 	static Timeline graphTl = new Timeline();
-	@FXML
-	private BarChart<?, ?> barChartElec;
+	private CustomBarChart barChartElec;
+	
 	@FXML
 	private AnchorPane AnchorElec;
 	
@@ -119,19 +119,55 @@ public class ElectricController implements Initializable {
 		});
 		thread.start();
 		
-		barChartElec.getStylesheets().add(getClass().getResource("electricChart.css").toString());
+		final CategoryAxis barXAxis = new CategoryAxis();
+		barXAxis.setLabel("Bars");
+		final NumberAxis barYAxis = new NumberAxis();
+		barYAxis.setLabel("Value");
+		barChartElec=new CustomBarChart(barXAxis, barYAxis);
+		
+		
+		AnchorElec.getChildren().add(barChartElec);
+		
+		
+		
+		barChartElec.setVerticalZeroLineVisible(false);
+		barChartElec.setHorizontalZeroLineVisible(false);
+		
+		//barChartElec.setTitle("ConsumeOfMonth");
+		barChartElec.getStylesheets().add(getClass().getResource("electricBarChart.css").toString());
 		barChartElec.applyCss();
+
 		XYChart.Series barSeries = new XYChart.Series();
 		barSeries.setName("월별 사용량");
 		barSeries.setData(FXCollections.observableArrayList(
-			  new XYChart.Data("1월", 2000),
-			  new XYChart.Data("2월", 1800),
-			  new XYChart.Data("3월", 1500),
-			  new XYChart.Data("4월", 1800),
-			  new XYChart.Data("5월", 2500)
+			  new XYChart.Data("1월", 20),
+			  new XYChart.Data("2월", 30),
+			  new XYChart.Data("3월", 40),
+			  new XYChart.Data("4월", 50),
+			  new XYChart.Data("5월", 70)
 		));
-		
+		Timeline tl = new Timeline();
+		KeyValue kv1 =new KeyValue(((XYChart.Data)barSeries.getData().get(0)).YValueProperty(), 700.0);
+		KeyValue kv2 =new KeyValue(((XYChart.Data)barSeries.getData().get(1)).YValueProperty(), 300.0);
+		KeyValue kv3 =new KeyValue(((XYChart.Data)barSeries.getData().get(2)).YValueProperty(), 100.0);
+		KeyValue kv4 =new KeyValue(((XYChart.Data)barSeries.getData().get(3)).YValueProperty(), 800.0);
+		KeyValue kv5 =new KeyValue(((XYChart.Data)barSeries.getData().get(4)).YValueProperty(), 500.0);
+		tl.getKeyFrames().add(new KeyFrame(Duration.millis(2500),kv1, kv2, kv3, kv4,kv5));
+		tl.play();
+
+//		(event) -> {
+//				  for (XYChart.Series<String, Number> series : barChartElec.getData()) {
+//					  for (XYChart.Data<String, Number> data : series.getData()) {
+//						  data.setYValue(Math.random() * 100);
+//					  }
+//				  }
+//			  }
 		barChartElec.getData().add(barSeries);
 	}	
+	
+	
+	
+//	
+	
 	
 }

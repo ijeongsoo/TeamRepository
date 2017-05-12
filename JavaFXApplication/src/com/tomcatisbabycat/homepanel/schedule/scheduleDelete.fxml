@@ -9,39 +9,18 @@
 <?import javafx.scene.layout.*?>
 <?import com.tomcatisbabycat.homepanel.schedule.*?>
 
-<AnchorPane prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.schedule.ScheduleAddController">
+<AnchorPane prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.schedule.ScheduleDeleteController">
     <children>
-        <Rectangle id="popupBackground" fx:id="popupBackground" arcHeight="5.0" arcWidth="5.0" fill="#000000b3" height="480.0" stroke="#000000b2" strokeType="INSIDE" width="800.0" />
-        <AnchorPane id="addAnchorPane" fx:id="addAnchorPane" layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0" style="-fx-background-color: white">
+        <Rectangle id="deleteBackground" fx:id="deleteBackground" arcHeight="5.0" arcWidth="5.0" fill="#000000b3" height="480.0" stroke="#000000b2" strokeType="INSIDE" width="800.0" />
+        <AnchorPane id="deleteAnchorPane" fx:id="deleteAnchorPane" layoutX="70.0" layoutY="180.0" prefHeight="150.0" prefWidth="300.0" style="-fx-background-color: white;">
             <children>
-            <ComboBox id="comboCategory" fx:id="comboCategory" layoutX="150.0" layoutY="50.0" prefWidth="150.0" promptText="선택" />
-            <ComboBox id="comboName" fx:id="comboName" layoutX="150.0" layoutY="100.0" prefWidth="150.0" promptText="선택" />
-                <TimeSpinner id="timeSpinner" fx:id="timeSpinner" layoutX="150" layoutY="150.0">
-                </TimeSpinner>
-                <ToggleSwitch id="btnOnOff" layoutX="150.0" layoutY="200.0" />
-            <Button id="btnExit" layoutX="192.0" layoutY="308.0" mnemonicParsing="false" text="취소" />
-            <Button id="btnAdd" fx:id="btnAdd" layoutX="81.0" layoutY="308.0" mnemonicParsing="false" text="추가" />
-            <Label layoutX="65.0" layoutY="50.0" text="종류">
-               <font>
-                  <Font name="Arial" size="19.0" />
-               </font>
-            </Label>
-            <Label layoutX="65.0" layoutY="100.0" text="위치">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="65.0" layoutY="150.0" text="시간">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="65.0" layoutY="200.0" text="상태">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Separator layoutX="29.0" layoutY="274.0" prefHeight="0.0" prefWidth="303.0" />
+                <Button id="btnOk" fx:id="btnOk" layoutX="77.0" layoutY="90.0" mnemonicParsing="false" text="확인" />
+                <Button id="btnCancel" fx:id="btnCancel" layoutX="164.0" layoutY="90.0" mnemonicParsing="false" text="취소" />
+                <Label layoutX="35.0" layoutY="32.0" text="삭제하시겠습니까?">
+                    <font>
+                        <Font size="27.0" />
+                    </font>
+                </Label>
             </children>
         </AnchorPane>
     </children>
