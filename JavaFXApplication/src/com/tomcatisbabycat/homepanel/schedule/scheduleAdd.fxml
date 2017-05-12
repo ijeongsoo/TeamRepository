@@ -18,7 +18,7 @@
             <ComboBox id="comboName" fx:id="comboName" layoutX="150.0" layoutY="100.0" prefWidth="150.0" promptText="선택" />
                 <TimeSpinner id="timeSpinner" fx:id="timeSpinner" layoutX="150" layoutY="150.0">
                 </TimeSpinner>
-                <ToggleSwitch id="btnOnOff" layoutX="150.0" layoutY="200.0" />
+                <ToggleSwitchSmall fx:id="btnOnOff" id="btnOnOff" layoutX="150.0" layoutY="200.0" />
             <Button id="btnExit" layoutX="192.0" layoutY="308.0" mnemonicParsing="false" text="취소" />
             <Button id="btnAdd" fx:id="btnAdd" layoutX="81.0" layoutY="308.0" mnemonicParsing="false" text="추가" />
             <Label layoutX="65.0" layoutY="50.0" text="종류">
@@ -42,6 +42,41 @@
                </font>
             </Label>
             <Separator layoutX="29.0" layoutY="274.0" prefHeight="0.0" prefWidth="303.0" />
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="월">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="80.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="화">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="120.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="수">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="160.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="목">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="200.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="금">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="240.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="토">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
+            <Button contentDisplay="CENTER" graphicTextGap="0.0" layoutX="280.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" style="-fx-background-color: transparent;" text="일">
+               <graphic>
+                  <Circle fill="DODGERBLUE" radius="13.0" stroke="WHITE" strokeType="INSIDE" />
+               </graphic>
+            </Button>
             </children>
         </AnchorPane>
     </children>

@@ -21,11 +21,10 @@ import javafx.util.Duration;
  *
  * @author kang
  */
-public class ToggleSwitch extends Parent{
+public class ToggleSwitchSmall extends Parent{
 	private static BooleanProperty switchedOn = new SimpleBooleanProperty(false);
 	
 	private TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
-	
 	private FillTransition fillAnimation = new FillTransition(Duration.seconds(0.25));
 	
 	private ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
@@ -38,17 +37,17 @@ public class ToggleSwitch extends Parent{
 		return switchedOn.getValue().toString();
 	}
 	
-	public ToggleSwitch(){
-		Rectangle background = new Rectangle(100, 50);
+	public ToggleSwitchSmall(){
+		Rectangle background = new Rectangle(50, 25);
 		
-		background.setArcWidth(50);
-		background.setArcHeight(50);
+		background.setArcWidth(25);
+		background.setArcHeight(25);
 		background.setFill(Color.WHITE);
 		background.setStroke(Color.LIGHTGRAY);
 		
-		Circle trigger = new Circle(25);
-		trigger.setCenterX(25);
-		trigger.setCenterY(25);
+		Circle trigger = new Circle(12.5);
+		trigger.setCenterX(12.5);
+		trigger.setCenterY(12.5);
 		trigger.setFill(Color.WHITE);
 		trigger.setStroke(Color.LIGHTGRAY);
 		
@@ -63,7 +62,7 @@ public class ToggleSwitch extends Parent{
 		
 		switchedOn.addListener(((observable, oldValue, newValue) -> {
 			boolean isOn = newValue.booleanValue();
-			translateAnimation.setToX(isOn ? 100 - 50 : 0);
+			translateAnimation.setToX(isOn ? 50 - 25 : 0);
 			fillAnimation.setFromValue(isOn ? Color.WHITE : Color.LIGHTGREEN);
 			fillAnimation.setToValue(isOn ? Color.LIGHTGREEN : Color.WHITE);
 			
@@ -73,10 +72,6 @@ public class ToggleSwitch extends Parent{
 		setOnMouseClicked(e->{
 			switchedOn.set(!switchedOn.get());
 		});
-	}
-	@Override
-	protected void finalize() throws Throwable {
-		System.out.println("Toggle Switch is Out");
 	}
 	
 }

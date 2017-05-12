@@ -11,19 +11,19 @@
 
 <AnchorPane prefHeight="100.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label id="turnTime" layoutX="62.0" layoutY="24.0" text="12:00">
+        <Label id="turnTime" layoutX="62.0" layoutY="8.0" text="12:00">
             <font>
                 <Font name="Arial" size="30.0" />
             </font>
         </Label>
-        <ToggleSwitch id="btnRun" layoutX="200" layoutY="24.0" />
-        <Label id="name" layoutX="62.0" layoutY="65.0" text="보일러실">
+        <ToggleSwitch id="btnRun" fx:id="btnRun" layoutX="200" layoutY="24.0" />
+        <Label id="name" layoutX="62.0" layoutY="45.0" text="보일러실">
             <font>
                 <Font size="12.0" />
             </font>
         </Label>
         <Label layoutX="152.0" layoutY="42.0" />
-        <Label id="onOff" layoutX="126.0" layoutY="65.0" text="OFF">
+        <Label id="onOff" layoutX="126.0" layoutY="45.0" text="OFF">
             <font>
                 <Font name="Arial" size="12.0" />
             </font>

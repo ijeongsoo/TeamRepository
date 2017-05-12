@@ -59,4 +59,10 @@ public class AList {
 	public void setWm(ObservableList<Appliances> wm) {
 		this.wm = wm;
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("AList is Out");
+	}
+	
 }

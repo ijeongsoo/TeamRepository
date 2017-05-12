@@ -5,9 +5,11 @@
  */
 package com.tomcatisbabycat.homepanel.sampleAppliance;
 
+import com.tomcatisbabycat.homepanel.schedule.ToggleSwitch;
 import java.util.Calendar;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+import javafx.beans.property.BooleanProperty;
 
 /**
  *
@@ -21,6 +23,7 @@ public class Appliances {
 	private String on = "";
 	private ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
 	private Light lightInstance = Light.getInstance();
+	private BooleanProperty switchedOn;
 	
 	public Appliances() {
 
@@ -31,11 +34,10 @@ public class Appliances {
 		this.lblName = lblName;
 		this.turnTime = turnTime;
 		this.on = on;
-		if(category.equals("전등")){
-			lightOnOff(this.turnTime, this.lblName, this.on);
-		}
+//		if(category.equals("전등")){
+//			lightOnOff(this.turnTime, this.lblName, this.on);
+//		}
 	}
-
 	public ScheduledThreadPoolExecutor getExec() {
 		return exec;
 	}
@@ -87,13 +89,10 @@ public class Appliances {
 		this.on = on;
 	}
 	
-	private void lightOnOff(String turnTime, String name, String on){
-//		System.out.println("turnTime :" + turnTime);
-//		System.out.println("name :" + name);
-//		System.out.println("on :" + on);
+	public void lightOnOff(String turnTime, String name, String on){
 		int sleepSec = 10;
-
-		//final ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+		ScheduledThreadPoolExecutor exec = new ScheduledThreadPoolExecutor(1);
+		this.exec = exec;
 		exec.scheduleAtFixedRate(new Runnable() {
 			@Override
 			public void run() {
@@ -107,23 +106,23 @@ public class Appliances {
 
 					if ((cal.get(Calendar.HOUR_OF_DAY) == tHour) && (cal.get(Calendar.MINUTE) == tMin)) {
 						if (name.equals("안방")) {
-							lightInstance.setInnerRoom(on.equals("true"));
+							lightInstance.setInnerRoom(on.equals("ON"));
 						} else if (name.equals("방-1")) {
-							lightInstance.setNum1Room(on.equals("true"));
+							lightInstance.setNum1Room(on.equals("ON"));
 						} else if (name.equals("방-2")) {
-							lightInstance.setNum2Room(on.equals("true"));
+							lightInstance.setNum2Room(on.equals("ON"));
 						} else if (name.equals("욕실")) {
-							lightInstance.setBathRoom(on.equals("true"));
+							lightInstance.setBathRoom(on.equals("ON"));
 						} else if (name.equals("거실")) {
-							lightInstance.setLivingRoom(on.equals("true"));
+							lightInstance.setLivingRoom(on.equals("ON"));
 						} else if (name.equals("주방")) {
-							lightInstance.setKeachinRoom(on.equals("true"));
+							lightInstance.setKeachinRoom(on.equals("ON"));
 						} else if (name.equals("다용도실")) {
-							lightInstance.setMultiRoom(on.equals("true"));
+							lightInstance.setMultiRoom(on.equals("ON"));
 						} else if (name.equals("보일러실")) {
-							lightInstance.setBoilRoom(on.equals("true"));
+							lightInstance.setBoilRoom(on.equals("ON"));
 						} else if (name.equals("현관")) {
-							lightInstance.setDoorRoom(on.equals("true"));
+							lightInstance.setDoorRoom(on.equals("ON"));
 						}
 
 						throw new RuntimeException();
@@ -133,6 +132,12 @@ public class Appliances {
 				}
 
 			}
+
+			@Override
+			protected void finalize() throws Throwable {
+				System.out.println("exec is OUT");
+			}
+			
 		}, 0, sleepSec, TimeUnit.SECONDS);
 	}
 
@@ -144,4 +149,9 @@ public class Appliances {
 		return Integer.parseInt(tokens[index]);
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("Appliances is Out!!!");
+	}
+	
 }

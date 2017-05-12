@@ -85,6 +85,7 @@ public class ScheduleController implements Initializable {
 		if (btnTV.isDefaultButton()) {
 			defaultButton();
 		}
+		//ToggleSwitch ts = new ToggleSwitch();
 		// 처음 씬에 들어갔을때
 		scheduleListview.setItems(aList.getTv());
 
@@ -127,13 +128,26 @@ public class ScheduleController implements Initializable {
 							Label lblTime = (Label) a.lookup("#turnTime");
 							ImageView btnDelImg = (ImageView) a.lookup("#btnDelImg");
 							Label lblOnOff = (Label) a.lookup("#onOff");
+							ToggleSwitch ts = (ToggleSwitch) a.lookup("#btnRun");
 
+							//item.setTs(ts.switchedOnProperty());
 							lblName.setText(item.getLblName());
 							lblTime.setText(item.getTurnTime());
 							lblOnOff.setText(item.getOn());
-							btnDelImg.addEventHandler(MouseEvent.MOUSE_CLICKED, e->{
+							btnDelImg.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 								selectedDelete(item);
-								
+
+							});
+							ts.switchedOnProperty().addListener((observable, oldValue, newValue) -> {
+								if (item.getCategory().equals("전등")) {
+									if (newValue.toString().equals("true")) {
+										System.out.println("newValue = true");
+										item.lightOnOff(item.getTurnTime(), item.getLblName(), item.getOn());
+									} else if (newValue.toString().equals("false")) {
+										System.out.println("newValue = false");
+										item.getExec().shutdown();
+									}
+								}
 							});
 
 							setGraphic(a);
@@ -141,17 +155,84 @@ public class ScheduleController implements Initializable {
 						} catch (IOException ex) {
 							ex.printStackTrace();
 						}
+
 					}
 
 				};
-				
+
 				return listCell;
 			}
+
+			@Override
+			protected void finalize() throws Throwable {
+				System.out.println("Factory Out");
+			}
+
 		});
 
 		btnAdd.setOnAction(e -> {
 			handleAddButton(e);
 		});
+	}
+
+	private void handleAddButton(ActionEvent e) {
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("scheduleAdd.fxml"));
+			scheduleStackPane.getChildren().add(parent);
+
+			Rectangle rec = (Rectangle) parent.lookup("#popupBackground");
+			AnchorPane anp = (AnchorPane) parent.lookup("#addAnchorPane");
+			Button btnExit = (Button) parent.lookup("#btnExit");
+
+			Button btnAdd = (Button) parent.lookup("#btnAdd");
+			ComboBox<String> category = (ComboBox<String>) parent.lookup("#comboCategory");
+			ComboBox<String> name = (ComboBox<String>) parent.lookup("#comboName");
+			ToggleSwitchSmall btnOnOff = (ToggleSwitchSmall) parent.lookup("#btnOnOff");
+			TimeSpinner timeSpinner = (TimeSpinner) parent.lookup("#timeSpinner");
+			//parent.setDisable(true);
+
+			btnExit.setOnAction(event -> {
+				Timeline timeline = new Timeline();
+				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
+				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
+					Timeline timeline2 = new Timeline();
+					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+						scheduleStackPane.getChildren().remove(2);
+					}, keyvalue2);
+					timeline2.getKeyFrames().add(keyFrame2);
+					timeline2.play();
+				}, keyvalue);
+
+				timeline.getKeyFrames().add(keyFrame);
+				timeline.play();
+
+				scheduleStackPane.getChildren().get(2).setDisable(true);
+			});
+			btnAdd.setOnAction(event -> {
+				addListView(category, name, timeSpinner, btnOnOff);
+
+				Timeline timeline = new Timeline();
+				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
+				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
+					Timeline timeline2 = new Timeline();
+					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+						scheduleStackPane.getChildren().remove(2);
+					}, keyvalue2);
+					timeline2.getKeyFrames().add(keyFrame2);
+					timeline2.play();
+				}, keyvalue);
+
+				timeline.getKeyFrames().add(keyFrame);
+				timeline.play();
+
+				scheduleStackPane.getChildren().get(2).setDisable(true);
+
+			});
+		} catch (IOException ex) {
+
+		}
 	}
 
 	private void selectedDelete(Appliances item) {
@@ -183,6 +264,7 @@ public class ScheduleController implements Initializable {
 
 				timeline.getKeyFrames().add(keyFrame);
 				timeline.play();
+				scheduleStackPane.getChildren().get(2).setDisable(true);
 			});
 			btnOk.setOnAction(event -> {
 				scheduleListview.getItems().remove(item);
@@ -202,6 +284,7 @@ public class ScheduleController implements Initializable {
 
 				timeline.getKeyFrames().add(keyFrame);
 				timeline.play();
+				scheduleStackPane.getChildren().get(2).setDisable(true);
 			});
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -297,91 +380,43 @@ public class ScheduleController implements Initializable {
 		}
 	}
 
-	private void handleAddButton(ActionEvent e) {
-		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("scheduleAdd.fxml"));
-			scheduleStackPane.getChildren().add(parent);
-
-			Rectangle rec = (Rectangle) parent.lookup("#popupBackground");
-			AnchorPane anp = (AnchorPane) parent.lookup("#addAnchorPane");
-			Button btnExit = (Button) parent.lookup("#btnExit");
-
-			Button btnAdd = (Button) parent.lookup("#btnAdd");
-			ComboBox<String> category = (ComboBox<String>) parent.lookup("#comboCategory");
-			ComboBox<String> name = (ComboBox<String>) parent.lookup("#comboName");
-			ToggleSwitch btnOnOff = (ToggleSwitch) parent.lookup("#btnOnOff");
-			TimeSpinner timeSpinner = (TimeSpinner) parent.lookup("#timeSpinner");
-
-			btnExit.setOnAction(event -> {
-				Timeline timeline = new Timeline();
-				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
-				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
-					Timeline timeline2 = new Timeline();
-					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
-					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
-						scheduleStackPane.getChildren().remove(2);
-					}, keyvalue2);
-					timeline2.getKeyFrames().add(keyFrame2);
-					timeline2.play();
-				}, keyvalue);
-
-				timeline.getKeyFrames().add(keyFrame);
-				timeline.play();
-			});
-			btnAdd.setOnAction(event -> {
-				addListView(category, name, timeSpinner, btnOnOff);
-
-				Timeline timeline = new Timeline();
-				KeyValue keyvalue = new KeyValue(anp.opacityProperty(), 0);
-				KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
-					Timeline timeline2 = new Timeline();
-					KeyValue keyvalue2 = new KeyValue(rec.opacityProperty(), 0);
-					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
-						scheduleStackPane.getChildren().remove(2);
-					}, keyvalue2);
-					timeline2.getKeyFrames().add(keyFrame2);
-					timeline2.play();
-				}, keyvalue);
-
-				timeline.getKeyFrames().add(keyFrame);
-				timeline.play();
-			});
-		} catch (IOException ex) {
-
-		}
-	}
-
-	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitch btnOnOff) {
+	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitchSmall btnOnOff) {
 		System.out.println("addListView\n");
 		//System.out.println(scheduleListview.getItems().size());
-		if (category.getSelectionModel().getSelectedItem().toString().equals("전등")) {
-			aList.getLight().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
-				  name.getSelectionModel().getSelectedItem().toString(),
-				  timeSpinner.getEditor().getText(),
-				  btnOnOff.buttonString()));
-			
-		} else if (category.getSelectionModel().getSelectedItem().toString().equals("TV")) {
-
-			aList.getTv().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
-				  name.getSelectionModel().getSelectedItem().toString(),
+		if (category.getSelectionModel().getSelectedItem().equals("전등")) {
+			aList.getLight().add(new Appliances(category.getSelectionModel().getSelectedItem(),
+				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
 
-		} else if (category.getSelectionModel().getSelectedItem().toString().equals("에어컨")) {
+		} else if (category.getSelectionModel().getSelectedItem().equals("TV")) {
 
-			aList.getAc().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
-				  name.getSelectionModel().getSelectedItem().toString(),
+			aList.getTv().add(new Appliances(category.getSelectionModel().getSelectedItem(),
+				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
 
-		} else if (category.getSelectionModel().getSelectedItem().toString().equals("세탁기")) {
+		} else if (category.getSelectionModel().getSelectedItem().equals("에어컨")) {
 
-			aList.getWm().add(new Appliances(category.getSelectionModel().getSelectedItem().toString(),
-				  name.getSelectionModel().getSelectedItem().toString(),
+			aList.getAc().add(new Appliances(category.getSelectionModel().getSelectedItem(),
+				  name.getSelectionModel().getSelectedItem(),
+				  timeSpinner.getEditor().getText(),
+				  btnOnOff.buttonString()));
+
+		} else if (category.getSelectionModel().getSelectedItem().equals("세탁기")) {
+
+			aList.getWm().add(new Appliances(category.getSelectionModel().getSelectedItem(),
+				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
 				  btnOnOff.buttonString()));
 
 		}
 
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("ScheduleController is OUT!!!!");
+	}
+
 }

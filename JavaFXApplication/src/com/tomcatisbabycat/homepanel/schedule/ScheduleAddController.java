@@ -124,5 +124,11 @@ public class ScheduleAddController implements Initializable {
 		
 		comboName.setItems(name);
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("scheduleAddController is OUT!!");
+	}
+	
 	
 }
