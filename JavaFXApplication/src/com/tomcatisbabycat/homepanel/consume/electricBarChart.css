@@ -35,7 +35,13 @@
 }*/
 
 .chart-plot-background{
-  -fx-background-color: transparent;
+  -fx-background-color: white;
+  
+}
+.chart-vertical-grid-lines{
+  -fx-stroke-width: 63;
+  -fx-stroke:F4F4F4;
+  
 }
 
 .chart-bar{

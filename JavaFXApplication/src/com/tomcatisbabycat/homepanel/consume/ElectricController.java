@@ -6,10 +6,8 @@
 package com.tomcatisbabycat.homepanel.consume;
 
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
-import java.awt.Color;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -17,18 +15,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
 /**
@@ -52,10 +44,8 @@ public class ElectricController implements Initializable {
 	SampleStatus ss = SampleStatus.getInstance();
 	
 	static Timeline graphTl = new Timeline();
-	@FXML
-	private BarChart<String, Number> barChartElec;
-	CategoryAxis barXAxis;
-	NumberAxis barYAxis;
+	private CustomBarChart barChartElec;
+	
 	@FXML
 	private AnchorPane AnchorElec;
 	
@@ -129,18 +119,16 @@ public class ElectricController implements Initializable {
 		});
 		thread.start();
 		
-		barXAxis = (CategoryAxis) barChartElec.getXAxis();
-		barYAxis = (NumberAxis) barChartElec.getYAxis();
-		barYAxis.setUpperBound(1000);
-		barYAxis.setLowerBound(0);
-		barYAxis.setAutoRanging(false);
-		barYAxis.setAnimated(false);
-		barYAxis.setTickUnit(200);
-		barYAxis.setTickMarkVisible(false);
-		barYAxis.setTickLabelsVisible(false);
-		barYAxis.setOpacity(0);
-		barXAxis.setTickMarkVisible(false);
-		barXAxis.setOpacity(0);
+		final CategoryAxis barXAxis = new CategoryAxis();
+		barXAxis.setLabel("Bars");
+		final NumberAxis barYAxis = new NumberAxis();
+		barYAxis.setLabel("Value");
+		barChartElec=new CustomBarChart(barXAxis, barYAxis);
+		
+		
+		AnchorElec.getChildren().add(barChartElec);
+		
+		
 		
 		barChartElec.setVerticalZeroLineVisible(false);
 		barChartElec.setHorizontalZeroLineVisible(false);
@@ -152,11 +140,11 @@ public class ElectricController implements Initializable {
 		XYChart.Series barSeries = new XYChart.Series();
 		barSeries.setName("월별 사용량");
 		barSeries.setData(FXCollections.observableArrayList(
-			  new XYChart.Data("1월", 0),
-			  new XYChart.Data("2월", 0),
-			  new XYChart.Data("3월", 0),
-			  new XYChart.Data("4월", 0),
-			  new XYChart.Data("5월", 0)
+			  new XYChart.Data("1월", 20),
+			  new XYChart.Data("2월", 30),
+			  new XYChart.Data("3월", 40),
+			  new XYChart.Data("4월", 50),
+			  new XYChart.Data("5월", 70)
 		));
 		Timeline tl = new Timeline();
 		KeyValue kv1 =new KeyValue(((XYChart.Data)barSeries.getData().get(0)).YValueProperty(), 700.0);
