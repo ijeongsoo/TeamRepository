@@ -24,6 +24,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Line;
@@ -131,7 +132,7 @@ public class LockController implements Initializable {
 		animationTL.setCycleCount(Animation.INDEFINITE);
 		animationTL.play();
 
-		PauseTransition delay = new PauseTransition(Duration.seconds(10));
+		PauseTransition delay = new PauseTransition(Duration.seconds(10000));
 		PauseTransition delay2 = new PauseTransition(Duration.seconds(5));
 		delay2.setOnFinished((e2) -> {
 			MainController.mainThreadInterrupt();
@@ -213,6 +214,8 @@ public class LockController implements Initializable {
 					LockController.lockRootPane.getChildren().get(LockController.lockRootPane.getChildren().indexOf(lock)).toBack();
 				}
 			}
+
+			
 		});
 
 	}

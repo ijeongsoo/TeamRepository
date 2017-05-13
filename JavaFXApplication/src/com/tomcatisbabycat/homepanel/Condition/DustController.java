@@ -62,7 +62,7 @@ public class DustController implements Initializable {
 		return time;
 	}
 
-	private double getDust() {
+	private int getDust() {
 		return ss.getDust();
 
 	}

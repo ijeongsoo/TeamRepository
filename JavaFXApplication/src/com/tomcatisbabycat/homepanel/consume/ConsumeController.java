@@ -110,13 +110,17 @@ public class ConsumeController implements Initializable {
 			ex.printStackTrace();
 		}
 		
+		
+		
 		graphStackPane.getChildren().add(gas);
 		graphStackPane.getChildren().add(water);
 		graphStackPane.getChildren().add(electric);
 		
+		
 		handleBackground(new ActionEvent(), btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
 
 		btnTemp.setOnAction((event) -> {
+			if(graphStackPane.getChildren().indexOf(electric)!=2){
 			handleBackground(event, btnTemp, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist, imgBtnDust, lblBtnDust);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(electric)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(electric)).toFront();
@@ -124,9 +128,11 @@ public class ConsumeController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+			}
 
 		});
 		btnMoist.setOnAction((event) -> {
+			if(graphStackPane.getChildren().indexOf(water)!=2){
 			handleBackground(event, btnMoist, imgBtnMoist, lblBtnMoist, imgBtnTemp, lblBtnTemp, imgBtnDust, lblBtnDust);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(water)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(water)).toFront();
@@ -134,8 +140,10 @@ public class ConsumeController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+			}
 		});
 		btnDust.setOnAction((event) -> {
+			if(graphStackPane.getChildren().indexOf(gas)!=2){
 			handleBackground(event, btnDust, imgBtnDust, lblBtnDust, imgBtnTemp, lblBtnTemp, imgBtnMoist, lblBtnMoist);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(gas)).setOpacity(0);
 			graphStackPane.getChildren().get(graphStackPane.getChildren().indexOf(gas)).toFront();
@@ -143,6 +151,7 @@ public class ConsumeController implements Initializable {
 			KeyFrame kf = new KeyFrame(Duration.millis(200), kv);
 			Timeline timeline = new Timeline(kf);
 			timeline.play();
+			}
 		});
 
 		btnControlLock.setOnAction(event -> {
@@ -154,6 +163,9 @@ public class ConsumeController implements Initializable {
 		btnControlBack.setOnAction(event->{
 			handleBtnControlBack(event);
 		});
+		
+		
+		
 	}
 	private void handleBtnControlBack(ActionEvent event){
 		try {
