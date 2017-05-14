@@ -112,7 +112,7 @@
                         <Font name="Arial Bold" size="16.0" />
                     </font>
                 </Label>
-                <Label layoutX="40.0" layoutY="27.0" text="MENU">
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="MENU">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
                     </font>
