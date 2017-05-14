@@ -105,10 +105,8 @@ public class MainController implements Initializable {
 	Rotate secondRotation;
 	Calendar calendar;
 
-	
 	private NoticeList noticeList = NoticeList.getInstance();
-	
-	
+
 	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
 	Image hillsImage = new Image(IconSelector.class.getResource("hills.png").toString());
 	Image fieldsImage = new Image(IconSelector.class.getResource("fields.png").toString());
@@ -265,20 +263,21 @@ public class MainController implements Initializable {
 		} else {
 			imgMainTemperature.setImage(hotImage);
 		}
-		
-		String todayDate = yearstr+"-"+monthstr+"-"+datestr;
-		int cnt=0;
-		for(int i=0; i<noticeList.getMemoList().size(); i++){
-			if(noticeList.getMemoList().get(i).getDate().equals(todayDate)){
-				cnt+=1;
-				if(cnt==1){
+
+		String todayDate = yearstr + "-" + monthstr + "-" + datestr;
+		int cnt = 0;
+		for (int i = 0; i < noticeList.getMemoList().size(); i++) {
+			if (noticeList.getMemoList().get(i).getDate().equals(todayDate)) {
+				cnt += 1;
+				if (cnt == 1) {
 					lblNotice1.setText(noticeList.getMemoList().get(i).getContents());
-				}if(cnt==2){
+				}
+				if (cnt == 2) {
 					lblNotice2.setText(noticeList.getMemoList().get(i).getContents());
 				}
 			}
 		}
-		
+
 	}
 
 	@Override
@@ -286,7 +285,7 @@ public class MainController implements Initializable {
 		System.gc();
 		mainBtnLock.setFocusTraversable(false);
 		mainBtnMenu.setFocusTraversable(false);
-		
+
 		hourRotation = new Rotate();
 		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
 		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
@@ -303,20 +302,19 @@ public class MainController implements Initializable {
 		secondHand.getTransforms().add(secondRotation);
 		animation();
 
-
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();
-		
+
 		mainBtnMenu.setFocusTraversable(false);
 		mainBtnLock.setFocusTraversable(false);
 
 		mainBtnMenu.setOnAction((event) -> {
 			handleBtnMenu(event);
-			
+
 		});
 		mainBtnLock.setOnAction((event) -> {
 			handleBtnLock(event);
-			
+
 		});
 
 		mainImage.setOnMouseClicked((event) -> {
@@ -328,7 +326,22 @@ public class MainController implements Initializable {
 				popupImage.setImage(new Image(ImageResourceFinder.class.getResource(ImageResourceFinder.getImageFileName()).toString()));
 				Button btnExit = (Button) parent.lookup("#btnExit");
 				Rectangle recPopupBackground = (Rectangle) parent.lookup("#recPopupBackground");
+				
+				Timeline timeline1 = new Timeline();
+				recPopupBackground.setOpacity(0);
+				popupImage.setOpacity(0);
+				KeyValue keyvalue1 = new KeyValue(recPopupBackground.opacityProperty(), 0.7);
+				KeyFrame keyFrame1 = new KeyFrame(Duration.millis(300), (event1) -> {
+					Timeline timeline2 = new Timeline();
+					KeyValue keyvalue2 = new KeyValue(popupImage.opacityProperty(), 1);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), keyvalue2);
+					timeline2.getKeyFrames().add(keyFrame2);
+					timeline2.play();
+				}, keyvalue1);
 
+				timeline1.getKeyFrames().add(keyFrame1);
+				timeline1.play();
+				
 				btnExit.setOnAction(e -> {
 					Timeline timeline = new Timeline();
 					KeyValue kv = new KeyValue(btnExit.opacityProperty(), 0);
@@ -338,7 +351,7 @@ public class MainController implements Initializable {
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
 						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), (e2) -> {
 							stackPaneMain.getChildren().remove(2);
-							
+
 						}, keyvalue2);
 						timeline2.getKeyFrames().add(keyFrame2);
 						timeline2.play();
@@ -355,12 +368,12 @@ public class MainController implements Initializable {
 		WeatherThread weatherThread = new WeatherThread(mainThreadGroup, "weatherThread", mainWeatherImage, mainWeatherImageBack, mainWeatherImageBack2);
 		weatherThread.setDaemon(true);
 		weatherThread.start();
-		
-		Thread thread = new Thread(mainThreadGroup, "ClockAndEnvThread"){
+
+		Thread thread = new Thread(mainThreadGroup, "ClockAndEnvThread") {
 			@Override
 			public void run() {
-				while(true){
-					if(Thread.interrupted()){
+				while (true) {
+					if (Thread.interrupted()) {
 						break;
 					}
 					try {
@@ -372,15 +385,15 @@ public class MainController implements Initializable {
 						animation();
 					});
 				}
-				
+
 			}
 		};
-		
-		Thread thread2 = new Thread(mainThreadGroup, "lionAnimation"){
+
+		Thread thread2 = new Thread(mainThreadGroup, "lionAnimation") {
 			@Override
 			public void run() {
-				while(true){
-					if(Thread.interrupted()){
+				while (true) {
+					if (Thread.interrupted()) {
 						break;
 					}
 					try {
@@ -430,11 +443,11 @@ public class MainController implements Initializable {
 				mainThreadInterrupt();
 				LockController.lockRootPane.getChildren().remove(1);
 			}, keyValueStackPaneMenu);
-			
+
 			Timeline timeline = new Timeline();
 			timeline.getKeyFrames().addAll(keyFrameStackPaneMenu);
 			timeline.play();
-			
+
 		} catch (IOException ex) {
 			ex.printStackTrace();
 		}
@@ -450,8 +463,7 @@ public class MainController implements Initializable {
 		mainThreadGroup.interrupt();
 //		animationTL.stop();
 //		lionAnimationTL.stop();
-		
-		
+
 	}
 
 	private void lionAnimation() {
@@ -461,13 +473,10 @@ public class MainController implements Initializable {
 			lionImagenum = 1;
 		}
 	}
-	
-	
 
 	@Override
 	protected void finalize() throws Throwable {
 		System.out.println("끝");
 	}
-	
-	
+
 }

@@ -38,20 +38,7 @@ public class MainImagePopupController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		btnExit.setFocusTraversable(false);
 		
-		Timeline timeline = new Timeline();
-		recPopupBackground.setOpacity(0);
-		imgPopup.setOpacity(0);
-		KeyValue keyvalue = new KeyValue(recPopupBackground.opacityProperty(), 0.7);
-		KeyFrame keyFrame = new KeyFrame(Duration.millis(300), (event) -> {
-			Timeline timeline2 = new Timeline();
-			KeyValue keyvalue2 = new KeyValue(imgPopup.opacityProperty(), 1);
-			KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), keyvalue2);
-			timeline2.getKeyFrames().add(keyFrame2);
-			timeline2.play();
-		}, keyvalue);
-
-		timeline.getKeyFrames().add(keyFrame);
-		timeline.play();
+		
 	}
 
 	
