@@ -56,6 +56,9 @@ public class LockController implements Initializable {
 	Rotate minuateRotation;
 	Rotate secondRotation;
 	Calendar calendar;
+	
+	//hyun added
+	public static Calendar cal;
 
 	/**
 	 * Initializes the controller class.
@@ -100,7 +103,9 @@ public class LockController implements Initializable {
 		hourRotation.setAngle(hour * 30 + minuate * 0.5);
 
 		lblMainClock.setText(ampm + " " + hourstr + ":" + minuatestr + ":" + secondstr);
-
+		
+		//hyun added
+		cal = calendar;
 	}
 
 	@Override

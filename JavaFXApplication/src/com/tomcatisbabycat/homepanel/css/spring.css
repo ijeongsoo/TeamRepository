@@ -110,3 +110,6 @@ and open the template in the editor.
     -fx-padding: 0;
     -fx-font-size: 0;
 }
+.buttonWhite{
+    -fx-background-color: white;
+}

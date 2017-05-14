@@ -65,9 +65,15 @@ public class ScheduleController implements Initializable {
 	private Button btnAdd;
 
 	private AList aList = AList.getInstance();
+	@FXML
+	private Rectangle menuBack;
+	@FXML
+	private Label lblHide;
 
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		lblHide.toFront();
+
 		btnControlLock.setOnAction(event -> {
 			handleBtnControlLock(event);
 		});
@@ -85,25 +91,51 @@ public class ScheduleController implements Initializable {
 		scheduleListview.refresh();
 		scheduleListview.setItems(aList.getTv());
 
+		if (scheduleListview.getItems().size() == 0) {
+			lblHide.setVisible(true);
+		} else {
+			lblHide.setVisible(false);
+		}
+
 		btnTV.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.refresh();
 			scheduleListview.setItems(aList.getTv());
+			if (scheduleListview.getItems().size() == 0) {
+				lblHide.setVisible(true);
+			} else {
+				lblHide.setVisible(false);
+			}
 		});
 		btnAirCondition.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.refresh();
 			scheduleListview.setItems(aList.getAc());
+			if (scheduleListview.getItems().size() == 0) {
+				lblHide.setVisible(true);
+			} else {
+				lblHide.setVisible(false);
+			}
 		});
 		btnWashingMachine.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.refresh();
 			scheduleListview.setItems(aList.getWm());
+			if (scheduleListview.getItems().size() == 0) {
+				lblHide.setVisible(true);
+			} else {
+				lblHide.setVisible(false);
+			}
 		});
 		btnLight.setOnAction(event -> {
 			handleBackground(event);
 			scheduleListview.refresh();
 			scheduleListview.setItems(aList.getLight());
+			if (scheduleListview.getItems().size() == 0) {
+				lblHide.setVisible(true);
+			} else {
+				lblHide.setVisible(false);
+			}
 		});
 
 		btnAdd.setOnAction(e -> {
@@ -128,7 +160,7 @@ public class ScheduleController implements Initializable {
 							ImageView btnDelImg = (ImageView) a.lookup("#btnDelImg");
 							Label lblOnOff = (Label) a.lookup("#onOff");
 							ToggleSwitch toggleSwitch = (ToggleSwitch) a.lookup("#toggleSwitch");
-							
+
 							Label lblMon = (Label) a.lookup("#lblMon");
 							Label lblTue = (Label) a.lookup("#lblTue");
 							Label lblWen = (Label) a.lookup("#lblWen");
@@ -136,7 +168,7 @@ public class ScheduleController implements Initializable {
 							Label lblFri = (Label) a.lookup("#lblFri");
 							Label lblSat = (Label) a.lookup("#lblSat");
 							Label lblSun = (Label) a.lookup("#lblSun");
-							
+
 							lblMon.setText(item.getMon());
 							lblTue.setText(item.getTue());
 							lblWen.setText(item.getWen());
@@ -144,7 +176,7 @@ public class ScheduleController implements Initializable {
 							lblFri.setText(item.getFri());
 							lblSat.setText(item.getSat());
 							lblSun.setText(item.getSun());
-							
+
 							Button mon = (Button) a.lookup("#btnMon");
 							Button tue = (Button) a.lookup("#btnTue");
 							Button wen = (Button) a.lookup("#btnWen");
@@ -156,38 +188,38 @@ public class ScheduleController implements Initializable {
 							lblName.setText(item.getLblName());
 							lblTime.setText(item.getTurnTime());
 							lblOnOff.setText(item.getOn());
-							
-							if(lblMon.getText().equals("true")){
+
+							if (lblMon.getText().equals("true")) {
 								//System.out.println("1. " + lblMon.getText());
 								mon.getStyleClass().remove("dayButton");
 								mon.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblTue.getText().equals("true")){
+							if (lblTue.getText().equals("true")) {
 								//System.out.println("2. " + lblWen.getText());
 								tue.getStyleClass().remove("dayButton");
 								tue.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblWen.getText().equals("true")){
+							if (lblWen.getText().equals("true")) {
 								//System.out.println("3. " + lblTue.getText());
 								wen.getStyleClass().remove("dayButton");
 								wen.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblThu.getText().equals("true")){
+							if (lblThu.getText().equals("true")) {
 								//System.out.println("4. " + lblThu.getText());
 								thu.getStyleClass().remove("dayButton");
 								thu.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblFri.getText().equals("true")){
+							if (lblFri.getText().equals("true")) {
 								//System.out.println("5. " + lblFri.getText());
 								fri.getStyleClass().remove("dayButton");
 								fri.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblSat.getText().equals("true")){
+							if (lblSat.getText().equals("true")) {
 								//System.out.println("6. " + lblSat.getText());
 								sat.getStyleClass().remove("dayButton");
 								sat.getStyleClass().add("dayButtonClicked");
 							}
-							if(lblSun.getText().equals("true")){
+							if (lblSun.getText().equals("true")) {
 								//System.out.println("7. " + lblSun.getText());
 								sun.getStyleClass().remove("dayButton");
 								sun.getStyleClass().add("dayButtonClicked");
@@ -196,24 +228,22 @@ public class ScheduleController implements Initializable {
 							btnDelImg.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 								selectedDelete(item);
 							});
-							
-							if(item.getExec() != null){
-								if(item.getExec().isShutdown() != true){
-									toggleSwitch.switchedOnProperty().set(!toggleSwitch.switchedOnProperty().get());
-									toggleSwitch.animate();
-								}
+							if (item.getToggle() != null) {
+								toggleSwitch.switchedOnProperty().set(item.getToggle().switchedOnProperty().get());
+								toggleSwitch.animate();
 							}
-							
 							toggleSwitch.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> {
 								if (toggleSwitch.switchedOnProperty().get() == false) {
-									//System.out.println("false :  " + toggleSwitch.switchedOnProperty().get());
-									item.lightOnOff(item.getTurnTime(), item.getLblName(), item.getOn());
+									item.dayChecker();
+									item.setToggle(toggleSwitch);
+
 								} else if (toggleSwitch.switchedOnProperty().get() == true) {
-									//System.out.println("true :  " + toggleSwitch.switchedOnProperty().get());
-									if(item.getExec() != null){
+									item.setToggle(toggleSwitch);
+									if (item.getExecDay() != null) {
+										item.getExecDay().shutdown();
+									}
+									if (item.getExec() != null) {
 										item.getExec().shutdown();
-										//item.getExec().purge();
-										System.out.println("getExec status" + item.getExec().isShutdown());
 									}
 								}
 							});
@@ -259,7 +289,7 @@ public class ScheduleController implements Initializable {
 			ComboBox<String> name = (ComboBox<String>) parent.lookup("#comboName");
 			ToggleSwitchSmall btnOnOff = (ToggleSwitchSmall) parent.lookup("#btnOnOff");
 			TimeSpinner timeSpinner = (TimeSpinner) parent.lookup("#timeSpinner");
-			
+
 			Label lblMon = (Label) parent.lookup("#lblMon");
 			Label lblTue = (Label) parent.lookup("#lblTue");
 			Label lblWen = (Label) parent.lookup("#lblWen");
@@ -267,10 +297,8 @@ public class ScheduleController implements Initializable {
 			Label lblFri = (Label) parent.lookup("#lblFri");
 			Label lblSat = (Label) parent.lookup("#lblSat");
 			Label lblSun = (Label) parent.lookup("#lblSun");
-			
-			
+
 			System.out.println("1. lblMon : " + lblMon.getText());
-			
 
 			btnExit.setOnAction(event -> {
 				Timeline timeline = new Timeline();
@@ -310,6 +338,11 @@ public class ScheduleController implements Initializable {
 				timeline.play();
 
 				scheduleStackPane.getChildren().get(2).setDisable(true);
+				if (scheduleListview.getItems().size() == 0) {
+					lblHide.setVisible(true);
+				} else {
+					lblHide.setVisible(false);
+				}
 
 			});
 		} catch (IOException ex) {
@@ -347,6 +380,9 @@ public class ScheduleController implements Initializable {
 				scheduleListview.getItems().remove(item);
 				if (item.getExec() != null) {
 					item.getExec().shutdown();
+				}
+				if (item.getExecDay() != null) {
+					item.getExecDay().shutdown();
 				}
 				scheduleListview.refresh();
 
@@ -446,41 +482,41 @@ public class ScheduleController implements Initializable {
 		}
 	}
 
-	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitchSmall btnOnOff
-		  , String a, String b, String c, String d, String e, String f, String g) {
-		System.out.println("category : " +category.getSelectionModel().getSelectedItem());
-		System.out.println("name : " +name.getSelectionModel().getSelectedItem());
-		if (category.getSelectionModel().getSelectedItem() == null){
+	private void addListView(ComboBox<String> category, ComboBox<String> name, TimeSpinner timeSpinner, ToggleSwitchSmall btnOnOff,
+		  String a, String b, String c, String d, String e, String f, String g) {
+		System.out.println("category : " + category.getSelectionModel().getSelectedItem());
+		System.out.println("name : " + name.getSelectionModel().getSelectedItem());
+		if (category.getSelectionModel().getSelectedItem() == null) {
 			System.out.println("category");
-		} else if (name.getSelectionModel().getSelectedItem() == null){
+		} else if (name.getSelectionModel().getSelectedItem() == null) {
 			System.out.println("name");
 		} else if (category.getSelectionModel().getSelectedItem().equals("전등")) {
 			System.out.println("전등");
 			aList.getLight().add(new Appliances(category.getSelectionModel().getSelectedItem(),
 				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
-				  btnOnOff.buttonString(), a , b, c, d, e, f, g));
+				  btnOnOff.buttonString(), a, b, c, d, e, f, g));
 
 		} else if (category.getSelectionModel().getSelectedItem().equals("TV")) {
 			System.out.println("TV");
 			aList.getTv().add(new Appliances(category.getSelectionModel().getSelectedItem(),
 				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
-				  btnOnOff.buttonString(), a , b, c, d, e, f, g));
+				  btnOnOff.buttonString(), a, b, c, d, e, f, g));
 
 		} else if (category.getSelectionModel().getSelectedItem().equals("에어컨")) {
 			System.out.println("에어컨");
 			aList.getAc().add(new Appliances(category.getSelectionModel().getSelectedItem(),
 				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
-				  btnOnOff.buttonString(), a , b, c, d, e, f, g));
+				  btnOnOff.buttonString(), a, b, c, d, e, f, g));
 
 		} else if (category.getSelectionModel().getSelectedItem().equals("세탁기")) {
 			System.out.println("세탁기");
 			aList.getWm().add(new Appliances(category.getSelectionModel().getSelectedItem(),
 				  name.getSelectionModel().getSelectedItem(),
 				  timeSpinner.getEditor().getText(),
-				  btnOnOff.buttonString() ,a , b, c, d, e, f, g));
+				  btnOnOff.buttonString(), a, b, c, d, e, f, g));
 
 		}
 
