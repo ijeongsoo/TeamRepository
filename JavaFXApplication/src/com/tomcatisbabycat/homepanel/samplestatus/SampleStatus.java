@@ -10,13 +10,18 @@ package com.tomcatisbabycat.homepanel.samplestatus;
  * @author ijeongsu
  */
 public class SampleStatus {
-	  public  double temperature= 38.5;
-	  public  int moisture=80;
-	  public  int dust=30;
-	  public  String weather="cloudy";
-	  public double wishTemperature=21;
-	  public int wishMoisture=70;
-	  public int wishDust=10;
+	  private  double temperature= 38.5;
+	  private  int moisture=80;
+	  private  int dust=30;
+	  private  String weather="cloudy";
+	  private double wishTemperature=21;
+	  private int wishMoisture=70;
+	  private int wishDust=10;
+	  
+	  private double elecUsed;
+	  private double waterUsed;
+	  private double gasUsed;
+	  
 	  
 	  private static SampleStatus samplestatus=new SampleStatus();
 	  
@@ -88,6 +93,32 @@ public class SampleStatus {
 	  public void setWeather(String weather) {
 			this.weather = weather;
 	  }
+
+	public double getElecUsed() {
+		return elecUsed;
+	}
+
+	public void setElecUsed(double elecUsed) {
+		this.elecUsed = elecUsed;
+	}
+
+	public double getWaterUsed() {
+		return waterUsed;
+	}
+
+	public void setWaterUsed(double waterUsed) {
+		this.waterUsed = waterUsed;
+	}
+
+	public double getGasUsed() {
+		return gasUsed;
+	}
+
+	public void setGasUsed(double gasUsed) {
+		this.gasUsed = gasUsed;
+	}
+	  
+	  
 	  
 	  
 }

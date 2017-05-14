@@ -35,7 +35,7 @@
 }*/
 
 .chart-plot-background{
-  -fx-background-color: white;
+  -fx-background-color: transparent;
   
 }
 .chart-vertical-grid-lines{
@@ -44,7 +44,9 @@
   
 }
 
+
+
 .chart-bar{
-   -fx-background-color: #FF0066
+   -fx-background-color: #FF0066;
 }
 

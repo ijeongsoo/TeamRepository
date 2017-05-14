@@ -9,11 +9,11 @@ and open the template in the editor.
 */
 
 .mainBackground{
-    -fx-background-color: #01C2F2; /* 푸른색 처음에 우리가 정한 푸른색 */
+    -fx-background-color: #FFCBC1; /* 푸른색 처음에 우리가 정한 푸른색 */
 }
 
 .specificBackground{
-    -fx-background-color: #85D03C; /* 푸른색 짝꿍 녹색*/
+    -fx-background-color: #F57D63; /* 푸른색 짝꿍 녹색*/
 }
 .controlButton{
     -fx-background-color: white; /* 상단의 뒤로가기, 잠금, 홈 버튼의 배경색을 흰색으로 처리 하기위해 사용 */
@@ -90,4 +90,26 @@ and open the template in the editor.
     -fx-body-color: #85D03C;
 
     -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+}
+.dayButton{
+    -fx-background-color: white, white;
+    -fx-background-radius: 16.4, 15;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: lightgray;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+}.dayButtonClicked{
+    -fx-background-color: white, lightgreen;
+    -fx-background-radius: 16.4, 15;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: lightgray;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+}
+.buttonWhite{
+    -fx-background-color: white;
 }
