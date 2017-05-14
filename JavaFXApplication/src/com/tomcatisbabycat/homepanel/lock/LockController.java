@@ -146,7 +146,7 @@ public class LockController implements Initializable {
 		animationTL.setCycleCount(Animation.INDEFINITE);
 		animationTL.play();
 
-		PauseTransition delay = new PauseTransition(Duration.seconds(5));
+		PauseTransition delay = new PauseTransition(Duration.seconds(30));
 		PauseTransition delay2 = new PauseTransition(Duration.seconds(5));
 		delay2.setOnFinished((e2) -> {
 			MainController.mainThreadInterrupt();

@@ -136,6 +136,7 @@ public class MoistureController implements Initializable {
 			System.out.println("수분 스레드 종료");
 
 		});
+		thread.setDaemon(true);
 		thread.start();
 
 		currentTempKnob.setControl(false);

@@ -145,6 +145,7 @@ public class ElectricController implements Initializable {
 			System.out.println("온도 스레드 종료");
 
 		});
+		thread.setDaemon(true);
 		thread.start();
 
 		final CategoryAxis barXAxis = new CategoryAxis();

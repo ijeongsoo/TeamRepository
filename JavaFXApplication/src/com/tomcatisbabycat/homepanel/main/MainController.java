@@ -302,20 +302,7 @@ public class MainController implements Initializable {
 		secondRotation.pivotYProperty().bind(secondHand.startYProperty());
 		secondHand.getTransforms().add(secondRotation);
 		animation();
-//
-//		
-//		animationTL.getKeyFrames().add(new KeyFrame(Duration.millis(1000), (event) -> {
-//			animation();
-//		}));
-//		animationTL.setCycleCount(Animation.INDEFINITE);
-//		animationTL.play();
-//
-//		
-//		lionAnimationTL.getKeyFrames().add(new KeyFrame(Duration.millis(100), (event) -> {
-//			lionAnimation();
-//		}));
-//		lionAnimationTL.setCycleCount(Animation.INDEFINITE);
-//		lionAnimationTL.play();
+
 
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();

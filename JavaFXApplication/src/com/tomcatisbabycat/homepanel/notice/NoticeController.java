@@ -215,16 +215,7 @@ public class NoticeController implements Initializable {
       private void handleBtnControlLock(ActionEvent event) {
             //StackPane rootPane = (StackPane) noticeStackPane.getScene().getRoot(); // 컨트롤을 통해서 현재 Scene을 얻고 root의 객체를 얻는다.
 
-            noticeStackPane.setTranslateX(0);
-            KeyValue keyValueStackPaneNotice = new KeyValue(noticeStackPane.translateXProperty(), 800);
-            KeyFrame keyFrameStackPaneNotice = new KeyFrame(Duration.seconds(1),
-                    e -> {
-                          LockController.lockRootPane.getChildren().remove(noticeStackPane);
-                    }, keyValueStackPaneNotice);
-
-            Timeline timeline = new Timeline();
-            timeline.getKeyFrames().add(keyFrameStackPaneNotice);
-            timeline.play();
+           LockController.lockRootPane.getChildren().remove(noticeStackPane);
       }
 
       private void handleBtnControlHome(ActionEvent event) {

@@ -138,6 +138,7 @@ public class DustController implements Initializable {
 
 		});
 		thread.start();
+		thread.setDaemon(true);
 
 		currentTempKnob.setControl(false);
 		currentTempKnob.setMarkerColor(Color.rgb(167, 113, 20));

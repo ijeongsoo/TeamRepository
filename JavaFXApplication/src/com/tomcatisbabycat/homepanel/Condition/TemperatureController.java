@@ -136,6 +136,7 @@ public class TemperatureController implements Initializable {
 			System.out.println("온도 스레드 종료");
 
 		});
+		thread.setDaemon(true);
 		thread.start();
 
 		currentTempKnob.setControl(false);

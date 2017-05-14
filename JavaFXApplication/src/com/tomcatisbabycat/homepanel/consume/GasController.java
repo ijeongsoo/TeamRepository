@@ -147,6 +147,7 @@ public class GasController implements Initializable {
 			System.out.println("가스 스레드 종료");
 
 		});
+		thread.setDaemon(true);
 		thread.start();
 		
 		final CategoryAxis barXAxis = new CategoryAxis();

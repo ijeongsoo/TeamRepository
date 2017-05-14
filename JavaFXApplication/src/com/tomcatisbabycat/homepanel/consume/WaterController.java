@@ -143,7 +143,7 @@ public class WaterController implements Initializable {
 			System.out.println("수도 스레드 종료");
 
 		});
-
+		thread.setDaemon(true);
 		thread.start();
 		
 		final CategoryAxis barXAxis = new CategoryAxis();
