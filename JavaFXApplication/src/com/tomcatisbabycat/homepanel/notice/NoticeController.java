@@ -146,7 +146,7 @@ public class NoticeController implements Initializable {
 
 		} else {
 			System.out.println(dataPick.getValue().toString());
-			noticeList.getMemoList().add(new Memo(addTextArea.getText(), writeDate));  //새로운 메모객체 생성하여 리스트에 추가
+			noticeList.getMemoList().add(new Memo(addTextArea.getText(), dataPick.getValue().toString()));  //새로운 메모객체 생성하여 리스트에 추가
 			noticeTableView.setItems(noticeList.getMemoList());  // 메모객체를 담은 리스트를 tableView에 올림.
 			addTextArea.clear();
 
