@@ -152,8 +152,7 @@ public class LockController implements Initializable {
 			MainController.mainThreadInterrupt();
 			if (((StackPane) lockRootPane.getChildren().get(0)).getId().equals("conditionStackPane")) {
 				ConditionController.stopthread();
-
-			} else if (((StackPane) lockRootPane.getChildren().get(0)).getId().equals("consumeStackPane")) {
+			}else if (((StackPane) lockRootPane.getChildren().get(0)).getId().equals("consumeStackPane")) {
 				ConsumeController.stopthread();
 			}else if(((StackPane) lockRootPane.getChildren().get(0)).getId().equals("lightStackPane")){
 				((StackPane) lockRootPane.getChildren().get(0)).setVisible(false);

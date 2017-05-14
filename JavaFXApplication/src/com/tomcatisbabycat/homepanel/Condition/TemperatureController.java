@@ -173,11 +173,8 @@ public class TemperatureController implements Initializable {
 
 				lblWishKnobTemp.setText(newValue.intValue() * 50 / 100 + "°");
 				ss.setWishTemperature(newValue.intValue() * 50 / 100);
-			}
-		;
-	}
-
-	);
+			};
+	});
 
 
 		

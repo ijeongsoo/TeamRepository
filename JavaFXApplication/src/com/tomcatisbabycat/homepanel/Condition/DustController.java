@@ -137,8 +137,9 @@ public class DustController implements Initializable {
 			System.out.println("먼지쓰레드 종료");
 
 		});
-		thread.start();
 		thread.setDaemon(true);
+		thread.start();
+		
 
 		currentTempKnob.setControl(false);
 		currentTempKnob.setMarkerColor(Color.rgb(167, 113, 20));
