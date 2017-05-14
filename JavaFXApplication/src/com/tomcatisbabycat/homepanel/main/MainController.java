@@ -330,11 +330,13 @@ public class MainController implements Initializable {
 				Timeline timeline1 = new Timeline();
 				recPopupBackground.setOpacity(0);
 				popupImage.setOpacity(0);
+				btnExit.setOpacity(0);
 				KeyValue keyvalue1 = new KeyValue(recPopupBackground.opacityProperty(), 0.7);
-				KeyFrame keyFrame1 = new KeyFrame(Duration.millis(300), (event1) -> {
+				KeyFrame keyFrame1 = new KeyFrame(Duration.millis(200), (event1) -> {
 					Timeline timeline2 = new Timeline();
 					KeyValue keyvalue2 = new KeyValue(popupImage.opacityProperty(), 1);
-					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), keyvalue2);
+					KeyValue keyvalue21 = new KeyValue(btnExit.opacityProperty(), 1);
+					KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), keyvalue2, keyvalue21);
 					timeline2.getKeyFrames().add(keyFrame2);
 					timeline2.play();
 				}, keyvalue1);
@@ -346,10 +348,10 @@ public class MainController implements Initializable {
 					Timeline timeline = new Timeline();
 					KeyValue kv = new KeyValue(btnExit.opacityProperty(), 0);
 					KeyValue keyvalue = new KeyValue(popupImage.opacityProperty(), 0);
-					KeyFrame keyFrame = new KeyFrame(Duration.millis(300), (e1) -> {
+					KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
 						Timeline timeline2 = new Timeline();
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
-						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), (e2) -> {
+						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
 							stackPaneMain.getChildren().remove(2);
 
 						}, keyvalue2);
