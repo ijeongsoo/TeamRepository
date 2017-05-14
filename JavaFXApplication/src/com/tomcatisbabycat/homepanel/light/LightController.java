@@ -491,4 +491,10 @@ public class LightController implements Initializable {
 
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("라이트 제거");
+	}
+	
+
 }

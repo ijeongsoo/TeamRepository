@@ -554,7 +554,7 @@ public class Lock_viewController implements Initializable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("aaabbb");
+		System.out.println("락뷰 제거");
 	}
 
 }

@@ -251,4 +251,10 @@ public class NoticeController implements Initializable {
             }
       }
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("Notice 제거"); //To change body of generated methods, choose Tools | Templates.
+	}
+
+	
 }

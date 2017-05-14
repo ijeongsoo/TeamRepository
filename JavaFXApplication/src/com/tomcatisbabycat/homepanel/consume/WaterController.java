@@ -211,6 +211,11 @@ public class WaterController implements Initializable {
 		return max * 1.25;
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("워터 제거 ");
+	}
+
 	
 
 }

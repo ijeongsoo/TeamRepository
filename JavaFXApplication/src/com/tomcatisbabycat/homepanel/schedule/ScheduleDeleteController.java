@@ -56,5 +56,10 @@ public class ScheduleDeleteController implements Initializable {
 		timeline.getKeyFrames().add(keyFrame);
 		timeline.play();
 	}	
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("스케쥴 delete제거");
+	}
 	
 }

@@ -215,4 +215,10 @@ public class GasController implements Initializable {
 		return max*1.25;
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("가스 제거");
+	}
+	
+
 }

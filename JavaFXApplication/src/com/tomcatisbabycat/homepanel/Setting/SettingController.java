@@ -132,4 +132,10 @@ public class SettingController implements Initializable {
 		}
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("셋팅 제거");
+	}
+
+	
 }

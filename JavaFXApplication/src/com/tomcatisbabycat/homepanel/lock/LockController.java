@@ -68,7 +68,7 @@ public class LockController implements Initializable {
 	 * Initializes the controller class.
 	 */
 	private void animation() {
-
+		System.gc();
 		calendar = Calendar.getInstance();
 		int hour = calendar.get(Calendar.HOUR);
 		String hourstr;

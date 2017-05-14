@@ -184,4 +184,10 @@ public class TemperatureController implements Initializable {
 		lblKnobTemp.setText((int) getTemperature() + "°");
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("온도 제거 ");
+	}
+	
+
 }

@@ -478,7 +478,7 @@ public class MainController implements Initializable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("끝");
+		System.out.println("메인제거");
 	}
 
 }

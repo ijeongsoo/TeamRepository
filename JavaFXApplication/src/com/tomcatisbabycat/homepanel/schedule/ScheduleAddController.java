@@ -253,7 +253,7 @@ public class ScheduleAddController implements Initializable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("scheduleAddController is OUT!!");
+		System.out.println("스케쥴Add 제거");
 	}
 	
 	

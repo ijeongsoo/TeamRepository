@@ -195,4 +195,10 @@ public class CctvController implements Initializable {
             imageView4.setImage(image3);
       }
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("cctv제거 ");
+	}
+
+	
 }

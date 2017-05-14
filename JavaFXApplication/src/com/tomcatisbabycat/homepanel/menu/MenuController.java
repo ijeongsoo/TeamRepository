@@ -417,7 +417,7 @@ public class MenuController implements Initializable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("메뉴 종료");
+		System.out.println("메뉴 제거");
 	}
 
 	

@@ -255,4 +255,10 @@ public class ConsumeController implements Initializable {
 
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("컨슘 제거");
+	}
+	
+
 }

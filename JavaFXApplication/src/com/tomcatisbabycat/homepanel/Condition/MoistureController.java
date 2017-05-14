@@ -185,4 +185,11 @@ public class MoistureController implements Initializable {
 		lblKnobTemp.setText((int) getMoisture() + "%");
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("습도 제거 ");
+	}
+	
+	
+
 }

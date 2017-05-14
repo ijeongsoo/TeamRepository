@@ -186,4 +186,10 @@ public class DustController implements Initializable {
 		lblKnobTemp.setText(getDust() + "㎍/㎥");
 	}
 
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("먼지 제거 ㅇ");
+	}
+
+	
 }

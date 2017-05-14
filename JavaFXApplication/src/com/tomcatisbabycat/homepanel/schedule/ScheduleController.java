@@ -533,6 +533,6 @@ public class ScheduleController implements Initializable {
 
 	@Override
 	protected void finalize() throws Throwable {
-		System.out.println("ScheduleController is OUT!!!!");
+		System.out.println("스케쥴 제거");
 	}
 }

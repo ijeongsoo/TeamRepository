@@ -217,6 +217,11 @@ public class ElectricController implements Initializable {
 		}
 		return max*1.25;
 	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("일렉 컨트롤 제거"); 
+	}
 	
 	
 	
