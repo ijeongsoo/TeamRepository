@@ -46,14 +46,38 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button fx:id="btnControlAdd" layoutX="738.0" layoutY="97.0" mnemonicParsing="false" text="추가" />
                 <TableView fx:id="noticeTableView" layoutX="386.0" layoutY="128.0" prefHeight="330.0" prefWidth="400.0">
                     <columns>
                         <TableColumn prefWidth="250.0" text="Contents" />
                         <TableColumn prefWidth="149.0" text="Date" />
                     </columns>
                 </TableView>
-            <Label layoutX="386.0" layoutY="101.0" text="Category" />
+                  <AnchorPane layoutX="20.0" layoutY="120.0" prefHeight="350.0" prefWidth="350.0">
+                      <children>
+                          <Button fx:id="btnControlAdd" layoutX="190.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                          <TextArea fx:id="addTextArea" layoutX="15.0" layoutY="53.0" prefHeight="150.0" prefWidth="320.0" />
+                  <Button fx:id="btnControlDelete" layoutX="270.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton" >
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icons/edit.png" />
+                     </image>
+                  </ImageView>
+                      </children>
+                  </AnchorPane>
             </children>
         </AnchorPane>
     </children>
