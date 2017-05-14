@@ -14,14 +14,22 @@ import java.util.ResourceBundle;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.util.Duration;
 
 /**
@@ -56,6 +64,12 @@ public class CctvController implements Initializable {
       private Button btnControlImage3;
       @FXML
       private Button btnControlImage4;
+	@FXML
+	private Rectangle menuBack;
+	@FXML
+	private AnchorPane cctvAnchor;
+	@FXML
+	private Button btnControlImage1;
 
       //Image image1;
       /**
@@ -63,6 +77,8 @@ public class CctvController implements Initializable {
        */
       @Override
       public void initialize(URL url, ResourceBundle rb) {
+		
+		
             btnControlLock.setOnAction(event -> {
                   handleBtnControlLock(event);
             });
