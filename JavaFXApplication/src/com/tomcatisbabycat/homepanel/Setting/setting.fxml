@@ -46,7 +46,29 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0" />
+                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+               <children>
+                  <AnchorPane layoutX="62.0" layoutY="-86.0" prefHeight="336.0" prefWidth="228.0">
+                     <children>
+                        <Button layoutX="15.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="1" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="2" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="3" textFill="BLACK" />
+                        <Button layoutX="15.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="4" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="5" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="6" textFill="BLACK" />
+                        <Button layoutX="15.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="7" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="8" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="9" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="0" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="C" textFill="BLACK" />
+                        <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="46.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="92.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="138.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="184.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Button layoutX="16.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="D" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
                 <AnchorPane layoutX="410.0" layoutY="95.0" prefHeight="360.0" prefWidth="360.0">
                     <children>
                         <Button mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
