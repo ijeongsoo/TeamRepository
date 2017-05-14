@@ -36,6 +36,8 @@ public class MainImagePopupController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnExit.setFocusTraversable(false);
+		
 		Timeline timeline = new Timeline();
 		recPopupBackground.setOpacity(0);
 		imgPopup.setOpacity(0);

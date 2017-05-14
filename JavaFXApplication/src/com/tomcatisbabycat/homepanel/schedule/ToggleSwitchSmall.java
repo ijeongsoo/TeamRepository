@@ -21,57 +21,67 @@ import javafx.util.Duration;
  *
  * @author kang
  */
-public class ToggleSwitchSmall extends Parent{
-	private static BooleanProperty switchedOn = new SimpleBooleanProperty(false);
-	
+public class ToggleSwitchSmall extends Parent {
+
+	//private static BooleanProperty switchedOn = new SimpleBooleanProperty(false);
+	private Switched switchedOn = new Switched();
+
 	private TranslateTransition translateAnimation = new TranslateTransition(Duration.seconds(0.25));
 	private FillTransition fillAnimation = new FillTransition(Duration.seconds(0.25));
-	
+
 	private ParallelTransition animation = new ParallelTransition(translateAnimation, fillAnimation);
-	
-	
-	public BooleanProperty switchedOnProperty(){
-		return switchedOn;
+
+	public BooleanProperty switchedOnProperty() {
+		return switchedOn.so;
 	}
-	public String buttonString(){
-		return switchedOn.getValue().toString();
+
+	public String buttonString() {
+		return switchedOn.so.getValue().toString();
 	}
-	
-	public ToggleSwitchSmall(){
+
+	public ToggleSwitchSmall() {
 		Rectangle background = new Rectangle(50, 25);
-		
+
 		background.setArcWidth(25);
 		background.setArcHeight(25);
 		background.setFill(Color.WHITE);
 		background.setStroke(Color.LIGHTGRAY);
-		
+
 		Circle trigger = new Circle(12.5);
 		trigger.setCenterX(12.5);
 		trigger.setCenterY(12.5);
 		trigger.setFill(Color.WHITE);
 		trigger.setStroke(Color.LIGHTGRAY);
-		
+
 		DropShadow shadow = new DropShadow();
 		shadow.setRadius(2);
 		trigger.setEffect(shadow);
-		
+
 		translateAnimation.setNode(trigger);
 		fillAnimation.setShape(background);
-		
+
 		getChildren().addAll(background, trigger);
-		
-		switchedOn.addListener(((observable, oldValue, newValue) -> {
-			boolean isOn = newValue.booleanValue();
-			translateAnimation.setToX(isOn ? 50 - 25 : 0);
-			fillAnimation.setFromValue(isOn ? Color.WHITE : Color.LIGHTGREEN);
-			fillAnimation.setToValue(isOn ? Color.LIGHTGREEN : Color.WHITE);
-			
-			animation.play();
-		}));
-		
-		setOnMouseClicked(e->{
-			switchedOn.set(!switchedOn.get());
+
+		//animate();
+
+		setOnMouseClicked(e -> {
+			System.out.println("");
+			switchedOn.so.set(!switchedOn.so.get());
+			animate();
 		});
 	}
-	
+
+	public void animate() {
+		boolean isOn = switchedOn.so.get();
+		translateAnimation.setToX(isOn ? 50 - 25 : 0);
+		fillAnimation.setFromValue(isOn ? Color.WHITE : Color.LIGHTGREEN);
+		fillAnimation.setToValue(isOn ? Color.LIGHTGREEN : Color.WHITE);
+
+		animation.play();
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		System.out.println("Toggle Small is Out");
+	}
 }

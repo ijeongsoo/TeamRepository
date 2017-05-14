@@ -269,6 +269,9 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		System.gc();
+		mainBtnLock.setFocusTraversable(false);
+		mainBtnMenu.setFocusTraversable(false);
+		
 		hourRotation = new Rotate();
 		hourRotation.pivotXProperty().bind(houreHand.startXProperty());
 		hourRotation.pivotYProperty().bind(houreHand.startYProperty());
@@ -301,12 +304,17 @@ public class MainController implements Initializable {
 
 		MainImageSet mainImageSet = new MainImageSet(mainImage);
 		mainImageSet.mainImageSet();
+		
+		mainBtnMenu.setFocusTraversable(false);
+		mainBtnLock.setFocusTraversable(false);
 
 		mainBtnMenu.setOnAction((event) -> {
 			handleBtnMenu(event);
+			
 		});
 		mainBtnLock.setOnAction((event) -> {
 			handleBtnLock(event);
+			
 		});
 
 		mainImage.setOnMouseClicked((event) -> {

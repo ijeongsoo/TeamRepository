@@ -38,6 +38,9 @@ public class ScheduleDeleteController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnCancel.setFocusTraversable(false);
+		btnOk.setFocusTraversable(false);
+		
 		Timeline timeline = new Timeline();
 		deleteBackground.setOpacity(0);
 		deleteAnchorPane.setOpacity(0);

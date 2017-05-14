@@ -100,6 +100,13 @@ public class ConsumeController implements Initializable {
 	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		btnDust.setFocusTraversable(false);
+		btnMoist.setFocusTraversable(false);
+		btnTemp.setFocusTraversable(false);
+		
 		staticGraphStackPane=graphStackPane;
 		
 		try {

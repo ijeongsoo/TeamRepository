@@ -78,6 +78,19 @@ public class LightController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		num1Room.setFocusTraversable(false);
+		num2Room.setFocusTraversable(false);
+		bathRoom.setFocusTraversable(false);
+		doorRoom.setFocusTraversable(false);
+		multiRoom.setFocusTraversable(false);
+		kichinRoom.setFocusTraversable(false);
+		livingRoom.setFocusTraversable(false);
+		innerRoom.setFocusTraversable(false);
+		boilRoom.setFocusTraversable(false);
+		
 		if (!light.isNum2Room()) {
 			num2Room.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
@@ -323,7 +336,6 @@ public class LightController implements Initializable {
 	}
 
 	private void handleBtnControlBack(ActionEvent event) {
-		
 
 		try {
 			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
@@ -359,9 +371,9 @@ public class LightController implements Initializable {
 	}
 
 	private void handleBtnControlLock(ActionEvent event) {
-		
+
 		LockController.lockRootPane.getChildren().remove(lightStackPane);
-			
+
 	}
 
 	private void handleBtnControlHome(ActionEvent event) {

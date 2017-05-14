@@ -94,6 +94,18 @@ public class Lock_viewController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnOne.setFocusTraversable(false);
+		btnTwo.setFocusTraversable(false);
+		btnThree.setFocusTraversable(false);
+		btnFive.setFocusTraversable(false);
+		btnFour.setFocusTraversable(false);
+		btnSix.setFocusTraversable(false);
+		btnSeven.setFocusTraversable(false);
+		btnEight.setFocusTraversable(false);
+		btnNine.setFocusTraversable(false);
+		btnZero.setFocusTraversable(false);
+		btnCancel.setFocusTraversable(false);
+		btnDel.setFocusTraversable(false);
 
 		btnOne.setOnAction(event -> {
 			if (buttonFlag) {

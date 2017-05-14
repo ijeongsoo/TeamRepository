@@ -82,6 +82,11 @@ public class NoticeController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnControlAdd.setFocusTraversable(false);
+		btnControlBack.setFocusTraversable(false);
+		btnControlDelete.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
 
 		btnControlLock.setOnAction(event -> {
 			handleBtnControlLock(event);

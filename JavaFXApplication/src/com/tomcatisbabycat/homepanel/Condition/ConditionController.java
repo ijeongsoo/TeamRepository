@@ -89,6 +89,14 @@ public class ConditionController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		staticGraphStackPane=graphStackPane;
+		
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		btnDust.setFocusTraversable(false);
+		btnMoist.setFocusTraversable(false);
+		btnTemp.setFocusTraversable(false);
+		
 		try {
 			temperature = FXMLLoader.load(getClass().getResource("temperature.fxml"));
 			moisture = FXMLLoader.load(getClass().getResource("moisture.fxml"));

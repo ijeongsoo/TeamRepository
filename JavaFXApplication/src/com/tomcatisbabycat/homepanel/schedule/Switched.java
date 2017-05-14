@@ -14,6 +14,7 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public class Switched {
 	BooleanProperty so = new SimpleBooleanProperty(false);
+	BooleanProperty so1 = new SimpleBooleanProperty(true);
 
 	public Switched() {
 	}
