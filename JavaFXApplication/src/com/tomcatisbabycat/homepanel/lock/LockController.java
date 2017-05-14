@@ -7,6 +7,7 @@ package com.tomcatisbabycat.homepanel.lock;
 
 import com.tomcatisbabycat.homepanel.Condition.ConditionController;
 import com.tomcatisbabycat.homepanel.consume.ConsumeController;
+import com.tomcatisbabycat.homepanel.css.CSSSelector;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import java.io.IOException;
 import java.net.URL;
@@ -103,7 +104,12 @@ public class LockController implements Initializable {
 		hourRotation.setAngle(hour * 30 + minuate * 0.5);
 
 		lblMainClock.setText(ampm + " " + hourstr + ":" + minuatestr + ":" + secondstr);
-		
+		if(lblMainClock.getScene()!=null){
+			if(!lblMainClock.getScene().getStylesheets().get(0).equals(CSSSelector.class.getResource(CSSSelector.getSeasonCSS()).toString())){
+				lblMainClock.getScene().getStylesheets().add(CSSSelector.class.getResource(CSSSelector.getSeasonCSS()).toString());
+				lblMainClock.getScene().getStylesheets().remove(0);
+			}
+		}
 		//hyun added
 		cal = calendar;
 	}
