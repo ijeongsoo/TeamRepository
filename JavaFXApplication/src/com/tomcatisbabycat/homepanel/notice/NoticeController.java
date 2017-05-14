@@ -66,12 +66,15 @@ public class NoticeController implements Initializable {
       @FXML
       private TextArea addTextArea;
       private String writeDate;
-      ObservableList<Memo> list;
+      private ObservableList<Memo> list;
       @FXML
       private Button btnControlDelete;
 
       private TextArea regTextArea;
-      Parent parent;
+      
+	Parent parent;
+	
+	private NoticeList noticeList = NoticeList.getInstance();
 
       /**
        * Initializes the controller class.
@@ -109,8 +112,11 @@ public class NoticeController implements Initializable {
             TableColumn tc1 = noticeTableView.getColumns().get(1);   //각 열의 속성을 받아냄
             tc0.setCellValueFactory(new PropertyValueFactory<Memo, String>("contents"));   //각 열의 속성을 String으로 구성된 memo객체로 생성
             tc1.setCellValueFactory(new PropertyValueFactory<Memo, String>("date"));
-            ObservableList<Memo> list = FXCollections.observableArrayList();
-            this.list = list;
+//            ObservableList<Memo> list = FXCollections.observableArrayList();
+//            this.list = list;
+
+		this.list = noticeList.getMemoList();
+		noticeTableView.setItems(list);
 
             //TableView 내용 편집
             noticeTableView.setEditable(true);
@@ -143,9 +149,9 @@ public class NoticeController implements Initializable {
                   System.out.println("입력내용이 없습니다.");
 
             } else {
-                  list.add(new Memo(addTextArea.getText(), writeDate));  //새로운 메모객체 생성하여 리스트에 추가
+                  noticeList.getMemoList().add(new Memo(addTextArea.getText(), writeDate));  //새로운 메모객체 생성하여 리스트에 추가
                   Platform.runLater(() -> {
-                        noticeTableView.setItems(list);  // 메모객체를 담은 리스트를 tableView에 올림.
+                        noticeTableView.setItems(noticeList.getMemoList());  // 메모객체를 담은 리스트를 tableView에 올림.
                         addTextArea.clear();
 
                   });
@@ -171,7 +177,7 @@ public class NoticeController implements Initializable {
                   System.out.println("삭제할 메모를 선택해주세요.");
             } else {
                   Platform.runLater(() -> {
-                        list.remove(selectedIndex);
+                        noticeList.getMemoList().remove(selectedIndex);
                   });
             }
 
