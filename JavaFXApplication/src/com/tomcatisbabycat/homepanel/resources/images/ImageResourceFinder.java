@@ -10,7 +10,7 @@ package com.tomcatisbabycat.homepanel.resources.images;
  * @author ijeongsu
  */
 public class ImageResourceFinder {
-	  private static String ImageFileName="flat_family.png";
+	  private static String ImageFileName="profile.jpeg";
 
 	  public static String getImageFileName() {
 			return ImageFileName;

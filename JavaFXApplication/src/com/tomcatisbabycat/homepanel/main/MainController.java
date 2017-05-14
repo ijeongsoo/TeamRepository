@@ -7,8 +7,6 @@ package com.tomcatisbabycat.homepanel.main;
 
 import com.tomcatisbabycat.homepanel.main.statusthread.WeatherThread;
 import com.tomcatisbabycat.homepanel.lock.LockController;
-import com.tomcatisbabycat.homepanel.main.statusthread.ClockAndEnvThread;
-import com.tomcatisbabycat.homepanel.main.statusthread.RionThread;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -18,14 +16,12 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import com.tomcatisbabycat.homepanel.menu.*;
+import com.tomcatisbabycat.homepanel.notice.NoticeList;
 import com.tomcatisbabycat.homepanel.resources.icons.IconSelector;
 import com.tomcatisbabycat.homepanel.resources.images.ImageResourceFinder;
 import com.tomcatisbabycat.homepanel.samplestatus.SampleStatus;
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -109,8 +105,8 @@ public class MainController implements Initializable {
 	Rotate secondRotation;
 	Calendar calendar;
 
-	private static Timeline animationTL = new Timeline();
-	private static Timeline lionAnimationTL = new Timeline();
+	
+	private NoticeList noticeList = NoticeList.getInstance();
 	
 	
 	Image forestImage = new Image(IconSelector.class.getResource("forest.png").toString());
@@ -123,6 +119,12 @@ public class MainController implements Initializable {
 	Image sosoImage = new Image(IconSelector.class.getResource("temperature-3.png").toString());
 	Image hotImage = new Image(IconSelector.class.getResource("temperature-4.png").toString());
 	int lionImagenum = 1;
+	@FXML
+	private Rectangle mainBack;
+	@FXML
+	private Label lblNotice1;
+	@FXML
+	private Label lblNotice2;
 
 	/**
 	 * Initializes the controller class.
@@ -263,7 +265,20 @@ public class MainController implements Initializable {
 		} else {
 			imgMainTemperature.setImage(hotImage);
 		}
-
+		
+		String todayDate = yearstr+"-"+monthstr+"-"+datestr;
+		int cnt=0;
+		for(int i=0; i<noticeList.getMemoList().size(); i++){
+			if(noticeList.getMemoList().get(i).getDate().equals(todayDate)){
+				cnt+=1;
+				if(cnt==1){
+					lblNotice1.setText(noticeList.getMemoList().get(i).getContents());
+				}if(cnt==2){
+					lblNotice2.setText(noticeList.getMemoList().get(i).getContents());
+				}
+			}
+		}
+		
 	}
 
 	@Override
@@ -321,17 +336,18 @@ public class MainController implements Initializable {
 
 				btnExit.setOnAction(e -> {
 					Timeline timeline = new Timeline();
+					KeyValue kv = new KeyValue(btnExit.opacityProperty(), 0);
 					KeyValue keyvalue = new KeyValue(popupImage.opacityProperty(), 0);
-					KeyFrame keyFrame = new KeyFrame(Duration.millis(200), (e1) -> {
+					KeyFrame keyFrame = new KeyFrame(Duration.millis(300), (e1) -> {
 						Timeline timeline2 = new Timeline();
 						KeyValue keyvalue2 = new KeyValue(recPopupBackground.opacityProperty(), 0);
-						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(200), (e2) -> {
+						KeyFrame keyFrame2 = new KeyFrame(Duration.millis(300), (e2) -> {
 							stackPaneMain.getChildren().remove(2);
 							
 						}, keyvalue2);
 						timeline2.getKeyFrames().add(keyFrame2);
 						timeline2.play();
-					}, keyvalue);
+					}, keyvalue, kv);
 
 					timeline.getKeyFrames().add(keyFrame);
 					timeline.play();

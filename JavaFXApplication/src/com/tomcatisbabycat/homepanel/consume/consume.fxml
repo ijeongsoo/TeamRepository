@@ -15,7 +15,7 @@
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
             <StackPane fx:id="graphStackPane" layoutX="31.0" layoutY="90.0" prefHeight="363.0" prefWidth="552.0" />
-                <Label layoutX="40.0" layoutY="27.0" text="Consume">
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="Consume">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
                     </font>

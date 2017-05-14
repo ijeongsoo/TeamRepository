@@ -21,7 +21,14 @@
                   <StackPane>
                      <children>
                         <ImageView id="imgPopup" fx:id="imgPopup" fitHeight="400.0" pickOnBounds="true" preserveRatio="true" />
-                        <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" text="Button" StackPane.alignment="TOP_RIGHT" />
+                        <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" style="-fx-background-color: transparent;" StackPane.alignment="TOP_RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icons/icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </StackPane>
                   <Pane HBox.hgrow="ALWAYS" />

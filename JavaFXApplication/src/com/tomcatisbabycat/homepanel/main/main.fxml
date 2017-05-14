@@ -90,8 +90,8 @@
                            </font>
                         </Label>
                         <Circle fill="#e56353" layoutX="14.0" layoutY="147.0" radius="4.0" stroke="TRANSPARENT" strokeType="INSIDE" />
-                        <Label layoutX="24.0" layoutY="138.0" prefHeight="19.0" prefWidth="117.0" text="정수생일" textFill="WHITE" />
-                        <Label layoutX="23.0" layoutY="162.0" prefHeight="19.0" prefWidth="117.0" text="생일상 장보러 가기 오후 1시" textFill="WHITE" />
+                        <Label fx:id="lblNotice1" layoutX="24.0" layoutY="138.0" prefHeight="19.0" prefWidth="117.0" text="공지 없음" textFill="WHITE" />
+                        <Label fx:id="lblNotice2" layoutX="23.0" layoutY="162.0" prefHeight="19.0" prefWidth="117.0" text="공지를 추가하세요" textFill="WHITE" />
                         <Circle fill="#e56353" layoutX="13.0" layoutY="171.0" radius="4.0" stroke="TRANSPARENT" strokeType="INSIDE" />
                      </children>
                   </AnchorPane>
