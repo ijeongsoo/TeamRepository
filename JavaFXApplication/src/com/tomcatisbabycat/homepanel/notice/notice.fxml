@@ -63,7 +63,7 @@
                         </ImageView>
                      </graphic></Button>
                           <TextArea fx:id="addTextArea" layoutX="15.0" layoutY="53.0" prefHeight="150.0" prefWidth="320.0" />
-                  <Button fx:id="btnControlDelete" layoutX="270.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton" >
+                  <Button fx:id="btnControlDelete" layoutX="270.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton">
                      <graphic>
                         <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -76,6 +76,7 @@
                         <Image url="@../resources/icons/edit.png" />
                      </image>
                   </ImageView>
+                  <DatePicker fx:id="dataPick" layoutX="70.0" layoutY="7.0" />
                       </children>
                   </AnchorPane>
             </children>

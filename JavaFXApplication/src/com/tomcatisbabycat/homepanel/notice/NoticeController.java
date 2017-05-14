@@ -5,7 +5,6 @@
  */
 package com.tomcatisbabycat.homepanel.notice;
 
-import com.sun.java.swing.plaf.windows.WindowsBorders;
 import com.tomcatisbabycat.homepanel.lock.LockController;
 import com.tomcatisbabycat.homepanel.main.MainController;
 import com.tomcatisbabycat.homepanel.menu.MenuController;
@@ -18,7 +17,6 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,6 +26,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.TableView;
@@ -72,12 +71,15 @@ public class NoticeController implements Initializable {
 
       private TextArea regTextArea;
       Parent parent;
+	@FXML
+	private DatePicker dataPick;
 
       /**
        * Initializes the controller class.
        */
       @Override
       public void initialize(URL url, ResourceBundle rb) {
+		
             btnControlLock.setOnAction(event -> {
                   handleBtnControlLock(event);
             });
@@ -97,12 +99,7 @@ public class NoticeController implements Initializable {
 //            noticeTableView.getFocusModel().getFocusedItem().setContents(editTextArea.getText());
 //            noticeTableView.getFocusModel().getFocusedItem().setDate(regYearCombo.getValue() + regMonthCombo.getValue() + regDayCombo.getValue());
             //작성날짜 셋팅
-            Calendar now = Calendar.getInstance();
-            int year = now.get(Calendar.YEAR);
-            int month = now.get(Calendar.MONTH);
-            int day = now.get(Calendar.DAY_OF_MONTH);
-            String writeDate = year + "년 " + (month + 1) + "월 " + day + "일";
-            this.writeDate = writeDate;
+		
 
             //TableView 셋팅
             TableColumn tc0 = noticeTableView.getColumns().get(0);
@@ -127,7 +124,8 @@ public class NoticeController implements Initializable {
       }
 
       private void handleBtnControlAdd(ActionEvent event) {
-            if (addTextArea.getText().trim().isEmpty()) {
+            if (addTextArea.getText().trim().isEmpty()||dataPick.getValue()==null) {
+			
                   Stage primaryStage = (Stage) btnControlAdd.getScene().getWindow();
                   Popup popup = new Popup();
                   try {
@@ -143,12 +141,11 @@ public class NoticeController implements Initializable {
                   System.out.println("입력내용이 없습니다.");
 
             } else {
-                  list.add(new Memo(addTextArea.getText(), writeDate));  //새로운 메모객체 생성하여 리스트에 추가
-                  Platform.runLater(() -> {
+			System.out.println(dataPick.getValue().toString());
+                  list.add(new Memo(addTextArea.getText(), dataPick.getValue().toString()));  //새로운 메모객체 생성하여 리스트에 추가
                         noticeTableView.setItems(list);  // 메모객체를 담은 리스트를 tableView에 올림.
                         addTextArea.clear();
 
-                  });
             }
 
       }
@@ -162,7 +159,6 @@ public class NoticeController implements Initializable {
                   try {
                         parent = FXMLLoader.load(getClass().getResource("deletePopup.fxml"));
                   } catch (IOException ex) {
-                        Logger.getLogger(NoticeController.class.getName()).log(Level.SEVERE, null, ex);
                   }
 
                   popup.getContent().add(parent);
@@ -170,9 +166,7 @@ public class NoticeController implements Initializable {
                   popup.show(primaryStage);   //삭제할 항목을 선택하지 않으면 팝업이 뜸.
                   System.out.println("삭제할 메모를 선택해주세요.");
             } else {
-                  Platform.runLater(() -> {
                         list.remove(selectedIndex);
-                  });
             }
 
       }
