@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.tomcatisbabycat.homepanel.controller.knob.knobfx.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorMoist" prefHeight="363.0" prefWidth="552.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.Condition.MoistureController">
+   <children>
+      <LineChart fx:id="chartMost" layoutX="-5.0" layoutY="-10.0" prefHeight="187.0" prefWidth="555.0">
+        <xAxis>
+          <NumberAxis minorTickCount="0" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+	<Knob fx:id="currentTempKnob" layoutX="55" layoutY="225" prefHeight="190" prefWidth="190">
+	  
+	</Knob>
+	
+	<Knob fx:id="wishTempKnob" layoutX="320" layoutY="225" prefHeight="190" prefWidth="190">
+	  
+	</Knob>
+      <Label layoutX="291.0" layoutY="182.0" text="희망습도" textFill="#01c2f2" />
+      <Label layoutX="30.0" layoutY="182.0" text="현재습도" textFill="#01c2f2" />
+      <StackPane layoutX="353.0" layoutY="281.0" prefHeight="63.0" prefWidth="133.0">
+         <children>
+            <Label fx:id="lblWishKnobTemp" text="100%">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+      <StackPane layoutX="93.0" layoutY="281.0" prefHeight="63.0" prefWidth="126.0">
+         <children>
+            <Label fx:id="lblKnobTemp" text="100%">
+               <font>
+                  <Font size="50.0" />
+               </font>
+            </Label>
+         </children>
+      </StackPane>
+   </children>
+</AnchorPane>

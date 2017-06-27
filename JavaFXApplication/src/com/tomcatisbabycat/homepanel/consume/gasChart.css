@@ -1,0 +1,13 @@
+
+.default-color0.chart-series-line {
+    -fx-stroke: #7B5551;
+}
+
+.default-color0.chart-line-symbol {
+    -fx-background-color: #7B5551, white;
+    
+}
+
+.chart-bar{
+   -fx-background-color: #7B5551
+}

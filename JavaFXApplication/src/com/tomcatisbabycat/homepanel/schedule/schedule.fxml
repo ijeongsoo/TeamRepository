@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="scheduleStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.schedule.ScheduleController">
+    <children>
+        <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="55.0" layoutY="35.0" styleClass="mainFont" text="Schedule">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+                    <children>
+                        <BorderPane prefHeight="360.0" prefWidth="360.0">
+                            <top>
+                                <HBox alignment="CENTER" prefHeight="30.0" prefWidth="200.0" spacing="100.0" BorderPane.alignment="CENTER">
+                                    <children>
+                                        <Button mnemonicParsing="false" opacity="0.0" prefWidth="100.0" text="Button" />
+                                        <Label fx:id="lblSchedule">
+                                            <font>
+                                                <Font name="Arial Black" size="13.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="btnAdd" mnemonicParsing="false" styleClass="buttonWhite">
+                                            <graphic>
+                                                <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true">
+                                                    <image>
+                                                        <Image url="@../resources/icons/plus.png" />
+                                                    </image>
+                                                </ImageView>
+                                            </graphic>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </top>
+                            <center>
+                                <ListView fx:id="scheduleListview" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: white;" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                  <Label fx:id="lblHide" layoutX="55.0" layoutY="180.0" text="항목이 없습니다. " visible="false">
+                     <font>
+                        <Font size="32.0" />
+                     </font>
+                  </Label>
+                    </children>
+                </AnchorPane>
+                <AnchorPane layoutX="410.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+                    <children>
+                        <Button fx:id="btnTV" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/television.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnAirCondition" layoutX="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="conditionBtn">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/air-conditioner.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnWashingMachine" layoutY="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="conditionBtn">
+                            <graphic>
+                                <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/washing-machine.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button fx:id="btnLight" layoutX="185.0" layoutY="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="conditionBtn">
+                            <graphic>
+                                <ImageView fitHeight="100" fitWidth="100" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/idea.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

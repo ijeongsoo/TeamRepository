@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import com.tomcatisbabycat.homepanel.schedule.*?>
+
+<AnchorPane prefHeight="100.0" prefWidth="340.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <Label id="turnTime" layoutX="62.0" layoutY="8.0" text="12:00">
+            <font>
+                <Font name="Arial" size="30.0" />
+            </font>
+        </Label><!-- -->
+        <ToggleSwitch id="toggleSwitch" fx:id="btnTs" layoutX="200" layoutY="8" />
+        <Label id="name" layoutX="62.0" layoutY="45.0" text="보일러실">
+            <font>
+                <Font size="12.0" />
+            </font>
+        </Label>
+        <Label layoutX="152.0" layoutY="42.0" />
+        <Label id="onOff" layoutX="126.0" layoutY="45.0" text="OFF">
+            <font>
+                <Font name="Arial" size="12.0" />
+            </font>
+        </Label>
+        <ImageView id="btnDelImg" fitHeight="30.0" fitWidth="30.0" layoutX="13.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../resources/icons/round-remove-button.png" />
+            </image>
+        </ImageView>
+        <Label fx:id="lblMon" id="lblMon" text="false" visible="false" />
+        <Label fx:id="lblTue" id="lblTue" text="false" visible="false" />
+        <Label fx:id="lblWen" id="lblWen" text="false" visible="false" />
+        <Label fx:id="lblThu" id="lblThu" text="false" visible="false" />
+        <Label fx:id="lblFri" id="lblFri" text="false" visible="false" />
+        <Label fx:id="lblSat" id="lblSat" text="false" visible="false" />
+        <Label fx:id="lblSun" id="lblSun" text="false" visible="false" />    
+        <Button fx:id="btnSun" id="btnSun" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="302.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="일" />
+        <Button fx:id="btnSat" id="btnSat" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="262.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="토" />
+        <Button fx:id="btnFri" id="btnFri" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="222.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="금" />
+        <Button fx:id="btnThu" id="btnThu" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="182.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="목" />
+        <Button fx:id="btnWen" id="btnWen" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="142.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="수" />
+        <Button fx:id="btnTue" id="btnTue" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="102.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="화" />
+        <Button fx:id="btnMon" id="btnMon" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="62.0" layoutY="65.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="월" />
+    </children>
+</AnchorPane>

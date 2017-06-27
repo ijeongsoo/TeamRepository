@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="noticeStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.notice.NoticeController">
+    <children>
+      <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="40.0" layoutY="27.0" styleClass="mainFont" text="Notice">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <TableView fx:id="noticeTableView" layoutX="386.0" layoutY="128.0" prefHeight="330.0" prefWidth="400.0">
+                    <columns>
+                        <TableColumn prefWidth="250.0" text="Contents" />
+                        <TableColumn prefWidth="149.0" text="Date" />
+                    </columns>
+                </TableView>
+                  <AnchorPane layoutX="20.0" layoutY="120.0" prefHeight="350.0" prefWidth="350.0">
+                      <children>
+                          <Button fx:id="btnControlAdd" layoutX="190.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/add.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                          <TextArea fx:id="addTextArea" layoutX="15.0" layoutY="53.0" prefHeight="150.0" prefWidth="320.0" />
+                  <Button fx:id="btnControlDelete" layoutX="270.0" layoutY="280.0" mnemonicParsing="false" styleClass="controlButton">
+                     <graphic>
+                        <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/delete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="15.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/icons/edit.png" />
+                     </image>
+                  </ImageView>
+                  <DatePicker fx:id="dataPick" layoutX="70.0" layoutY="7.0" />
+                      </children>
+                  </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
