@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="settingStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.setting.SettingController">
+    <children>
+        <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="Setting">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <AnchorPane layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0">
+               <children>
+                  <AnchorPane layoutX="62.0" layoutY="-86.0" prefHeight="336.0" prefWidth="228.0">
+                     <children>
+                        <Button layoutX="15.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="1" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="2" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="3" textFill="BLACK" />
+                        <Button layoutX="15.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="4" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="5" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="6" textFill="BLACK" />
+                        <Button layoutX="15.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="7" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="8" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="9" textFill="BLACK" />
+                        <Button layoutX="85.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="0" textFill="BLACK" />
+                        <Button layoutX="155.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="C" textFill="BLACK" />
+                        <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="46.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="92.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="138.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="184.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                        <Button layoutX="16.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="D" textFill="WHITE" />
+                     </children>
+                  </AnchorPane>
+               </children></AnchorPane>
+                <AnchorPane layoutX="410.0" layoutY="95.0" prefHeight="360.0" prefWidth="360.0">
+                    <children>
+                        <Button mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="90.0" fitWidth="90.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@../resources/icons/flat_lock_icon_white.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button layoutX="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="175.0" styleClass="mainBackground">
+                            <graphic>
+                                <ImageView fitHeight="80" fitWidth="80" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/hourglass.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button layoutY="185.0" mnemonicParsing="false" prefHeight="175.0" prefWidth="360.0" styleClass="specificBackground">
+                            <graphic>
+                                <ImageView fitHeight="110" fitWidth="110" pickOnBounds="true">
+                                    <image>
+                                        <Image url="@../resources/icons/family_picture.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

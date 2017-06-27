@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="stackPaneLock" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.lock.Lock_viewController">
+   <children>
+      <Rectangle fx:id="lock_viewBack" arcHeight="5.0" arcWidth="5.0" height="480.0" opacity="0.71" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="800.0" />
+      <AnchorPane fx:id="anchorPaneLockView" prefHeight="480.0" prefWidth="800.0">
+         <children>
+            <AnchorPane layoutX="285.0" layoutY="-30.0" prefHeight="440.0" prefWidth="230.0">
+               <children>
+                  <Button fx:id="btnOne" layoutX="15.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="1" textFill="WHITE" />
+                  <Button fx:id="btnTwo" layoutX="85.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="2" textFill="WHITE" />
+                  <Button fx:id="btnThree" layoutX="155.0" layoutY="170.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="3" textFill="WHITE" />
+                  <Button fx:id="btnFour" layoutX="15.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="4" textFill="WHITE" />
+                  <Button fx:id="btnFive" layoutX="85.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="5" textFill="WHITE" />
+                  <Button fx:id="btnSix" layoutX="155.0" layoutY="240.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="6" textFill="WHITE" />
+                  <Button fx:id="btnSeven" layoutX="15.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="7" textFill="WHITE" />
+                  <Button fx:id="btnEight" layoutX="85.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="8" textFill="WHITE" />
+                  <Button fx:id="btnNine" layoutX="155.0" layoutY="310.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="9" textFill="WHITE" />
+                  <Button fx:id="btnZero" layoutX="85.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="0" textFill="WHITE" />
+                  <Button fx:id="btnCancel" layoutX="155.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="C" textFill="WHITE" />
+                  <Circle fx:id="circle1" fill="DODGERBLUE" layoutX="46.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                  <Circle fx:id="circle2" fill="DODGERBLUE" layoutX="92.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                  <Circle fx:id="circle3" fill="DODGERBLUE" layoutX="138.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                  <Circle fx:id="circle4" fill="DODGERBLUE" layoutX="184.0" layoutY="120.0" radius="7.0" stroke="BLACK" strokeType="INSIDE" styleClass="circlePassword" />
+                  <Button fx:id="btnDel" layoutX="16.0" layoutY="380.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="lockBtnPassword" text="D" textFill="WHITE" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

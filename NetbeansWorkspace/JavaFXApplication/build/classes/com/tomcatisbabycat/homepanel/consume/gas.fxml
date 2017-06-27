@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+
+<AnchorPane id="AnchorPane" fx:id="AnchorGas" prefHeight="363.0" prefWidth="552.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.consume.GasController">
+   <children>
+      <LineChart fx:id="chartDust" layoutX="-5.0" layoutY="11.0" prefHeight="166.0" prefWidth="555.0">
+        <xAxis>
+          <NumberAxis minorTickCount="0" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <Label layoutX="6.0" layoutY="185.0" text="최근 3개월 사용량" textFill="#7b5551" />
+      <Label layoutY="-3.0" text="실시간 사용량" textFill="#7b5551" />
+      <Label fx:id="month1" layoutX="63.0" layoutY="341.0" text="Label" textFill="#7b5551" />
+      <Label fx:id="month2" layoutX="165.0" layoutY="341.0" text="Label" textFill="#7b5551" />
+      <Label fx:id="month3" layoutX="266.0" layoutY="341.0" text="Label" textFill="#7b5551" />
+      <Label layoutX="331.0" layoutY="185.0" text="이번달 사용량" textFill="#7b5551" />
+      <HBox alignment="CENTER" layoutX="350.0" layoutY="243.0" prefHeight="61.0" prefWidth="200.0">
+         <children>
+            <Pane HBox.hgrow="ALWAYS" />
+            <Label fx:id="thisMonthUsed" alignment="CENTER" text="0" textAlignment="CENTER" textFill="#7b5551">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <Pane HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Label layoutX="439.0" layoutY="290.0" text="㎥" textFill="#7b5551">
+         <font>
+            <Font size="22.0" />
+         </font>
+      </Label>
+      <Circle fill="#1f93ff00" layoutX="450.0" layoutY="283.0" radius="75.0" stroke="#7a5451ae" strokeType="INSIDE" strokeWidth="3.0" />
+	
+	
+   </children>
+</AnchorPane>
