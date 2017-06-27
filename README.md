@@ -1,2 +1,0 @@
-# TeamRepository
-Repository for Team
