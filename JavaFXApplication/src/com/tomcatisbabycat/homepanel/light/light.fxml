@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="lightStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.light.LightController">
+    <children>
+      <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="Light">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            <ImageView fitHeight="71.0" fitWidth="71.0" layoutX="40.5" layoutY="369.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/icons/idea-2.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgLight" fitHeight="72.0" fitWidth="75.0" layoutX="40.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../resources/icons/idea.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="boilRoom" alignment="BOTTOM_LEFT" layoutX="40.0" layoutY="94.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="86.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="보일러실" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="multiRoom" alignment="BOTTOM_LEFT" layoutX="141.0" layoutY="94.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="86.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="다용도실" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="innerRoom" alignment="BOTTOM_LEFT" layoutX="40.0" layoutY="192.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="190.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="안방" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="kichinRoom" alignment="BOTTOM_LEFT" layoutX="243.0" layoutY="94.0" mnemonicParsing="false" prefHeight="139.0" prefWidth="222.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="주방" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="livingRoom" alignment="BOTTOM_LEFT" layoutX="243.0" layoutY="253.0" mnemonicParsing="false" prefHeight="188.0" prefWidth="222.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="거실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="bathRoom" alignment="BOTTOM_LEFT" layoutX="484.0" layoutY="94.0" mnemonicParsing="false" prefHeight="92.0" prefWidth="101.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="욕실" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="doorRoom" alignment="BOTTOM_LEFT" layoutX="484.0" layoutY="201.0" mnemonicParsing="false" prefHeight="243.0" prefWidth="101.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="현관" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="num1Room" alignment="BOTTOM_LEFT" layoutX="602.0" layoutY="94.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="168.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="방-1" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Button fx:id="num2Room" alignment="BOTTOM_LEFT" layoutX="602.0" layoutY="279.0" mnemonicParsing="false" prefHeight="164.0" prefWidth="168.0" style="-fx-background-color: c0c0c0;">
+               <graphic>
+                  <Label text="방-2" textFill="WHITE">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </Button>
+            <Label fx:id="lblLight" layoutX="126.0" layoutY="378.0" text="0">
+               <font>
+                  <Font size="51.0" />
+               </font>
+            </Label>
+            <Label layoutX="157.0" layoutY="378.0" text="/9">
+               <font>
+                  <Font size="51.0" />
+               </font>
+            </Label>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

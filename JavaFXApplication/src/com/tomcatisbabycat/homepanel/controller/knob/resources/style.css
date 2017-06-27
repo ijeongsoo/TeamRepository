@@ -1,0 +1,9 @@
+.root{
+    -fx-background-color:red;
+}
+.knob{
+    -fx-knob-marker-color:red;
+    -fx-knob-fill:red;
+    -fx-knob-stroke:red;
+    -fx-knob-tick-mark-color:red;
+}

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import com.tomcatisbabycat.homepanel.schedule.*?>
+
+<AnchorPane prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.schedule.ScheduleAddController">
+    <children>
+        <Rectangle id="popupBackground" fx:id="popupBackground" arcHeight="5.0" arcWidth="5.0" fill="#000000b3" height="480.0" stroke="#000000b2" strokeType="INSIDE" width="800.0" />
+        <AnchorPane id="addAnchorPane" fx:id="addAnchorPane" layoutX="40.0" layoutY="94.0" prefHeight="360.0" prefWidth="360.0" style="-fx-background-color: white">
+            <children>
+            <ComboBox id="comboCategory" fx:id="comboCategory" layoutX="150.0" layoutY="50.0" prefWidth="150.0" promptText="선택" />
+            <ComboBox id="comboName" fx:id="comboName" layoutX="150.0" layoutY="100.0" prefWidth="150.0" promptText="선택" />
+                <TimeSpinner id="timeSpinner" fx:id="timeSpinner" layoutX="150" layoutY="150.0">
+                </TimeSpinner>
+                <ToggleSwitchSmall id="btnOnOff" fx:id="btnOnOff" layoutX="150.0" layoutY="200.0" />
+            <Button id="btnExit" layoutX="192.0" layoutY="308.0" mnemonicParsing="false" text="취소" />
+            <Button id="btnAdd" fx:id="btnAdd" layoutX="81.0" layoutY="308.0" mnemonicParsing="false" text="추가" />
+            <Label layoutX="65.0" layoutY="50.0" text="종류">
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="100.0" text="위치">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="150.0" text="시간">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="65.0" layoutY="200.0" text="상태">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="29.0" layoutY="274.0" prefHeight="0.0" prefWidth="303.0" />
+            <Button fx:id="btnMon" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="40.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="월">
+            </Button>
+            <Button fx:id="btnTue" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="80.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="화">
+            </Button>
+            <Button fx:id="btnWen" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="120.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="수">
+            </Button>
+            <Button fx:id="btnThu" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="160.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="목">
+            </Button>
+            <Button fx:id="btnFri" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="200.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="금">
+            </Button>
+            <Button fx:id="btnSat" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="240.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="토">
+            </Button>
+            <Button fx:id="btnSun" contentDisplay="CENTER" graphicTextGap="0.0" layoutX="280.0" layoutY="230.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="23.0" styleClass="dayButton" text="일">
+            </Button>
+            <Label fx:id="lblMon" id="lblMon" text="false" visible="false" />
+            <Label fx:id="lblTue" id="lblTue" text="false" visible="false" />
+            <Label fx:id="lblWen" id="lblWen" text="false" visible="false" />
+            <Label fx:id="lblThu" id="lblThu" text="false" visible="false" />
+            <Label fx:id="lblFri" id="lblFri" text="false" visible="false" />
+            <Label fx:id="lblSat" id="lblSat" text="false" visible="false" />
+            <Label fx:id="lblSun" id="lblSun" text="false" visible="false" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="consumeStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.consume.ConsumeController">
+    <children>
+      <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+            <StackPane fx:id="graphStackPane" layoutX="31.0" layoutY="90.0" prefHeight="363.0" prefWidth="552.0" />
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="Consume">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            <Button fx:id="btnTemp" layoutX="598.0" layoutY="91.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnTemp" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/light-bulb_1.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnTemp" opacity="0.0" text="전기" textFill="WHITE">
+                           <font>
+                              <Font size="39.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
+            <Button fx:id="btnMoist" layoutX="598.0" layoutY="218.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnMoist" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/water.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnMoist" opacity="0.0" text="수도" textFill="WHITE">
+                           <font>
+                              <Font size="39.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
+            <Button fx:id="btnDust" layoutX="597.0" layoutY="344.0" mnemonicParsing="false" prefHeight="108.0" prefWidth="166.0" styleClass="conditionBtn">
+               <graphic>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <ImageView fx:id="imgBtnDust" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/gasoline.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="lblBtnDust" alignment="CENTER" opacity="0.0" prefHeight="68.0" prefWidth="142.0" text="가스" textFill="WHITE">
+                           <font>
+                              <Font size="34.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </StackPane>
+               </graphic></Button>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>
