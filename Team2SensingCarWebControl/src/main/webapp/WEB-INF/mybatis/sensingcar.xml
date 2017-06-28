@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sensingcar">
+	
+	<insert id="insert" parameterType="com.mycompany.myapp.dto.Sensingcar" useGeneratedKeys="true" keyColumn="sno" keyProperty="sno" >
+		insert into sensingcar(sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription) values (#{sip}, #{sname}, #{sregistor}, #{soriginalfilename},#{ssavedfilename},#{sfilecontent},#{sdescription});
+	</insert>
+	
+	<select id= "selectExistSip" 
+		resultType="int">
+		select count(*) from sensingcar where sip=#{sip};	
+	</select>
+	
+	<select id="selectAll" resultType="com.mycompany.myapp.dto.Sensingcar">
+		select sno,sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription from sensingcar order by sip desc
+	</select>
+	
+</mapper>
