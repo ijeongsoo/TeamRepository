@@ -61,6 +61,7 @@ function drawAvailable() {
 	var noAvailableNo = 0;
 	availableStr = $('.available').text();
 	availableArray=availableStr.split(" ");
+	console.log(availableArray);
 	for(i=0; i<availableArray.length-1;i++){
 		if(availableArray[i]=='접속가능'){
 			availableNo++;

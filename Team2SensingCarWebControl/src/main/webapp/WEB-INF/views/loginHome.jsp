@@ -97,6 +97,11 @@
 						$("#checkButton")
 								.click(
 										function() {
+											$("#canUse").removeClass("alert-info");
+											$("#canUse").removeClass(
+													"alert-danger");
+											$("#canUse").removeClass(
+													"alert-warning");
 											$('#canUse')
 													.html(
 															"<img width='20px' src='resources/images/loading.gif'/>");
