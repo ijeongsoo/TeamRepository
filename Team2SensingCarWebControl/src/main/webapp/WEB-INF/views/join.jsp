@@ -33,62 +33,65 @@
 
 <script>
 	$(function() {
-		$("#mPasswordCheck").keyup(
-				function() {
-					if ($("#mPasswordCheck").val() == ''
-							|| $("#joinMpassword").val() == '') {
-						$("#pwcheck").removeClass("alert-danger");
-						$("#pwcheck").removeClass("alert-info");
-						$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
-					} else if ($("#mPasswordCheck").val() == $("#joinMpassword")
-							.val()) {
-						if (($("#mPasswordCheck").val() == $("#joinMpassword")
-								.val())
-								&& ($("#mPasswordCheck").val() == ' ' || $(
-										"#joinMpassword").val() == ' ')) {
-							$("#pwcheck").removeClass("alert-danger");
-							$("#pwcheck").removeClass("alert-info");
-							$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
-						} else {
-							$("#pwcheck").removeClass("alert-danger");
-							$("#pwcheck").removeClass("alert-info");
-							$("#pwcheck").addClass("alert-info");
-							$("#pwcheck").text('비밀번호가 일치합니다.');
-						}
+		var pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}/;
+		$("#mPasswordCheck")
+				.keyup(
+						function() {
+							if ($("#mPasswordCheck").val() == ''
+									|| $("#joinMpassword").val() == '') {
+								$("#pwcheck").removeClass("alert-danger");
+								$("#pwcheck").removeClass("alert-info");
+								$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
+							} else if ($("#mPasswordCheck").val() == $(
+									"#joinMpassword").val()) {
 
-					} else {
-						$("#pwcheck").addClass("alert-danger");
-						$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
-					}
-				});
+								if (pwReg.test($("#joinMpassword").val()) && $("#joinMpassword").val().length<=20) {
+									$("#pwcheck").removeClass("alert-danger");
+									$("#pwcheck").removeClass("alert-info");
+									$("#pwcheck").addClass("alert-info");
+									$("#pwcheck").text('비밀번호가 일치합니다.');
+								} else {
+									$("#pwcheck").addClass("alert-danger");
+									$("#pwcheck")
+											.text(
+													'비밀번호는 영어, 숫자, 특수문자 조합 8~20자리 이어야 합니다.');
+								}
+							} else {
+								$("#pwcheck").addClass("alert-danger");
+								$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
+							}
+						});
 
-		$("#joinMpassword").keyup(
-				function() {
-					if ($("#mPasswordCheck").val() == ''
-							|| $("#joinMpassword").val() == '') {
-						$("#pwcheck").removeClass("alert-danger");
-						$("#pwcheck").removeClass("alert-info");
-						$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
-					} else if ($("#mPasswordCheck").val() == $("#joinMpassword")
-							.val()) {
-						if (($("#mPasswordCheck").val() == $("#joinMpassword")
-								.val())
-								&& ($("#mPasswordCheck").val() == ' ' || $(
-										"#joinMpassword").val() == ' ')) {
-							$("#pwcheck").removeClass("alert-danger");
-							$("#pwcheck").removeClass("alert-info");
-							$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
-						} else {
-							$("#pwcheck").removeClass("alert-danger");
-							$("#pwcheck").addClass("alert-info");
-							$("#pwcheck").text('비밀번호가 일치합니다.');
-						}
-					} else {
-						$("#pwcheck").addClass("alert-danger");
-						$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
-					}
+		$("#joinMpassword")
+				.keyup(
+						function() {
+							if ($("#mPasswordCheck").val() == ''
+									|| $("#joinMpassword").val() == '') {
+								$("#pwcheck").removeClass("alert-danger");
+								$("#pwcheck").removeClass("alert-info");
+								$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
+							} else if ($("#mPasswordCheck").val() == $(
+									"#joinMpassword").val()) {
+								if (pwReg.test($("#joinMpassword").val()) && $("#joinMpassword").val().length<=20) {
+									$("#pwcheck").removeClass("alert-danger");
+									$("#pwcheck").removeClass("alert-info");
+									$("#pwcheck").addClass("alert-info");
+									$("#pwcheck").text('비밀번호가 일치합니다.');
+								} else {
+									
+									$("#pwcheck").addClass("alert-danger");
+									$("#pwcheck")
+											.text(
+													'비밀번호는 영어, 숫자, 특수문자 조합 8~20자리 이어야 합니다.');
+								}
+								
 
-				});
+							} else {
+								$("#pwcheck").addClass("alert-danger");
+								$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
+							}
+
+						});
 
 	});
 
@@ -102,10 +105,8 @@
 		});
 
 		$("#checkButton").click(function() {
-			if ($("#joinMid").val() == "") {
-				$("#canUse").addClass("alert-danger");
-				$("#canUse").text('ID를 입력해주세요.');
-			} else {
+			var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+			if (idReg.test($("#joinMid").val()) && $("#joinMid").val().length<=20) {
 				$.ajax({
 					'url' : "check_id",
 					'data' : {
@@ -136,6 +137,10 @@
 
 					}
 				});
+			} else {
+				$("#canUse").addClass("alert-danger");
+				$("#canUse").text('ID는 영어, 숫자 조합 6~20자리이어야 합니다.');
+				
 			}
 
 		});
@@ -255,8 +260,8 @@
 					<label style="font-size: 23px" class="2u 12u$(small)"
 						for="inputEmail">ID</label>
 					<div class="8u 12u$(small)" style="text-align: left">
-						<input name="joinMid" id="joinMid" type="text" placeholder="ID" required>
-						<label id="canUse" style="margin-top: 5px">중복확인해주세요</label>
+						<input name="joinMid" id="joinMid" type="text" placeholder="ID"
+							required> <label id="canUse" style="margin-top: 5px">중복확인해주세요</label>
 					</div>
 					<div class="2u$ 12u$(small)">
 						<a id="checkButton" class="btn btn-primary"

@@ -18,6 +18,9 @@
 <link
 	href="<%=application.getContextPath()%>/resources/css/style-xlarge.css"
 	rel="stylesheet" type="text/css" />
+<link
+	href="<%=application.getContextPath()%>/resources/css/circle-img.css"
+	rel="stylesheet" type="text/css" />
 <script
 	src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"
 	type="text/javascript"></script>
@@ -97,7 +100,8 @@
 						$("#checkButton")
 								.click(
 										function() {
-											$("#canUse").removeClass("alert-info");
+											$("#canUse").removeClass(
+													"alert-info");
 											$("#canUse").removeClass(
 													"alert-danger");
 											$("#canUse").removeClass(
@@ -209,6 +213,10 @@
 	}
 </script>
 <script>
+	function controlAlert(){
+		alert('접속이 불가능한 상태입니다.');
+	}
+
 	<c:forEach var="s" items="${list}">
 	setInterval("checkComunication('${s.sip}','${s.sregistor}${s.sno}')", 2000)
 	</c:forEach>
@@ -231,15 +239,23 @@
 							$(dest)
 									.html(
 											"접속가능 <img width='15px' src='resources/images/green.png'/>");
+							
+							$(dest).parent().wrap("<a href='control/?"+ip+"'></a>");
+							
 						} else {
 							$(dest)
 									.html(
 											"접속불가능 <img width='15px' src='resources/images/red.png'/>");
+							$(dest).parent().wrap("<a href='javascript:void(0);' onclick='controlAlert();'></a>");
+							
 						}
 					}
 				});
 	}
 </script>
+
+
+
 </head>
 
 <body class="landing">
@@ -359,12 +375,10 @@
 						<section class="box">
 							<img
 								src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
-								class="icon big rounded color6 " />
+								class="photo3" />
 							<h3>${s.sip}</h3>
 							<h3>${s.sname}/${s.sregistor}님등록</h3>
-							<p class="available" id="${s.sregistor}${s.sno}">
-								<img width="15px" src="resources/images/loading.gif" />
-							</p>
+							<p class="available" id="${s.sregistor}${s.sno}"><img width="15px" src="resources/images/loading.gif" /></p>
 						</section>
 					</div>
 
@@ -427,7 +441,7 @@
 
 
 	<!-- Two -->
-	<section id="two" class="wrapper style2 special">
+	<section id="two" class="wrapper style1 special">
 		<div class="container">
 			<header class="major">
 				<h2>Developer</h2>
@@ -436,7 +450,7 @@
 			<section class="profiles" style="text-align: center">
 				<div style="text-align: center;">
 					<section class="3u 12u(medium) 12u$(xsmall) profile"
-						style="display: inline-block; margin-left: 150px">
+						style="display: inline-block">
 						<img height="100" src="resources/images/jsPhoto.jpg" alt="" />
 						<h4>이정수</h4>
 						<p>Phon. 010-9895-5986</p>
