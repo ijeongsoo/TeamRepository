@@ -20,4 +20,5 @@ public interface Service {
 	
 	public void sensingcarRegist(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarListAll();
+	public Sensingcar getSensingcar(String sip);
 }

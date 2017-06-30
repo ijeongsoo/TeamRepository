@@ -18,4 +18,9 @@
 		select sno,sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription from sensingcar order by sip desc
 	</select>
 	
+	<select id="selectBySip" resultType="com.mycompany.myapp.dto.Sensingcar">
+		select sno,sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription from sensingcar where sip=#{sip};
+	</select>
+	
+	
 </mapper>

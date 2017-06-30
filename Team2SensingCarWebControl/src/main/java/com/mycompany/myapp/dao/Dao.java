@@ -14,6 +14,7 @@ public interface Dao {
 	public Member memberSelectByMid(String mid);
 	
 	public int sensingcarExistSelectBySip(String sip);
+	public Sensingcar sensingcarSelectBySip(String sip);
 	public int sensingcarInsert(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarSelectAll();
 }

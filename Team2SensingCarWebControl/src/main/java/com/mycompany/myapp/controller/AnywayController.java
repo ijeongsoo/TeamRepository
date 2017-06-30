@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URLEncoder;
+import java.util.Date;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
@@ -90,5 +91,28 @@ public class AnywayController {
 		fis.close();
 		os.close();
 
+	}
+	
+	@RequestMapping("/check_webserver_comunication")
+	public void checkWebserverComunication(String startTime, HttpServletResponse response) {
+		try {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("startTime", startTime);
+				String json = jsonObject.toString();
+				response.setContentType("application/json; charset=UTF-8");
+				PrintWriter pw;
+
+				pw = response.getWriter();
+
+				pw.write(json);
+				pw.flush();
+				pw.close();
+			
+			
+			
+
+			
+		} catch (IOException e) {
+		}
 	}
 }

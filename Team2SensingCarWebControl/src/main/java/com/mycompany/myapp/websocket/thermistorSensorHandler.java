@@ -1,10 +1,7 @@
 package com.mycompany.myapp.websocket;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.TimeZone;
 import java.util.Vector;
 

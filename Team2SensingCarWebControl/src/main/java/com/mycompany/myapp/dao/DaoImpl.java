@@ -55,5 +55,10 @@ public class DaoImpl implements Dao {
 		return list;
 	}
 	
+	@Override
+	public Sensingcar sensingcarSelectBySip(String sip) {
+		Sensingcar sensingcar = sst.selectOne("sensingcar.selectBySip", sip);
+		return sensingcar;
+	}
 	
 }

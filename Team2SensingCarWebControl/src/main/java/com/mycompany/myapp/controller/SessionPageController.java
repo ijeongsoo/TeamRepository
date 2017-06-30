@@ -98,6 +98,15 @@ public class SessionPageController {
 
 		return "loginHome";
 	}
+	
+	@RequestMapping("/control")
+	public String control(@ModelAttribute Member login_info, Model model, String sip) {
+		
+		Sensingcar sensingcar = service.getSensingcar(sip);
+		model.addAttribute("sensingcar", sensingcar);
+		model.addAttribute("cameraUrl", "http://"+sip+":50001?action=stream");
+		return "controlPage";
+	}
 
 	
 

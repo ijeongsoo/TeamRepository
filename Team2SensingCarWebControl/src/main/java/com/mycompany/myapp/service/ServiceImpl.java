@@ -116,6 +116,12 @@ public class ServiceImpl implements Service{
 		return list;
 	}
 	
+	@Override
+	public Sensingcar getSensingcar(String sip) {
+		Sensingcar sensingcar =dao.sensingcarSelectBySip(sip);
+		return sensingcar;
+	}
+	
 	
 
 }
