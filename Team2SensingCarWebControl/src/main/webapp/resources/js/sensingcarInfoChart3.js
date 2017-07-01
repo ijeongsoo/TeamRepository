@@ -46,7 +46,7 @@ $(function() {
 
 
 
-function webServerNetworkStatusCheck(startTime) {
+function webServerNetworkStatusCheck() {
 //	StartTime을 제는 부분
 	
 	var json={"startTime":(new Date().getTime()).toString()};
@@ -59,6 +59,7 @@ function webServerNetworkStatusCheck(startTime) {
 		method : "post",
 		timeout:10000,
 		error: function (jqXHR, textStatus, errorThrown) {
+			
 	    },
 		
 		success : function(data) {
@@ -67,6 +68,7 @@ function webServerNetworkStatusCheck(startTime) {
 			var result=endTime-startTime;
 			var series = sensingcarInfoChart3.series[0];
 			var shift = series.data.length > 10;
+			
 			series.addPoint([new Date().getTime(), result], true, shift);
 		}
 		

@@ -61,11 +61,12 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/chartTheme.js"></script>
 <script
+	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart3.js"></script>
+<script
 	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart2.js"></script>
-<script
-	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart3.js"></script>
+
 
 <script type="text/javascript">
 	function fileChange(event) {
@@ -213,14 +214,14 @@
 	}
 </script>
 <script>
-	function controlAlert(){
+	function controlAlert() {
 		alert('접속이 불가능한 상태입니다.');
 	}
-	
-	function controlYet(){
+
+	function controlYet() {
 		alert('통신상태를 확인중입니다.');
 	}
-	
+
 	<c:forEach var="s" items="${list}">
 	setInterval("checkComunication('${s.sip}','${s.sregistor}${s.sno}')", 2000)
 	</c:forEach>
@@ -243,20 +244,23 @@
 							$(dest)
 									.html(
 											"접속가능 <img width='15px' src='resources/images/green.png'/>");
-							$(dest).parent().parent().attr('href','control?sip='+ip);
-							$(dest).parent().parent().attr('onclick',''); 
-							
+							$(dest).parent().parent().attr('href',
+									'control?sip=' + ip);
+							$(dest).parent().parent().attr('onclick', '');
+
 						} else {
 							$(dest)
 									.html(
 											"접속불가능 <img width='15px' src='resources/images/red.png'/>");
-						 $(dest).parent().parent().attr('href','javascript:void(0);');
-							$(dest).parent().parent().attr('onclick','controlAlert();'); 
-							
+							$(dest).parent().parent().attr('href',
+									'javascript:void(0);');
+							$(dest).parent().parent().attr('onclick',
+									'controlAlert();');
+
 						}
 					}
 				});
-	} 
+	}
 </script>
 
 
@@ -378,14 +382,16 @@
 				<c:forEach var="s" items="${list}">
 					<div class="4u 12u$(medium)">
 						<a href='javascript:void(0);' onclick='controlYet();'>
-						<section class="box">
-							<img
-								src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
-								class="photo3" />
-							<h3>${s.sip}</h3>
-							<h3>${s.sname}/${s.sregistor}님등록</h3>
-							<p class="available" id="${s.sregistor}${s.sno}"><img width="15px" src="resources/images/loading.gif" /></p>
-						</section>
+							<section class="box">
+								<img
+									src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
+									class="photo3" />
+								<h3>${s.sip}</h3>
+								<h3>${s.sname}/${s.sregistor}님등록</h3>
+								<p class="available" id="${s.sregistor}${s.sno}">
+									<img width="15px" src="resources/images/loading.gif" />
+								</p>
+							</section>
 						</a>
 					</div>
 

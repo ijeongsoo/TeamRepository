@@ -37,6 +37,16 @@
 
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
+
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts-more.js"></script>
+
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
+
+
+
+
 <style>
 @media screen and (min-width: 480px) {
 	#title {
@@ -46,52 +56,63 @@
 </style>
 
 
+
 </head>
 
-<body class="landing">
+<body>
 
 	<!-- Header -->
 	<header id="header">
-		<h1>
-			<a type="button" style="color: #ff0080; border: 2px solid #ffffff;"
-				class="button alt" href="<%=application.getContextPath()%>">Team2's
-				SensingCar</a>
+		<h1 class="0u(medium)">
+			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a> <span>|
+				"${sensingcar.sregistor}"님이 등록하신 "${sensingcar.sname}":
+				${sensingcar.sip }</span>
 		</h1>
-
 		<nav id="nav">
 			<ul>
-				<li><a type="button" class="btn btn-info" href="logout">Log
+				<li><a href="generic.html">RealTime Sensor</a></li>
+				<li><a href="<%=application.getContextPath()%>">Home</a></li>
+				<li><a type="button" class="button special" href="logout">Log
 						Out</a></li>
 			</ul>
 		</nav>
-
 	</header>
 
-
-	<!-- Banner -->
-	<section class="style1 ">
-
-
-
-		<div class="7u$ 12u(medium)" style=" height: 0; padding-bottom: 37%;">
-			<div class="thumbnail">
-				<div class="centered">
-					<img src="${cameraUrl}" class="portrait" />
+	<!-- Main -->
+	<section id="main" class="wrapper" style="padding: 0px">
+		<div class="row">
+			<div class="3u 12u(medium)" style="height: 0; padding-bottom: 31%">
+				<div class="6u 12u$(medium)">
+					<div style="width: 600px; height: 400px; margin: 0 auto">
+						<div id="container-speed"
+							style="width: 300px; height: 200px; float: left"></div>
+						<div id="container-rpm"
+							style="width: 300px; height: 200px; float: left"></div>
+					</div>
 				</div>
 			</div>
-		</div>
+			<div class="6u 12u(medium)"
+				style="padding-left: 0; height: 0; padding-bottom: 31%;">
+				<div class="thumbnail">
+					<div class="centered">
+						<img src="${cameraUrl}" class="portrait" />
+					</div>
+				</div>
+			</div>
+			<div class="3u$ 3u(medium)" style="height: 0; padding-bottom: 31%;">
+			</div>
 
+
+		</div>
 	</section>
 
 	<!-- One -->
 	<section id="one" class="wrapper style2 special">
-		<div class="container">
-			<header class="major">
-				<h2>등록된 SensingCar</h2>
-				<p>현재 등록된 SensigCar는 다음과 같으며 추가할수 있습니다.</p>
-			</header>
 
-		</div>
+
+		<script>
+			
+		</script>
 	</section>
 
 
@@ -220,7 +241,9 @@
 			</div>
 		</div>
 	</footer>
-
+<script
+	src="<%=application.getContextPath()%>/resources/js/thermistorGauge.js"></script>
+	
 
 
 </body>
