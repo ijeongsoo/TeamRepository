@@ -55,7 +55,6 @@ $(function() {
 
 
 $(function webServerCheckRepeat() {
-	
 	setInterval("webServerNetworkStatusCheck()", 2000)
 });
 
@@ -64,15 +63,18 @@ $(function webServerCheckRepeat() {
 function webServerNetworkStatusCheck() {
 //	StartTime을 제는 부분
 	
-	var json={"startTime":(new Date().getTime()).toString()};
+	var	startTime = (new Date().getTime()).toString();
+	var json={
+			"startTime" : startTime
+			};
+	
 	//통신 및 endTime 
 	$.ajax({
-		url : "http://" + location.host
-				+ "/Team2SensingCarWebControl/check_webserver_comunication",
+		url : "http://" + location.host + "/Team2SensingCarWebControl/check_webserver_comunication",
 		data : json,
-		async:true,
+		async: true,
 		method : "post",
-		timeout:10000,
+		timeout: 10000,
 		error: function (request, Status, error) {
 			
 		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
@@ -94,15 +96,13 @@ function webServerNetworkStatusCheck() {
 				 $("#testPTagChange").attr("src","resources/images/green.png");
 				 $("#testSTagChange").html("Good");
 				
-			} else if(result <= 8){
+			}else if(result <= 8){
 				 $("#testPTagChange").attr("src","resources/images/orange.png");
 				 $("#testSTagChange").html("Normal");
 					
-			} else {
-				
+			}else{
 				$("#testPTagChange").attr("src","resources/images/red.png");
 				$("#testSTagChange").html("Bad");
-				
 			}
 			
 		}

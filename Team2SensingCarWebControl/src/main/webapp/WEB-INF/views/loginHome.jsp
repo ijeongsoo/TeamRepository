@@ -233,29 +233,20 @@
 		};
 		var dest = "#" + dest;
 
-		$
-				.ajax({
-					url : "http://" + location.host
-							+ "/Team2SensingCarWebControl/check_comunication",
+		$.ajax({
+					url : "http://" + location.host+ "/Team2SensingCarWebControl/check_comunication",
 					data : json,
 					method : "post",
 					success : function(data) {
 						if (data.result == 1) {
-							$(dest)
-									.html(
-											"접속가능 <img width='15px' src='resources/images/green.png'/>");
-							$(dest).parent().parent().attr('href',
-									'control?sip=' + ip);
+							$(dest).html("접속가능 <img width='15px' src='resources/images/green.png'/>");
+							$(dest).parent().parent().attr('href','control?sip=' + ip);
 							$(dest).parent().parent().attr('onclick', '');
 
 						} else {
-							$(dest)
-									.html(
-											"접속불가능 <img width='15px' src='resources/images/red.png'/>");
-							$(dest).parent().parent().attr('href',
-									'javascript:void(0);');
-							$(dest).parent().parent().attr('onclick',
-									'controlAlert();');
+							$(dest).html("접속불가능 <img width='15px' src='resources/images/red.png'/>");
+							$(dest).parent().parent().attr('href','javascript:void(0);');
+							$(dest).parent().parent().attr('onclick','controlAlert();');
 
 						}
 					}
