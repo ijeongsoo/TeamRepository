@@ -214,6 +214,8 @@
 	}
 </script>
 <script>
+
+	
 	function controlAlert() {
 		alert('접속이 불가능한 상태입니다.');
 	}
@@ -233,26 +235,72 @@
 		};
 		var dest = "#" + dest;
 
-		$.ajax({
-					url : "http://" + location.host+ "/Team2SensingCarWebControl/check_comunication",
+		$
+				.ajax({
+					url : "http://" + location.host
+							+ "/Team2SensingCarWebControl/check_comunication",
 					data : json,
 					method : "post",
 					success : function(data) {
 						if (data.result == 1) {
-							$(dest).html("접속가능 <img width='15px' src='resources/images/green.png'/>");
-							$(dest).parent().parent().attr('href','control?sip=' + ip);
+							$(dest)
+									.html(
+											"접속가능 <img width='15px' src='resources/images/green.png'/>");
+							$(dest).parent().parent().attr('href',
+									'control?sip=' + ip);
 							$(dest).parent().parent().attr('onclick', '');
 
 						} else {
-							$(dest).html("접속불가능 <img width='15px' src='resources/images/red.png'/>");
-							$(dest).parent().parent().attr('href','javascript:void(0);');
-							$(dest).parent().parent().attr('onclick','controlAlert();');
+							$(dest)
+									.html(
+											"접속불가능 <img width='15px' src='resources/images/red.png'/>");
+							$(dest).parent().parent().attr('href',
+									'javascript:void(0);');
+							$(dest).parent().parent().attr('onclick',
+									'controlAlert();');
 
 						}
 					}
 				});
 	}
 </script>
+
+
+
+
+
+<script type="text/javascript">
+
+<c:forEach var="i" begin="1" end="1" step="1">
+	setInterval("drawUserAvailable('${login_info.mid}')", 2000)
+</c:forEach>
+
+function drawUserAvailable(mid) {
+
+	var userAvailablecount=0;
+	var userNoAvailablecount=0;
+	<c:forEach var="s" items="${list}">
+	var dest = '#${s.sregistor}${s.sno}';
+	if(($('#${s.sregistor}${s.sno}').html())=='접속가능 <img width="15px" src="resources/images/green.png">' && $('#${s.sregistor}${s.sno}').siblings('h4').html()==(mid+" ")){
+		userAvailablecount++;
+	}else if(($('#${s.sregistor}${s.sno}').html())=='접속불가능 <img width="15px" src="resources/images/red.png">' && $('#${s.sregistor}${s.sno}').siblings('h4').html()==(mid+" ")){
+		userNoAvailablecount++;
+	}
+	</c:forEach>
+	
+	console.log(sensingcarInfoChart2);
+	var userTotal=userAvailablecount+userNoAvailablecount;
+	   
+	sensingcarInfoChart2.xAxis[0].setTitle({
+        text: mid
+    });
+	sensingcarInfoChart2.series[0].data[0].update({'y':userTotal});
+	sensingcarInfoChart2.series[1].data[0].update({'y':userNoAvailablecount});
+	sensingcarInfoChart2.series[2].data[0].update({'y': userAvailablecount});
+}
+</script>
+
+
 
 
 
@@ -378,7 +426,8 @@
 									src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
 									class="photo3" />
 								<h3>${s.sip}</h3>
-								<h3>${s.sname}/${s.sregistor}님등록</h3>
+								<h3>${s.sname}</h3>
+								<h4 class="checkMid">${s.sregistor} </h4>
 								<p class="available" id="${s.sregistor}${s.sno}">
 									<img width="15px" src="resources/images/loading.gif" />
 								</p>
@@ -434,11 +483,14 @@
 						<div class="container" id="sensingcarInfoChartContainer3"
 							style="min-width: 310px; height: 400px; max-width: 1200px; margin: 0 auto"></div>
 						<p class="available" id="result">
-							<div style="text-align:left">
-								<span style="font-size:20pt; font-weight: bold; width:1000px"> &nbsp; &nbsp; &nbsp; Network Quality &nbsp; : &nbsp; </span>
-								<img id="testPTagChange" width="15px" src="resources/images/loading.gif" />
-								<span style="font-size:20pt; font-weight: bold; width:1000px" id="testSTagChange">Ready</span>
-							</div>
+						<div style="text-align: left">
+							<span style="font-size: 20pt; font-weight: bold; width: 1000px">
+								&nbsp; &nbsp; &nbsp; Network Quality &nbsp; : &nbsp; </span> <img
+								id="testPTagChange" width="15px"
+								src="resources/images/loading.gif" /> <span
+								style="font-size: 20pt; font-weight: bold; width: 1000px"
+								id="testSTagChange">Ready</span>
+						</div>
 						</p>
 					</section>
 				</div>
