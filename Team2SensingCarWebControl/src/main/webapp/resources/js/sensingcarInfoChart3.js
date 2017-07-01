@@ -55,7 +55,7 @@ $(function() {
 
 
 $(function webServerCheckRepeat() {
-	//webServerNetworkStatusCheckStart();
+	
 	setInterval("webServerNetworkStatusCheck()", 2000)
 });
 
@@ -67,7 +67,8 @@ function webServerNetworkStatusCheck() {
 	var json={"startTime":(new Date().getTime()).toString()};
 	//통신 및 endTime 
 	$.ajax({
-		url : "http://" + location.host+ "/Team2SensingCarWebControl/check_webserver_comunication",
+		url : "http://" + location.host
+				+ "/Team2SensingCarWebControl/check_webserver_comunication",
 		data : json,
 		async:true,
 		method : "post",
@@ -79,8 +80,8 @@ function webServerNetworkStatusCheck() {
 	    },
 		
 		success : function(data) {
-			var startTime = data.startTime;
-			var endTime = new Date().getTime();
+			var startTime=data.startTime;
+			var endTime= new Date().getTime();
 			var result = endTime-startTime;
 			var series = sensingcarInfoChart3.series[0];
 			var shift = series.data.length > 10;
@@ -92,13 +93,13 @@ function webServerNetworkStatusCheck() {
 			if (result <= 5) {
 				 $("#testPTagChange").attr("src","resources/images/green.png");
 				 $("#testSTagChange").html("Good");
-
-
+				
+			} else if(result <= 8){
 				 $("#testPTagChange").attr("src","resources/images/orange.png");
 				 $("#testSTagChange").html("Normal");
 					
 			} else {
-				console.log(result);
+				
 				$("#testPTagChange").attr("src","resources/images/red.png");
 				$("#testSTagChange").html("Bad");
 				
@@ -109,5 +110,4 @@ function webServerNetworkStatusCheck() {
 	});
 	
 }
-
 

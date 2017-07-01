@@ -444,8 +444,8 @@
 						<div class="container" id="sensingcarInfoChartContainer3"
 							style="min-width: 310px; height: 400px; max-width: 1200px; margin: 0 auto"></div>
 						<p class="available" id="result">
-							<img id="testPTagChange" width="15px"
-								src="resources/images/loading.gif" /> <span id="testSTagChange">Ready</span>
+							<img id="testPTagChange" width="15px" src="resources/images/loading.gif" />
+							<span id="testSTagChange">Ready</span>
 						</p>
 					</section>
 				</div>
