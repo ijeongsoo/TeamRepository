@@ -394,7 +394,6 @@
 							</section>
 						</a>
 					</div>
-
 				</c:forEach>
 
 

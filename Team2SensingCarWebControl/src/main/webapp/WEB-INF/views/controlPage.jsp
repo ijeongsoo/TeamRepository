@@ -44,6 +44,8 @@
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 
+<script src="<%=application.getContextPath()%>/resources/js/rgbView.js"></script>
+
 
 
 
@@ -55,7 +57,28 @@
 }
 </style>
 
+<script>
 
+
+
+/* $(function(){
+	window.moveTo(0, 0);
+	window.resizeTo(screen.availWidth, screen.availHeight);
+	if($(window).width()>980){
+		$( ".leftcon " ).css("height", ($(window).width()/10));
+		 
+	}
+	
+	$( window ).resize(function() {
+		if($(window).width()>980){
+		  $( ".leftcon" ).css("height", ($(window).width()/10));
+		}else{
+			$( ".leftcon" ).css("height", '200px');
+		}
+	});
+
+}); */
+</script>
 
 </head>
 
@@ -81,14 +104,25 @@
 	<!-- Main -->
 	<section id="main" class="wrapper" style="padding: 0px">
 		<div class="row">
-			<div class="3u 12u(medium)" style="height: 0; padding-bottom: 31%">
-				<div class="6u 12u$(medium)">
-					<div style="width: 600px; height: 400px; margin: 0 auto">
-						<div id="container-speed"
-							style="width: 300px; height: 200px; float: left"></div>
-						<div id="container-rpm"
-							style="width: 300px; height: 200px; float: left"></div>
-					</div>
+			<div class="3u 12u(medium) ">
+				<div class="row">
+					<div class="6u 6u(medium) leftcon" id="container-thermistor"
+						style="height:11em"></div>
+
+					<div class="6u$ 6u(medium) leftcon" id="container-photoresistor"
+						style="height:11em"></div>
+				</div>
+				<div class="row">
+					<div class="6u 6u(medium) leftcon" id="container-gas"
+						style="height:11em"></div>
+					<div class="6u$ 6u$(medium) leftcon" id="container-ultrasonic"
+						style="height:11em"></div>
+				</div>
+				<div class="row">
+					<div class="6u 6u(medium) leftcon" id="container-rgb"
+						style="height:11em"></div>
+					<div class="6u$ 6u$(medium) leftcon" id="container-tracking"
+						style="height:11em"></div>
 				</div>
 			</div>
 			<div class="6u 12u(medium)"
@@ -99,7 +133,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="3u$ 3u(medium)" style="height: 0; padding-bottom: 31%;">
+			<div class="3u$ 12u(medium)" style="height: 0; padding-bottom: 31%;">
 			</div>
 
 
@@ -109,11 +143,7 @@
 	<!-- One -->
 	<section id="one" class="wrapper style2 special">
 
-
-		<script>
-			
-		</script>
-	</section>
+		aaaaaaaaaaaaaaaaaaa</section>
 
 
 	<section id="one" class="wrapper style2 special" style="color: black">
@@ -241,9 +271,8 @@
 			</div>
 		</div>
 	</footer>
-<script
-	src="<%=application.getContextPath()%>/resources/js/thermistorGauge.js"></script>
-	
+	<script src="<%=application.getContextPath()%>/resources/js/gauge.js"></script>
+
 
 
 </body>

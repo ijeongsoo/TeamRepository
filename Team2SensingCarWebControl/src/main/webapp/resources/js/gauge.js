@@ -4,16 +4,17 @@
 	var gaugeOptions = {
 
 		chart : {
+			height: null,
 			type : 'solidgauge'
 		},
 
 		title : null,
 
 		pane : {
-			center : [ '50%', '85%' ],
-			size : '140%',
-			startAngle : -90,
-			endAngle : 90,
+			center : [ '50%', '50%' ],
+			size : '100%',
+			startAngle : -120,
+			endAngle : 120,
 			background : {
 				backgroundColor : (Highcharts.theme && Highcharts.theme.background2)
 						|| '#EEE',
@@ -37,7 +38,7 @@
 			minorTickInterval : null,
 			tickAmount : 2,
 			title : {
-				y : -70
+				y : 80
 			},
 			labels : {
 				y : 16
@@ -47,7 +48,7 @@
 		plotOptions : {
 			solidgauge : {
 				dataLabels : {
-					y : 5,
+					y : -30,
 					borderWidth : 0,
 					useHTML : true
 				}
@@ -56,9 +57,9 @@
 	};
 
 	// The speed gauge
-	var chartSpeed = Highcharts
+	var chartThermistor = Highcharts
 			.chart(
-					'container-speed',
+					'container-thermistor',
 					Highcharts
 							.merge(
 									gaugeOptions,
@@ -92,8 +93,8 @@
 									}));
 
 	// The RPM gauge
-	var chartRpm = Highcharts
-			.chart('container-rpm',
+	var chartPhotoresistor = Highcharts
+			.chart('container-photoresistor',
 					Highcharts.merge(gaugeOptions,
 									{
 										yAxis : {
@@ -103,7 +104,9 @@
 												text : 'RPM'
 											}
 										},
-
+										credits : {
+											enabled : false
+										},
 										series : [ {
 											name : 'RPM',
 											data : [ 1 ],
@@ -119,6 +122,67 @@
 										} ]
 
 									}));
+	
+	var chartGas = Highcharts
+	.chart('container-gas',
+			Highcharts.merge(gaugeOptions,
+							{
+								yAxis : {
+									min : 0,
+									max : 5,
+									title : {
+										text : 'RPM'
+									}
+								},
+								credits : {
+									enabled : false
+								},
+								series : [ {
+									name : 'RPM',
+									data : [ 1 ],
+									dataLabels : {
+										format : '<div style="text-align:center"><span style="font-size:25px;color:'
+												+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
+												+ '">{y:.1f}</span><br/>'
+												+ '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+									},
+									tooltip : {
+										valueSuffix : ' revolutions/min'
+									}
+								} ]
+
+							}));
+
+	var chartTracking = Highcharts
+	.chart('container-ultrasonic',
+			Highcharts.merge(gaugeOptions,
+							{
+								yAxis : {
+									min : 0,
+									max : 5,
+									title : {
+										text : 'RPM'
+									}
+								},
+								credits : {
+									enabled : false
+								},
+								series : [ {
+									name : 'RPM',
+									data : [ 1 ],
+									dataLabels : {
+										format : '<div style="text-align:center"><span style="font-size:25px;color:'
+												+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
+												+ '">{y:.1f}</span><br/>'
+												+ '<span style="font-size:12px;color:silver">* 1000 / min</span></div>'
+									},
+									tooltip : {
+										valueSuffix : ' revolutions/min'
+									}
+								} ]
+
+							}));
+
 
 	
 
