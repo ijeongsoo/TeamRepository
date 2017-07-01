@@ -94,8 +94,7 @@ function webServerNetworkStatusCheck() {
 				 $("#testSTagChange").html("Good");
 
 
-				 $("#testPTagChange").attr("src","resou" +
-				 		"rces/images/orange.png");
+				 $("#testPTagChange").attr("src","resources/images/orange.png");
 				 $("#testSTagChange").html("Normal");
 					
 			} else {
