@@ -63,3 +63,53 @@ $(function() {
 });
 
 
+function webServerNetworkStatusCheck() {
+	//	StartTime을 제는 부분
+	
+	var	startTime = (new Date().getTime()).toString();
+	var json={
+			"startTime" : startTime
+			};
+	
+	//통신 및 endTime 
+	$.ajax({
+		url : "http://" + location.host + "/Team2SensingCarWebControl/check_webserver_comunication",
+		data : json,
+		async: true,
+		method : "post",
+		timeout: 10000,
+		error: function (request, Status, error) {
+			
+		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		window.location.replace("http://10.10.10.57:8080/Team2SensingCarWebControl/");
+	    },
+		
+		success : function(data) {
+			var startTime=data.startTime;
+			var endTime= new Date().getTime();
+			var result = endTime-startTime;
+			var series = sensingcarInfoChart3.series[0];
+			var shift = series.data.length > 10;
+			
+			series.addPoint([new Date().getTime(), result], true, shift);
+			
+			if (result <= 5) {
+				 $("#testPTagChange").attr("src","resources/images/green.png");
+				 $("#testSTagChange").html("Good");
+				
+			}else if(result <= 8){
+				 $("#testPTagChange").attr("src","resources/images/orange.png");
+				 $("#testSTagChange").html("Normal");
+					
+			}else{
+				$("#testPTagChange").attr("src","resources/images/red.png");
+				$("#testSTagChange").html("Bad");
+			}
+			
+		}
+		
+	});
+	
+}
+
+

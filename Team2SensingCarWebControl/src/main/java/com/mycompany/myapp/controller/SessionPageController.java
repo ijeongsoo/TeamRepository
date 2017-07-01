@@ -95,7 +95,6 @@ public class SessionPageController {
 
 		List<Sensingcar> list = service.sensingcarListAll();
 		model.addAttribute("list", list);
-
 		return "loginHome";
 	}
 	

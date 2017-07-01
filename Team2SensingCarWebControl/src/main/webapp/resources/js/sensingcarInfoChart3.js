@@ -11,7 +11,6 @@ $(function() {
 		chart: {
 			renderTo:"sensingcarInfoChartContainer3",
 			type:"spline"
-			
 		},
 		colors: ['cyan'],
 		title: {
@@ -22,7 +21,11 @@ $(function() {
 			tickPixelInterval: 100,
 			minRange: 20*1000,
 			title: {
-				text: "Time Interval : 2sec"
+				text: "Time Interval : 2sec",
+				style: {
+					fontSize: 18,
+				},
+				margin : 25
 			}
 		},
 		yAxis: {
@@ -30,8 +33,10 @@ $(function() {
 			maxPadding: 0.2,
 			title: {
 				text: "네트워크 통신 시간 (millisec)",
-				fontSize: 20,
-				margin: 30
+				style: {
+					fontSize: 18,
+				},
+				margin : 25
 			}
 		},
 		series: [{
@@ -61,7 +66,7 @@ $(function webServerCheckRepeat() {
 
 
 function webServerNetworkStatusCheck() {
-//	StartTime을 제는 부분
+	//	StartTime을 제는 부분
 	
 	var	startTime = (new Date().getTime()).toString();
 	var json={
@@ -89,8 +94,6 @@ function webServerNetworkStatusCheck() {
 			var shift = series.data.length > 10;
 			
 			series.addPoint([new Date().getTime(), result], true, shift);
-			
-			
 			
 			if (result <= 5) {
 				 $("#testPTagChange").attr("src","resources/images/green.png");

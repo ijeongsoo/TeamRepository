@@ -434,12 +434,14 @@
 						<div class="container" id="sensingcarInfoChartContainer3"
 							style="min-width: 310px; height: 400px; max-width: 1200px; margin: 0 auto"></div>
 						<p class="available" id="result">
-							<img id="testPTagChange" width="15px" src="resources/images/loading.gif" />
-							<span id="testSTagChange">Ready</span>
+							<div style="text-align:left">
+								<span style="font-size:20pt; font-weight: bold; width:1000px"> &nbsp; &nbsp; &nbsp; Network Quality &nbsp; : &nbsp; </span>
+								<img id="testPTagChange" width="15px" src="resources/images/loading.gif" />
+								<span style="font-size:20pt; font-weight: bold; width:1000px" id="testSTagChange">Ready</span>
+							</div>
 						</p>
 					</section>
 				</div>
-
 
 			</div>
 		</div>
