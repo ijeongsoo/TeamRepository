@@ -233,29 +233,20 @@
 		};
 		var dest = "#" + dest;
 
-		$
-				.ajax({
-					url : "http://" + location.host
-							+ "/Team2SensingCarWebControl/check_comunication",
+		$.ajax({
+					url : "http://" + location.host+ "/Team2SensingCarWebControl/check_comunication",
 					data : json,
 					method : "post",
 					success : function(data) {
 						if (data.result == 1) {
-							$(dest)
-									.html(
-											"접속가능 <img width='15px' src='resources/images/green.png'/>");
-							$(dest).parent().parent().attr('href',
-									'control?sip=' + ip);
+							$(dest).html("접속가능 <img width='15px' src='resources/images/green.png'/>");
+							$(dest).parent().parent().attr('href','control?sip=' + ip);
 							$(dest).parent().parent().attr('onclick', '');
 
 						} else {
-							$(dest)
-									.html(
-											"접속불가능 <img width='15px' src='resources/images/red.png'/>");
-							$(dest).parent().parent().attr('href',
-									'javascript:void(0);');
-							$(dest).parent().parent().attr('onclick',
-									'controlAlert();');
+							$(dest).html("접속불가능 <img width='15px' src='resources/images/red.png'/>");
+							$(dest).parent().parent().attr('href','javascript:void(0);');
+							$(dest).parent().parent().attr('onclick','controlAlert();');
 
 						}
 					}
@@ -442,6 +433,10 @@
 					<section class="major">
 						<div class="container" id="sensingcarInfoChartContainer3"
 							style="min-width: 310px; height: 400px; max-width: 1200px; margin: 0 auto"></div>
+						<p class="available" id="result">
+							<img id="testPTagChange" width="15px" src="resources/images/loading.gif" />
+							<span id="testSTagChange">Ready</span>
+						</p>
 					</section>
 				</div>
 
