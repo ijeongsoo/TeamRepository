@@ -18,4 +18,9 @@
 		resultType="com.mycompany.myapp.dto.Member" parameterType="string">
 		select mid, mname, mpassword, mdate, mtel, memail, maddress from member where mid=#{mid};	
 	</select>
+	
+	
+	<select id="selectAll" resultType="com.mycompany.myapp.dto.Sensingcar">
+		select sno,sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription from sensingcar order by sip desc
+	</select>
 </mapper>
