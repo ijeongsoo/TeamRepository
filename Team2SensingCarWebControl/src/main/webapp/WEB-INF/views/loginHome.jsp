@@ -379,9 +379,7 @@
 									class="photo3" />
 								<h3>${s.sip}</h3>
 								<h3>${s.sname}/${s.sregistor}님등록</h3>
-								<p class="available" id="${s.sregistor}${s.sno}">
-									<img width="15px" src="resources/images/loading.gif" />
-								</p>
+								<p class="available" id="${s.sregistor}${s.sno}"><img width="15px" src="resources/images/loading.gif"/></p>
 							</section>
 						</a>
 					</div>

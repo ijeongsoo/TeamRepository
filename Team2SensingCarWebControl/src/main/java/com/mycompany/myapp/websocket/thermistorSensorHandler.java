@@ -24,7 +24,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 @Component
-public class thermistorSensorHandler extends TextWebSocketHandler implements ApplicationListener{
+public class thermistorSensorHandler extends TextWebSocketHandler implements ApplicationListener {
 	private static final Logger logger = LoggerFactory.getLogger(thermistorSensorHandler.class);
 
 	private List<WebSocketSession> list = new Vector<>();
@@ -35,29 +35,30 @@ public class thermistorSensorHandler extends TextWebSocketHandler implements App
 	public void init() {
 		coapClient = new CoapClient();
 		coapClient.setURI("coap://192.168.3.36/thermistorsensor");
-		coapObserveRelateion=coapClient.observe(new CoapHandler() {
-			
+		coapObserveRelateion = coapClient.observe(new CoapHandler() {
+
 			@Override
 			public void onLoad(CoapResponse response) {
-				String json=response.getResponseText();
+				String json = response.getResponseText();
 				JSONObject jsonObject = new JSONObject(json);
 				double doubleT = Double.parseDouble(jsonObject.getString("temperature"));
-				double temperature=((int)(doubleT*10))/10.0;
-				
-				jsonObject= new JSONObject();
+				double temperature = ((int) (doubleT * 10)) / 10.0;
+
+				jsonObject = new JSONObject();
 				jsonObject.put("time", getUTCTime(new Date().getTime()));
 				jsonObject.put("temperature", temperature);
 				json = jsonObject.toString();
-				try{
-					for(WebSocketSession session : list){
+				try {
+					for (WebSocketSession session : list) {
 						session.sendMessage(new TextMessage(json));
 					}
-				}catch(Exception e){}
+				} catch (Exception e) {
+				}
 			}
-			
+
 			@Override
 			public void onError() {
-				
+
 			}
 		});
 	}
@@ -89,14 +90,13 @@ public class thermistorSensorHandler extends TextWebSocketHandler implements App
 		}
 		return utcTime;
 	}
-	
+
 	@Override
 	public void onApplicationEvent(ApplicationEvent event) {
-		if(event instanceof ContextClosedEvent){
+		if (event instanceof ContextClosedEvent) {
 			coapObserveRelateion.proactiveCancel();
 			coapClient.shutdown();
 		}
 	}
-	
 
 }

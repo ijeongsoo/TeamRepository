@@ -18,6 +18,7 @@ public interface Service {
 	
 	public int checkCoumunication(String sip, String command);
 	
+	public String thermistorSensor(String sip, String command);
 	public void sensingcarRegist(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarListAll();
 	public Sensingcar getSensingcar(String sip);

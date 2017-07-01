@@ -20,108 +20,128 @@ import com.mycompany.myapp.dto.Member;
 import com.mycompany.myapp.dto.Sensingcar;
 
 @Component
-public class ServiceImpl implements Service{
+public class ServiceImpl implements Service {
 	private static final Logger logger = LoggerFactory.getLogger(ServiceImpl.class);
 	@Autowired
 	private Dao dao;
-	
+
 	@Override
 	public int joinCheckID(String mid) {
 		// TODO Auto-generated method stub
-		int result=0;
-		int count =dao.memberExistSelectByMid(mid);
-		
-		if(count==0){
+		int result = 0;
+		int count = dao.memberExistSelectByMid(mid);
+
+		if (count == 0) {
 			result = 1;
 		}
 		return result;
 	}
-	
+
 	@Override
 	public void memberJoin(Member member) {
 		dao.memberInsert(member);
 	}
 
-	
 	@Override
 	public Member login(String mid, String mpassword) {
 		logger.info(mpassword);
-		Member member=dao.memberSelectByMid(mid);
-		if(member==null){
+		Member member = dao.memberSelectByMid(mid);
+		if (member == null) {
 			return null;
-		}else{
-			if(member.getMpassword().equals(mpassword)){
+		} else {
+			if (member.getMpassword().equals(mpassword)) {
 				return member;
-			}else{
+			} else {
 				return null;
 			}
 		}
-		
+
 	}
-	
-	
-	
+
 	@Override
 	public Member getMember(String mid) {
 		Member member = dao.memberSelectByMid(mid);
 		return member;
 	}
-	
+
 	@Override
 	public int registCheckIP(String sip) {
-		int result=0;
-		int count =dao.sensingcarExistSelectBySip(sip);
-		
-		if(count==0){
+		int result = 0;
+		int count = dao.sensingcarExistSelectBySip(sip);
+
+		if (count == 0) {
 			result = 1;
 		}
 		return result;
 	}
-	
+
 	@Override
 	public int checkCoumunication(String sip, String command) {
-		int result=1;
-		
+		int result = 1;
+
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("command", command);
 
 		String reqJson = jsonObject.toString();
 
 		CoapClient coapClient = new CoapClient();
-		coapClient.setURI("coap://"+sip+"/lcd");
-		
+		coapClient.setURI("coap://" + sip + "/lcd");
+
 		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
-		
-		if(coapResponse==null){
-			result=0;
+
+		if (coapResponse == null) {
+			result = 0;
 			coapClient.shutdown();
 		}
-		
-		
-		
+
 		return result;
-		
 
 	}
-	
+
 	@Override
 	public void sensingcarRegist(Sensingcar sensingcar) {
 		// TODO Auto-generated method stub
 		dao.sensingcarInsert(sensingcar);
 	}
-	
+
 	@Override
 	public List<Sensingcar> sensingcarListAll() {
 		List<Sensingcar> list = dao.sensingcarSelectAll();
 		return list;
 	}
-	
+
 	@Override
 	public Sensingcar getSensingcar(String sip) {
-		Sensingcar sensingcar =dao.sensingcarSelectBySip(sip);
+		Sensingcar sensingcar = dao.sensingcarSelectBySip(sip);
 		return sensingcar;
 	}
-	
-	
+
+	@Override
+	public String thermistorSensor(String sip, String command) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/thermistorsensor");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		
+		jsonObject = new JSONObject(json);
+		String temp = jsonObject.getString("temperature");
+		double tempD = Double.parseDouble(temp);
+		double tempDD= Math.round(tempD*10d) / 10d;
+		String result = String.valueOf(tempDD);
+		jsonObject = new JSONObject();
+		jsonObject.put("temperature", result);
+		json=jsonObject.toString();
+		coapClient.shutdown();
+		
+		return json;
+
+	}
 
 }
