@@ -1,8 +1,8 @@
-function frontTire(command, angle) {
-
+function frontTire(ip) {
 	var json = {
-		"command" : command,
-		"angle" : angle
+		"command" : change,
+		"angle" : $('#frontTireAngle').val(),
+		"sip":ip
 	};
 
 	$.ajax({
@@ -11,10 +11,9 @@ function frontTire(command, angle) {
 		data : json,
 		method : "post",
 		success : function(data) {
-			if (data.result == "success") {
-				$("#frontTireStatus").html(
-						data.angle + "도") ;
-			}
+			$('#frontTireAngle').val(data.angle);
+			frontTireAngleView.series[0].points[0].update(Number(data.angle));
+
 		}
 	});
 }

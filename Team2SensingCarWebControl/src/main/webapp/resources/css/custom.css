@@ -8,14 +8,13 @@
 form { margin-bottom: 50px; }
 
 input.vertical {
-  margin-top: 70px;
-  margin-bottom: 40px;
+  margin-top: 100px;
+  margin-bottom: 120px;
 }
 
 input[type=range].vertical {
   -webkit-appearance: none;
-  background-color: #0099FF;
-  width: 150px;
+  width: 100px;
   height: 4px;
   /*margin-top: 100px;*/
   -webkit-transform: rotate(-90deg);
@@ -25,6 +24,27 @@ input[type=range].vertical {
   transform: rotate(-90deg);
   z-index: 0;
 }
+
+.vertical::-webkit-slider-thumb {
+ -webkit-appearance: none;
+ background-color: #BFBFBF;
+ border: none;
+ height: 30px;
+ width: 30px;
+ border-radius: 50%;
+ opacity: 1;
+}
+.vertical {
+  -webkit-appearance: none;
+  background-color: #BFBFBF;
+  height: 4px;
+  width: 200px;
+  border: none;
+  border-radius: 4px;
+}
+.vertical:focus { outline: none; }
+
+.vertical:hover { background: #595959; }
 
 .redSlide {
   -webkit-appearance: none;

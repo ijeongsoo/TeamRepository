@@ -1,33 +1,35 @@
-function backTire(command, direction, speed) {
+
+
+function backTire(sip){
 	
-	var json = {
-		"command" : command,
-		"direction" : direction,
-		"speed" : speed
-	};
+	if($('#directionToggle')[0].checked){
+		var json = {
+				"command" : "change",
+				"direction" : "forward",
+				"speed" : $('#speedSlide').val(),
+				"sip":sip
+			};
+	}else{
+		var json = {
+				"command" : "change",
+				"direction" : "backward",
+				"speed" : $('#speedSlide').val(),
+				"sip":sip
+			};
+	}
+	
+	
 	$.ajax({
-		url : "http://" + location.host + "/SensingCarRemoteControl/backTire",
+		url : "http://" + location.host + "/Team2SensingCarWebControl/backTire",
 		data : json,
 		method : "post",
 		success : function(data) {
 			if (data.result == "success") {
-				$("#backTireStatus").html(
-						"방향=" + data.direction + ";속력="
-								+ data.speed);
-				$("#btnSpeed0").attr("onclick","backTire('change','"+data.direction+"','0')");
-				$("#btnSpeed900").attr("onclick","backTire('change','"+data.direction+"','950')");
-				$("#btnSpeed1250").attr("onclick","backTire('change','"+data.direction+"','1250')");
-				$("#btnSpeed1600").attr("onclick","backTire('change','"+data.direction+"','1600')");
-				$("#btnSpeed1950").attr("onclick","backTire('change','"+data.direction+"','1950')");
-				$("#btnSpeed2300").attr("onclick","backTire('change','"+data.direction+"','2300')");
-				$("#btnSpeed2650").attr("onclick","backTire('change','"+data.direction+"','2650')");
-				$("#btnSpeed3000").attr("onclick","backTire('change','"+data.direction+"','3000')");
-				$("#btnSpeed3350").attr("onclick","backTire('change','"+data.direction+"','3350')");
-				$("#btnSpeed3700").attr("onclick","backTire('change','"+data.direction+"','3700')");
-				$("#btnSpeed4095").attr("onclick","backTire('change','"+data.direction+"','4095')");
-				$("#btnDirectionForward").attr("onclick","backTire('change','forward','"+data.speed+"')");
-				$("#btnDirectionBackward").attr("onclick","backTire('change','backward','"+data.speed+"')");
+				$('#speedH').html(data.speed);
+				$('#speedSlide').val(data.speed);
+				speedView.series[0].points[0].update(Number(data.speed));
 			}
 		}
 	});
-}
+	
+};

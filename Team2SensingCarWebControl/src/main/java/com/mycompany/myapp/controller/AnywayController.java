@@ -254,4 +254,40 @@ public class AnywayController {
 			logger.info(sip+"연결상태 불량");
 		}
 	}
+	
+	@RequestMapping("/backTire")
+	public void backTire(String sip, String command, String speed, String direction, HttpServletResponse response) {
+		try {
+			String result = service.backTire(sip, command, speed, direction);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/frontTire")
+	public void frontTire(String sip, String command, String angle, HttpServletResponse response) {
+		try {
+			String result = service.frontTire(sip, command,angle);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
 }

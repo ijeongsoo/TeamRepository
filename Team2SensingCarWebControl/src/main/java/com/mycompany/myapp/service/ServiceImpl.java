@@ -317,5 +317,50 @@ public class ServiceImpl implements Service {
 		
 		return json;
 	}
+	
+	@Override
+	public String backTire(String sip, String command, String speed, String direction) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		if(speed!=null){
+			jsonObject.put("speed", speed);
+			jsonObject.put("direction", direction);
+		}
 
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/backtire");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
+
+	@Override
+	public String frontTire(String sip, String command, String angle) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		if(angle!=null){
+			double temp = Double.parseDouble(angle);
+			int tempI=(int)temp;
+			angle=String.valueOf(tempI);
+			jsonObject.put("angle", angle);
+		}
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/fronttire");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
 }
