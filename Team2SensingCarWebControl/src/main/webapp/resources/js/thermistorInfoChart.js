@@ -10,12 +10,19 @@ $(function() {
 	 thermistorInfoChart = new Highcharts.Chart({
 		chart: {
 			renderTo:"thermistorInfoChartContainer",
+			backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                stops: [
+                    [0, 'rgb(255, 255, 255)'],
+                    [1, 'rgb(253, 176, 158)']
+                ]
+			},
 			type:"spline"
 		},
 		
-		colors: ['cyan'],
+		colors: ['red'],
 		title: {
-			text: "온도 센서 현황"
+			text: "< 온도 센서 현황 >"
 		},
 		xAxis: {
 			type: "datetime",
@@ -55,3 +62,4 @@ $(function() {
 		
 	});
 });
+

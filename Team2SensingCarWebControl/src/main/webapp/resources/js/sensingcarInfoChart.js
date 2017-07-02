@@ -4,6 +4,7 @@ $(function() {
 	sensingcarInfoChart = new Highcharts.Chart({
 		chart : {
 			renderTo : "sensingcarInfoChartContainer1",
+			
 			plotBackgroundColor : null,
 			plotBorderWidth : null,
 			plotShadow : false,

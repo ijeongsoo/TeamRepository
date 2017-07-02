@@ -10,12 +10,19 @@ $(function() {
 	 ultrasonicsensorInfoChart = new Highcharts.Chart({
 		chart: {
 			renderTo:"ultrasonicsensorInfoChartContainer",
+			backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                stops: [
+                    [0, 'rgb(255, 255, 255)'],
+                    [1, 'rgb(169, 204, 40)']
+                ]
+			},
 			type:"spline",
 		},
 		
-		colors: ['cyan'],
+		colors: ['green'],
 		title: {
-			text: "거리감지 센서 현황"
+			text: "< 거리감지 센서 현황 >"
 		},
 		xAxis: {
 			type: "datetime",
@@ -41,7 +48,7 @@ $(function() {
 			}
 		},
 		series: [{
-			name: "현제 거리감지 현황",
+			name: "현재 거리감지 현황",
 			data: [],
 			allowPointSelect: true
 		}],
