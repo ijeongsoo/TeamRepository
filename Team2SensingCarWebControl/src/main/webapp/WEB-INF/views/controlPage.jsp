@@ -58,27 +58,45 @@
 </style>
 
 <script>
-
-
-
-/* $(function(){
-	window.moveTo(0, 0);
-	window.resizeTo(screen.availWidth, screen.availHeight);
-	if($(window).width()>980){
-		$( ".leftcon " ).css("height", ($(window).width()/10));
-		 
-	}
+	/* $(function(){
+	 window.moveTo(0, 0);
+	 window.resizeTo(screen.availWidth, screen.availHeight);
+	 if($(window).width()>980){
+	 $( ".leftcon " ).css("height", ($(window).width()/10));
 	
-	$( window ).resize(function() {
-		if($(window).width()>980){
-		  $( ".leftcon" ).css("height", ($(window).width()/10));
-		}else{
-			$( ".leftcon" ).css("height", '200px');
-		}
-	});
+	 }
+	
+	 $( window ).resize(function() {
+	 if($(window).width()>980){
+	 $( ".leftcon" ).css("height", ($(window).width()/10));
+	 }else{
+	 $( ".leftcon" ).css("height", '200px');
+	 }
+	 });
 
-}); */
+	 }); */
+
+	setInterval("thermistorSensor('${sensingcar.sip}')", 1000)
+
+	function thermistorSensor(ip) {
+		var json = {
+			"command" : "status",
+			"sip" : ip
+		};
+
+		$.ajax({
+			url : "http://" + location.host
+					+ "/Team2SensingCarWebControl/thermistorSensor",
+			data : json,
+			method : "post",
+			success : function(data) {
+				var series = chartThermistor.series[0];
+				series.data[0].update({'y':data.temperature});
+			}
+		});
+	}
 </script>
+
 
 </head>
 
@@ -107,22 +125,22 @@
 			<div class="3u 12u(medium) ">
 				<div class="row">
 					<div class="6u 6u(medium) leftcon" id="container-thermistor"
-						style="height:11em"></div>
+						style="height: 11em"></div>
 
 					<div class="6u$ 6u(medium) leftcon" id="container-photoresistor"
-						style="height:11em"></div>
+						style="height: 10em"></div>
 				</div>
 				<div class="row">
 					<div class="6u 6u(medium) leftcon" id="container-gas"
-						style="height:11em"></div>
+						style="height: 10em"></div>
 					<div class="6u$ 6u$(medium) leftcon" id="container-ultrasonic"
-						style="height:11em"></div>
+						style="height: 10em"></div>
 				</div>
 				<div class="row">
 					<div class="6u 6u(medium) leftcon" id="container-rgb"
-						style="height:11em"></div>
+						style="height: 10em"></div>
 					<div class="6u$ 6u$(medium) leftcon" id="container-tracking"
-						style="height:11em"></div>
+						style="height: 10em"></div>
 				</div>
 			</div>
 			<div class="6u 12u(medium)"

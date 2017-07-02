@@ -11,10 +11,7 @@ $(function() {
 	        text: 'RGB',
 	        align: 'center',
 	        verticalAlign: 'middle',
-	        y: 40
-	    },
-	    tooltip: {
-	        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+	        y: 60
 	    },
 	    credits : {
 			enabled : false
@@ -29,8 +26,8 @@ $(function() {
 	                    color: 'white'
 	                }
 	            },
-	            startAngle: -180,
-	            endAngle: 180,
+	            startAngle: -120,
+	            endAngle: 120,
 	            center: ['50%', '50%']
 	        }
 	    },
@@ -39,15 +36,21 @@ $(function() {
 	        name: 'Browser share',
 	        innerSize: '70%',
 	        data: [
-	            ['Firefox',   10.38],
-	            ['IE',       56.33],
-	            ['Chrome', 24.03],
+	            
 	            {
-	                name: 'Proprietary or Undetectable',
-	                y: 0.2,
-	                dataLabels: {
-	                    enabled: false
-	                }
+	                name: 'RED',
+	                color: '#DF5353',
+	                y: 0.2
+	            },
+	            {
+	                name: 'GREEN',
+	                color: '#90ee7e',
+	                y: 0.2
+	            },
+	            {
+	                name: 'BLUE',
+	                color: '#7cb5ec',
+	                y: 0.2
 	            }
 	        ]
 	    }]

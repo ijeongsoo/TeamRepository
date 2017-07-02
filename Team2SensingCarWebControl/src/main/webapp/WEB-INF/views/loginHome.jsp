@@ -429,15 +429,15 @@ function drawUserAvailable(mid) {
 					<div class="4u 12u$(medium)">
 						<a href='javascript:void(0);' onclick='controlYet();'>
 							<section class="box">
-								<img src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}" class="photo3" />
-								<h3>${s.sip} </h3>
-								<h3>
-								${s.sname}</h3>
-								<h4>
-								${s.sregistor}</h4>
-								<p class="available" id="${s.sregistor}${s.sno}">
-									<img width="15px" src="resources/images/loading.gif" />
-								</p>
+
+								<img
+									src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
+									class="photo3" />
+								<h3>${s.sip}</h3>
+
+								<h3>${s.sname}</h3>
+								<h4 class="checkMid">${s.sregistor} </h4>
+								<p class="available" id="${s.sregistor}${s.sno}"><img width="15px" src="resources/images/loading.gif" /></p>
 							</section>
 						</a>
 					</div>
