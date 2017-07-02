@@ -81,8 +81,6 @@ function webServerNetworkStatusCheck() {
 		method : "post",
 		timeout: 10000,
 		error: function (request, Status, error) {
-			
-		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
 	
 	    },
 		
@@ -95,11 +93,11 @@ function webServerNetworkStatusCheck() {
 			
 			series.addPoint([new Date().getTime(), result], true, shift);
 			
-			if (result <= 5) {
+			if (result <= 500) {
 				 $("#testPTagChange").attr("src","resources/images/green.png");
 				 $("#testSTagChange").html("Good");
 				
-			}else if(result <= 8){
+			}else if(result <= 1000){
 				 $("#testPTagChange").attr("src","resources/images/orange.png");
 				 $("#testSTagChange").html("Normal");
 					

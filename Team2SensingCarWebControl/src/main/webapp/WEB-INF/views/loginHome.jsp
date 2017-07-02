@@ -68,6 +68,7 @@
 	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart2.js"></script>
 
 
+
 <script type="text/javascript">
 	function fileChange(event) {
 		if ($("#sattach")[0].files.length != 0) {
@@ -311,12 +312,10 @@ function drawUserAvailable(mid) {
 	<header id="header">
 		<h1>
 			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a>
-			<a href="remove?sno=5">test</a>
 		</h1>
 		<nav id="nav">
 			<ul>
-				<li><a type="button" class="button special" href="logout">Log
-						Out</a></li>
+				<li><a type="button" class="button special" href="logout">LogOut</a></li>
 			</ul>
 		</nav>
 

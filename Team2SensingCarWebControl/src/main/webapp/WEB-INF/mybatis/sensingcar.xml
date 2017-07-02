@@ -22,7 +22,7 @@
 	</select>
 	
 	<delete id="removeBySno" parameterType="com.mycompany.myapp.dto.Sensingcar">
-		delete from board where sno=#{sno}
+		delete from sensingcar where sno=#{sno}
 	</delete>
 	
 </mapper>
