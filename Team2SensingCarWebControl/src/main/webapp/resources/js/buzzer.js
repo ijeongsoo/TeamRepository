@@ -1,13 +1,27 @@
-function buzzer(command, status){
-	var json={"command":command, "status":status};
-	$.ajax({
-		url : "http://" + location.host + "/SensingCarRemoteControl/buzzer",
-		data : json,
-		method : "post",
-		success : function(data) {
-			if (data.result == "success") {
-				$("#buzzerStatus").html(data.status);
-			}
-		}
-	});
-}
+
+function buzzer(sip){
+	
+	if($('#buzzerToggle')[0].checked){
+		var json={"command":"change", "status":"on", "sip":sip};
+    	$.ajax({
+    		url : "http://" + location.host + "/Team2SensingCarWebControl/buzzer",
+    		data : json,
+    		method : "post",
+    		success : function(data) {
+    			
+    		}
+    	});
+
+	}else{
+		var json={"command":"change", "status":"off", "sip":sip};
+    	$.ajax({
+    		url : "http://" + location.host + "/Team2SensingCarWebControl/buzzer",
+    		data : json,
+    		method : "post",
+    		success : function(data) {
+    			
+    		}
+    	});
+	}
+	
+};

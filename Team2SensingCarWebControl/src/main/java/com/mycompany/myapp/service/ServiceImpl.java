@@ -1,5 +1,7 @@
 package com.mycompany.myapp.service;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -143,5 +145,148 @@ public class ServiceImpl implements Service {
 		return json;
 
 	}
+	
+	@Override
+	public String photoresistorSensor(String sip, String command) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
 
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/photoresistor");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		String temp = jsonObject.getString("photoresistor");
+		double tempD = Double.parseDouble(temp);
+		int tempI= (int)tempD;
+		String result = String.valueOf(tempI);
+		jsonObject = new JSONObject();
+		jsonObject.put("photoresistor", result);
+		json=jsonObject.toString();
+		coapClient.shutdown();
+		
+		return json;
+	}
+
+	@Override
+	public String gasSensor(String sip, String command) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/gassensor");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		String temp = jsonObject.getString("gas");
+		double tempD = Double.parseDouble(temp);
+		int tempI= (int)tempD;
+		String result = String.valueOf(tempI);
+		jsonObject = new JSONObject();
+		jsonObject.put("gas", result);
+		json=jsonObject.toString();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String ultrasonicSensor(String sip, String command) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/ultrasonicsensor");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		String temp = jsonObject.getString("distance");
+		double tempD = Double.parseDouble(temp);
+		int tempI= (int)tempD;
+		String result = String.valueOf(tempI);
+		jsonObject = new JSONObject();
+		jsonObject.put("distance", result);
+		json=jsonObject.toString();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String trackingSensor(String sip, String command) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/tracking");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		String temp = jsonObject.getString("tracking");
+		if(temp.equals("black")){
+			temp="0";
+		}else{
+			temp="1";
+		}
+		jsonObject = new JSONObject();
+		jsonObject.put("tracking", temp);
+		json=jsonObject.toString();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String laserEmitter(String sip, String command, String status) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("status", status);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/laseremitter");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String buzzer(String sip, String command, String status) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		jsonObject.put("status", status);
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/buzzer");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
 }

@@ -55,7 +55,7 @@ public class SessionPageController {
 	}
 
 	@RequestMapping("/check_ip")
-	public String checkIP(@ModelAttribute Member login_info,String sip, String command, Model model) {
+	public String checkIP(@ModelAttribute Member login_info, String sip, String command, Model model) {
 		int result = 0;
 		int duplicateResult = service.registCheckIP(sip);
 		int comunicationResult = service.checkCoumunication(sip, command);
@@ -72,10 +72,9 @@ public class SessionPageController {
 
 	}
 
-	
-
 	@RequestMapping(value = "/regist", method = RequestMethod.POST)
-	public String regist(@ModelAttribute Member login_info,Sensingcar sensingcar) throws IllegalStateException, IOException {
+	public String regist(@ModelAttribute Member login_info, Sensingcar sensingcar)
+			throws IllegalStateException, IOException {
 		sensingcar.setSoriginalfilename(sensingcar.getSattach().getOriginalFilename());
 		sensingcar.setSfilecontent(sensingcar.getSattach().getContentType());
 		String fileName = new Date().getTime() + "-" + sensingcar.getSoriginalfilename();
@@ -92,17 +91,15 @@ public class SessionPageController {
 
 	@RequestMapping("/loginHome")
 	public String loginHome(@ModelAttribute Member login_info, Model model) {
-		
-		
-		
+
 		List<Sensingcar> list = service.sensingcarListAll();
 		model.addAttribute("list", list);
 		return "loginHome";
 	}
-	
+
 	@RequestMapping("/control")
 	public String control(@ModelAttribute Member login_info, Model model, String sip) {
-		
+
 		CoapClient coapClient = new CoapClient();
 		JSONObject jsonObject = null;
 		String json = null;
@@ -113,7 +110,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/camera");
+		coapClient.setURI("coap://" + sip + "/camera");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -124,7 +121,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/rgbled");
+		coapClient.setURI("coap://" + sip + "/rgbled");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -136,7 +133,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/laseremitter");
+		coapClient.setURI("coap://" + sip + "/laseremitter");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -146,7 +143,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/buzzer");
+		coapClient.setURI("coap://" + sip + "/buzzer");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -156,7 +153,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/ultrasonicsensor");
+		coapClient.setURI("coap://" + sip + "/ultrasonicsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -167,7 +164,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/lcd");
+		coapClient.setURI("coap://" + sip + "/lcd");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -178,7 +175,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/fronttire");
+		coapClient.setURI("coap://" + sip + "/fronttire");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -188,35 +185,76 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/backtire");
+		coapClient.setURI("coap://" + sip + "/backtire");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
 		model.addAttribute("backTireSpeed", jsonObject.getString("speed"));
 		model.addAttribute("backTireDirection", jsonObject.getString("direction"));
-		//-------------------------------------------------------------------------
+		// -------------------------------------------------------------------------
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://"+sip+"/thermistorsensor");
+		coapClient.setURI("coap://" + sip + "/thermistorsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
 		String temp = jsonObject.getString("temperature");
 		double tempD = Double.parseDouble(temp);
-		tempD= Math.round(tempD*10d) / 10d;
+		tempD = Math.round(tempD * 10d) / 10d;
 		String result = String.valueOf(tempD);
-		model.addAttribute("temperature",result);
+		model.addAttribute("temperature", result);
 
-		coapClient.shutdown();
+		// -------------------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://" + sip + "/photoresistor");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		temp = jsonObject.getString("photoresistor");
+		tempD = Double.parseDouble(temp);
+		int tempI = (int) tempD;
+		result = String.valueOf(tempD);
+		model.addAttribute("photoresistor", result);
+
+		// -------------------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://" + sip + "/gassensor");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		temp = jsonObject.getString("gas");
+		tempD = Double.parseDouble(temp);
+		tempI = (int) tempD;
+		result = String.valueOf(tempD);
+		model.addAttribute("gas", result);
 		
+		// -------------------------------------------------------------------------
+		jsonObject = new JSONObject();
+		jsonObject.put("command", "status");
+		json = jsonObject.toString();
+		coapClient.setURI("coap://" + sip + "/tracking");
+		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
+		json = coapResponse.getResponseText();
+		jsonObject = new JSONObject(json);
+		temp = jsonObject.getString("tracking");
+		if(temp.equals("black")){
+			temp="0";
+		}else{
+			temp="1";
+		}
+		
+		model.addAttribute("tracking", temp);
+		
+
 		Sensingcar sensingcar = service.getSensingcar(sip);
 		model.addAttribute("sensingcar", sensingcar);
-		model.addAttribute("cameraUrl", "http://"+sip+":50001?action=stream");
+		model.addAttribute("cameraUrl", "http://" + sip + ":50001?action=stream");
 		return "controlPage";
 	}
-
-	
-
 
 }

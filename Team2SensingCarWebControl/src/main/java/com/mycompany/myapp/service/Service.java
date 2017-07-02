@@ -19,6 +19,15 @@ public interface Service {
 	public int checkCoumunication(String sip, String command);
 	
 	public String thermistorSensor(String sip, String command);
+	public String photoresistorSensor(String sip, String command);
+	public String gasSensor(String sip, String command);
+	public String ultrasonicSensor(String sip, String command);
+	public String trackingSensor(String sip, String command);
+	
+	
+	public String laserEmitter(String sip, String command, String status);
+	public String buzzer(String sip, String command, String status);
+
 	public void sensingcarRegist(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarListAll();
 	public Sensingcar getSensingcar(String sip);

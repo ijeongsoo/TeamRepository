@@ -79,16 +79,16 @@ var chartThermistor = Highcharts
 									},
 
 									series : [ {
-										name : 'Speed',
+										name : '온도',
 										data : [0],
 										dataLabels : {
 											format : '<div style="text-align:center"><span style="font-size:25px;color:'
 													+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
 													+ '">{y}</span><br/>'
-													+ '<span style="font-size:12px;color:silver">km/h</span></div>'
+													+ '<span style="font-size:12px;color:silver">°C</span></div>'
 										},
 										tooltip : {
-											valueSuffix : ' km/h'
+											valueSuffix : ' °C'
 										}
 									} ]
 
@@ -117,12 +117,12 @@ var chartPhotoresistor = Highcharts
 										enabled : false
 									},
 									series : [ {
-										name : 'RPM',
-										data : [ 0 ],
+										name : '조도',
+										data : [0],
 										dataLabels : {
 											format : '<div style="text-align:center"><span style="font-size:25px;color:'
 													+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
-													+ '">{y:.1f}</span><br/>'
+													+ '">{y}</span><br/>'
 													+ '<span style="font-size:12px;color:silver">밝기</span></div>'
 										},
 										tooltip : {
@@ -159,7 +159,7 @@ var chartGas = Highcharts
 										dataLabels : {
 											format : '<div style="text-align:center"><span style="font-size:25px;color:'
 													+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
-													+ '">{y:.1f}</span><br/>'
+													+ '">{y}</span><br/>'
 													+ '<span style="font-size:12px;color:silver">가스량</span></div>'
 										},
 										tooltip : {
@@ -169,7 +169,7 @@ var chartGas = Highcharts
 
 								}));
 
-var chartTracking = Highcharts
+var chartUltrasonic = Highcharts
 		.chart(
 				'container-ultrasonic',
 				Highcharts
@@ -178,7 +178,7 @@ var chartTracking = Highcharts
 								{
 									yAxis : {
 										min : 0,
-										max : 255,
+										max : 400,
 										
 									},
 									title : {
@@ -196,11 +196,11 @@ var chartTracking = Highcharts
 										dataLabels : {
 											format : '<div style="text-align:center"><span style="font-size:25px;color:'
 													+ ((Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black')
-													+ '">{y:.1f}</span><br/>'
+													+ '">{y}</span><br/>'
 													+ '<span style="font-size:12px;color:silver">cm</span></div>'
 										},
 										tooltip : {
-											valueSuffix : ' revolutions/min'
+											valueSuffix : ' cm'
 										}
 									} ]
 

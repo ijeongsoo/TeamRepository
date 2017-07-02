@@ -1,6 +1,6 @@
-var rgbView;
+var trackingView;
 $(function() {
-	rgbView = new Highcharts.chart('container-rgb', {
+	trackingView = new Highcharts.chart('container-tracking', {
 	    chart: {
 	        plotBackgroundColor: null,
 	        plotBorderWidth: 0,
@@ -8,7 +8,7 @@ $(function() {
 	        height: null
 	    },
 	    title: {
-	        text: 'RGB',
+	        text: 'tracking',
 	        align: 'center',
 	        verticalAlign: 'middle',
 	        y: 60
@@ -26,40 +26,32 @@ $(function() {
 	                    color: 'white'
 	                }
 	            },
-	            startAngle: -120,
-	            endAngle: 120,
-	            center: ['50%', '50%']
+	            borderWidth:0,
+	            size : '60%',
+	            startAngle: -180,
+	            endAngle: 180,
+	            center: ['50%', '40%']
 	        }
 	    },
 	    series: [{
 	        type: 'pie',
-	        name: 'value',
-	        innerSize: '70%',
+	        name: 'now',
+	        innerSize: '0%',
 	        data: [
 	            
 	            {
-	                name: 'RED',
-	                color: '#DF5353',
+	                name: 'WHITE',
+	                color: '#E8E8E8',
 	                y: 0
 	            },
 	            {
-	                name: 'GREEN',
-	                color: '#90ee7e',
-	                y: 0
-	            },
-	            {
-	                name: 'BLUE',
-	                color: '#7cb5ec',
+	                name: 'BLACK',
+	                color: '#000000',
 	                y: 0
 	            }
 	        ]
 	    }]
-	},function (chart) { // on complete
-        chart.renderer.circle('50%', '49%', '15%').attr({
-            fill: '#FFFFFF',
-            stroke: 'white',
-            'stroke-width': 0
-        }).add();
+	
 
     });
 });

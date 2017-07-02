@@ -129,4 +129,112 @@ public class AnywayController {
 			logger.info(sip+"연결상태 불량");
 		}
 	}
+	
+	@RequestMapping("/photoresistorSensor")
+	public void photoresistorSensor(String sip, String command, HttpServletResponse response) {
+		try {
+			String result = service.photoresistorSensor(sip, command);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/gasSensor")
+	public void gasSensor(String sip, String command, HttpServletResponse response) {
+		try {
+			String result = service.gasSensor(sip, command);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/ultrasonicSensor")
+	public void ultrasonicSensor(String sip, String command, HttpServletResponse response) {
+		try {
+			String result = service.ultrasonicSensor(sip, command);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/trackingSensor")
+	public void trackingSensor(String sip, String command, HttpServletResponse response) {
+		try {
+			String result = service.trackingSensor(sip, command);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/laserEmitter")
+	public void laserEmitter(String sip, String command, String status, HttpServletResponse response) {
+		try {
+			String result = service.laserEmitter(sip, command, status);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/buzzer")
+	public void buzzer(String sip, String command, String status, HttpServletResponse response) {
+		try {
+			String result = service.buzzer(sip, command, status);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
 }
