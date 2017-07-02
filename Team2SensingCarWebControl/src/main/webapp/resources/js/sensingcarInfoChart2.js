@@ -9,23 +9,31 @@ $(function() {
 		        type: 'column'
 		    },
 		    title: {
-		        text: '계정별 장비 접속 현황'
+		        text: '현 계정의 장비현황'
 		    },
 		   
 		    xAxis: {
-		            title: {
-		                    text:""
+	            title: {
+	                text: "",
+	                style: {
+						fontSize: 18,
+	    				   },
+	        		margin : 25	
 		                },
-		        categories: [
-		            ''
-		        ],
+		       categories: [''],
 		        crosshair: true
 		    },
 		    yAxis: {
 		        min: 0,
 		        title: {
-		            text: '센싱카 수 (개)'
+		            text: '센싱카 수 (개)',
+	                style: {
+						fontSize: 18,
+	    				   },
+	        		margin : 25
 		        }
+		    
+		    
 		    },
 		    tooltip: {
 		        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -57,11 +65,6 @@ $(function() {
 		});
 
 });
-
-
-
-
-
 
 
 

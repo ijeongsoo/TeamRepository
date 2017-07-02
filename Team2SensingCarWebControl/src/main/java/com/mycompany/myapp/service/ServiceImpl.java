@@ -121,6 +121,11 @@ public class ServiceImpl implements Service{
 		Sensingcar sensingcar =dao.sensingcarSelectBySip(sip);
 		return sensingcar;
 	}
+
+	@Override
+	public void sensingcarRemove(int sno) {
+		dao.sensingcarRemoveBySno(sno);
+	}
 	
 	
 

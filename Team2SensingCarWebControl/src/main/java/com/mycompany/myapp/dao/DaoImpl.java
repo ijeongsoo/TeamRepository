@@ -29,6 +29,7 @@ public class DaoImpl implements Dao {
 	}
 	
 	
+	
 	@Override
 	public String memberInsert(Member member) {
 		sst.insert("member.insert", member);
@@ -59,6 +60,11 @@ public class DaoImpl implements Dao {
 	public Sensingcar sensingcarSelectBySip(String sip) {
 		Sensingcar sensingcar = sst.selectOne("sensingcar.selectBySip", sip);
 		return sensingcar;
+	}
+
+	@Override
+	public void sensingcarRemoveBySno(int sno) {
+		sst.delete("sensingcar.removeBySno", sno);
 	}
 	
 }

@@ -17,4 +17,5 @@ public interface Dao {
 	public Sensingcar sensingcarSelectBySip(String sip);
 	public int sensingcarInsert(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarSelectAll();
+	public void sensingcarRemoveBySno(int sno);
 }
