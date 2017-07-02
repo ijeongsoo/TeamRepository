@@ -10,6 +10,13 @@ $(function() {
 	sensingcarInfoChart3 = new Highcharts.Chart({
 		chart: {
 			renderTo:"sensingcarInfoChartContainer3",
+			backgroundColor: {
+                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+                stops: [
+                    [0, 'rgb(255, 255, 255)'],
+                    [1, 'rgb(247, 231, 253)']
+                ]
+			},
 			type:"spline"
 		},
 		colors: ['cyan'],
@@ -80,10 +87,6 @@ function webServerNetworkStatusCheck() {
 		async: true,
 		method : "post",
 		timeout: 10000,
-		error: function (request, Status, error) {
-	
-	    },
-		
 		success : function(data) {
 			var startTime=data.startTime;
 			var endTime= new Date().getTime();

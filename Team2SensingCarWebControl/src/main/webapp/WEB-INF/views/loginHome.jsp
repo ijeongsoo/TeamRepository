@@ -483,8 +483,11 @@ function drawUserAvailable(mid) {
 
 			</div>
 			<hr>
+			
 			<div class="row 150%">
+			<hr>
 				<div class="12u$ 12u$(medium)">
+				
 					<section class="major">
 						<div class="container" id="sensingcarInfoChartContainer3"
 							style="min-width: 310px; height: 400px; max-width: 1200px; margin: 0 auto"></div>

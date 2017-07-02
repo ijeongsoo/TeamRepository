@@ -53,10 +53,119 @@
 	src="<%=application.getContextPath()%>/resources/js/photoresistorInfoChart.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/thermistorInfoChart.js"></script>
-	<script
+<script
 	src="<%=application.getContextPath()%>/resources/js/ultrasonicsensorInfoChart.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/trackingInfoChart.js"></script>
+
+ 
+<script>
+
+setInterval("thermistorSensor('${sensingcar.sip}')", 1000);
+setInterval("photoresistorSensor('${sensingcar.sip}')", 1000);
+setInterval("gasSensor('${sensingcar.sip}')", 1000);
+setInterval("ultrasonicSensor('${sensingcar.sip}')", 1000);
+setInterval("trackingSensor('${sensingcar.sip}')", 1000);
+
+
+function thermistorSensor(ip) {
+	var json = {
+		"command" : "status",
+		"sip" : ip
+	};
+
+	$.ajax({
+		url : "http://" + location.host+ "/Team2SensingCarWebControl/thermistorSensor",
+		data : json,
+		method : "post",
+		success : function(data) {
+			
+			var series = thermistorInfoChart.series[0];
+			var shift = series.data.length > 10;
+			series.addPoint([new Date().getTime(), Number(data.temperature)], true, shift);
+		}
+	});
+}
+ 
+ function photoresistorSensor(ip) {
+		var json = {
+			"command" : "status",
+			"sip" : ip
+		};
+
+		$.ajax({
+			url : "http://" + location.host+ "/Team2SensingCarWebControl/photoresistorSensor",
+			data : json,
+			method : "post",
+			success : function(data) {
+				var series = photoresistorInfoChart.series[0];
+				var shift = series.data.length > 10;
+				series.addPoint([new Date().getTime(), Number(data.photoresistor)], true, shift);
+			}
+		});
+	}
+ 
+ function gasSensor(ip) {
+		var json = {
+			"command" : "status",
+			"sip" : ip
+		};
+
+		$.ajax({
+			url : "http://" + location.host+ "/Team2SensingCarWebControl/gasSensor",
+			data : json,
+			method : "post",
+			success : function(data) {
+				var series = gassensorInfoChart.series[0];
+				var shift = series.data.length > 10;
+				series.addPoint([new Date().getTime(), Number(data.gas)], true, shift);
+			}
+		});
+	}
+ 
+ function ultrasonicSensor(ip) {
+		var json = {
+			"command" : "status",
+			"sip" : ip
+		};
+
+		$.ajax({
+			url : "http://" + location.host+ "/Team2SensingCarWebControl/ultrasonicSensor",
+			data : json,
+			method : "post",
+			success : function(data) {
+				var series = ultrasonicsensorInfoChart.series[0];
+				var shift = series.data.length > 10;
+				series.addPoint([new Date().getTime(), Number(data.distance)], true, shift);
+			}
+		});
+	}
+ 
+ function trackingSensor(ip) {
+		var json = {
+			"command" : "status",
+			"sip" : ip
+		};
+
+		$.ajax({
+			url : "http://" + location.host + "/Team2SensingCarWebControl/trackingSensor",
+			data : json,
+			method : "post",
+			success : function(data) {
+				var series = trackingInfoChart.series[0];
+				var shift = series.data.length > 10;
+				series.addPoint([new Date().getTime(), Number(data.tracking)], true, shift);
+					
+				}
+		
+				
+			
+		});
+	}
+
+</script>
+
+
 
 <style>
 @media screen and (min-width: 480px) {
@@ -119,47 +228,41 @@
 	<section id="one" class="wrapper style2 special" style="color: black">
 		<div class="container">
 			<header class="major">
-				<h2>Sensingcar의 센서 현황</h2>
-				
+				<h2>Sensingcar의 실시간 센서 현황</h2>
 			</header>
+			<hr>
 			<div class="row 150%">
-				<div class="6u 12u$(medium)">
+				
 					<section class="major">
-					<p>가스센서의 현황입니다.</p>
-			<div class="container" id="gassensorInfoChartContainer" style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
+					<h2 >가스 센서 현황</h2>
+						<div class="container" id="gassensorInfoChartContainer" 
+							style="min-width: 310px; height: 400px; max-width: 1300px; margin: 0 auto"></div>
 					</section>
-				</div>
-			
-				<div class="6u 12u$(medium)">
+					<hr>
 					<section class="major">
-					<p>조도센서의 현황입니다.</p>
+					<hr><h2>조도 센서 현황</h2>
 						<div class="container" id="photoresistorInfoChartContainer"
-							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 1300px; margin: 0 auto"></div>
 					</section>
-				</div>
-				
-				<div class="6u 12u$(medium)">
+					<hr>
 					<section class="major">
-					<p>온도센서의 현황입니다.</p>
+					<hr><h2>온도 센서 현황</h2>
 						<div class="container" id="thermistorInfoChartContainer"
-							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 1300px; margin: 0 auto"></div>
 					</section>
-				</div>
 				
-				<div class="6u 12u$(medium)">
+					<hr>
 					<section class="major">
-					<p>트래킹센서의 현황입니다.</p>
+					<hr><h2>트래킹 센서 현황</h2>
 						<div class="container" id="trackingInfoChartContainer"
-							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
+							style="min-width: 310px; height: 400px; max-width: 1300px; margin: 0 auto"></div>
 					</section>
-				</div>
-				
-				<div class="6u 12u$(medium)">
+					<hr>
 					<section class="major">
-					<p>거리감지센서의 현황입니다.</p>
+					<hr><h2>거리감지 센서 현황</h2>
 						<div class="container" id="ultrasonicsensorInfoChartContainer"
-							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
-					</section>
+							style="min-width: 310px; height: 400px; max-width: 1300px; margin: 0 auto"></div>
+					</section><hr>
 				</div>
 				
 			</div>

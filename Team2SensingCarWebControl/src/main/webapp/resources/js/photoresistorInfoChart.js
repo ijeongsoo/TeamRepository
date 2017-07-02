@@ -10,12 +10,19 @@ $(function() {
 	 photoresistorInfoChart = new Highcharts.Chart({
 		chart: {
 			renderTo:"photoresistorInfoChartContainer",
+			 backgroundColor: {
+	                linearGradient: { x1: 0, y1: 0, x2: 1, y2: 1 },
+	                stops: [
+	                    [0, 'rgb(255, 255, 255)'],
+	                    [1, 'rgb(255, 255, 89)']
+	                ]
+	            },
 			type:"spline"
 		},
 		 
-		colors: ['cyan'],
+		colors: ['rgb(216,216,28)'],
 		title: {
-			text: "조도 센서 현황"
+			text: "< 조도 센서 현황 >"
 		},
 		xAxis: {
 			type: "datetime",

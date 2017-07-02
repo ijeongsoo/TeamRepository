@@ -10,7 +10,7 @@ $(function() {
 		},
 		colors: ['red'],
 		title: {
-			text: "UltrasonicSensor(거리센서)"
+			text: "UltrasonicSensor(거리감지센서)"
 		},
 		xAxis: {
 			type: "datetime",

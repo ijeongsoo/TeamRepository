@@ -157,7 +157,7 @@
 			cameraAngleView.series[1].points[0].update(${upDown});
 	 });
 
-	setInterval("thermistorSensor('${sensingcar.sip}')", 1000);
+	 setInterval("thermistorSensor('${sensingcar.sip}')", 1000);
 	 setInterval("photoresistorSensor('${sensingcar.sip}')", 1000);
 	 setInterval("gasSensor('${sensingcar.sip}')", 1000);
 	 setInterval("ultrasonicSensor('${sensingcar.sip}')", 1000);
