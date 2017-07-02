@@ -9,8 +9,7 @@
 		insert into sensingcar(sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription) values (#{sip}, #{sname}, #{sregistor}, #{soriginalfilename},#{ssavedfilename},#{sfilecontent},#{sdescription});
 	</insert>
 	
-	<select id= "selectExistSip" 
-		resultType="int">
+	<select id= "selectExistSip" resultType="int">
 		select count(*) from sensingcar where sip=#{sip};	
 	</select>
 	
@@ -22,5 +21,8 @@
 		select sno,sip, sname, sregistor, soriginalfilename, ssavedfilename, sfilecontent, sdescription from sensingcar where sip=#{sip};
 	</select>
 	
+	<delete id="removeBySno" parameterType="com.mycompany.myapp.dto.Sensingcar">
+		delete from board where sno=#{sno}
+	</delete>
 	
 </mapper>

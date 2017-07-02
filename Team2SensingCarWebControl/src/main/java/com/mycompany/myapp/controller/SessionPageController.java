@@ -257,4 +257,11 @@ public class SessionPageController {
 		return "controlPage";
 	}
 
+	
+	@RequestMapping("/remove")
+	public String remove(@ModelAttribute Member login_info, int sno) {
+		service.sensingcarRemove(sno);
+		return "redirect:loginHome";
+	}
+	
 }

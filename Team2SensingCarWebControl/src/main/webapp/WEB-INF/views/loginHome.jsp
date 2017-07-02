@@ -225,7 +225,7 @@
 	}
 
 	<c:forEach var="s" items="${list}">
-	setInterval("checkComunication('${s.sip}','${s.sregistor}${s.sno}')", 2000)
+		setInterval("checkComunication('${s.sip}','${s.sregistor}${s.sno}')", 2000)
 	</c:forEach>
 
 	function checkComunication(ip, dest) {
@@ -235,8 +235,7 @@
 		};
 		var dest = "#" + dest;
 
-		$
-				.ajax({
+		$.ajax({
 					url : "http://" + location.host
 							+ "/Team2SensingCarWebControl/check_comunication",
 					data : json,
@@ -312,6 +311,7 @@ function drawUserAvailable(mid) {
 	<header id="header">
 		<h1>
 			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a>
+			<a href="remove?sno=5">test</a>
 		</h1>
 		<nav id="nav">
 			<ul>
@@ -372,8 +372,7 @@ function drawUserAvailable(mid) {
 									class="btn btn-default">등록</label> <input type="file"
 									id="sattach" style="visibility: hidden"
 									onchange="fileChange(event)" name="sattach" /><label
-									class="help-block" id="imgcheck" name="imgcheck">사진을
-									반드시 첨부해 주세요.</label>
+									class="help-block" id="imgcheck" name="imgcheck">사진을 반드시 첨부해 주세요.</label>
 							</div>
 						</div>
 
@@ -400,6 +399,14 @@ function drawUserAvailable(mid) {
 		</div>
 
 	</div>
+	
+	
+	
+
+	
+	
+	
+	
 
 
 
@@ -415,13 +422,14 @@ function drawUserAvailable(mid) {
 		<div class="container">
 			<header class="major">
 				<h2>등록된 SensingCar</h2>
-				<p>현재 등록된 SensigCar는 다음과 같으며 추가할수 있습니다.</p>
+				<p>현재 등록된 SensigCar는 다음과 같으며 추가할 수 있습니다.</p>
 			</header>
 			<div class="row 150%">
 				<c:forEach var="s" items="${list}">
 					<div class="4u 12u$(medium)">
 						<a href='javascript:void(0);' onclick='controlYet();'>
 							<section class="box">
+
 								<img
 									src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
 									class="photo3" />
@@ -436,16 +444,16 @@ function drawUserAvailable(mid) {
 				</c:forEach>
 
 
-
 				<div class="4u 12u$(medium)">
-					<a data-toggle="modal" data-target="#myModal"><section
-							class="box">
+					<a data-toggle="modal" data-target="#myModal">
+						<section class="box">
 							<img class="icon big rounded " src="resources/images/plus.png">
 							</image>
 							<h3>자신만의 새로운</h3>
 							<h3>SensingCar를 추가하세요.</h3>
 							<p>Click This Button</p>
-						</section></a>
+						</section>
+					</a>
 				</div>
 			</div>
 		</div>
@@ -484,7 +492,7 @@ function drawUserAvailable(mid) {
 						<p class="available" id="result">
 						<div style="text-align: left">
 							<span style="font-size: 20pt; font-weight: bold; width: 1000px">
-								&nbsp; &nbsp; &nbsp; Network Quality &nbsp; : &nbsp; </span> <img
+								Network Quality : </span> <img
 								id="testPTagChange" width="15px"
 								src="resources/images/loading.gif" /> <span
 								style="font-size: 20pt; font-weight: bold; width: 1000px"

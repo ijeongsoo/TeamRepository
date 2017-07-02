@@ -83,7 +83,7 @@ function webServerNetworkStatusCheck() {
 		error: function (request, Status, error) {
 			
 		alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		window.location.replace("http://10.10.10.57:8080/Team2SensingCarWebControl/");
+	
 	    },
 		
 		success : function(data) {

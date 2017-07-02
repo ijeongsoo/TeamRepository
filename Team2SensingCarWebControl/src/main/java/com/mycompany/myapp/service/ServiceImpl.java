@@ -119,6 +119,12 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
+	public void sensingcarRemove(int sno) {
+		dao.sensingcarRemoveBySno(sno);
+	}
+	
+	
+	@Override
 	public String thermistorSensor(String sip, String command) {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("command", command);
@@ -204,7 +210,6 @@ public class ServiceImpl implements Service {
 		jsonObject.put("command", command);
 
 		String reqJson = jsonObject.toString();
-
 		CoapClient coapClient = new CoapClient();
 		coapClient.setURI("coap://" + sip + "/ultrasonicsensor");
 
@@ -289,4 +294,5 @@ public class ServiceImpl implements Service {
 		
 		return json;
 	}
+
 }
