@@ -27,6 +27,7 @@ public interface Service {
 	
 	public String laserEmitter(String sip, String command, String status);
 	public String buzzer(String sip, String command, String status);
+	public String rgbLed(String sip, String command, String red, String green, String blue);
 
 	public void sensingcarRegist(Sensingcar sensingcar);
 	public List<Sensingcar> sensingcarListAll();

@@ -23,6 +23,8 @@
 	rel="stylesheet" type="text/css" />
 <link href="<%=application.getContextPath()%>/resources/css/toggle.css"
 	rel="stylesheet" type="text/css" />
+<link href="<%=application.getContextPath()%>/resources/css/custom.css"
+	rel="stylesheet" type="text/css" />
 
 <script
 	src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js"
@@ -36,6 +38,8 @@
 <script
 	src="<%=application.getContextPath()%>/resources/js/skel-layers.min.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/init.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/script.js"></script>
+
 
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
@@ -45,6 +49,9 @@
 
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
+
+
+
 
 <script src="<%=application.getContextPath()%>/resources/js/rgbView.js"></script>
 <script
@@ -57,10 +64,10 @@
 	src="<%=application.getContextPath()%>/resources/js/ultraAngleView.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/frontTireAngleView.js"></script>
-	<script
+<script
 	src="<%=application.getContextPath()%>/resources/js/laserEmitter.js"></script>
-	<script
-	src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
+<script src="<%=application.getContextPath()%>/resources/js/rgbLed.js"></script>
 
 
 
@@ -96,9 +103,11 @@
 		var red;
 		var green;
 		var blue;
-		 rgbView.series[0].data[0].update({'y':${red}});
-		 rgbView.series[0].data[1].update({'y':${green}});
-		 rgbView.series[0].data[2].update({'y':${blue}});
+		
+		rgbView.series[0].data[0].update(${red});
+		rgbView.series[0].data[1].update(${green});
+		rgbView.series[0].data[2].update(${blue}); 
+		 
 		
 		  red = ${red};
 		 green = ${green};
@@ -116,11 +125,7 @@
 			 blue='0'+blue;
 		 }
 		 var bgColor = '#'+red+green+blue;
-		 rgbView.renderer.circle('50%', '49%', '15%').attr({
-	            fill: bgColor,
-	            stroke: 'gray',
-	            'stroke-width': 1
-	        }).add();
+		 
 		 
 		 var series = chartThermistor.series[0];
 			series.data[0].update({'y':${temperature}});
@@ -157,6 +162,9 @@
 	 setInterval("gasSensor('${sensingcar.sip}')", 1000);
 	 setInterval("ultrasonicSensor('${sensingcar.sip}')", 1000);
 	 setInterval("trackingSensor('${sensingcar.sip}')", 1000);
+	 setInterval("buzzerStatus('${sensingcar.sip}')", 1000);
+	 setInterval("laserStatus('${sensingcar.sip}')", 1000);
+	 setInterval("ledStatus('${sensingcar.sip}')", 1000);
 	function thermistorSensor(ip) {
 		var json = {
 			"command" : "status",
@@ -258,6 +266,80 @@
 			});
 		}
 	 
+	 function buzzerStatus(ip) {
+			var json = {
+				"command" : "status",
+				"sip" : ip
+			};
+
+			$.ajax({
+				url : "http://" + location.host
+						+ "/Team2SensingCarWebControl/buzzer",
+				data : json,
+				method : "post",
+				success : function(data) {
+					if(data.status=='on'){
+						$('#buzzerToggle').prop('checked', true);
+						 
+						 
+					}else if(data.status=='off'){
+						$('#buzzerToggle').prop('checked', false);
+						
+					}		
+				}
+			});
+		}
+	 
+	 function laserStatus(ip) {
+			var json = {
+				"command" : "status",
+				"sip" : ip
+			};
+
+			$.ajax({
+				url : "http://" + location.host
+						+ "/Team2SensingCarWebControl/laserEmitter",
+				data : json,
+				method : "post",
+				success : function(data) {
+					if(data.status=='on'){
+						$('#laserToggle').prop('checked', true);
+						 
+						 
+					}else if(data.status=='off'){
+						$('#laserToggle').prop('checked', false);
+						
+					}		
+				}
+			});
+		}
+	 
+	 function ledStatus(ip) {
+			var json = {
+				"command" : "status",
+				"sip" : ip
+			};
+
+			$.ajax({
+				url : "http://" + location.host
+						+ "/Team2SensingCarWebControl/rgbLed",
+				data : json,
+				method : "post",
+				success : function(data) {
+					$("#redH").html(data.red);
+					$("#greenH").html(data.green);
+					$("#blueH").html(data.blue);
+					rgbView.series[0].data[0].update(Number(data.red));
+					rgbView.series[0].data[1].update(Number(data.green));
+					rgbView.series[0].data[2].update(Number(data.blue));
+					
+					$('#redSlide').val(data.red);
+					$('#greenSlide').val(data.green);
+					$('#blueSlide').val(data.blue);
+				}
+			});
+		}
+	 
 	 
 	
 	 
@@ -266,17 +348,38 @@
 		
 	 
 	/* KeyEvent */
-	function keyEvent(){
-		console.log("키눌림");
+	function keyEvent(event){
+		var keycode=event.keyCode;
+		if(keycode==66){			
+			if($('#buzzerToggle')[0].checked==false){
+				$('#buzzerToggle').prop('checked', true);
+				buzzer('${sensingcar.sip }');
+			}else{
+				$('#buzzerToggle').prop('checked', false);
+				buzzer('${sensingcar.sip }');
+			}
+		}else if(keycode==76){			
+			if($('#laserToggle')[0].checked==false){
+				$('#laserToggle').prop('checked', true);
+				laserEmitter('${sensingcar.sip }');
+			}else{
+				$('#laserToggle').prop('checked', false);
+				laserEmitter('${sensingcar.sip }');
+			}
+		}
 	};
 	 
+	$('#redSlider').spunkySlider();
+	$('#greenSlider').spunkySlider();
+	$('#blueSlider').spunkySlider();
+
+
 	 
 </script>
 
-
 </head>
 
-<body onkeydown="keyEvent()">
+<body onkeydown="keyEvent(event)">
 
 	<!-- Header -->
 	<header id="header">
@@ -356,38 +459,67 @@
 
 
 		</div>
+		<hr>
 	</section>
 
 	<!-- One -->
-	<section id="one" class="wrapper style2 special">
+	<section id="one" class=" style2 special">
 
 		<div class="row">
-
-			<div class="3u 12u(medium) ">
+			<div class="2u 12u(medium) ">
 				<div style="display: inline-block; vertical-align: middle;">
-					<div style="display: inline-block; width :200px;">
+					<div style="display: inline-block; width: 200px;">
 						<h3 style="display: inline-block; margin-right: 20px">부저</h3>
-						<label class="switch"> <input type="checkbox" id="buzzerToggle" onchange="buzzer('${sensingcar.sip }')"/>
+						<label class="switch"> <input type="checkbox"
+							id="buzzerToggle" onchange="buzzer('${sensingcar.sip }')" />
 							<div class="slider round"></div>
 						</label>
 					</div>
 
-					<div style="display: inline-block;width :200px">
-					<h3 style="display: inline-block; margin-right: 20px">레이저</h3>
-					<label class="switch"> <input type="checkbox" id="laserToggle" onchange="laserEmitter('${sensingcar.sip }')"/>
-						<div class="slider round"></div>
-					</label>
+					<div style="display: inline-block; width: 200px">
+						<h3 style="display: inline-block; margin-right: 20px">레이저</h3>
+						<label class="switch"> <input type="checkbox"
+							id="laserToggle" onchange="laserEmitter('${sensingcar.sip }')" />
+							<div class="slider round"></div>
+						</label>
 					</div>
-					
-					
-					
+				</div>
+				<div>
+					<h3>RGB</h3>
+					<div style="margin-left: 30px">
+						<input oninput="rgbLed('${sensingcar.sip }')" class="redSlide"
+							id="redSlide" data-fix-max-value="255"
+							data-orientation="horizontal"
+							style="display: inline-block; width: 250px;" value="${red}"
+							type="range" min="0" max="255" step="1">
+						<h4 id="redH">${red}</h4>
+						<input  oninput="rgbLed('${sensingcar.sip }')" class="greenSlide"
+							id="greenSlide" data-fix-max-value="255"
+							data-orientation="horizontal"
+							style="display: inline-block; width: 250px;" value="${green}"
+							type="range" min="0" max="255" step="1">
+						<h4 id="greenH">${green}</h4>
+						<input oninput="rgbLed('${sensingcar.sip }')" class="blueSlide"
+							id="blueSlide" data-fix-max-value="255"
+							data-orientation="horizontal"
+							style="display: inline-block; width: 250px;" value="${blue}"
+							type="range" min="0" max="255" step="1">
+						<h4 id="blueH">${blue}</h4>
+
+					</div>
 
 				</div>
 			</div>
 
-			<div class="6u 12u$(medium)"></div>
+			<div class="2u$ 12u$(medium)"
+				style="padding-left: 0; padding-right: 0;"></div>
 
-			<div class="3u$ 12u$(medium)"
+			<div class="4u 12u$(medium)"></div>
+
+			<div class="2u$ 12u$(medium)"
+				style="padding-left: 0; padding-right: 0;"></div>
+
+			<div class="2u$ 12u$(medium)"
 				style="padding-left: 0; padding-right: 0;"></div>
 		</div>
 
@@ -395,15 +527,13 @@
 
 
 	<section id="one" class="wrapper style2 special" style="color: black">
-		
+
 	</section>
 
 
 
 	<!-- Two -->
-	<section id="two" class="wrapper style1 special">
-		
-	</section>
+	<section id="two" class="wrapper style1 special"></section>
 
 
 

@@ -294,5 +294,28 @@ public class ServiceImpl implements Service {
 		
 		return json;
 	}
+	
+	@Override
+	public String rgbLed(String sip, String command, String red, String green, String blue) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		if(red!=null){
+			jsonObject.put("red", red);
+			jsonObject.put("green", green);
+			jsonObject.put("blue", blue);
+		}
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/rgbled");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
 
 }

@@ -27,10 +27,10 @@ $(function() {
 	                }
 	            },
 	            borderWidth:0,
-	            size : '60%',
+	            size : '80%',
 	            startAngle: -180,
 	            endAngle: 180,
-	            center: ['50%', '40%']
+	            center: ['50%', '30%']
 	        }
 	    },
 	    series: [{
