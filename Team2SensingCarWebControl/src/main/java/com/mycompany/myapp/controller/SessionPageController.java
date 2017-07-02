@@ -96,6 +96,14 @@ public class SessionPageController {
 		model.addAttribute("list", list);
 		return "loginHome";
 	}
+	
+	@RequestMapping("/sensor")
+	public String sensor(@ModelAttribute Member login_info, Model model, String sip) {
+
+		Sensingcar sensingcar = service.getSensingcar(sip);
+		model.addAttribute("sensingcar", sensingcar);
+		return "sensorPage";
+	}
 
 	@RequestMapping("/control")
 	public String control(@ModelAttribute Member login_info, Model model, String sip) {

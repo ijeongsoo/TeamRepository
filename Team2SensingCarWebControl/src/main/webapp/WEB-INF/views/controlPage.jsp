@@ -287,7 +287,7 @@
 		</h1>
 		<nav id="nav">
 			<ul>
-				<li><a href="generic.html">RealTime Sensor</a></li>
+				<li><a href="sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
 				<li><a href="<%=application.getContextPath()%>">Home</a></li>
 				<li><a type="button" class="button special" href="logout">Log
 						Out</a></li>
