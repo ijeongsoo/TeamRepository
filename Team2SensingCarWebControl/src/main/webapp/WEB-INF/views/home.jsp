@@ -133,7 +133,7 @@
 	</section>
 
 	<!-- Two -->
-	<section id="two" class="wrapper style2 special">
+	<section id="two" class="wrapper style1 special">
 		<div class="container">
 			<header class="major">
 				<h2>Developer</h2>

@@ -160,7 +160,7 @@ public class ServiceImpl implements Service {
 		String reqJson = jsonObject.toString();
 
 		CoapClient coapClient = new CoapClient();
-		coapClient.setURI("coap://" + sip + "/photoresistor");
+		coapClient.setURI("coap://" + sip + "/photoresistorsensor");
 
 		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
 
@@ -237,7 +237,7 @@ public class ServiceImpl implements Service {
 		String reqJson = jsonObject.toString();
 
 		CoapClient coapClient = new CoapClient();
-		coapClient.setURI("coap://" + sip + "/tracking");
+		coapClient.setURI("coap://" + sip + "/trackingsensor");
 
 		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
 

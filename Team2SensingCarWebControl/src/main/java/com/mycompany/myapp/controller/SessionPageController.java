@@ -217,7 +217,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://" + sip + "/photoresistor");
+		coapClient.setURI("coap://" + sip + "/photoresistorsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
@@ -245,7 +245,7 @@ public class SessionPageController {
 		jsonObject = new JSONObject();
 		jsonObject.put("command", "status");
 		json = jsonObject.toString();
-		coapClient.setURI("coap://" + sip + "/tracking");
+		coapClient.setURI("coap://" + sip + "/trackingsensor");
 		coapResponse = coapClient.post(json, MediaTypeRegistry.APPLICATION_JSON);
 		json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);

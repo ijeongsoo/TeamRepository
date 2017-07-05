@@ -50,7 +50,11 @@
 <script
 	src="<%=application.getContextPath()%>/resources/highcharts/code/modules/solid-gauge.js"></script>
 
-
+<script
+	src="https://cdn.jsdelivr.net/jquery.roundslider/1.0/roundslider.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/jquery.roundslider/1.0/roundslider.min.css"
+	rel="stylesheet" />
 
 
 <script src="<%=application.getContextPath()%>/resources/js/rgbView.js"></script>
@@ -69,7 +73,8 @@
 <script src="<%=application.getContextPath()%>/resources/js/buzzer.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/rgbLed.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/backTire.js"></script>
-<script src="<%=application.getContextPath()%>/resources/js/frontTire.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/frontTire.js"></script>
 
 
 
@@ -80,9 +85,50 @@
 		height: 10px;
 	}
 }
+
+#arc-slider {
+	height: 150px !important;
+	width: 100% !important;
+	border: 0px dashed;
+	overflow: hidden;
+	padding: 15px;
+}
+
+#arc-slider .rs-container {
+	margin-left: -350px; /* here 300 is the radius value */
+	left: 50%;
+}
+
+#arc-slider .rs-tooltip {
+	top: 60px;
+}
+
+#arc-slider .rs-tooltip-text {
+	font-size: 25px;
+}
+
+#arc-slider .rs-border {
+	border-width: 0px;
+}
+
+/* Appearance related changes */
+.rs-control .rs-range-color {
+	background-color: #54BBE0;
+}
+
+.rs-control .rs-path-color {
+	background-color: #5f5f5f;
+}
+
+.rs-control .rs-handle {
+	background-color: #51c5cf;
+}
 </style>
 
 <script>
+
+
+
 	/* $(function(){
 	 window.moveTo(0, 0);
 	 window.resizeTo(screen.availWidth, screen.availHeight);
@@ -101,20 +147,26 @@
 
 	 }); */
 	 $(function(){
-		    $(".dial").knob(
-	        {'min':65,
-	            'max':115,
-	            'angleOffset':225,
-	            'angleArc':270,
-	            'width': 400,
-	            'height': 400,
-	            'displayInput' : false,
-	            'bgColor' : "#7cb5ec",
-	            'inputColor' : "000000",
-		        'change' : function (v) {
-		        	var json = {
+		 
+		 
+		 $("#arc-slider").roundSlider({
+			    sliderType: "min-range",
+			    circleShape: "custom-quarter",
+			    min:60,
+			    max:120,
+			    value:${frontTireAngle},
+			    startAngle: 45,
+			    editableTooltip: true,
+			    radius: 350,
+			    width: 6,
+			    handleSize: "+30",
+			    tooltipFormat: function (args) {
+			        return args.value + " ";
+			    },
+			    'drag' :function (args) {
+		        	 var json = {
 		        			"command" : "change",
-		        			"angle" : String(v),
+		        			"angle" : String(args.value),
 		        			"sip":'${sensingcar.sip}'
 		        		};
 
@@ -128,12 +180,11 @@
 		        				frontTireAngleView.series[0].points[0].update(Number(data.angle));
 
 		        			}
-		        		});
+		        		}); 
 		        }
-		    });
+			});	 
 		 
-	 
-		 
+
 		var red;
 		var green;
 		var blue;
@@ -414,7 +465,7 @@
 				data : json,
 				method : "post",
 				success : function(data) {
-					$('.dial').val(data.angle).trigger('change');
+					$("#arc-slider").roundSlider("setValue", data.angle);
 					frontTireAngleView.series[0].points[0].update(Number(data.angle));
 				
 				}
@@ -516,15 +567,63 @@
 			});
 		}
 	 
+	 function turnLeft(sip) {
+		 	console.log("aa");
+		 	 var angle = Number($("#arc-slider").roundSlider("getValue"))-5;	
+				var json = {
+						"command" : "change",
+						"angle" : angle,
+						"sip":sip
+					};
+			
+
+				$.ajax({
+        			url : "http://" + location.host
+        					+ "/Team2SensingCarWebControl/frontTire",
+        			data : json,
+        			method : "post",
+        			success : function(data) {
+        				$("#arc-slider").roundSlider("setValue", data.angle);
+        				frontTireAngleView.series[0].points[0].update(Number(data.angle));
+        			}
+        		});  
+		}
+	 
+	 function turnRight(sip) {
+		 	var angle = Number($("#arc-slider").roundSlider("getValue"))+5;
+		 	
+				var json = {
+						"command" : "change",
+						"angle" : angle,
+						"sip":sip
+					};
+			
+
+				$.ajax({
+     			url : "http://" + location.host
+     					+ "/Team2SensingCarWebControl/frontTire",
+     			data : json,
+     			method : "post",
+     			success : function(data) {
+     				$("#arc-slider").roundSlider("setValue", data.angle);
+     				frontTireAngleView.series[0].points[0].update(Number(data.angle));
+
+     			}
+     		}); 
+		}
+	 
 	
-		
+	 
+	
 		
 	 var speedUpInterval=null;
 	 var speedDownInterval=null;
+	 var leftInterval=null;
+	 var rightInterval=null;
 	/* KeyEvent */
  	function keyEvent(event){
 	 var keycode=event.keyCode;
-		if(keycode==66){			
+		if(keycode==81){			
 			if($('#buzzerToggle')[0].checked==false){
 				$('#buzzerToggle').prop('checked', true);
 				buzzer('${sensingcar.sip }');
@@ -532,7 +631,7 @@
 				$('#buzzerToggle').prop('checked', false);
 				buzzer('${sensingcar.sip }');
 			}
-		}else if(keycode==76){			
+		}else if(keycode==87){			
 			if($('#laserToggle')[0].checked==false){
 				$('#laserToggle').prop('checked', true);
 				laserEmitter('${sensingcar.sip }');
@@ -540,61 +639,62 @@
 				$('#laserToggle').prop('checked', false);
 				laserEmitter('${sensingcar.sip }');
 			}
-		}else if(keycode==80){
+		}else if(keycode==67){
 			if(speedUpInterval==null){
 				speedUpInterval=setInterval("speedUp('${sensingcar.sip}')", 10);
 			}
-		} else if(keycode==186){
+		} else if(keycode==88){
 			if(speedDownInterval==null){
 				speedDownInterval=setInterval("speedDown('${sensingcar.sip}')", 10);
 			}
-		} else if(keycode==79){
+		} else if(keycode==90){
 			zeroSpeed('${sensingcar.sip}');
-		} else if(keycode==219){
-			if($('#directionToggle')[0].checked==false){
-				$('#directionToggle').prop('checked', true);
-				backTire('${sensingcar.sip }');
-			}else{
-				$('#directionToggle').prop('checked', false);
-				backTire('${sensingcar.sip }');
+		}else if(keycode==80){
+			$('#directionToggle').prop('checked', true);
+			backTire('${sensingcar.sip }');	
+		} else if(keycode==186){
+			$('#directionToggle').prop('checked', false);
+			backTire('${sensingcar.sip }');
+		}else if(keycode == 76){
+			if(leftInterval==null){
+				leftInterval=setInterval("turnLeft('${sensingcar.sip}')", 100);	
 			}
-		} 
+			
+		}else if(keycode == 222){
+			if(rightInterval==null){
+				rightInterval=setInterval("turnRight('${sensingcar.sip}')", 100);
+			}
+		}
 	}; 
 	
 	 
 	function keyUpEvent(event){
 		var keycode2=event.keyCode;
 		console.log(keycode2);
-		if(keycode2==80){
+		if(keycode2==67){
 			clearInterval(speedUpInterval);
 			speedUpInterval=null;
-		}else if(keycode2==186){
+		}else if(keycode2==88){
 			clearInterval(speedDownInterval);
 			speedDownInterval=null;
+		}else if(keycode2==76){
+			clearInterval(leftInterval);
+			leftInterval=null;
+		}else if(keycode2==222){
+			clearInterval(rightInterval);
+			rightInterval=null;
 		}
 		
 	}
+	
 	 
 	$('#redSlider').spunkySlider();
 	$('#greenSlider').spunkySlider();
 	$('#blueSlider').spunkySlider();
 
+	
 
-
-		$(function() {
-	        $(".dial").knob({
-	        	'min':60,
-	            'max':120,
-	            'angleOffset':225,
-	            'angleArc':270,
-	            'width': 400,
-	            'height': 400,
-	            'displayInput' : false,
-	            'bgColor' : "#7cb5ec",
-	            'inputColor' : "000000"
-	        });
-	        
-	    });
+	
 		
 		
 	 
@@ -613,6 +713,7 @@
 		</h1>
 		<nav id="nav">
 			<ul>
+				<li><a href="remove?sno=${sensingcar.sno }">장비제거</a></li>
 				<li><a href="sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
 				<li><a href="<%=application.getContextPath()%>">Home</a></li>
 				<li><a type="button" class="button special" href="logout">Log
@@ -716,7 +817,7 @@
 							style="display: inline-block; width: 250px;" value="${red}"
 							type="range" min="0" max="255" step="1">
 						<h4 id="redH">${red}</h4>
-						<input  oninput="rgbLed('${sensingcar.sip }')" class="greenSlide"
+						<input oninput="rgbLed('${sensingcar.sip }')" class="greenSlide"
 							id="greenSlide" data-fix-max-value="255"
 							data-orientation="horizontal"
 							style="display: inline-block; width: 250px;" value="${green}"
@@ -734,38 +835,45 @@
 				</div>
 			</div>
 
-			<div class="2u 12u$(medium)"
+			<div class="6u 12u$(medium)"
 				style="padding-left: 0; padding-right: 0;">
-				
-				<div style="display: inline-block; width: 200px">
-						<h3 style="display: inline-block;padding-bottom:0; margin-right: 20px">방향</h3>
-						<label class="switchv"> <input type="checkbox"
-							id="directionToggle" onchange="backTire('${sensingcar.sip }')" />
-							<div class="sliderv roundv"></div>
-						</label>
-					</div>
-				
-				
-				<div>
-					<h3 style="margin-left: 30px; margin-top: 20px">속도</h3>
-					<div style="margin-left: 30px">
-						<input oninput="backTire('${sensingcar.sip }')" class="vertical"
-							id="speedSlide" data-fix-max-value="255"
-							data-orientation="horizontal"
-							style="display: inline-block; width: 250px;" value="${backTireSpeed}"
-							type="range" min="0" max="4095" step="1">
-						<h4 id="speedH">${backTireSpeed}</h4>
-						
+				<div class="row">
+					<div class="3u 3u(medium)">
+						<div style="display: inline-block; width: 200px">
+							<h3
+								style="display: inline-block; padding-bottom: 0; margin-right: 20px">방향</h3>
+							<label class="switchv"> <input type="checkbox"
+								id="directionToggle" onchange="backTire('${sensingcar.sip }')" />
+								<div class="sliderv roundv"></div>
+							</label>
+						</div>
 
+
+						<div>
+							<h3 style="margin-left: 30px; margin-top: 20px">속도</h3>
+							<div style="margin-left: 30px">
+								<input oninput="backTire('${sensingcar.sip }')" class="vertical"
+									id="speedSlide" data-fix-max-value="255"
+									data-orientation="horizontal"
+									style="display: inline-block; width: 250px;"
+									value="${backTireSpeed}" type="range" min="0" max="4095"
+									step="1">
+								<h4 id="speedH">${backTireSpeed}</h4>
+
+
+							</div>
+						</div>
+					</div>
+
+
+					<div class="9u 9u$(medium)">
+						<h3>핸들</h3>
+						<%-- <input id="frontAngleControl" oninput="frontTire('${sensingcar.sip }')" type="text"  class="dial" value="${frontTireAngle}"> --%>
+						<div id="arc-slider" oninput="frontTire('${sensingcar.sip }')"
+							class="rslider"></div>
 					</div>
 
 				</div>
-			
-			
-			</div>
-
-			<div class="4u 12u$(medium)">
-				<input id="frontAngleControl" oninput="frontTire('${sensingcar.sip }')" type="text"  class="dial" value="${frontTireAngle}">
 			</div>
 
 			<div class="2u 12u$(medium)"
