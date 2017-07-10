@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="stackPaneLock" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.lock.LockController">
+   <children>
+     <AnchorPane fx:id="lock" style="-fx-background-color: black;">
+	 <children>
+                        <ImageView fitHeight="357.0" fitWidth="371.0" layoutX="227.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/icons/circular-clock-2.png" />
+                           </image>
+                        </ImageView>
+                        <Line fx:id="secondHand" endX="120.0" layoutX="346.0" layoutY="180.0" rotate="-90.0" stroke="RED" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="5.0" />
+                        <Line fx:id="minuateHand" endX="120.0" layoutX="346.0" layoutY="180.0" rotate="-90.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="9.0" />
+                        <Line fx:id="houreHand" endX="90.0" layoutX="361.0" layoutY="197.0" rotate="-90.0" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeWidth="9.0" />
+                        <Circle fill="#524e4d" layoutX="406.0" layoutY="240.0" radius="14.0" stroke="TRANSPARENT" strokeType="INSIDE" />
+                        <Label fx:id="lblMainClock" layoutX="558.0" layoutY="394.0" text="AM 12:14:30" textFill="WHITE">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Circle fill="#1f93ff00" layoutX="405.0" layoutY="240.0" radius="179.0" stroke="#ff9c39" strokeType="INSIDE" strokeWidth="19.0" />
+                     </children>
+     </AnchorPane>
+
+   </children>
+</StackPane>

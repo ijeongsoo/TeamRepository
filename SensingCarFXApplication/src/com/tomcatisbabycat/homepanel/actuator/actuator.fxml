@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="actuatorStackPane" prefHeight="480.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.actuator.ActuatorController">
+    <children>
+      <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
+        <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
+            <children>
+                <Label layoutX="50.0" layoutY="35.0" styleClass="mainFont" text="Actuator">
+                    <font>
+                        <Font name="Arial Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btnControlHome" layoutX="659.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_home_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlLock" layoutX="722.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_lock_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <Button fx:id="btnControlBack" layoutX="594.0" layoutY="27.0" mnemonicParsing="false" styleClass="controlButton">
+                    <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/control_back_85D03C.png" />
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+            <Button fx:id="btnLeft" layoutX="149.0" layoutY="375.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/leftarrow.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnFront" layoutX="217.0" layoutY="375.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/uparrow.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnRight" layoutX="287.0" layoutY="375.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/rightarrow.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnAccel" layoutX="14.0" layoutY="375.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/accel.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnBrake" layoutX="83.0" layoutY="375.0" mnemonicParsing="false" prefHeight="60.0" prefWidth="60.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/brake.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnForward" layoutX="380.0" layoutY="358.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/forward.jpg" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnBackward" layoutX="380.0" layoutY="407.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="40" fitWidth="40" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/backward.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUpDown75" layoutX="671.0" layoutY="337.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/updown3.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUpDown45" layoutX="616.0" layoutY="337.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/updown2.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUpDown10" layoutX="561.0" layoutY="337.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/updown1.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLeftRight45" layoutX="561.0" layoutY="419.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/left.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLeftRight90" layoutX="616.0" layoutY="419.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/upto.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLeftRight135" layoutX="671.0" layoutY="419.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/right.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLeftRight170" layoutX="671.0" layoutY="378.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/rightdouble.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnLeftRight10" layoutX="561.0" layoutY="378.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/leftdouble.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <StackPane fx:id="cameraPane" layoutX="370.0" layoutY="70.0" prefHeight="200.0" prefWidth="400.0" styleClass="controlButton" />
+            <StackPane fx:id="stackSpeed" layoutX="52.0" layoutY="70.0" prefHeight="250.0" prefWidth="250.0" styleClass="controlButton" />
+            <Button fx:id="btnUltrasonicRight" layoutX="671.0" layoutY="293.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/rob.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUltrasonicFront" layoutX="616.0" layoutY="293.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/fob.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            <Button fx:id="btnUltrasonicLeft" layoutX="561.0" layoutY="293.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="30.0" styleClass="controlButton">
+                <graphic>
+                        <ImageView fitHeight="30" fitWidth="30" pickOnBounds="true">
+                            <image>
+                                <Image url="@../resources/icons/lob.png" />
+                            </image>
+                        </ImageView>
+                </graphic>
+            </Button>
+            </children>
+        </AnchorPane>
+    </children>
+</StackPane>

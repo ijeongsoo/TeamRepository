@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.tomcatisbabycat.homepanel.main.MainImagePopupController">
+   <children>
+      <Rectangle id="recPopupBackground" fx:id="recPopupBackground" arcHeight="5.0" arcWidth="5.0" fill="#000000b3" height="480.0" stroke="#000000b2" strokeType="INSIDE" width="800.0" />
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <Pane VBox.vgrow="ALWAYS" />
+            <HBox>
+               <children>
+                  <Pane HBox.hgrow="ALWAYS" />
+                  <StackPane>
+                     <children>
+                        <ImageView id="imgPopup" fx:id="imgPopup" fitHeight="400.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button id="btnExit" fx:id="btnExit" mnemonicParsing="false" style="-fx-background-color: transparent;" StackPane.alignment="TOP_RIGHT">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/icons/icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
+                     </children>
+                  </StackPane>
+                  <Pane HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <Pane VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </children>
+</StackPane>

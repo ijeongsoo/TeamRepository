@@ -1,0 +1,133 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 2017. 5. 1, 오후 5:49:38
+    Author     : ijeongsu
+*/
+
+.mainBackground{
+    -fx-background-color: #FFCBC1; /* 푸른색 처음에 우리가 정한 푸른색 */
+}
+
+.specificBackground{
+    -fx-background-color: #F57D63; /* 푸른색 짝꿍 녹색*/
+}
+.controlButton{
+    -fx-background-color: white; /* 상단의 뒤로가기, 잠금, 홈 버튼의 배경색을 흰색으로 처리 하기위해 사용 */
+}
+
+Button.mainBackground:pressed { 
+    -fx-focus-color: #CDD9AC;
+    -fx-faint-focus-color: #CDD9AC;
+    -fx-inner-border: #CDD9AC;
+    -fx-body-color: #CDD9AC;
+
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: -2, -0.3, 1, 2;
+    -fx-background-radius: 7, 6, 4, 3;
+}
+
+Button.specificBackground:pressed { 
+    -fx-focus-color: #CDD9AC;
+    -fx-faint-focus-color: #CDD9AC;
+    -fx-inner-border: #CDD9AC;
+    -fx-body-color: #CDD9AC;
+
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: -2, -0.3, 1, 2;
+    -fx-background-radius: 7, 6, 4, 3;
+}
+
+.lockBtnPassword{
+    -fx-background-radius: 30;
+    /*-fx-background-color: #A1DCFC;*/
+    -fx-border-radius: 30;
+    -fx-background-color:transparent;
+    -fx-border-color: #D5EFFD;
+    -fx-border-width: 2;
+    -fx-font-size : 30px;
+}
+
+
+
+.circlePassword{
+    -fx-fill: transparent;
+    -fx-stroke: #D5EFFD;
+}
+
+.root{
+    /*-fx-font-size: 24pt;*/
+    /*    -fx-base: rgb(255,0,0);*/
+    /*    -fx-background: rgb(50,50,50);*/
+}
+
+#NumberField {
+    -fx-border-width: 1;
+    -fx-border-color: lightgray;
+    -fx-background-insets:1;
+    -fx-border-radius:3 0 0 3;
+    /*    -fx-border-radius:0 0 0 0;*/
+}
+#NumberSpinnerArrow {
+    -fx-fill: gray;
+    -fx-stroke: gray;
+    /*        -fx-effect: innershadow( gaussian , black , 2 , 0.6 , 1 , 1 )*/
+}
+#ButtonsBox {
+    -fx-border-color:lightgray;
+    -fx-border-width: 1 1 1 0;
+    -fx-border-radius: 0 3 3 0;
+    /*    -fx-border-radius: 0 0 0 0;*/
+}
+#SpinnerButtonUp {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 3 0 0;
+    /*    -fx-background-radius:0;*/
+}
+#SpinnerButtonDown {
+    -fx-background-insets: 0;
+    -fx-background-radius:0 0 3 0;
+    /*    -fx-background-radius:0;*/
+
+}
+.conditionBtn{
+    -fx-background-color: #FFCBC1;
+}
+.conditionBtnFocused{
+    -fx-focus-color: #F57D63;
+    -fx-faint-focus-color: #F57D63;
+    -fx-inner-border: #F57D63;
+    -fx-body-color: #F57D63;
+
+    -fx-background-color: -fx-faint-focus-color, -fx-focus-color, -fx-inner-border, -fx-body-color; 
+}
+.dayButton{
+    -fx-background-color: white, white;
+    -fx-background-radius: 16.4, 15;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: lightgray;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+}
+.dayButtonClicked{
+    -fx-background-color: white, lightgreen;
+    -fx-background-radius: 16.4, 15;
+    -fx-background-insets: -1.4, 0;
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: lightgray;
+    -fx-padding: 0;
+    -fx-font-size: 0;
+}
+.buttonWhite{
+    -fx-background-color: white;
+}
+
+.mainFont{
+  -fx-text-fill:#F57D63;
+}
