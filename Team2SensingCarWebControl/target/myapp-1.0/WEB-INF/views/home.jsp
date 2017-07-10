@@ -45,7 +45,7 @@
 	<!-- Header -->
 	<header id="header">
 		<h1>
-			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a>
+			<a href="<%=application.getContextPath()%>/">Team2's SensingCar</a>
 		</h1>
 		<nav id="nav">
 			<ul>
@@ -63,7 +63,7 @@
 			<div class="modal-content">
 
 				<div class="modal-body">
-					<form method="post" action="login" class="form-signin">
+					<form method="post" action="<%=application.getContextPath()%>/login" class="form-signin">
 						<h2 class="form-signin-heading">로그인</h2>
 						<label for="inputEmail" class="sr-only">ID</label> <input
 							type="text" id="mid" name="mid" class="form-control"
@@ -92,7 +92,7 @@
 		<h2>센싱카 컨트롤 페이지에 오신걸 환영합니다.</h2>
 		<p>본 웹사이트는 한국소프트웨어산업협회 IoT전문가 과정 프로젝트입니다.</p>
 		<ul class="actions">
-			<li><a href="join" class="button big">회원가입</a></li>
+			<li><a href="<%=application.getContextPath()%>/join" class="button big">회원가입</a></li>
 		</ul>
 	</section>
 
@@ -133,7 +133,7 @@
 	</section>
 
 	<!-- Two -->
-	<section id="two" class="wrapper style2 special">
+	<section id="two" class="wrapper style1 special">
 		<div class="container">
 			<header class="major">
 				<h2>Developer</h2>
@@ -142,22 +142,22 @@
 			<section class="profiles" style="text-align: center">
 				<div style="text-align: center;">
 					<section class="3u 12u(medium) 12u$(xsmall) profile"
-						style="display: inline-block; margin-left: 150px">
-						<img height="100" src="resources/images/jsPhoto.jpg" alt="" />
+						style="display: inline-block;">
+						<img height="100" src="<%=application.getContextPath()%>/resources/images/jsPhoto.jpg" alt="" />
 						<h4>이정수</h4>
 						<p>Phon. 010-9895-5986</p>
 					</section>
 					<section class="3u 12u$(medium) 12u$(xsmall) profile"
 						style="display: inline-block;">
-						<img height="100" src="resources/images/hkPhoto.jpg" alt="" />
+						<img height="100" src="<%=application.getContextPath()%>/resources/images/hkPhoto.jpg" alt="" />
 						<h4>강현규</h4>
-						<p>Phon. 010-9895-5986</p>
+						<p>Phon. 010-8994-9346</p>
 					</section>
 					<section class="3u 12u(medium) 12u$(xsmall) profile"
 						style="display: inline-block;">
-						<img height="100" src="resources/images/jhPhoto.jpeg" alt="" />
+						<img height="100" src="<%=application.getContextPath()%>/resources/images/jhPhoto.jpeg" alt="" />
 						<h4>조재훈</h4>
-						<p>Phon. 010-9895-5986</p>
+						<p>Phon. 010-7923-6932</p>
 					</section>
 
 				</div>

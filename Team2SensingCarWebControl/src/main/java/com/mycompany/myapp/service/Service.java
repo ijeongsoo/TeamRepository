@@ -21,7 +21,7 @@ public interface Service {
 	public String thermistorSensor(String sip, String command);
 	public String photoresistorSensor(String sip, String command);
 	public String gasSensor(String sip, String command);
-	public String ultrasonicSensor(String sip, String command);
+	public String ultrasonicSensor(String sip, String command, String angle);
 	public String trackingSensor(String sip, String command);
 	
 	
@@ -30,6 +30,9 @@ public interface Service {
 	public String rgbLed(String sip, String command, String red, String green, String blue);
 	public String backTire(String sip, String command, String speed, String direction);
 	public String frontTire(String sip, String command, String angle);
+	public String camera(String sip, String command, String leftRight, String upDown);
+	public String lcd(String sip, String command, String line0, String line1);
+	
 
 
 	public void sensingcarRegist(Sensingcar sensingcar);

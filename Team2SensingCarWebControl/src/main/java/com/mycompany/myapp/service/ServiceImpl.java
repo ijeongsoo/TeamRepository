@@ -205,9 +205,13 @@ public class ServiceImpl implements Service {
 	}
 	
 	@Override
-	public String ultrasonicSensor(String sip, String command) {
+	public String ultrasonicSensor(String sip, String command, String angle) {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put("command", command);
+		
+		if(angle!=null){
+			jsonObject.put("angle", angle);
+		}
 
 		String reqJson = jsonObject.toString();
 		CoapClient coapClient = new CoapClient();
@@ -218,11 +222,13 @@ public class ServiceImpl implements Service {
 		String json = coapResponse.getResponseText();
 		jsonObject = new JSONObject(json);
 		String temp = jsonObject.getString("distance");
+		String resultAngle =jsonObject.getString("angle");
 		double tempD = Double.parseDouble(temp);
 		int tempI= (int)tempD;
 		String result = String.valueOf(tempI);
 		jsonObject = new JSONObject();
 		jsonObject.put("distance", result);
+		jsonObject.put("angle", resultAngle);
 		json=jsonObject.toString();
 		coapClient.shutdown();
 		
@@ -355,6 +361,54 @@ public class ServiceImpl implements Service {
 
 		CoapClient coapClient = new CoapClient();
 		coapClient.setURI("coap://" + sip + "/fronttire");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String camera(String sip, String command, String leftRight, String upDown) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		if(leftRight!=null){
+			
+			jsonObject.put("leftright", leftRight);
+			jsonObject.put("updown", upDown);
+			
+		}
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/camera");
+
+		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
+
+		String json = coapResponse.getResponseText();
+		coapClient.shutdown();
+		
+		return json;
+	}
+	
+	@Override
+	public String lcd(String sip, String command, String line0, String line1) {
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("command", command);
+		if(line0!=null){
+			
+			jsonObject.put("line0", line0);
+			jsonObject.put("line1", line1);
+			
+		}
+
+		String reqJson = jsonObject.toString();
+
+		CoapClient coapClient = new CoapClient();
+		coapClient.setURI("coap://" + sip + "/lcd");
 
 		CoapResponse coapResponse = coapClient.post(reqJson, MediaTypeRegistry.APPLICATION_JSON);
 

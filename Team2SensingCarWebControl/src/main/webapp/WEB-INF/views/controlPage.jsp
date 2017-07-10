@@ -74,7 +74,9 @@
 <script src="<%=application.getContextPath()%>/resources/js/rgbLed.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/backTire.js"></script>
 <script
-	src="<%=application.getContextPath()%>/resources/js/frontTire.js"></script>
+	src="<%=application.getContextPath()%>/resources/js/ultrasonicSensor.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/lcd.js"></script>
 
 
 
@@ -236,9 +238,9 @@
 			}
 			
 			speedView.series[0].points[0].update(${backTireSpeed});
-			ultraAngleView.series[0].points[0].update(${ultrasonicSensorAngle});
+			ultraAngleView.series[0].points[0].update(180-${ultrasonicSensorAngle});
 			frontTireAngleView.series[0].points[0].update(${frontTireAngle});
-			cameraAngleView.series[0].points[0].update(${leftRight});
+			cameraAngleView.series[0].points[0].update(180-${leftRight});
 			cameraAngleView.series[1].points[0].update(${upDown});
 	 });
 
@@ -247,11 +249,12 @@
 	 setInterval("gasSensor('${sensingcar.sip}')", 1000);
 	 setInterval("ultrasonicSensor('${sensingcar.sip}')", 1000);
 	 setInterval("trackingSensor('${sensingcar.sip}')", 1000);
-	 setInterval("buzzerStatus('${sensingcar.sip}')", 1000);
-	 setInterval("laserStatus('${sensingcar.sip}')", 1000);
+	 setInterval("buzzerStatus('${sensingcar.sip}')", 2000);
+	 setInterval("laserStatus('${sensingcar.sip}')", 2000);
 	 setInterval("ledStatus('${sensingcar.sip}')", 1000);
-	 setInterval("backTireStatus('${sensingcar.sip}')", 1000);
-	 setInterval("frontTireStatus('${sensingcar.sip}')", 1000);
+	 setInterval("backTireStatus('${sensingcar.sip}')", 2000);
+	 setInterval("frontTireStatus('${sensingcar.sip}')", 2000);
+	 setInterval("lcdStatus('${sensingcar.sip}')", 10000);
 	function thermistorSensor(ip) {
 		var json = {
 			"command" : "status",
@@ -320,6 +323,10 @@
 				success : function(data) {
 					var series = chartUltrasonic.series[0];
 					series.data[0].update({'y':data.distance});
+					ultraAngleView.series[0].points[0].update(Number(180-data.angle));
+					$("#ultraH").html(Number(180-data.angle));
+					$("#ultraSlide").val(180-data.angle);
+					
 				}
 			});
 		}
@@ -471,6 +478,27 @@
 				}
 			});
 		}
+	 
+	 function lcdStatus(ip) {
+			var json = {
+				"command" : "status",
+				"sip" : ip
+			};
+
+			$.ajax({
+				url : "http://" + location.host
+						+ "/Team2SensingCarWebControl/lcd",
+				data : json,
+				method : "post",
+				success : function(data) {
+					$("#line0").val(data.line0);
+					$("#line1").val(data.line1);
+				
+				}
+			});
+		}
+	 
+	 
 	 
 	 function speedUp(sip) {
 		 	var speed = Number($("#speedSlide").val())+53;
@@ -664,6 +692,8 @@
 			if(rightInterval==null){
 				rightInterval=setInterval("turnRight('${sensingcar.sip}')", 100);
 			}
+		}else if(keycode == 13){
+			lcd('${sensingcar.sip}');
 		}
 	}; 
 	
@@ -700,6 +730,124 @@
 	 
 </script>
 
+<script type="text/javascript">
+      
+      
+
+$(function(){
+	var isDragging = false;
+	var x=Number(180-${leftRight})*(300/170);
+ 	var y=180-Number(${upDown})*(180/100);
+		var cnvs=document.getElementById('myCanvas');
+     var ctx = document.getElementById('myCanvas').getContext("2d");
+     
+  // 픽셀 정리
+     ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+     // 컨텍스트 리셋
+     ctx.beginPath();
+
+
+     //원 그리기
+     ctx.beginPath();
+     ctx.arc(x, y, 10, 0,(Math.PI/180) *360,false);
+     //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+     //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+     ctx.fillStyle = "rgb(255, 0, 0)";  //채울 색상
+     ctx.fill(); //채우기
+     ctx.stroke(); //테두리
+	
+	
+	 $("#myCanvas").mousedown(function(event) {
+		    isDragging = true;
+		    var x=event.offsetX;
+         	var y=event.offsetY;
+  			var cnvs=document.getElementById('myCanvas');
+             var ctx = document.getElementById('myCanvas').getContext("2d");
+             
+          // 픽셀 정리
+             ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+             // 컨텍스트 리셋
+             ctx.beginPath();
+
+  
+             //원 그리기
+             ctx.beginPath();
+             ctx.arc(x, y, 10, 0,(Math.PI/180) *360,false);
+             //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+             //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+  
+             ctx.fillStyle = "rgb(255, 0, 0)";  //채울 색상
+             ctx.fill(); //채우기
+             ctx.stroke(); //테두리
+             
+             var json = {
+            			"command" : "change",
+            			"leftRight" : String(180-parseInt(x*(170/300))),
+            			"upDown":String(90-parseInt(y*(100/180))),
+            			"sip" : '${sensingcar.sip}'
+            		};
+
+            		$.ajax({
+            			url : "http://" + location.host
+            					+ "/Team2SensingCarWebControl/camera",
+            			data : json,
+            			method : "post",
+            			success : function(data) {
+            				cameraAngleView.series[0].points[0].update(180-Number(data.leftright));
+             				cameraAngleView.series[1].points[0].update(Number(data.updown));
+            			}
+            		});
+	});
+	 $("#myCanvas").mousemove(function(event) {
+		 if(isDragging){
+			 var x=event.offsetX;
+         	var y=event.offsetY;
+  			var cnvs=document.getElementById('myCanvas');
+             var ctx = document.getElementById('myCanvas').getContext("2d");
+             
+          // 픽셀 정리
+             ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+             // 컨텍스트 리셋
+             ctx.beginPath();
+
+  
+             //원 그리기
+             ctx.beginPath();
+             ctx.arc(x, y, 10, 0,(Math.PI/180) *360,false);
+             //ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+             //그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+  
+             ctx.fillStyle = "rgb(255, 0, 0)";  //채울 색상
+             ctx.fill(); //채우기
+             ctx.stroke(); //테두리
+             var json = {
+         			"command" : "change",
+         			"leftRight" : String(180-parseInt(x*(170/300))),
+         			"upDown":String(90-parseInt(y*(100/180))),
+         			"sip" : '${sensingcar.sip}'
+         		};
+
+         		$.ajax({
+         			url : "http://" + location.host
+         					+ "/Team2SensingCarWebControl/camera",
+         			data : json,
+         			method : "post",
+         			success : function(data) {
+         				cameraAngleView.series[0].points[0].update(180-Number(data.leftright));
+         				cameraAngleView.series[1].points[0].update(Number(data.updown));
+         			}
+         		});
+             
+		 }
+	});
+	 $("#myCanvas").mouseup(function(event) {
+		    isDragging = false;
+	});
+});
+
+    </script>
+
 </head>
 
 <body onkeydown="keyEvent(event)" onkeyup="keyUpEvent(event)">
@@ -707,15 +855,15 @@
 	<!-- Header -->
 	<header id="header">
 		<h1 class="0u(medium)">
-			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a> <span>|
+			<a href="<%=application.getContextPath()%>/">Team2's SensingCar</a> <span>|
 				"${sensingcar.sregistor}"님이 등록하신 "${sensingcar.sname}":
 				${sensingcar.sip }</span>
 		</h1>
 		<nav id="nav">
 			<ul>
-				<li><a href="remove?sno=${sensingcar.sno }">장비제거</a></li>
-				<li><a href="sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
-				<li><a href="<%=application.getContextPath()%>">Home</a></li>
+				<li><a href="<%=application.getContextPath()%>/remove?sno=${sensingcar.sno }">장비제거</a></li>
+				<li><a href="<%=application.getContextPath()%>/sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
+				<li><a href="<%=application.getContextPath()%>/">Home</a></li>
 				<li><a type="button" class="button special" href="logout">Log
 						Out</a></li>
 			</ul>
@@ -868,19 +1016,42 @@
 
 					<div class="9u 9u$(medium)">
 						<h3>핸들</h3>
-						<%-- <input id="frontAngleControl" oninput="frontTire('${sensingcar.sip }')" type="text"  class="dial" value="${frontTireAngle}"> --%>
 						<div id="arc-slider" oninput="frontTire('${sensingcar.sip }')"
 							class="rslider"></div>
+						<hr>
+						<h3>거리센서</h3>
+						<input onchange="getUltasonicSensor('${sensingcar.sip }')"
+							class="blueSlide" id="ultraSlide" data-fix-max-value="180"
+							data-orientation="horizontal"
+							style="display: inline-block; width: 320px;" value="0"
+							type="range" min="0" max="180" step="1">
+						<h4 id="ultraH">0</h4>
 					</div>
 
 				</div>
 			</div>
 
-			<div class="2u 12u$(medium)"
-				style="padding-left: 0; padding-right: 0;"></div>
+			<div class="4u 12u$(medium)"
+				style="padding-left: 0; padding-right: 0;">
+				<h3>카메라 각도</h3>
+				<canvas id="myCanvas" height="180" style="background: gray;">
+  				</canvas>
+  				
+				<h3>LCD메세지</h3>
+				
+				<input  type="text" id="line0" name="line0" class="form-control"
+					placeholder="line0" required
+					style="background-color: #e8e8e8; width: 300px; margin:0 auto" value="${lcdLine0 }"> <input value="${lcdLine1 }"
+					type="text" id="line1" name="line1" class="form-control"
+					placeholder="line1" required
+					style="background-color: #e8e8e8;  width: 300px;margin:0 auto; margin-top: 20px;">
 
-			<div class="2u$ 12u$(medium)"
-				style="padding-left: 0; padding-right: 0;"></div>
+
+			</div>
+
+
+
+
 		</div>
 
 	</section>

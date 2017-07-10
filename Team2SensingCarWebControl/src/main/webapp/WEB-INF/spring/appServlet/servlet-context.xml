@@ -33,11 +33,11 @@
 	<!-- AOP 설정 -->
 	<aop:aspectj-autoproxy/>	
 	
-	<websocket:handlers>
+	<!-- <websocket:handlers>
 		<websocket:mapping handler="thermistorSensorHandler" path="/websocket/thermistorSensor"/>
 		<websocket:mapping handler="ultrasonicSensorHandler" path="/websocket/ultrasonicSensor"/>
 		<websocket:mapping handler="trackingSensorHandler" path="/websocket/trackingSensor"/>
 		<websocket:mapping handler="photoresistorSensorHandler" path="/websocket/photoresistorSensor"/>
 		<websocket:mapping handler="gasSensorHandler" path="/websocket/gasSensor"/>
-	</websocket:handlers>
+	</websocket:handlers> -->
 </beans:beans>

@@ -169,7 +169,7 @@
 	<!-- Header -->
 	<header id="header">
 		<h1>
-			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a>
+			<a href="<%=application.getContextPath()%>/">Team2's SensingCar</a>
 		</h1>
 		<nav id="nav">
 			<ul>
@@ -186,7 +186,7 @@
 			<div class="modal-content">
 
 				<div class="modal-body">
-					<form method="post" class="form-signin" action="login">
+					<form method="post" class="form-signin" action="<%=application.getContextPath()%>/login">
 						<h2 class="form-signin-heading">로그인</h2>
 						<label for="inputEmail" class="sr-only">ID</label> <input
 							type="text" id="mid" name="mid" class="form-control"
@@ -254,7 +254,7 @@
 			<h2>가입양식</h2>
 		</header>
 		<div class="container 50%">
-			<form id="formjoin" method="post" onsubmit="return check()"
+			<form id="formjoin" action="<%=application.getContextPath()%>/join"method="post" onsubmit="return check()"
 				enctype="multipart/form-data">
 				<div class="row uniform">
 					<label style="font-size: 23px" class="2u 12u$(small)"

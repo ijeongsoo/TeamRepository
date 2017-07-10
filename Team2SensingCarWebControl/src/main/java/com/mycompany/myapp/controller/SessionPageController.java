@@ -81,9 +81,8 @@ public class SessionPageController {
 		sensingcar.setSsavedfilename(fileName);
 
 		String realPath = servletContext.getRealPath("/WEB-INF/upload/");
-		File file = new File(realPath + fileName);
+		File file = new File(realPath +"/"+ fileName);
 		sensingcar.getSattach().transferTo(file);
-		logger.info(sensingcar.getSname());
 		service.sensingcarRegist(sensingcar);
 
 		return "redirect:loginHome";

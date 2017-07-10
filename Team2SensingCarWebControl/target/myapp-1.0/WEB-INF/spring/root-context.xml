@@ -8,7 +8,7 @@
 	<!-- Connection Pool(DataSource) 설정 -->
 	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver" />
-		<property name="jdbcUrl" value="jdbc:mariadb://192.168.3.36/iotdb" />
+		<property name="jdbcUrl" value="jdbc:mariadb://localhost/iotdb" />
 		<property name="user" value="iotuser" />
 		<property name="password" value="iot12345" />
 		<property name="maxPoolSize" value="1" />

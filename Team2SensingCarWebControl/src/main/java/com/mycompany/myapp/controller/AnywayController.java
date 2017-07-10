@@ -167,9 +167,9 @@ public class AnywayController {
 	}
 	
 	@RequestMapping("/ultrasonicSensor")
-	public void ultrasonicSensor(String sip, String command, HttpServletResponse response) {
+	public void ultrasonicSensor(String sip, String command,String angle, HttpServletResponse response) {
 		try {
-			String result = service.ultrasonicSensor(sip, command);
+			String result = service.ultrasonicSensor(sip, command, angle);
 
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter pw;
@@ -277,6 +277,42 @@ public class AnywayController {
 	public void frontTire(String sip, String command, String angle, HttpServletResponse response) {
 		try {
 			String result = service.frontTire(sip, command,angle);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/camera")
+	public void camera(String sip, String command, String leftRight, String upDown, HttpServletResponse response) {
+		try {
+			String result = service.camera(sip, command, leftRight, upDown);
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+
+			pw.write(result);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			logger.info(sip+"연결상태 불량");
+		}
+	}
+	
+	@RequestMapping("/lcd")
+	public void lcd(String sip, String command, String line0, String line1, HttpServletResponse response) {
+		try {
+			String result = service.lcd(sip, command, line0, line1);
 
 			response.setContentType("application/json; charset=UTF-8");
 			PrintWriter pw;

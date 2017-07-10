@@ -311,7 +311,7 @@ function drawUserAvailable(mid) {
 	<!-- Header -->
 	<header id="header">
 		<h1>
-			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a>
+			<a href="<%=application.getContextPath()%>/">Team2's SensingCar</a>
 		</h1>
 		<nav id="nav">
 			<ul>
@@ -430,7 +430,7 @@ function drawUserAvailable(mid) {
 							<section class="box">
 
 								<img
-									src="file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
+									src="<%=application.getContextPath()%>/file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
 									class="photo3" />
 								<h3>${s.sip}</h3>
 

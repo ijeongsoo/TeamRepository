@@ -1,20 +1,20 @@
-function ultrasonicSensor(command, angle) {
-
+function getUltasonicSensor(ip) {	
+	$("#ultraH").html($('#ultraSlide').val());
 	var json = {
-		"command" : command,
-		"angle" : angle
+		"command" : "change",
+		"angle" : String(180-Number($('#ultraSlide').val())),
+		"sip" : ip
 	};
 
 	$.ajax({
 		url : "http://" + location.host
-				+ "/SensingCarRemoteControl/ultrasonicSensor",
+				+ "/Team2SensingCarWebControl/ultrasonicSensor",
 		data : json,
 		method : "post",
 		success : function(data) {
-			if (data.result == "success") {
-				$("#ultrasonicSensorStatus").html(
-						"각도:" + data.angle + ";거리:" + data.distance);
-			}
+				
 		}
 	});
 }
+
+

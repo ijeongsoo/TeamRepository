@@ -41,13 +41,7 @@
 	
 <script
 	src="<%=application.getContextPath()%>/resources/js/chartTheme.js"></script>
-<script
-	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart3.js"></script>
-<script
-	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart.js"></script>
-<script
-	src="<%=application.getContextPath()%>/resources/js/sensingcarInfoChart2.js"></script>
-		
+
 <script
 	src="<%=application.getContextPath()%>/resources/js/gassensorInfoChart.js"></script>
 <script
@@ -182,15 +176,15 @@ function thermistorSensor(ip) {
 	<!-- Header -->
 	<header id="header">
 		<h1 class="0u(medium)">
-			<a href="<%=application.getContextPath()%>">Team2's SensingCar</a> <span>|
+			<a href="<%=application.getContextPath()%>/">Team2's SensingCar</a> <span>|
 				"${sensingcar.sregistor}"님이 등록하신 "${sensingcar.sname}":
 				${sensingcar.sip }</span>
 		</h1>
 		<nav id="nav">
 			<ul>
-				<li><a href="remove?sno=${sensingcar.sno }">장비제거</a></li>
-				<li><a href="sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
-				<li><a href="<%=application.getContextPath()%>">Home</a></li>
+				<li><a href="<%=application.getContextPath()%>/remove?sno=${sensingcar.sno }">장비제거</a></li>
+				<li><a href="<%=application.getContextPath()%>/sensor?sip=${sensingcar.sip }">RealTime Sensor</a></li>
+				<li><a href="<%=application.getContextPath()%>/">Home</a></li>
 				<li><a type="button" class="button special" href="logout">Log
 						Out</a></li>
 			</ul>
