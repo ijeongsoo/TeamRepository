@@ -13,6 +13,7 @@ import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 
 /**
  *
@@ -42,7 +43,7 @@ public class MqttPublisher {
 
 	public MqttPublisher() throws MqttException {
 		//MQTT 클라이언트 생성
-		mqttClient = new MqttClient("tcp://192.168.3.129:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://192.168.3.127:1883", MqttClient.generateClientId());
 		//통신 결과에 따라 실행할 콜백 객체 생성 
 		mqttClient.setCallback(mqttCallback);
 		//MQTT 브로커와 연결하기 
@@ -55,7 +56,7 @@ public class MqttPublisher {
 		//MQTT 브로커로 보내는 메시지 생성
 		MqttMessage message = new MqttMessage(text.getBytes());
 		//MQTT 브로커로 메시지 보냄 
-		mqttClient.publish("/devices/device1/temperature", message);
+		mqttClient.publish("/devices/drone/throttle", message);
 	}
 	
 	public void shutdown() throws MqttException{
@@ -67,10 +68,14 @@ public class MqttPublisher {
 	
 	public static void main(String[] args) throws Exception {
 		MqttPublisher publisher = new MqttPublisher();
-		for(int i =1; i<=5; i++){
-			publisher.publish("temperature"+i);
-			Thread.sleep(1000);
-		}
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("throttle", 1300);
+		String text = jsonObject.toString();
+		
+		
+		publisher.publish(text);
+		Thread.sleep(1000);
+		
 		publisher.shutdown();
 		
 	}
