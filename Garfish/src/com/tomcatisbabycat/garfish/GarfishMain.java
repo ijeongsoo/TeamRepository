@@ -15,10 +15,19 @@ public class GarfishMain {
 	public static void main(String[] args) {
 		GarfishMqttClient garfishMqttClient= new GarfishMqttClient();
 		garfishMqttClient.subscribe();
+		garfishMqttClient.init();
 		
 		
 		System.out.println("start garfishMqttClient");
+		///////////////////////////////////////////////////
+		
+		
+		
+		
+		///////////////////////////////////////////////////
 		System.out.println("press any key to quit");
+		
+		
 		try {
 			System.in.read();
 		} catch (IOException ex) {
