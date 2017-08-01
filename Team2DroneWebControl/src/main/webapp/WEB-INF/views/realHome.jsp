@@ -515,7 +515,7 @@
 									</p>
 									
 								</header>
-								<a href="#work" class="jumplink pic">
+								<a href="#ControlPanel" class="jumplink pic">
 									<span class="arrow icon fa-chevron-right"><span>See my work</span></span>
 									<img src="resources/images/me.jpg" alt="" />
 								</a>
