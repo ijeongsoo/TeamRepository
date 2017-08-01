@@ -9,14 +9,11 @@
 		<script src="<%=application.getContextPath()%>/resources/jquery/jquery-3.2.1.min.js" type="text/javascript"></script>
 		<script src="<%=application.getContextPath()%>/resources/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script>
 	</head>
-	
 	<body>
 		<h4>WebApplication Home</h4>
 		<hr/>
-		
 		<a href="control">control</a>
-		<a href="jspTest">jspTest</a>
-		
+		<a href="realHome">realHome</a>
 	</body>
 </html>
 
