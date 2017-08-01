@@ -44,7 +44,6 @@ public class HomeController {
 				System.out.println("deliveryComplete:" + new Date());
 			}
 		};
-
 		mqttClient.setCallback(mqttCallback);
 		mqttClient.connect();
 	}
@@ -66,9 +65,9 @@ public class HomeController {
 		return "controlPage";
 	}
 	
-	@RequestMapping("/jspTest")
+	@RequestMapping("/realHome")
 	public String jspTest() {
-		return "jspTest";
+		return "realHome";
 	}
 	
 
