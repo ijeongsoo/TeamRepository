@@ -14,6 +14,13 @@
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		
 		
+		
+			
+	
+		
+			
+		
+		
 		<!-- controlPanel ( throttle / pitch / roll / yaw ) -->
 		<meta charset="UTF-8">
 		<meta name="viewport"
@@ -496,7 +503,7 @@
 						<a href="#me" class="icon fa-home active"><span>Home</span></a>
 						<a href="#ControlPanel" class="icon fa-folder"><span>Control</span></a>
 						<a href="#work2" class="icon fa-folder"><span>Work</span></a>
-						<a href="#contact" class="icon fa-envelope"><span>Contact</span></a>
+						<a href="#join" class="icon fa-envelope"><span>Join</span></a>
 						<a href="#" class="icon fa-twitter"><span>Twitter</span></a>
 					</nav>
 
@@ -513,6 +520,133 @@
 									<br/>
 										Let's start!
 									</p>
+									
+									
+									<!-- 회원가입 모달 -->
+									<div style="position:relative; top:320px; right:10px">
+									<nav id="nav-1">
+										<ul>
+											<li><button type="button" class="button special"
+													data-toggle="modal" data-target="#myModal-1">Join</button></li>
+										</ul>
+									</nav>
+									</div>
+									<div id="myModal-1" class="modal fade" role="dialog">
+										<div style="width:600px;" class="modal-dialog modal-center">
+										
+											<!-- join Modal content-->
+											<div class="modal-content">
+								
+												<section style="margin: 30px 10px 20px 50px">
+												
+													<h1>가입양식</h1>
+											
+												<div>
+													<form action="<%=application.getContextPath()%>/join" method="post" onsubmit="return check()" enctype="multipart/form-data">
+														<div>
+															
+															<div  style="text-align: left">
+																<input class="input" name="joinMid" id="joinMid" type="text" placeholder="ID" required> 
+																	<label id="canUse" style="margin-top: 5px">중복확인해주세요</label>
+															</div>
+															<div>
+																<a id="checkButton" class="btn btn-primary"style="font-size: 15px">중복확인</a>
+															</div>
+															
+															<br/>
+															
+															<div  style="text-align: left">
+																<input class="input" id="joinMpassword" name="joinMpassword" type="password" placeholder="비밀번호" required>
+															</div>
+										
+															</br>
+															
+															<div  style="text-align: left">
+																<input class="input" id="mPasswordCheck" name="mPasswordCheck" type="password"placeholder="비밀번호 확인" required>
+																	<label style="margin-top: 5px" id="pwcheck" name="pwcheck">비밀번호를 한번 더 입력해주세요.</label>
+															</div>
+															
+										
+															<div style="text-align: left">
+																<input class="input" id="mname" name="mname" type="text" placeholder="이름" required>
+															</div>
+															
+															</br>
+										
+															<div style="text-align: left">
+																<input class="input" id="memail" name="memail" type="email" placeholder="E-mail" required>
+															</div>
+															</br>
+										 
+															<div >
+																<ul>
+																	<li><input class="btn btn-primary" class="input" id="join" name="join" value="회원가입" type="submit"/></li>
+																	<br/>
+																	<li><input class="btn btn-primary" class="input" type="reset"  value="Reset"/></li>
+																</ul>
+															</div>
+														</div>
+													</form>
+												</div>
+											</section>
+												
+											</div>
+										</div>
+									</div>
+									
+									
+									
+									
+									<!-- 로그인 모달 -->
+									<div style="position:relative; top:250px ; left:150px">
+									<nav id="nav-2">
+										<ul>
+											<li><button type="button" class="button special"
+													data-toggle="modal" data-target="#myModal-2">Log-in</button></li>
+										</ul>
+									</nav>
+									</div>
+									
+									<div id="myModal-2" class="modal fade" role="dialog">
+										<div class="modal-dialog modal-sm">
+								
+											<!-- login Modal content-->
+											<div class="modal-content">
+								
+												<div class="modal-body">
+													<form method="post" action="<%=application.getContextPath()%>/login" class="form-signin">
+														<h2 class="form-signin-heading">Log-in</h2>
+														<label for="inputEmail" class="sr-only">ID</label> <input
+															type="text" id="mid" name="mid" class="form-control"
+															placeholder="ID" required  style="background-color:#e8e8e8"> <label
+															for="inputPassword" class="sr-only">PW</label> <input
+															type="password" id="mpassword" name="mpassword" class="form-control"
+															placeholder="Password" required style="background-color:#e8e8e8 ; margin-top: 20px">
+														<br>
+														<button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									
+									<div style="position:relative; top:300px">
+									<nav id="nav">
+										<ul>
+											<li><button type="button" class="button special"
+													data-toggle="modal" data-target="#myModal">Log-in</button></li>
+										</ul>
+									</nav>
+									</div>
+									
+									
+									
+									
+									
 									
 								</header>
 								<a href="#ControlPanel" class="jumplink pic">
@@ -533,7 +667,7 @@
 									Positive throttle will make the drone fly higher and negative throttle will make the drone fly lower.
 								<h4>&lt;Yaw&gt;</h4>
 									Yaw is the left and right rotation of the drone.  
-									Positive yaw will make the drone turn to the right and negative yaw will make the drone turn to the left.
+									Positive yaw will make the drone turn to the right and negative yaw will make the drone turn the left.
 								<h4>&lt;Pitch&gt;</h4>
 									Pitch is the forward and backward tilt of the drone.  
 									positive pitch will make the drone tilt and move forward and negative pitch will make the drone tilt and move backwards.	
@@ -543,7 +677,7 @@
 								</p>
 								<section>
 									<div class="row" >
-									<div style="text-align: center;" >
+									<div style="text-align: center;">
 										<button onclick="arm()" class="btn" id="arm">ARM</button>
 										<br/>
 										
@@ -703,10 +837,14 @@
 								</section>
 							</article>
 
-						<!-- Contact -->
-							<article id="contact" class="panel">
+						
+							
+							
+							
+							<!-- Join page -->
+							<article id="join" class="panel">
 								<header>
-									<h2>Contact Me</h2>
+									<h2>Join</h2>
 								</header>
 								<form action="#" method="post">
 									<div>
