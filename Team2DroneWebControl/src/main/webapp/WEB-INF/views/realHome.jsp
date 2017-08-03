@@ -502,7 +502,7 @@
 					<nav id="nav">
 						<a href="#me" class="icon fa-home active"><span>Home</span></a>
 						<a href="#ControlPanel" class="icon fa-folder"><span>Control</span></a>
-						<a href="#work2" class="icon fa-folder"><span>Work</span></a>
+						<a href="#sensor" class="icon fa-folder"><span>Sensor</span></a>
 						<a href="#join" class="icon fa-envelope"><span>Join</span></a>
 						<a href="#" class="icon fa-twitter"><span>Twitter</span></a>
 					</nav>
@@ -578,7 +578,7 @@
 															</div>
 															</br>
 										 
-															<div >
+															<div>
 																<ul>
 																	<li><input class="btn btn-primary" class="input" id="join" name="join" value="회원가입" type="submit"/></li>
 																	<br/>
@@ -747,94 +747,11 @@
 								</section>
 							</article>
 						<!-- Work -->
-							<article id="work2" class="panel">
+							<article id="sensor" class="panel">
 								<header>
-									<h2>Drone Control</h2>
+									<h2>Sensor</h2>
 								</header>
-								<p>
-								<h4>Throttle</h4>
-									Throttle controls the vertical up and down motion of the drone.  
-									Positive throttle will make the drone fly higher and negative throttle will make the drone fly lower.
-								<h4>Yaw</h4>
-									Yaw is the left and right rotation of the drone.  
-									Positive yaw will make the drone turn to the right and negative yaw will make the drone turn to the left.
-								<h4>Pitch</h4>
-									Pitch is the forward and backward tilt of the drone.  
-									positive pitch will make the drone tilt and move forward and negative pitch will make the drone tilt and move backwards.	
-								<h4>roll</h4>
-									Roll is the side to side tilt of the drone.  
-									Positive roll will make the drone tilt to the right and negative roll will make the drone tilt to the left.
-								</p>
-								<section>
-									<div class="row" >
-									<div style="text-align: center;" >
-										<button onclick="arm()" class="btn" id="arm">ARM</button>
-										<br/>
-										
-										<div style="border: 1px solid gold; float: left; width: 33%;">
-										<h3>throttle and yaw</h3>
-										<canvas id="myCanvas" height="200" width="200"
-											style="background: gray;"></canvas>
-										</div>
-										
-										<div style="border: 1px solid gold; float: left; width: 33%;">
-										<h3>pitch and roll</h3>
-										<canvas id="myCanvas2" height="200" width="200"
-											style="background: gray;"></canvas>
-										</div>
-										
-										<div style="border: 1px solid gold; float: left; width: 33%;">
-										<h3>fly mode</h3>
-										<canvas id="myCanvas3" height="200" width="200"
-											style="background: gray;"></canvas>
-										</div>
-										
-										<div style="border: 1px solid gold; float: left; width: 33%;">
-										<h3>camera</h3>
-										<canvas id="myCanvas4" height="200" width="200"
-											style="background: gray;"></canvas>
-										</div>
-									</div>
-									<!--  
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic01.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic02.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic03.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic04.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic05.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic06.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic07.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic08.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic09.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic10.jpg" alt=""></a>
-										</div>
-										<div class="4u 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic11.jpg" alt=""></a>
-										</div>
-										<div class="4u$ 12u$(mobile)">
-											<a href="#" class="image fit"><img src="resources/images/pic12.jpg" alt=""></a>
-										</div>
-										-->
-									</div>
-								</section>
+								
 							</article>
 
 						
