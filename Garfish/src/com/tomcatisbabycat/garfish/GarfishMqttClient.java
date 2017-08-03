@@ -95,20 +95,27 @@ public class GarfishMqttClient {
 	public GarfishMqttClient() {
 		try {
 			mqttClient = new MqttClient("tcp://192.168.3.127:1883", MqttClient.generateClientId());
+			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
 			pca9685= PCA9685.getInstance();
 			roll = new PwmFowader(pca9685, PCA9685.PWM_01);
+			System.out.println(roll + "roll");
 			throttle = new PwmFowader(pca9685, PCA9685.PWM_03);
+			System.out.println(throttle + "t");
 			pitch = new PwmFowader(pca9685, PCA9685.PWM_02);
+			System.out.println(pitch + "pticht");
 			yaw= new PwmFowader(pca9685, PCA9685.PWM_04);
+			System.out.println(yaw + "yaw");
 			mode= new PwmFowader(pca9685, PCA9685.PWM_05);
-			
+			System.out.println(mode.toString() + "mode");
+			 
 			servoCamLeftRight = new SG90ServoPCA9685Duration(pca9685, PCA9685.PWM_08); // 좌우
 			servoCamUpDown = new SG90ServoPCA9685Duration(pca9685, PCA9685.PWM_09); // 상하
 			init();
 		} catch (Exception ex) {
 			System.out.println("MqttClient 생성 및 연결 실패");
+			ex.printStackTrace();
 		}
 	}
 
@@ -148,7 +155,8 @@ public class GarfishMqttClient {
 			mode.setPWM(pwmMode);
 			
 			angleLeftRight=90;
-			angleUpDown=90;
+			angleUpDown=10;
+			
 			
 			// servo motor 초기값(90도) 설정
 			servoCamLeftRight.setAngle(angleLeftRight);
