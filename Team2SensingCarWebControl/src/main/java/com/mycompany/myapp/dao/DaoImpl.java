@@ -29,7 +29,6 @@ public class DaoImpl implements Dao {
 	}
 	
 	
-	
 	@Override
 	public String memberInsert(Member member) {
 		sst.insert("member.insert", member);

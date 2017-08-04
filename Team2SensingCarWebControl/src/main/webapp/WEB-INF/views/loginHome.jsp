@@ -367,11 +367,10 @@ function drawUserAvailable(mid) {
 
 						<div class="col-sm-12" style="text-align: center">
 							<div>
-								<img id="imgFileView" /> <label for="sattach" id="sattachBtn"
-									class="btn btn-default">등록</label> <input type="file"
-									id="sattach" style="visibility: hidden"
-									onchange="fileChange(event)" name="sattach" /><label
-									class="help-block" id="imgcheck" name="imgcheck">사진을 반드시 첨부해 주세요.</label>
+								<img id="imgFileView" /> 
+								<label for="sattach" id="sattachBtn" class="btn btn-default">등록</label> 
+								<input type="file" id="sattach" style="visibility: hidden" onchange="fileChange(event)" name="sattach"/>
+								<label class="help-block" id="imgcheck" name="imgcheck">사진을 반드시 첨부해 주세요.</label>
 							</div>
 						</div>
 
