@@ -94,7 +94,7 @@ public class GarfishMqttClient {
 
 	public GarfishMqttClient() {
 		try {
-			mqttClient = new MqttClient("tcp://192.168.3.127:1883", MqttClient.generateClientId());
+			mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
@@ -124,7 +124,7 @@ public class GarfishMqttClient {
 			mqttClient.subscribe("/devices/drone/throttleAndYaw");
 			mqttClient.subscribe("/devices/drone/pitchAndRoll");
 			mqttClient.subscribe("/devices/drone/mode");
-			mqttClient.subscribe("/devices/drone/camera");
+			mqttClient.subscribe("/devices/drone/cameraServo");
 		} catch (MqttException ex) {
 			System.out.println("구독 실패");
 		}
