@@ -802,7 +802,7 @@
 
 								<section style="margin: 30px 10px 20px 50px">
 
-									<h1>가입양식</h1>
+									<h1>Join Fomat</h1>
 
 									<div>
 										<form action="<%=application.getContextPath()%>/join"
