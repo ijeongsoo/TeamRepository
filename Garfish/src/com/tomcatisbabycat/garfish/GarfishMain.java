@@ -1,38 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author 2Team(Lee, Kang, Cho)
  */
 package com.tomcatisbabycat.garfish;
 
+import com.tomcatisbabycat.garfish.camera.publisher.CamPublisher;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
-/**
- *
- * @author ijeongsu
- */
 public class GarfishMain {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws MalformedURLException {
 		GarfishMqttClient garfishMqttClient= new GarfishMqttClient();
 		garfishMqttClient.subscribe();
 		garfishMqttClient.init();
 		
+		CamPublisher viewer = new CamPublisher(320, 240);
+		viewer.setCurrentURL(new URL("http://localhost:50001/?action=stream"));
 		
 		System.out.println("start garfishMqttClient");
-		///////////////////////////////////////////////////
-		
-		
-		
-		
-		///////////////////////////////////////////////////
-		System.out.println("press any key to quit");
-		
 		
 		try {
 			System.in.read();
 		} catch (IOException ex) {
 		}
-		
 		garfishMqttClient.shutdown();
 	}
 }

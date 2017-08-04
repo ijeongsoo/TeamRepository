@@ -1,16 +1,25 @@
+/**
+ *
+ * @author 2Team(Lee, Kang, Cho)
+ */
 package com.tomcatisbabycat.garfish.hardware;
 
 import com.pi4j.io.gpio.Pin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SG90ServoPCA9685Duration {
-	//Field
+	// LOGGER
+	private static final Logger LOG = LoggerFactory.getLogger(SG90ServoPCA9685Duration.class);
+	
+	// FIELD
 	private PCA9685 pca9685;
 	private Pin pin;
 	private int angle;
 	private int minDuration;
 	private int maxDuration;
 	
-	//Constructor
+	// CONSTRUCTOR
 	public SG90ServoPCA9685Duration(PCA9685 pca9685, Pin pin) {
 		//0도(0.8ms = 800us)
 		//180도(2.7ms = 2700us)
@@ -24,7 +33,7 @@ public class SG90ServoPCA9685Duration {
 		this.maxDuration = maxDuration;
 	}
 	
-	//Method
+	// METHOD
 	public int getAngle() {
 		return angle;
 	}

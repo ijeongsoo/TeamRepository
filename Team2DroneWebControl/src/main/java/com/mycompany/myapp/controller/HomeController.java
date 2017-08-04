@@ -29,7 +29,7 @@ public class HomeController {
 	@PostConstruct
 	public void init() throws MqttException {
 		logger.info("init실행");
-		mqttClient = new MqttClient("tcp://192.168.3.127:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
 		mqttCallback = new MqttCallback() {
 			@Override
 			public void connectionLost(Throwable thrwbl) {
