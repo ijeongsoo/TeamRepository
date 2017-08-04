@@ -108,7 +108,31 @@ public class GarfishMqttClient {
 			ex.printStackTrace();
 		}
 	}
+<<<<<<< HEAD
 	// METHOD
+=======
+
+	public void subscribe() {
+		try {
+			mqttClient.subscribe("/devices/drone/throttleAndYaw");
+			mqttClient.subscribe("/devices/drone/pitchAndRoll");
+			mqttClient.subscribe("/devices/drone/mode");
+			mqttClient.subscribe("/devices/drone/cameraServo");
+		} catch (MqttException ex) {
+			System.out.println("구독 실패");
+		}
+	}
+
+	public void shutdown() {
+		try {
+			mqttClient.disconnect();
+			mqttClient.close();
+
+		} catch (MqttException ex) {
+			System.out.println("닫기 실패");
+		}
+	}
+>>>>>>> origin/master
 	public void init(){
 		try{
 			// transmitter 초기값 설정

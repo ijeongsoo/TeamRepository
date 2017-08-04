@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+	
+	<insert id="insert" parameterType="com.mycompany.myapp.dto.Member" >
+		insert into member(mid, mname, mpassword, memail, moriginalfilename, msavedfilename, mfiletype) 
+		values (#{mid},#{mname},#{mpassword}, #{memail}, #{moriginalfileName}, #{msavedfileName}, #{mfileType});
+	</insert>
+	
+	<select id= "selectExistMid" resultType="int">
+		select count(*) from member where mid=#{mid};	
+	</select>
+	
+	<select id= "selectByMid" resultType="com.mycompany.myapp.dto.Member" parameterType="string">
+		select mid, mname, mpassword, memail, moriginalfilename, msavedfilename, mfiletype from member where mid=#{mid};	
+	</select>
+	
+</mapper>

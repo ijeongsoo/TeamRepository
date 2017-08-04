@@ -14,6 +14,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
+<<<<<<< HEAD
+=======
+
+/**
+ *
+ * @author ijeongsu
+ */
+>>>>>>> origin/master
 public class MqttPublisher {
 	// LOGGER
 	private static final Logger LOG = LoggerFactory.getLogger(MqttPublisher.class);
