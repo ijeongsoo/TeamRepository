@@ -87,7 +87,11 @@ public class GarfishMqttClient {
 	// CONSTRUCTOR
 	public GarfishMqttClient() {
 		try {
+<<<<<<< HEAD
 			mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+=======
+			mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
+>>>>>>> origin/master
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
@@ -109,6 +113,7 @@ public class GarfishMqttClient {
 		}
 	}
 
+<<<<<<< HEAD
 	public void subscribe() {
 		try {
 			mqttClient.subscribe("/devices/drone/throttleAndYaw");
@@ -129,6 +134,8 @@ public class GarfishMqttClient {
 			System.out.println("닫기 실패");
 		}
 	}
+=======
+>>>>>>> origin/master
 	public void init(){
 		try{
 			// transmitter 초기값 설정
