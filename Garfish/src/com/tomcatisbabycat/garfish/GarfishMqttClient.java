@@ -87,7 +87,7 @@ public class GarfishMqttClient {
 	// CONSTRUCTOR
 	public GarfishMqttClient() {
 		try {
-			mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
+			mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
@@ -108,9 +108,6 @@ public class GarfishMqttClient {
 			ex.printStackTrace();
 		}
 	}
-<<<<<<< HEAD
-	// METHOD
-=======
 
 	public void subscribe() {
 		try {
@@ -132,7 +129,6 @@ public class GarfishMqttClient {
 			System.out.println("닫기 실패");
 		}
 	}
->>>>>>> origin/master
 	public void init(){
 		try{
 			// transmitter 초기값 설정
@@ -159,26 +155,6 @@ public class GarfishMqttClient {
 			e.printStackTrace();
 		}
 		
-	}
-	public void subscribe() {
-		try {
-			mqttClient.subscribe("/devices/drone/throttleAndYaw");
-			mqttClient.subscribe("/devices/drone/pitchAndRoll");
-			mqttClient.subscribe("/devices/drone/mode");
-			mqttClient.subscribe("/devices/drone/cameraServo");
-		} catch (MqttException ex) {
-			LOG.info("구독 실패");
-		}
-	}
-
-	public void shutdown() {
-		try {
-			mqttClient.disconnect();
-			mqttClient.close();
-
-		} catch (MqttException ex) {
-			LOG.info("닫기 실패");
-		}
 	}
 	
 }

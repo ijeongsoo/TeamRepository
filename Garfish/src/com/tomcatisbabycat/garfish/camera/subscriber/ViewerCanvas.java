@@ -29,7 +29,7 @@ public class ViewerCanvas extends Canvas {
 		gc = getGraphicsContext2D();
 		Base64.Decoder base64Decoder = Base64.getDecoder();
 
-		mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
 		mqttClient.setCallback(new MqttCallback() {
 			//메시지를 수신할 때 호출(구독자일 경우)
 			@Override
