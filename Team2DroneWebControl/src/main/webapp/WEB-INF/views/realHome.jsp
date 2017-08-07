@@ -82,7 +82,8 @@
 
 					var json = {
 						"throttle" : String(3000 - ((5 * y) + 1000)),
-						"yaw" : String((5 * x) + 1000)
+						//"yaw" : String((5 * x) + 1000)
+						"yaw" : "1460"
 					};
 
 					$.ajax({
@@ -91,7 +92,7 @@
 						data : json,
 						method : "post",
 						success : function(data) {
-
+							$("#throttleValue").html(String(3000 - ((5 * y) + 1000)));
 						}
 					});
 				});
@@ -121,7 +122,9 @@
 						ctx.stroke(); //테두리
 						var json = {
 							"throttle" : String(3000 - ((5 * y) + 1000)),
-							"yaw" : String((5 * x) + 1000)
+							//"yaw" : String((5 * x) + 1000)
+							"yaw" : "1460"
+							
 						};
 
 						$.ajax({
@@ -130,7 +133,7 @@
 							data : json,
 							method : "post",
 							success : function(data) {
-
+								$("#throttleValue").html(String(3000 - ((5 * y) + 1000)));
 							}
 						});
 
@@ -191,8 +194,10 @@
 					ctx.stroke(); //테두리
 
 					var json = {
-						"pitch" : String((5 * y) + 1000),
-						"roll" : String((5 * x) + 1000)
+						//"pitch" : String((5 * y) + 1000),
+						//"roll" : String((5 * x) + 1000)
+						"pitch" : "1450",
+						"roll" : "1500"
 					};
 
 					$.ajax({
@@ -230,8 +235,10 @@
 						ctx.fill(); //채우기
 						ctx.stroke(); //테두리
 						var json = {
-							"pitch" : String((5 * y) + 1000),
-							"roll" : String((5 * x) + 1000)
+							//"pitch" : String((5 * y) + 1000),
+							//"roll" : String((5 * x) + 1000)
+							"pitch" : "1450",
+							"roll" : "1500"
 						};
 
 						$.ajax({
@@ -256,7 +263,7 @@
 	$(function() {
 		var isDragging = false;
 		var x = 100;
-		var y = 0;
+		var y = 200;
 		var cnvs = document.getElementById('myCanvas3');
 		var ctx = document.getElementById('myCanvas3').getContext("2d");
 
@@ -966,15 +973,17 @@
 				<section>
 					<div class="row">
 						<div style="text-align: center;">
-							<button onclick="arm()" class="btn" id="arm">ARM</button>
-							<button onclick="throttle100()" class="btn" id="throttle100">Throttle</button>
+							<button onclick="arm()" style="color: white" class="btn" id="arm">ARM</button>
+							<button onclick="throttle100()" style="color: white" class="btn" id="throttle100">Throttle</button>
 
-							<button onclick="max()" class="btn" id="max">max</button>
-							<button onclick="min()" class="btn" id="min">min</button>
-							<button onclick="center()" class="btn" id="center">center</button>
+							<button onclick="max()" style="color: white" class="btn" id="max">max</button>
+							<button onclick="min()" style="color: white" class="btn" id="min">min</button>
+							<button onclick="center()" style="color: white" class="btn" id="center">center</button>
 
-							<button onclick="throttleMax()" class="btn" id="throttleMax">throttleMax</button>
-							<button onclick="throttleMin()" class="btn" id="throttleMin">throttleMIn</button>
+							<button onclick="throttleMax()" style="color: white" class="btn" id="throttleMax">throttleMax</button>
+							<button onclick="throttleMin()" style="color: white" class="btn" id="throttleMin">throttleMIn</button>
+							
+							<h1 id="throttleValue">1000</h1>
 
 							<br />
 

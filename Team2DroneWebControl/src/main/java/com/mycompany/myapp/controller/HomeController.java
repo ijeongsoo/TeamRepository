@@ -29,7 +29,7 @@ public class HomeController {
 	@PostConstruct
 	public void init() throws MqttException {
 		logger.info("init실행");
-		mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://1.1.1.2:1883", MqttClient.generateClientId());
 		mqttCallback = new MqttCallback() {
 			@Override
 			public void connectionLost(Throwable thrwbl) {
@@ -140,7 +140,7 @@ public class HomeController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/camera", message);
+		mqttClient.publish("/devices/drone/cameraServo", message);
 
 	}
 

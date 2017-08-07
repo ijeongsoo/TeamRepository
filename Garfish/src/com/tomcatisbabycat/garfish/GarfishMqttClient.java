@@ -94,7 +94,7 @@ public class GarfishMqttClient {
 
 	public GarfishMqttClient() {
 		try {
-			mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
+			mqttClient = new MqttClient("tcp://1.1.1.2:1883", MqttClient.generateClientId());
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
