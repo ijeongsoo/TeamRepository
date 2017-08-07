@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author 2Team(Lee, Kang, Cho)
  */
 package com.tomcatisbabycat.garfish;
 
@@ -14,13 +13,14 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author ijeongsu
- */
 public class GarfishMqttClient {
-
+	// LOGGER
+	private static final Logger LOG = LoggerFactory.getLogger(GarfishMqttClient.class);
+	
+	// FIELD
 	private MqttClient mqttClient;
 	public String message;
 	private int pwmThrottle;
@@ -28,7 +28,6 @@ public class GarfishMqttClient {
 	private int pwmPitch;
 	private int pwmYaw;
 	private int pwmMode;
-//	private boolean armed = false;
 	
 	private int angleLeftRight;
 	private int angleUpDown;
@@ -46,7 +45,6 @@ public class GarfishMqttClient {
 	private MqttCallback mqttCallback = new MqttCallback() {
 		@Override
 		public void connectionLost(Throwable thrwbl) {
-			System.out.println(thrwbl.getMessage());
 			thrwbl.printStackTrace();
 		}
 
@@ -55,27 +53,15 @@ public class GarfishMqttClient {
 			message = new String(mm.getPayload());
 			System.out.println(message);
 			JSONObject jsonObject = new JSONObject(message);
-			if(jsonObject.has("throttle")){
-				pwmThrottle = jsonObject.getInt("throttle");
-			}
-			if(jsonObject.has("pitch")){
-				pwmPitch = jsonObject.getInt("pitch");
-			}
-			if(jsonObject.has("roll")){
-				pwmRoll = jsonObject.getInt("roll");
-			}
-			if(jsonObject.has("yaw")){
-				pwmYaw = jsonObject.getInt("yaw");
-			}
-			if(jsonObject.has("mode")){
-				pwmMode = jsonObject.getInt("mode");
-			}
-			if(jsonObject.has("leftRight")){
-				angleLeftRight = jsonObject.getInt("leftRight");
-			}
-			if(jsonObject.has("upDown")){
-				angleUpDown = jsonObject.getInt("upDown");
-			}
+			
+			// NullPointException prevent
+			if(jsonObject.has("throttle")){pwmThrottle = jsonObject.getInt("throttle");}
+			if(jsonObject.has("pitch")){pwmPitch = jsonObject.getInt("pitch");}
+			if(jsonObject.has("roll")){pwmRoll = jsonObject.getInt("roll");}
+			if(jsonObject.has("yaw")){pwmYaw = jsonObject.getInt("yaw");}
+			if(jsonObject.has("mode")){pwmMode = jsonObject.getInt("mode");}
+			if(jsonObject.has("leftRight")){angleLeftRight = jsonObject.getInt("leftRight");}
+			if(jsonObject.has("upDown")){angleUpDown = jsonObject.getInt("upDown");}
 			
 			throttle.setPWM(pwmThrottle);
 			pitch.setPWM(pwmPitch);
@@ -85,40 +71,47 @@ public class GarfishMqttClient {
 			
 			servoCamLeftRight.setAngle(angleLeftRight);
 			servoCamUpDown.setAngle(angleUpDown);
+			
+			
+			LOG.info(String.valueOf(pwmThrottle));
+			LOG.info(String.valueOf(pwmPitch));
+			LOG.info(String.valueOf(pwmRoll));
+			LOG.info(String.valueOf(pwmYaw));
+			LOG.info(String.valueOf(pwmMode));
 		}
 
 		@Override
 		public void deliveryComplete(IMqttDeliveryToken imdt) {
 		}
 	};
-
+	// CONSTRUCTOR
 	public GarfishMqttClient() {
 		try {
+<<<<<<< HEAD
 			mqttClient = new MqttClient("tcp://1.1.1.2:1883", MqttClient.generateClientId());
+=======
+			mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
+>>>>>>> 51afa785242eac25f1ef2fd445c9de119870276c
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
 			pca9685= PCA9685.getInstance();
 			roll = new PwmFowader(pca9685, PCA9685.PWM_01);
-			System.out.println(roll + "roll");
 			throttle = new PwmFowader(pca9685, PCA9685.PWM_03);
-			System.out.println(throttle + "t");
 			pitch = new PwmFowader(pca9685, PCA9685.PWM_02);
-			System.out.println(pitch + "pticht");
 			yaw= new PwmFowader(pca9685, PCA9685.PWM_04);
-			System.out.println(yaw + "yaw");
-			mode= new PwmFowader(pca9685, PCA9685.PWM_05);
-			System.out.println(mode.toString() + "mode");
+			mode = new PwmFowader(pca9685, PCA9685.PWM_05);
 			 
 			servoCamLeftRight = new SG90ServoPCA9685Duration(pca9685, PCA9685.PWM_08); // 좌우
 			servoCamUpDown = new SG90ServoPCA9685Duration(pca9685, PCA9685.PWM_09); // 상하
+			
+			// Set Start PWM Value like Transmitter
 			init();
 		} catch (Exception ex) {
-			System.out.println("MqttClient 생성 및 연결 실패");
+			LOG.info("MqttClient 생성 및 연결 실패");
 			ex.printStackTrace();
 		}
 	}
-
 	public void subscribe() {
 		try {
 			mqttClient.subscribe("/devices/drone/throttleAndYaw");
@@ -155,7 +148,7 @@ public class GarfishMqttClient {
 			mode.setPWM(pwmMode);
 			
 			angleLeftRight=90;
-			angleUpDown=10;
+			angleUpDown=140;
 			
 			
 			// servo motor 초기값(90도) 설정
@@ -166,4 +159,5 @@ public class GarfishMqttClient {
 		}
 		
 	}
+	
 }

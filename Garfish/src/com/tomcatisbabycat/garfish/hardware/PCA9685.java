@@ -1,7 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author 2Team(Lee, Kang, Cho)
  */
 package com.tomcatisbabycat.garfish.hardware;
 
@@ -13,13 +12,14 @@ import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.i2c.I2CBus;
 import com.pi4j.io.i2c.I2CFactory;
 import java.math.BigDecimal;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author ijeongsu
- */
 public class PCA9685 {
-	//field
+	// LOGGER
+	private static final Logger LOG = LoggerFactory.getLogger(PCA9685.class);
+		  
+	// FIELD
 	private static PCA9685 singleton;
 	public static PCA9685 getInstance() throws Exception{
 		if(singleton==null){
@@ -49,7 +49,7 @@ public class PCA9685 {
 	
 	private int period; 
 	
-	//constructor
+	// CONSTRUCTOR
 	private PCA9685() throws Exception{
 		I2CBus i2cBus = I2CFactory.getInstance(I2CBus.BUS_1);
 		//0x40 : PCA9685 모듈의 I2C장치 번호 
@@ -79,7 +79,7 @@ public class PCA9685 {
 		
 		gpioProvider.reset();
 	}
-	
+	// METHOD
 	public void setDuration(Pin pin, int duration){
 		//duration: 0~19999us(20000일경우 사이클이 형성 되지 않음)
 		if(duration>=period){

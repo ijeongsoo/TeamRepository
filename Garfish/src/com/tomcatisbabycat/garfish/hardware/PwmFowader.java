@@ -1,32 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @author 2Team(Lee, Kang, Cho)
  */
 package com.tomcatisbabycat.garfish.hardware;
 
 import com.pi4j.io.gpio.Pin;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author ijeongsu
- */
 public class PwmFowader {
-	//field	
+	// LOGGER
+	private static final Logger LOG = LoggerFactory.getLogger(PwmFowader.class);
+	
+	// FIELD	
 	private PCA9685 pca9685;
 	private Pin pwm; //pca9685.PWM_00~pca9685.PWM_15
 	
 	
-	//constructor
+	// CONSTRUCTOR
 	public PwmFowader(PCA9685 pca9685, Pin pwm ){
 		this.pca9685=pca9685;
 		this.pwm=pwm;
 	}
 	
-	//method
-	
+	// METHOD
 	public void setPWM(int duration){
 		pca9685.setDuration(pwm, duration);
-		
 	}
 }
