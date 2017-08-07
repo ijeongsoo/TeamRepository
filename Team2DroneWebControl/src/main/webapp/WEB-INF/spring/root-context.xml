@@ -8,8 +8,8 @@
 	<!-- Connection Pool(DataSource) 설정 -->
 	<bean name="dataSource" 
 		class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<property name="driverClass" value="org.mariadb.jdbc.Driver"/>
-		<property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/db"/>
+		<property name="driverClass" value="oracle.jdbc.OracleDriver"/>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@106.253.56.122:1521:orcl"/>
 		<property name="user" value="iot1_drone"/>
 		<property name="password" value="iot1_drone"/>
 		<property name="maxPoolSize" value="1"/>

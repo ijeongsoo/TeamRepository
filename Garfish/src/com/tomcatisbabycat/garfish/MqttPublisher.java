@@ -14,14 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-<<<<<<< HEAD
-=======
 
-/**
- *
- * @author ijeongsu
- */
->>>>>>> origin/master
 public class MqttPublisher {
 	// LOGGER
 	private static final Logger LOG = LoggerFactory.getLogger(MqttPublisher.class);
@@ -48,7 +41,7 @@ public class MqttPublisher {
 	// CONSTRUCTOR
 	public MqttPublisher() throws MqttException {
 		//MQTT 클라이언트 생성
-		mqttClient = new MqttClient("tcp://52.78.170.231:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
 		//통신 결과에 따라 실행할 콜백 객체 생성 
 		mqttClient.setCallback(mqttCallback);
 		//MQTT 브로커와 연결하기 

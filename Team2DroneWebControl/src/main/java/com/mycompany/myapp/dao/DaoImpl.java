@@ -15,5 +15,4 @@ public class DaoImpl implements Dao {
 	public void memberInsert(Member member) {
 		sst.insert("member.insert", member);
 	}
-
 }
