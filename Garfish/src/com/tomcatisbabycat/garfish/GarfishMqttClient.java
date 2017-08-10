@@ -63,6 +63,12 @@ public class GarfishMqttClient {
 			if(jsonObject.has("leftRight")){angleLeftRight = jsonObject.getInt("leftRight");}
 			if(jsonObject.has("upDown")){angleUpDown = jsonObject.getInt("upDown");}
 			
+			if(jsonObject.has("pwmCheck")){
+				System.out.println("pwmCheck");
+				pwmCheck();
+			}
+			
+			
 			throttle.setPWM(pwmThrottle);
 			pitch.setPWM(pwmPitch);
 			roll.setPWM(pwmRoll);
@@ -82,12 +88,15 @@ public class GarfishMqttClient {
 
 		@Override
 		public void deliveryComplete(IMqttDeliveryToken imdt) {
+			System.out.println("DeliveryComplete");
 		}
 	};
 	// CONSTRUCTOR
 	public GarfishMqttClient() {
 		try {
-			mqttClient = new MqttClient("tcp://192.168.0.3:1883", MqttClient.generateClientId());
+
+			mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+
 			System.out.println(mqttClient);
 			mqttClient.setCallback(mqttCallback);
 			mqttClient.connect();
@@ -108,12 +117,15 @@ public class GarfishMqttClient {
 			ex.printStackTrace();
 		}
 	}
+	
+	// METHOD
 	public void subscribe() {
 		try {
 			mqttClient.subscribe("/devices/drone/throttleAndYaw");
 			mqttClient.subscribe("/devices/drone/pitchAndRoll");
 			mqttClient.subscribe("/devices/drone/mode");
 			mqttClient.subscribe("/devices/drone/cameraServo");
+			mqttClient.subscribe("/devices/drone/pwmCheck");
 		} catch (MqttException ex) {
 			System.out.println("구독 실패");
 		}
@@ -128,6 +140,25 @@ public class GarfishMqttClient {
 			System.out.println("닫기 실패");
 		}
 	}
+	
+	public void pwmCheck() throws MqttException{
+		System.out.println("pwmCheck()");
+		
+		JSONObject jsonObject = new JSONObject();
+		
+		jsonObject.put("throttle", pwmThrottle);
+		jsonObject.put("pitch", pwmPitch);
+		jsonObject.put("yaw", pwmYaw);
+		jsonObject.put("roll", pwmRoll);
+		jsonObject.put("mode", pwmMode);
+		
+		String reqJson = jsonObject.toString();
+		
+		MqttMessage message  = new MqttMessage(reqJson.getBytes());
+		
+		mqttClient.publish("/devices/drone/pwm", message);
+	}
+	
 	public void init(){
 		try{
 			// transmitter 초기값 설정

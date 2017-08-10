@@ -15,8 +15,8 @@ public class GarfishMain {
 		garfishMqttClient.subscribe();
 		garfishMqttClient.init();
 		
-		CamPublisher viewer = new CamPublisher(320, 240);
-		viewer.setCurrentURL(new URL("http://localhost:50001/?action=stream"));
+//		CamPublisher viewer = new CamPublisher(320, 240);
+//		viewer.setCurrentURL(new URL("http://localhost:50001/?action=stream"));
 		
 		System.out.println("start garfishMqttClient");
 		
