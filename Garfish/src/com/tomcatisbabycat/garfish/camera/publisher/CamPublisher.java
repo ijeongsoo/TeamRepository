@@ -80,7 +80,7 @@ public class CamPublisher implements ImageChangeListener, Runnable {
 	public void imageChanged(ImageChangeEvent ie) {
 		if (mqttClient == null || !mqttClient.isConnected()) {
 			try {
-				mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
+				mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
 
 				mqttClient.connect();
 			} catch (MqttException e) {
@@ -105,9 +105,8 @@ public class CamPublisher implements ImageChangeListener, Runnable {
 							MqttMessage message = new MqttMessage(b64.getBytes("UTF-8"));
 							message.setQos(0);
 							mqttClient.publish("/devices/drone/camera", message);
-							System.out.println("test");
 							Thread.sleep(2000);
-							//System.out.println("Send Image");
+							System.out.println("Send Image");
 						} catch (Exception e) {
 						}
 					}
