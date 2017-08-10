@@ -35,7 +35,7 @@ public class HomeController {
 	@PostConstruct
 	public void init() throws MqttException {
 		logger.info("init실행");
-		mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://1.1.1.2:1883", MqttClient.generateClientId());
 
 		mqttCallback = new MqttCallback() {
 			@Override
@@ -44,10 +44,6 @@ public class HomeController {
 
 			@Override
 			public void messageArrived(String string, MqttMessage mm) throws Exception {
-				String ms = mm.toString();
-				byte[] mb = ms.getBytes();
-				byte[] mbb = Base64.getDecoder().decode(mb);
-				
 				
 			}
 
@@ -86,40 +82,40 @@ public class HomeController {
 		return "realHome";
 	}
 
-	@RequestMapping("/camera2")
-	public void camera(HttpServletResponse r, @RequestHeader("User-Agent") String userAgent)
-			throws IOException, MqttException {
-		MqttClient mclient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
-		MqttCallback mcallback = new MqttCallback() {
-			@Override
-			public void connectionLost(Throwable thrwbl) {
-			}
-
-			@Override
-			public void messageArrived(String string, MqttMessage mm) throws Exception {
-				String ms = mm.toString();
-				byte[] mb = ms.getBytes();
-				byte[] mbb = Base64.getDecoder().decode(mb);
-				System.out.println(new String(mbb));
-				
-				r.addHeader("Content-Type", "image/jpg");
-				OutputStream os = r.getOutputStream();
-				os.write(mbb);
-				os.flush();
-				//os.close();
-			}
-
-			@Override
-			public void deliveryComplete(IMqttDeliveryToken imdt) {
-				System.out.println("deliver" + "yComplete:" + new Date());
-			}
-		};
-
-		mclient.setCallback(mcallback);
-
-		mclient.connect();
-		mclient.subscribe("/devices/drone/camera");
-	}
+//	@RequestMapping("/camera2")
+//	public void camera(HttpServletResponse r, @RequestHeader("User-Agent") String userAgent)
+//			throws IOException, MqttException {
+//		MqttClient mclient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+//		MqttCallback mcallback = new MqttCallback() {
+//			@Override
+//			public void connectionLost(Throwable thrwbl) {
+//			}
+//
+//			@Override
+//			public void messageArrived(String string, MqttMessage mm) throws Exception {
+//				String ms = mm.toString();
+//				byte[] mb = ms.getBytes();
+//				byte[] mbb = Base64.getDecoder().decode(mb);
+//				System.out.println(new String(mbb));
+//				
+////				r.addHeader("Content-Type", "image/jpg");
+////				OutputStream os = r.getOutputStream();
+////				os.write(mbb);
+////				os.flush();
+//				//os.close();
+//			}
+//
+//			@Override
+//			public void deliveryComplete(IMqttDeliveryToken imdt) {
+//				System.out.println("deliver" + "yComplete:" + new Date());
+//			}
+//		};
+//
+//		mclient.setCallback(mcallback);
+//
+//		mclient.connect();
+//		mclient.subscribe("/devices/drone/camera");
+//	}
 
 	@RequestMapping("/throttleAndYaw")
 	public void throttleAndYaw(String throttle, String yaw, HttpServletResponse response) throws MqttException {
@@ -180,7 +176,7 @@ public class HomeController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/camera", message);
+		mqttClient.publish("/devices/drone/cameraServo", message);
 
 	}
 
