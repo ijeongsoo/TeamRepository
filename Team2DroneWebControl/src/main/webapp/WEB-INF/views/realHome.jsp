@@ -82,8 +82,7 @@
 
 					var json = {
 						"throttle" : String(3000 - ((5 * y) + 1000)),
-						//"yaw" : String((5 * x) + 1000)
-						"yaw" : "1460"
+						"yaw" : String((5 * x) + 1000)
 					};
 
 					$.ajax({
@@ -92,7 +91,8 @@
 						data : json,
 						method : "post",
 						success : function(data) {
-							$("#throttleValue").html(String(3000 - ((5 * y) + 1000)));
+							$("#throttleValue").html(
+									String(3000 - ((5 * y) + 1000)));
 						}
 					});
 				});
@@ -122,9 +122,8 @@
 						ctx.stroke(); //테두리
 						var json = {
 							"throttle" : String(3000 - ((5 * y) + 1000)),
-							//"yaw" : String((5 * x) + 1000)
-							"yaw" : "1460"
-							
+							"yaw" : String((5 * x) + 1000)
+
 						};
 
 						$.ajax({
@@ -133,15 +132,96 @@
 							data : json,
 							method : "post",
 							success : function(data) {
-								$("#throttleValue").html(String(3000 - ((5 * y) + 1000)));
+								$("#throttleValue").html(
+										String(3000 - ((5 * y) + 1000)));
 							}
 						});
 
 					}
 				});
-		$("#myCanvas").mouseup(function(event) {
-			isDragging = false;
-		});
+		$("#myCanvas").mouseup(
+				function(event) {
+					isDragging = false;
+					var x = 100;
+					var y = event.offsetY;
+					var cnvs = document.getElementById('myCanvas');
+					var ctx = document.getElementById('myCanvas').getContext(
+							"2d");
+
+					// 픽셀 정리
+					ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+					// 컨텍스트 리셋
+					ctx.beginPath();
+
+					//원 그리기
+					ctx.beginPath();
+					ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360, false);
+					//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+					//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+					ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+					ctx.fill(); //채우기
+					ctx.stroke(); //테두리
+					var json = {
+						"throttle" : String(3000 - ((5 * y) + 1000)),
+						"yaw" : 100
+
+					};
+
+					$.ajax({
+						url : "http://" + location.host
+								+ "/Team2DroneWebControl/throttleAndYaw",
+						data : json,
+						method : "post",
+						success : function(data) {
+							$("#throttleValue").html(
+									String(3000 - ((5 * y) + 1000)));
+						}
+					});
+				});
+
+		$("#myCanvas").mouseleave(
+				function(event) {
+					if (isDragging) {
+						isDragging = false;
+						var x = 100;
+						var y = event.offsetY;
+						var cnvs = document.getElementById('myCanvas');
+						var ctx = document.getElementById('myCanvas')
+								.getContext("2d");
+
+						// 픽셀 정리
+						ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+						// 컨텍스트 리셋
+						ctx.beginPath();
+
+						//원 그리기
+						ctx.beginPath();
+						ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360, false);
+						//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+						//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+						ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+						ctx.fill(); //채우기
+						ctx.stroke(); //테두리
+						var json = {
+							"throttle" : String(3000 - ((5 * y) + 1000)),
+							"yaw" : 100
+
+						};
+
+						$.ajax({
+							url : "http://" + location.host
+									+ "/Team2DroneWebControl/throttleAndYaw",
+							data : json,
+							method : "post",
+							success : function(data) {
+								$("#throttleValue").html(
+										String(3000 - ((5 * y) + 1000)));
+							}
+						});
+					}
+				});
 	});
 </script>
 
@@ -194,10 +274,8 @@
 					ctx.stroke(); //테두리
 
 					var json = {
-						//"pitch" : String((5 * y) + 1000),
-						//"roll" : String((5 * x) + 1000)
-						"pitch" : "1450",
-						"roll" : "1500"
+						"pitch" : String((5 * y) + 1000),
+						"roll" : String((5 * x) + 1000)
 					};
 
 					$.ajax({
@@ -235,10 +313,8 @@
 						ctx.fill(); //채우기
 						ctx.stroke(); //테두리
 						var json = {
-							//"pitch" : String((5 * y) + 1000),
-							//"roll" : String((5 * x) + 1000)
-							"pitch" : "1450",
-							"roll" : "1500"
+							"pitch" : String((5 * y) + 1000),
+							"roll" : String((5 * x) + 1000)
 						};
 
 						$.ajax({
@@ -253,9 +329,85 @@
 
 					}
 				});
-		$("#myCanvas2").mouseup(function(event) {
-			isDragging = false;
-		});
+		$("#myCanvas2").mouseup(
+				function(event) {
+					isDragging = false;
+					var x = 100;
+					var y = 100;
+					var cnvs = document.getElementById('myCanvas2');
+					var ctx = document.getElementById('myCanvas2').getContext(
+							"2d");
+
+					// 픽셀 정리
+					ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+					// 컨텍스트 리셋
+					ctx.beginPath();
+
+					//원 그리기
+					ctx.beginPath();
+					ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360, false);
+					//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+					//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+					ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+					ctx.fill(); //채우기
+					ctx.stroke(); //테두리
+					var json = {
+						"pitch" : "1500",
+						"roll" : "1500"
+					};
+
+					$.ajax({
+						url : "http://" + location.host
+								+ "/Team2DroneWebControl/pitchAndRoll",
+						data : json,
+						method : "post",
+						success : function(data) {
+
+						}
+					});
+				});
+
+		$("#myCanvas2").mouseleave(
+				function(event) {
+					if (isDragging) {
+						isDragging = false;
+						var x = 100;
+						var y = 100;
+						var cnvs = document.getElementById('myCanvas2');
+						var ctx = document.getElementById('myCanvas2')
+								.getContext("2d");
+
+						// 픽셀 정리
+						ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+						// 컨텍스트 리셋
+						ctx.beginPath();
+
+						//원 그리기
+						ctx.beginPath();
+						ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360, false);
+						//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+						//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+						ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+						ctx.fill(); //채우기
+						ctx.stroke(); //테두리
+						var json = {
+							"pitch" : "1500",
+							"roll" : "1500"
+						};
+
+						$.ajax({
+							url : "http://" + location.host
+									+ "/Team2DroneWebControl/pitchAndRoll",
+							data : json,
+							method : "post",
+							success : function(data) {
+
+							}
+						});
+					}
+				});
 	});
 </script>
 
@@ -359,6 +511,46 @@
 				});
 		$("#myCanvas3").mouseup(function(event) {
 			isDragging = false;
+		});
+		
+		$("#myCanvas3").mouseleave(function(event) {
+			if(isDragging){
+				isDragging = false;
+				var x = event.offsetX;
+				var y = event.offsetY;
+				var cnvs = document.getElementById('myCanvas3');
+				var ctx = document.getElementById('myCanvas3')
+						.getContext("2d");
+
+				// 픽셀 정리
+				ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+				// 컨텍스트 리셋
+				ctx.beginPath();
+
+				//원 그리기
+				ctx.beginPath();
+				ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360, false);
+				//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+				//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+				ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+				ctx.fill(); //채우기
+				ctx.stroke(); //테두리
+				var json = {
+					"mode" : String(3000 - ((5 * y) + 1000)),
+				};
+
+				$.ajax({
+					url : "http://" + location.host
+							+ "/Team2DroneWebControl/mode",
+					data : json,
+					method : "post",
+					success : function(data) {
+
+					}
+				});
+			}
+			
 		});
 	});
 </script>
@@ -474,6 +666,50 @@
 		$("#myCanvas4").mouseup(function(event) {
 			isDragging = false;
 		});
+		
+		$("#myCanvas4").mouseleave(function(event) {
+			if(isDragging){
+				isDragging = false;
+				var x = event.offsetX;
+				var y = event.offsetY;
+				var cnvs = document.getElementById('myCanvas4');
+				var ctx = document.getElementById('myCanvas4')
+						.getContext("2d");
+
+				// 픽셀 정리
+				ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+				// 컨텍스트 리셋
+				ctx.beginPath();
+
+				//원 그리기
+				ctx.beginPath();
+				ctx.arc(x, y, 10, 0, (Math.PI / 180) * 360,
+						false);
+				//ctx.arc(x,y, 반지름, 시작각도, 종료각도, 그리는 방향);
+				//그리는 방향 : true 이면 시계 반대방향 / false 이면 시계 방향
+
+				ctx.fillStyle = "rgb(255, 0, 0)"; //채울 색상
+				ctx.fill(); //채우기
+				ctx.stroke(); //테두리
+
+				var json = {
+					"upDown" : String(120 - parseInt((3 / 5)
+							* y) + 30),
+					"leftRight" : String(parseInt((3 / 5) * x) + 30)
+				};
+
+				$.ajax({
+					url : "http://" + location.host
+							+ "/Team2DroneWebControl/camera",
+					data : json,
+					method : "post",
+					success : function(data) {
+
+					}
+				});
+			}
+			
+		});
 	});
 
 	function arm() {
@@ -543,21 +779,19 @@
 
 			}
 		});
-		
-		
+
 		var json = {
-				"mode" : "2000",
-			};
+			"mode" : "2000",
+		};
 
-			$.ajax({
-				url : "http://" + location.host
-						+ "/Team2DroneWebControl/mode",
-				data : json,
-				method : "post",
-				success : function(data) {
+		$.ajax({
+			url : "http://" + location.host + "/Team2DroneWebControl/mode",
+			data : json,
+			method : "post",
+			success : function(data) {
 
-				}
-			});
+			}
+		});
 	}
 
 	function min() {
@@ -592,21 +826,19 @@
 
 			}
 		});
-		
-		
+
 		var json = {
-				"mode" : "1000",
-			};
+			"mode" : "1000",
+		};
 
-			$.ajax({
-				url : "http://" + location.host
-						+ "/Team2DroneWebControl/mode",
-				data : json,
-				method : "post",
-				success : function(data) {
+		$.ajax({
+			url : "http://" + location.host + "/Team2DroneWebControl/mode",
+			data : json,
+			method : "post",
+			success : function(data) {
 
-				}
-			});
+			}
+		});
 	}
 
 	function center() {
@@ -641,26 +873,22 @@
 
 			}
 		});
-		
-		
+
 		var json = {
-				"mode" : "1500",
-			};
+			"mode" : "1500",
+		};
 
-			$.ajax({
-				url : "http://" + location.host
-						+ "/Team2DroneWebControl/mode",
-				data : json,
-				method : "post",
-				success : function(data) {
+		$.ajax({
+			url : "http://" + location.host + "/Team2DroneWebControl/mode",
+			data : json,
+			method : "post",
+			success : function(data) {
 
-				}
-			});
-			
+			}
+		});
+
 	}
-	
-	
-	
+
 	function throttleMax() {
 		var x;
 
@@ -693,26 +921,22 @@
 
 			}
 		});
-		
-		
+
 		var json = {
-				"mode" : "1500",
-			};
+			"mode" : "1500",
+		};
 
-			$.ajax({
-				url : "http://" + location.host
-						+ "/Team2DroneWebControl/mode",
-				data : json,
-				method : "post",
-				success : function(data) {
+		$.ajax({
+			url : "http://" + location.host + "/Team2DroneWebControl/mode",
+			data : json,
+			method : "post",
+			success : function(data) {
 
-				}
-			});
-			
+			}
+		});
+
 	}
-	
-	
-	
+
 	function throttleMin() {
 		var x;
 
@@ -745,25 +969,32 @@
 
 			}
 		});
-		
-		
+
 		var json = {
-				"mode" : "1500",
-			};
+			"mode" : "1500",
+		};
 
-			$.ajax({
-				url : "http://" + location.host
-						+ "/Team2DroneWebControl/mode",
-				data : json,
-				method : "post",
-				success : function(data) {
+		$.ajax({
+			url : "http://" + location.host + "/Team2DroneWebControl/mode",
+			data : json,
+			method : "post",
+			success : function(data) {
 
-				}
-			});
-			
+			}
+		});
+
 	}
 </script>
-
+<script type="text/javascript">
+	$(function() {
+		var ws = new WebSocket("ws://" + location.host
+				+ "/Team2DroneWebControl/websocket/camera");
+		// 함수를 바로 대입해도 괜찮음.메시지가 도착했을 때 시행
+		ws.onmessage = function(event) {
+			$("#cameraView").attr("src", "data:image/jpg;base64," + event.data);
+		};
+	});
+</script>
 </head>
 <body>
 	<!-- Wrapper-->
@@ -974,16 +1205,24 @@
 					<div class="row">
 						<div style="text-align: center;">
 							<button onclick="arm()" style="color: white" class="btn" id="arm">ARM</button>
-							<button onclick="throttle100()" style="color: white" class="btn" id="throttle100">Throttle</button>
+							<button onclick="throttle100()" style="color: white" class="btn"
+								id="throttle100">Throttle</button>
 
 							<button onclick="max()" style="color: white" class="btn" id="max">max</button>
 							<button onclick="min()" style="color: white" class="btn" id="min">min</button>
-							<button onclick="center()" style="color: white" class="btn" id="center">center</button>
+							<button onclick="center()" style="color: white" class="btn"
+								id="center">center</button>
 
-							<button onclick="throttleMax()" style="color: white" class="btn" id="throttleMax">throttleMax</button>
-							<button onclick="throttleMin()" style="color: white" class="btn" id="throttleMin">throttleMIn</button>
-							
-							<h1 id="throttleValue">1000</h1>
+							<button onclick="throttleMax()" style="color: white" class="btn"
+								id="throttleMax">throttleMax</button>
+							<button onclick="throttleMin()" style="color: white" class="btn"
+								id="throttleMin">throttleMIn</button>
+
+							<h1 id="throttleValue">Throttle : ${throttle }</h1>
+							<h1 >Yaw : ${yaw }</h1>
+							<h1 >Pitch : ${pitch }</h1>
+							<h1 >Roll : ${roll }</h1>
+							<h1 >Mode : ${mode }</h1>
 
 							<br />
 
@@ -1010,6 +1249,7 @@
 								<canvas id="myCanvas4" height="200" width="200"
 									style="background: gray;"></canvas>
 							</div>
+							<img style="height: 240; width: 320" id="cameraView" />
 						</div>
 						<!--  
 										<div class="4u 12u$(mobile)">

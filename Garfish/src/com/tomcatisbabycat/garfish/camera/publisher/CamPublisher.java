@@ -80,7 +80,7 @@ public class CamPublisher implements ImageChangeListener, Runnable {
 	public void imageChanged(ImageChangeEvent ie) {
 		if (mqttClient == null || !mqttClient.isConnected()) {
 			try {
-				mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
+				mqttClient = new MqttClient("tcp://192.168.0.3:1883", MqttClient.generateClientId());
 
 				mqttClient.connect();
 			} catch (MqttException e) {

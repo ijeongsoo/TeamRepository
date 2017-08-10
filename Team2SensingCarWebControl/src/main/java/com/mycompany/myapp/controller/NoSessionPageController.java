@@ -66,9 +66,6 @@ public class NoSessionPageController {
 		model.addAttribute("result", result);
 		return "checkID";
 	}
-	
-	
-	
-	
+
 
 }

@@ -13,15 +13,20 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.tomcat.jni.File;
+
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttToken;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -31,11 +36,13 @@ public class HomeController {
 
 	private MqttClient mqttClient;
 	private MqttCallback mqttCallback;
+	private boolean flag=true;
+	private String testJson=null;
 
 	@PostConstruct
 	public void init() throws MqttException {
 		logger.info("init실행");
-		mqttClient = new MqttClient("tcp://1.1.1.2:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
 
 		mqttCallback = new MqttCallback() {
 			@Override
@@ -78,44 +85,63 @@ public class HomeController {
 	}
 
 	@RequestMapping("/realHome")
-	public String jspTest() {
+	public String jspTest(Model model) throws MqttException {
+		JSONObject jsonObject = null;
+		String json = null;
+		
+		MqttClient statusMqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+
+		MqttCallback statusMqttCallback = new MqttCallback() {
+			@Override
+			public void connectionLost(Throwable thrwbl) {
+			}
+
+			@Override
+			public void messageArrived(String string, MqttMessage mm) throws Exception {
+				
+				testJson=mm.toString();
+				flag=false;
+
+				statusMqttClient.disconnect();
+				statusMqttClient.close();
+			}
+
+			@Override
+			public void deliveryComplete(IMqttDeliveryToken imdt) {
+				System.out.println("deliver" + "yComplete:" + new Date());
+			}
+		};
+
+		statusMqttClient.setCallback(statusMqttCallback);
+
+		statusMqttClient.connect();
+		
+		jsonObject = new JSONObject();
+		jsonObject.put("pwmCheck", "status");
+		String reqJson = jsonObject.toString();
+
+		MqttMessage message = new MqttMessage(reqJson.getBytes());
+		// MQTT 브로커로 메시지 보냄
+		statusMqttClient.subscribe("/devices/drone/pwm");
+		statusMqttClient.publish("/devices/drone/pwmCheck", message);
+		
+		while(flag){
+			System.out.println("wailt");
+		}
+		System.out.println("완료");
+		flag=false;
+		System.out.println(testJson);
+		JSONObject jsonObject2 = new JSONObject(testJson);
+		model.addAttribute("throttle", jsonObject2.getInt("throttle"));
+		model.addAttribute("yaw", jsonObject2.getInt("yaw"));
+		model.addAttribute("pitch", jsonObject2.getInt("pitch"));
+		model.addAttribute("roll", jsonObject2.getInt("roll"));
+		model.addAttribute("mode", jsonObject2.getInt("mode"));
+		
 		return "realHome";
+
 	}
 
-//	@RequestMapping("/camera2")
-//	public void camera(HttpServletResponse r, @RequestHeader("User-Agent") String userAgent)
-//			throws IOException, MqttException {
-//		MqttClient mclient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
-//		MqttCallback mcallback = new MqttCallback() {
-//			@Override
-//			public void connectionLost(Throwable thrwbl) {
-//			}
-//
-//			@Override
-//			public void messageArrived(String string, MqttMessage mm) throws Exception {
-//				String ms = mm.toString();
-//				byte[] mb = ms.getBytes();
-//				byte[] mbb = Base64.getDecoder().decode(mb);
-//				System.out.println(new String(mbb));
-//				
-////				r.addHeader("Content-Type", "image/jpg");
-////				OutputStream os = r.getOutputStream();
-////				os.write(mbb);
-////				os.flush();
-//				//os.close();
-//			}
-//
-//			@Override
-//			public void deliveryComplete(IMqttDeliveryToken imdt) {
-//				System.out.println("deliver" + "yComplete:" + new Date());
-//			}
-//		};
-//
-//		mclient.setCallback(mcallback);
-//
-//		mclient.connect();
-//		mclient.subscribe("/devices/drone/camera");
-//	}
 
 	@RequestMapping("/throttleAndYaw")
 	public void throttleAndYaw(String throttle, String yaw, HttpServletResponse response) throws MqttException {
