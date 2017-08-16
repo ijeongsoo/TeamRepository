@@ -1,33 +1,21 @@
 package com.mycompany.myapp.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
-
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Base64;
-import java.util.Base64.Decoder;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.File;
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.IMqttToken;
-import org.eclipse.paho.client.mqttv3.MqttAsyncClient;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.MqttToken;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -42,7 +30,7 @@ public class HomeController {
 	@PostConstruct
 	public void init() throws MqttException {
 		logger.info("init실행");
-		mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
 
 		mqttCallback = new MqttCallback() {
 			@Override
@@ -76,7 +64,12 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String home() {
-		return "home";
+		return "root";
+	}
+	
+	@RequestMapping("/join")
+	public String join() {
+		return "join";
 	}
 
 	@RequestMapping("/control")

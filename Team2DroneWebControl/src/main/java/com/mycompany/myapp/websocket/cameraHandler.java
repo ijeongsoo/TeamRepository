@@ -39,7 +39,7 @@ public class cameraHandler extends TextWebSocketHandler implements ApplicationLi
 	@PostConstruct
 	public void init() throws MqttSecurityException, MqttException {
 		LOGGER.info("init실행");
-		mqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
+		mqttClient = new MqttClient("tcp://106.253.56.122:1883", MqttClient.generateClientId());
 		
 		mqttCallback = new MqttCallback() {
 			@Override
