@@ -19,4 +19,20 @@ public class ServiceImpl implements Service{
 		dao.memberInsert(member);
 	}
 
+	@Override
+	public int joinCheckID(String mid) {
+		int result = 0;
+		int count = dao.memberExistSelectByMid(mid);
+
+		if (count == 0) {
+			result = 1;
+		}
+		return result;
+	}
+	
+	@Override
+	public Member getMember(String mid) {
+		Member member = dao.memberSelectByMid(mid);
+		return member;
+	}
 }

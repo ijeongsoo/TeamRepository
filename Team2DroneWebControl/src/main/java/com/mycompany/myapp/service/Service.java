@@ -7,8 +7,8 @@ import com.mycompany.myapp.dto.Member;
 public interface Service {
 
 	public void memberJoin(Member member);
-
-
+	public int joinCheckID(String mid);
+	Member getMember(String mid);
 
 
 }

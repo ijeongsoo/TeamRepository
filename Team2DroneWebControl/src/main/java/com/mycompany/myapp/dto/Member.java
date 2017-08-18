@@ -6,7 +6,6 @@ public class Member {
 	private String mid;
 	private String mpassword;
 	private String mname;
-	private String memail;
 	private String moriginalfilename;
 	private String msavedfilename;
 	private MultipartFile mattach;
@@ -37,12 +36,7 @@ public class Member {
 	public void setMname(String mname) {
 		this.mname = mname;
 	}
-	public String getMemail() {
-		return memail;
-	}
-	public void setMemail(String memail) {
-		this.memail = memail;
-	}
+	
 	public String getMoriginalfilename() {
 		return moriginalfilename;
 	}

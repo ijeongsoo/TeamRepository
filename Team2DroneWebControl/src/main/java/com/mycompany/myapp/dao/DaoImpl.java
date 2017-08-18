@@ -15,4 +15,17 @@ public class DaoImpl implements Dao {
 	public void memberInsert(Member member) {
 		sst.insert("member.insert", member);
 	}
+
+	@Override
+	public int memberExistSelectByMid(String mid) {
+		return sst.selectOne("member.selectExistMid", mid);
+	}
+	
+	@Override
+	public Member memberSelectByMid(String mid) {
+		Member member=sst.selectOne("member.selectByMid", mid);
+		return member;
+	}
+	
+	
 }
