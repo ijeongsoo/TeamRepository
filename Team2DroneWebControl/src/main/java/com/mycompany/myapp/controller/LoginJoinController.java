@@ -52,11 +52,7 @@ public class LoginJoinController {
 	
 	//회원가입
 
-	@RequestMapping(value = "/joinPost", method = RequestMethod.GET)
-	public String joinPost(Member member) throws IllegalStateException, IOException {
-		service.memberJoin(member);
-		return "redirect:/";
-	}
+	
 	
 	
 	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)

@@ -113,6 +113,14 @@ function pwchange_check(event) {
 		}
 	}); 
 }
+
+function joinRequest(){
+	location.href="join";
+}
+
+function communityRequest(){
+	
+}
 </script>
 
 </head>
@@ -141,9 +149,9 @@ function pwchange_check(event) {
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li class="page-scroll"><a href="join">회원가입</a></li>
+					<li class="page-scroll"><a href="join" onclick="joinRequest()" >회원가입</a></li>
 					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
-					<li class="page-scroll"><a href="qna">Community</a></li>
+					<li class="page-scroll"><a href="comunity" onclick="communityRequest()" >Community</a></li>
 
 				</ul>
 
