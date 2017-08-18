@@ -14,9 +14,11 @@
 	<select id= "selectExistMid" resultType="int">
 		select count(*) from member where mid=#{mid};	
 	</select>
+	-->
+	
 	
 	<select id= "selectByMid" resultType="com.mycompany.myapp.dto.Member" parameterType="string">
-		select mid, mname, mpassword, memail, moriginalfilename, msavedfilename, mfiletype from member where mid=#{mid};	
+		select mid, mname, mpassword, moriginalfilename, msavedfilename, mfiletype from member where mid=#{mid}	
 	</select>
-	-->
+	
 </mapper>

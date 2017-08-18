@@ -1,9 +1,19 @@
 package com.mycompany.myapp.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
@@ -14,9 +24,15 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.mycompany.myapp.dto.Member;
+import com.mycompany.myapp.dto.PasswdChange;
+import com.mycompany.myapp.service.Service;
 
 @Controller
 public class HomeController {
@@ -24,8 +40,11 @@ public class HomeController {
 
 	private MqttClient mqttClient;
 	private MqttCallback mqttCallback;
-	private boolean flag=true;
-	private String testJson=null;
+	private boolean flag = true;
+	private String testJson = null;
+
+	@Autowired
+	private Service service;
 
 	@PostConstruct
 	public void init() throws MqttException {
@@ -39,7 +58,7 @@ public class HomeController {
 
 			@Override
 			public void messageArrived(String string, MqttMessage mm) throws Exception {
-				
+
 			}
 
 			@Override
@@ -66,7 +85,7 @@ public class HomeController {
 	public String home() {
 		return "root";
 	}
-	
+
 	@RequestMapping("/join")
 	public String join() {
 		return "join";
@@ -77,11 +96,219 @@ public class HomeController {
 		return "controlPage";
 	}
 
+	@RequestMapping("/loginHome")
+	public String loginHome() {
+		return "loginHome";
+	}
+
+	@RequestMapping(value = "login", method = RequestMethod.POST)
+	public String login(String mid, String mpassword, Model model) {
+		logger.info("aaa");
+		logger.info(mpassword);
+		Member member = service.login(mid, mpassword);
+		if (member == null) {
+			model.addAttribute("result", 0);
+			return "loginFail";
+		} else if (member.getMid() == null) {
+			model.addAttribute("result", 1);
+			return "loginFail";
+		} else {
+			model.addAttribute("login_info", member);
+			return "redirect:loginHome";
+		}
+	}
+
+	@RequestMapping(value = "passwdChange", method = RequestMethod.POST)
+	public void passwdChange(String reset_mid, HttpServletResponse response) {
+		logger.info(reset_mid);
+
+		JSONObject jsonObject = new JSONObject();
+		
+		Member member = service.joinCheckID(reset_mid);
+		if(member==null){
+			jsonObject.put("result", "fail");
+
+			String json = jsonObject.toString();
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			try {
+				pw = response.getWriter();
+				pw.write(json);
+				pw.flush();
+				pw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}else{
+			PasswdChange passwdChange = service.selectLinkByMid(reset_mid);
+			if (passwdChange != null) {
+
+				jsonObject.put("result", "already");
+
+				String json = jsonObject.toString();
+
+				response.setContentType("application/json; charset=UTF-8");
+				PrintWriter pw;
+
+				try {
+					pw = response.getWriter();
+					pw.write(json);
+					pw.flush();
+					pw.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
+			} else {
+				String time = String.valueOf(System.currentTimeMillis());
+				String SHA = "";
+				try {
+					MessageDigest sh = MessageDigest.getInstance("SHA-256");
+					sh.update(time.getBytes());
+					byte byteData[] = sh.digest();
+					StringBuffer sb = new StringBuffer();
+					for (int i = 0; i < byteData.length; i++) {
+						sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+					}
+					SHA = sb.toString();
+
+				} catch (NoSuchAlgorithmException e) {
+					e.printStackTrace();
+					SHA = null;
+				}
+
+				PasswdChange passwdChange2 = new PasswdChange();
+				passwdChange2.setMid(reset_mid);
+				passwdChange2.setPlink(SHA);
+
+				service.savePasswdChangeLink(passwdChange2);
+
+				String host = "smtp.gmail.com";
+				final String username = "quintessence6083";
+				final String password = "54r54r!@#";
+				int port = 465;
+
+				String recipient = reset_mid;
+				String subject = " Garfish사이트의" + reset_mid + "님의 비밀번호 변경 링크입니다.";
+				String body = "링크 : http://localhost:8080/Team2DroneWebControl/updatePasswd/?link=" + SHA + "&mid="
+						+ reset_mid;
+				Properties props = System.getProperties();
+				props.put("mail.smtp.host", host);
+				props.put("mail.smtp.port", port);
+				props.put("mail.smtp.auth", "true");
+				props.put("mail.smtp.ssl.enable", "true");
+				props.put("mail.smtp.ssl.trust", host);
+
+				Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+					String un = username;
+					String pw = password;
+
+					protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+						return new javax.mail.PasswordAuthentication(un, pw);
+					}
+				});
+				session.setDebug(true);
+				Message mimeMessage = new MimeMessage(session);
+				try {
+					mimeMessage.setFrom(new InternetAddress("quintessence6083@gmail.com"));
+					mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+
+					mimeMessage.setSubject(subject);
+					mimeMessage.setText(body);
+					Transport.send(mimeMessage);
+
+					try {
+						jsonObject = new JSONObject();
+						jsonObject.put("result", "sussece");
+
+						String json = jsonObject.toString();
+
+						response.setContentType("application/json; charset=UTF-8");
+						PrintWriter pw;
+
+						pw = response.getWriter();
+						pw.write(json);
+						pw.flush();
+						pw.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+
+			}
+		}
+		
+		
+
+	}
+
+	@RequestMapping("/contact_me")
+	public void contact_me(String name, String phone, String email, String message, HttpServletResponse response) {
+		String host = "smtp.gmail.com";
+		final String username = "quintessence6083";
+		final String password = "54r54r!@#";
+		int port = 465;
+
+		String recipient = "quintessence6083@gmail.com";
+		String subject = name + "님의 문의사항";
+		String body = "이름 :" + name + " 전화번호 :" + phone + " 메일 :" + email + " 문의 사항:" + message;
+		Properties props = System.getProperties();
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", port);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.ssl.trust", host);
+
+		Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
+			String un = username;
+			String pw = password;
+
+			protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+				return new javax.mail.PasswordAuthentication(un, pw);
+			}
+		});
+		session.setDebug(true);
+		Message mimeMessage = new MimeMessage(session);
+		try {
+			mimeMessage.setFrom(new InternetAddress("quintessence6083@gmail.com"));
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+
+			mimeMessage.setSubject(subject);
+			mimeMessage.setText(body);
+			Transport.send(mimeMessage);
+
+			try {
+				JSONObject jsonObject = new JSONObject();
+				jsonObject.put("result", "sussece");
+
+				String json = jsonObject.toString();
+
+				response.setContentType("application/json; charset=UTF-8");
+				PrintWriter pw;
+
+				pw = response.getWriter();
+				pw.write(json);
+				pw.flush();
+				pw.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	@RequestMapping("/realHome")
 	public String jspTest(Model model) throws MqttException {
 		JSONObject jsonObject = null;
 		String json = null;
-		
+
 		MqttClient statusMqttClient = new MqttClient("tcp://192.168.0.2:1883", MqttClient.generateClientId());
 
 		MqttCallback statusMqttCallback = new MqttCallback() {
@@ -91,9 +318,9 @@ public class HomeController {
 
 			@Override
 			public void messageArrived(String string, MqttMessage mm) throws Exception {
-				
-				testJson=mm.toString();
-				flag=false;
+
+				testJson = mm.toString();
+				flag = false;
 
 				statusMqttClient.disconnect();
 				statusMqttClient.close();
@@ -108,7 +335,7 @@ public class HomeController {
 		statusMqttClient.setCallback(statusMqttCallback);
 
 		statusMqttClient.connect();
-		
+
 		jsonObject = new JSONObject();
 		jsonObject.put("pwmCheck", "status");
 		String reqJson = jsonObject.toString();
@@ -117,12 +344,12 @@ public class HomeController {
 		// MQTT 브로커로 메시지 보냄
 		statusMqttClient.subscribe("/devices/drone/pwm");
 		statusMqttClient.publish("/devices/drone/pwmCheck", message);
-		
-		while(flag){
+
+		while (flag) {
 			System.out.println("wailt");
 		}
 		System.out.println("완료");
-		flag=false;
+		flag = false;
 		System.out.println(testJson);
 		JSONObject jsonObject2 = new JSONObject(testJson);
 		model.addAttribute("throttle", jsonObject2.getInt("throttle"));
@@ -130,11 +357,10 @@ public class HomeController {
 		model.addAttribute("pitch", jsonObject2.getInt("pitch"));
 		model.addAttribute("roll", jsonObject2.getInt("roll"));
 		model.addAttribute("mode", jsonObject2.getInt("mode"));
-		
+
 		return "realHome";
 
 	}
-
 
 	@RequestMapping("/throttleAndYaw")
 	public void throttleAndYaw(String throttle, String yaw, HttpServletResponse response) throws MqttException {

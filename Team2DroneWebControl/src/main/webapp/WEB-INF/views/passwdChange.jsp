@@ -60,60 +60,7 @@
 	src="<%=application.getContextPath()%>/resources/js/modernizr_3.js"></script>
 <!-- Modernizr -->
 
-<script>
-function login_check(event) {
-		event.preventDefault();
-		var formModal = $('.cd-user-modal');
-		var formLogin = formModal.find('#cd-login');
-		$.ajax({
-			'url' : "login",
-			'data' : {
-				'mid' : $("#mid").val(),
-				'mpassword' : $("#mpassword").val()
-			},
-			'type' : "POST",
-			'async' : false,
-			'success' : function(data) {
-				if (data.result == 0) {
-					formLogin.find('input[type="email"]').addClass('has-error').next('span').addClass('is-visible');
-					formLogin.find('input[type="password"]').removeClass('has-error').next().next('span').removeClass('is-visible')
-				} else if (data.result == 1) {
-					formLogin.find('input[type="email"]').removeClass('has-error').next('span').removeClass('is-visible');
-					formLogin.find('input[type="password"]').addClass('has-error').next().next('span').addClass('is-visible');
-				} else {
-					document.getElementById('loginForm').submit();
-				} 
 
-			}
-		}); 
-}
-
-function pwchange_check(event) {
-	event.preventDefault();
-	var formModal = $('.cd-user-modal');
-	var formLogin = formModal.find('#cd-login');
-	$.ajax({
-		'url' : "passwdChange",
-		'data' : {
-			'reset_mid' : $("#reset_mid").val()
-		},
-		'type' : "POST",
-		'async' : false,
-		'success' : function(data) {
-			/* if (data.result == 0) {
-				formLogin.find('input[type="email"]').addClass('has-error').next('span').addClass('is-visible');
-				formLogin.find('input[type="password"]').removeClass('has-error').next().next('span').removeClass('is-visible')
-			} else if (data.result == 1) {
-				formLogin.find('input[type="email"]').removeClass('has-error').next('span').removeClass('is-visible');
-				formLogin.find('input[type="password"]').addClass('has-error').next().next('span').addClass('is-visible');
-			} else {
-				document.getElementById('loginForm').submit();
-			}  */
-
-		}
-	}); 
-}
-</script>
 
 </head>
 
@@ -139,14 +86,6 @@ function pwchange_check(event) {
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse"
 				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav navbar-right">
-					<li class="hidden"><a href="#page-top"></a></li>
-					<li class="page-scroll"><a href="join">회원가입</a></li>
-					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
-					<li class="page-scroll"><a href="qna">Community</a></li>
-
-				</ul>
-
 			</div>
 			<!-- /.navbar-collapse -->
 		</div>
@@ -166,7 +105,7 @@ function pwchange_check(event) {
 
 			<div id="cd-login">
 				<!-- log in form -->
-				<form id="loginForm" method="post" action="<%=application.getContextPath()%>/login" class="cd-form" onsubmit="login_check(event)">
+				<form id="loginForm" method="post" action="<%=application.getContextPath()%>/login" class="cd-form" onsubmit="check(event)">
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signin-email">이메일</label>
 						<input class="full-width has-padding has-border" id="mid" name="mid"
@@ -240,10 +179,10 @@ function pwchange_check(event) {
 				<!-- reset password form -->
 				<p class="cd-form-message">비밀번호를 잊으셨나요? 이메일을 입력하시면 해당 메일로 비밀번호변경 링크를 보내드립니다.</p>
 
-				<form class="cd-form" method="post" action="<%=application.getContextPath()%>/passwdChange" onsubmit="pwchange_check(event)">
+				<form class="cd-form">
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="reset-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="reset_mid" name="reset_mid"
+						<input class="full-width has-padding has-border" id="reset-email"
 							type="email" placeholder="E-mail"> <span
 							class="cd-error-message">Error message here!</span>
 					</p>
