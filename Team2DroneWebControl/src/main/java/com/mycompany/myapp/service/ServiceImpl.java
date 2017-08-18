@@ -49,4 +49,15 @@ public class ServiceImpl implements Service{
 	
 	
 
+	@Override
+	public int joinCheckID(String mid) {
+		int result = 0;
+		Member member = dao.memberSelectByMid(mid);
+
+		if (member == null) {
+			result = 1;
+		}
+		return result;
+	}
+	
 }

@@ -34,4 +34,5 @@ public class DaoImpl implements Dao {
 	public void linkInsert(PasswdChange passwdChange) {
 		sst.insert("passwdchange.insert", passwdChange);
 	}
+
 }

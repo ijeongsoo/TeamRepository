@@ -12,4 +12,5 @@ public interface Dao {
 	public Member memberSelectByMid(String mid);
 	public PasswdChange selectLink(String reset_mid);
 	public void linkInsert(PasswdChange passwdChange);
+
 }

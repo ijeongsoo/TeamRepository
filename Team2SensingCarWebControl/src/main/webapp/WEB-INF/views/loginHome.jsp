@@ -71,10 +71,10 @@
 
 <script type="text/javascript">
 	function fileChange(event) {
+		
 		if ($("#sattach")[0].files.length != 0) {
 			var originalfilename = $("#sattach")[0].files[0].name;
-			$("#imgFileView")[0].src = URL
-					.createObjectURL(event.target.files[0]);
+			$("#imgFileView")[0].src = URL.createObjectURL(event.target.files[0]);
 			$("#imgFileView").attr("style", "height:100px");
 			$("#sattachBtn").text("수정");
 			$("#imgcheck").removeClass("alert-danger");
@@ -86,8 +86,7 @@
 <script>
 	$('.modal').on('hidden.bs.modal', function(e) {
 		$(this).find('form')[0].reset()
-	});
-
+		});
 	$(document)
 			.ready(
 					function() {

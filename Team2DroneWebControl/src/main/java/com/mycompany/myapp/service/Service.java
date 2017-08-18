@@ -11,5 +11,7 @@ public interface Service {
 	public Member login(String mid, String mpassword);
 	public PasswdChange	selectLinkByMid(String reset_mid);
 	public void savePasswdChangeLink(PasswdChange passwdChange);
+	public int joinCheckID(String mid);
+
 
 }

@@ -124,8 +124,8 @@ public class HomeController {
 
 		JSONObject jsonObject = new JSONObject();
 		
-		Member member = service.joinCheckID(reset_mid);
-		if(member==null){
+		int count = service.joinCheckID(reset_mid);
+		if(count==1){
 			jsonObject.put("result", "fail");
 
 			String json = jsonObject.toString();
