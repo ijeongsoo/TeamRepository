@@ -33,8 +33,12 @@
 <!-- CSS reset -->
 <link rel="stylesheet"
 	href="<%=application.getContextPath()%>/resources/css/style_3.css">
+
 <link rel="stylesheet"
-	href="<%=application.getContextPath()%>/resources/css/style_4.css">
+	href="<%=application.getContextPath()%>/resources/css/list_view_style.css">
+<link
+	href="<%=application.getContextPath()%>/resources/css/circle-img.css"
+	rel="stylesheet" type="text/css" />
 <!-- Resource style -->
 
 
@@ -56,35 +60,57 @@
 
 <script
 	src="<%=application.getContextPath()%>/resources/js/modernizr.js"></script>
-	<script
+<script
 	src="<%=application.getContextPath()%>/resources/js/modernizr_3.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/list_view_modernizr.js"></script>
 <!-- Modernizr -->
 
 <script>
-function check(event) {
-		event.preventDefault();
-		var formModal = $('.cd-user-modal');
-		var formLogin = formModal.find('#cd-login');
-		$.ajax({
-			'url' : "login",
-			'data' : {
-				'mid' : $("#mid").val(),
-				'mpassword' : $("#mpassword").val()
-			},
-			'type' : "POST",
-			'async' : false,
-			'success' : function(data) {
-				if (data.result == 0) {
-					formLogin.find('input[type="email"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-				} else if (data.result == 1) {
-					formLogin.find('input[type="password"]').toggleClass('has-error').next('span').toggleClass('is-visible');
-				} else {
-					document.getElementById('loginForm').submit();
-				} 
+	function communityRequest() {
+		location.href = "community";
+	}
 
+	function logoutRequest() {
+		location.href = "logout";
+	}
+	$(function() {
+		<c:forEach var="d" items="${droneList}" varStatus="status">
+			$('#device${status.count}').append("<li data-type='1' class='is-visible' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count },${d.dname }</p><br></li>");
+		</c:forEach>
+	});
+	$(function() {
+		<c:forEach var="d" items="${roverList}" varStatus="status">
+			$('#device${status.count}').append("<li data-type='2' class='is-hidden' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}'><p>${status.count },${d.dname }</p></li>");
+		</c:forEach>
+	});
+	$(function() {
+		<c:forEach var="d" items="${planeList}" varStatus="status">
+			$('#device${status.count}').append("<li data-type='3' class='is-hidden' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count },${d.dname }</p></li>");
+		</c:forEach>
+	});
+</script>
+
+
+<script type="text/javascript">
+	$(function() {
+		var ws = new WebSocket("ws://" + location.host
+				+ "/Team2DroneWebControl/websocket/camera");
+		// 함수를 바로 대입해도 괜찮음.메시지가 도착했을 때 시행
+		var beforTime= new Date().getMilliseconds();
+		var currnetTime;
+		var duration;
+		ws.onmessage = function(event) {
+			currentTime= new Date().getMilliseconds();
+			duration= currentTime-beforTime;
+			if(duration<1){
+				
+			}else if(duration>1 && duration <3){
+				
 			}
-		}); 
-}
+			
+		};
+	});
 </script>
 
 </head>
@@ -113,9 +139,13 @@ function check(event) {
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li class="page-scroll"><a href="join">회원가입</a></li>
-					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
-					<li class="page-scroll"><a href="qna">Community</a></li>
+					<li class="page-scroll"><a href="comunity"
+						onclick="logoutRequest()">로그아웃</a></li>
+					<li class="page-scroll"><a
+						style="background-color: rgba(0, 0, 0, 0)" class="cd-signup"
+						href="#0">정보수정</a></li>
+					<li class="page-scroll"><a href="comunity"
+						onclick="communityRequest()">Community</a></li>
 
 				</ul>
 
@@ -132,41 +162,11 @@ function check(event) {
 		<!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container">
 			<!-- this is the container wrapper -->
-			<ul style="text-align: center; background-color: #FF625D; color: white; height: 65px; font-weight: bold; font-size: 40px; padding-top: 10px; padding-bottom: 10px">
-				<li>로그인</li>
+			<ul
+				style="text-align: center; background-color: #FF625D; color: white; height: 65px; font-weight: bold; font-size: 40px; padding-top: 10px; padding-bottom: 10px">
+				<li>정보수정</li>
 			</ul>
 
-			<div id="cd-login">
-				<!-- log in form -->
-				<form id="loginForm" method="post" action="<%=application.getContextPath()%>/login" class="cd-form" onsubmit="check(event)">
-					<p class="fieldset">
-						<label class="image-replace cd-email" for="signin-email">이메일</label>
-						<input class="full-width has-padding has-border" id="mid" name="mid"
-							type="email" placeholder="이메일"> <span
-							class="cd-error-message">이메일을 확인해주세요!</span>
-					</p>
-
-					<p class="fieldset">
-						<label class="image-replace cd-password" for="signin-password">비밀번호</label>
-						<input class="full-width has-padding has-border"
-							id="mpassword" name="mpassword" type="password" placeholder="비밀번호">
-						<a href="#0" class="hide-password">보기</a> <span
-							class="cd-error-message">비밀번호를 확인해주세요!</span>
-					</p>
-
-					
-
-					<p class="fieldset">
-						<input class="full-width" type="submit" value="로그인">
-					</p>
-				</form>
-
-				<p class="cd-form-bottom-message">
-					<a href="#0">비밀번호가 기억안나세요?</a>
-				</p>
-				<!-- <a href="#0" class="cd-close-form">Close</a> -->
-			</div>
-			<!-- cd-login -->
 
 			<div id="cd-signup">
 				<!-- sign up form -->
@@ -208,65 +208,35 @@ function check(event) {
 			</div>
 			<!-- cd-signup -->
 
-			<div id="cd-reset-password">
-				<!-- reset password form -->
-				<p class="cd-form-message">비밀번호를 잊으셨나요? 이메일을 입력하시면 해당 메일로 비밀번호변경 링크를 보내드립니다.</p>
 
-				<form class="cd-form">
-					<p class="fieldset">
-						<label class="image-replace cd-email" for="reset-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="reset-email"
-							type="email" placeholder="E-mail"> <span
-							class="cd-error-message">Error message here!</span>
-					</p>
-
-					<p class="fieldset">
-						<input class="full-width has-padding" type="submit"
-							value="비밀번호 변경 링크보내기">
-					</p>
-				</form>
-
-				<p class="cd-form-bottom-message">
-					<a href="#0">로그인으로 돌아가기</a>
-				</p>
-			</div>
-			<!-- cd-reset-password -->
 			<a href="#0" class="cd-close-form">Close</a>
 		</div>
 		<!-- cd-user-modal-container -->
 	</div>
 	<!-- cd-user-modal -->
 
-	
-	
+
+
 
 	<header class="cd-slider-wrapper">
 		<ul class="cd-slider">
 			<li class="visible">
 				<div>
-					<h2>Garfish Project</h2>
-					<hr class="star-light1">
-					<p>Garfish Project는 RC 드론이 인터넷을 통해 IoT장비가 될 수 있도록 도와줍니다.</p>
-					<p>지금바로 시작해보세요!</p>
-					<div class="pc_view">
+					<h2>${login_info.mname }$님<br>환영합니다!
+					</h2>
+					<hr style="margin-bottom: 0px" class="star-light1">
+
+					<div>
 						<br>
 						<div style="display: inline-block;">
-							<img height="130px"
-								src="<%=application.getContextPath()%>/resources/image/drone-2.png">
-							<p>드론</p>
+							<img height="130px" class="photo3"
+								src="<%=application.getContextPath()%>/file?msavedfilename=${login_info.msavedfilename}&mfiletype=${login_info.mfiletype}">
+							<div class="pc_view">
+								<p style="margin-top: 50px">계정 ${login_info.mid }</p>
+							</div>
+
 						</div>
 
-						<div style="display: inline-block;">
-							<img height="130px" style="margin-left: 50px; margin-right: 50px"
-								src="<%=application.getContextPath()%>/resources/image/ram-memory.png">
-							<p>통신모듈</p>
-						</div>
-
-						<div style="display: inline-block;">
-							<img height="130px"
-								src="<%=application.getContextPath()%>/resources/image/wifi.png">
-							<p>IoT</p>
-						</div>
 					</div>
 
 
@@ -384,66 +354,98 @@ function check(event) {
 
 
 	<!-- Portfolio Grid Section -->
-	<section id="portfolio">
+	<section class="list">
 		<div class="container">
-			<div class="row">
-				<div class="col-lg-12 text-center">
-					<h2>Garfish 소개</h2>
-					<hr class="star-primary">
+			<div class="cd-gallery-container">
+				<div class="row">
+					<div class="col-lg-12 text-center">
+						<h2>나의 장비 리스트</h2>
+						<hr class="star-primary">
+					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="col-sm-4 portfolio-item">
-					<a href="#portfolioModal1" class="portfolio-link"
-						data-toggle="modal">
-						<div class="caption">
-							<div class="caption-content">
-								<i class="fa fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img src="resources/image/iot.png"
-						class="img-responsive" alt="Cabin" ><br><div align="center" style="color: #343434"><h2>IoT</h2><br>
-						garfish는 별도의 RC조종기 필요없이 인터넷을 통하여 드론을 제어할 수 있도록 도와줍니다.
-						이는 기존의 RC 조종기를 완전히 대체하는 것을 의미하며 IoT장비로 인터넷이 되는 곳이라면
-						어디서든 드론을 제어할 수 있음을 의미합니다.
-						
-						</div></a>
-				</div>
-				<div class="col-sm-4 portfolio-item">
-					<a href="#portfolioModal2" class="portfolio-link"
-						data-toggle="modal">
-						<div class="caption">
-							<div class="caption-content">
-								<i class="fa fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img src="resources/image/many.png"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #343434"><h2>범용성</h2><br>
-						garfish는 드론의 종류, 항법장치, 오픈소스에 구애를 받지 않고 RC를 이용하여 조종하는 
-						드론이라면 모든 곳에 이용될 수 있습니다. 또한 드론 뿐만 아니라 RC 신호로 제어하는 모든
-						종류의 장비에서 사용될 수 있습니다.  
-						
+				<nav class="cd-filter">
+					<ul>
+						<li class="placeholder"><a data-type="1" href="#0">드론</a> <!-- selected option on mobile --></li>
+
+						<li><a class="selected" data-type="1" href="#0">드론</a></li>
+
+						<li><a data-type="2" href="#0">자동차</a></li>
+
+						<li><a data-type="3" href="#0">비행기</a></li>
+					</ul>
+				</nav>
+
+				<ul class="cd-gallery cd-container">
+
+					<%-- <c:forEach var="s" items="${list}">
+						<div class="4u 12u$(medium)">
+							<a href='javascript:void(0);' onclick='controlYet();'>
+								<section class="box">
+									<img
+										src="<%=application.getContextPath()%>/file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
+										class="photo3" />
+									<h3>${s.sip}</h3>
+
+									<h3>${s.sname}</h3>
+									<h4 class="checkMid">${s.sregistor}</h4>
+									<p class="available" id="${s.sregistor}${s.sno}">
+										<img width="15px" src="resources/images/loading.gif" />
+									</p>
+								</section>
+							</a>
 						</div>
-					</a>
-				</div>
-				<div class="col-sm-4 portfolio-item">
-					<a href="#portfolioModal3" class="portfolio-link"
-						data-toggle="modal">
-						<div class="caption">
-							<div class="caption-content">
-								<i class="fa fa-search-plus fa-3x"></i>
-							</div>
-						</div> <img src="resources/image/gear.png"
-						class="img-responsive" alt="Circus tent"><br>
-						<div align="center" style="color: #343434"><h2 >응용성</h2><br>
-						garfish는 회원가입과 설치만으로 장비를 제어할 수 있도록 플랫폼을 제공 합니다. 컴퓨터를
-						잘 모르는 사람도 설명서를 통해 쉽고 간편하게 이용할수 있습니다. 또한 개발자를 위한
-						라이브러리를 제공해 다양한 분야에 응용할 수 있습니다.
-						
-						</div>
-					</a>
-				</div>
-				
+					</c:forEach> --%>
+
+					<c:forEach var="d" items="${allList}" varStatus="status">
+						<li>
+							<ul class="cd-item-wrapper" id="device${status.count}">
+
+							</ul>
+						</li>
+					</c:forEach>
+
+
+
+					<%-- <li data-type="0" class="is-visible"><img
+						src="img/thumb-red.jpg" alt="thumbnail">
+						<p>${status.count },${d.dname }</p></li> --%>
+
+					<!-- <li>
+						<ul class="cd-item-wrapper">
+							<li data-type="0" class="is-visible"><img
+								src="img/thumb-red.jpg" alt="thumbnail">
+								<p></p></li>
+
+						</ul>
+					</li>
+
+					<li>
+						<ul class="cd-item-wrapper">
+							<li data-type="0" class="is-visible"><img
+								src="img/thumb-red.jpg" alt="thumbnail"></li>
+
+						</ul>
+					</li>
+
+					<li>
+						<ul class="cd-item-wrapper">
+							<li data-type="0" class="is-visible"><img
+								src="img/thumb-red.jpg" alt="thumbnail"></li>
+
+						</ul>
+					</li>
+
+					<li>
+						<ul class="cd-item-wrapper">
+
+
+						</ul>
+					</li> -->
+
+				</ul>
+				<!-- cd-gallery -->
 			</div>
+			<!-- cd-gallery-container -->
 		</div>
 	</section>
 
@@ -461,34 +463,40 @@ function check(event) {
 					<p>garfish를 개발한 개발자를 소개합니다.</p>
 				</div>
 				<div class="row">
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img style="height: 200px" src="resources/image/jsPhoto.jpg"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>이정수</h2><br>
-						H.P. 010-9895-5986<br>
-						E-mail. quintessence6083@gmail.com
-						
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img style="height: 200px" src="resources/image/jsPhoto.jpg"
+							class="img-responsive" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>이정수</h2>
+							<br> H.P. 010-9895-5986<br> E-mail.
+							quintessence6083@gmail.com
+
 						</div>
-				</div>
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img src="resources/image/hkPhoto.jpg"
-						class="img-responsive" style="height: 200px" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>강현규</h2><br>
-						H.P. 010-8994-9346<br>
-						E-mail. yoyo238@naver.com
+					</div>
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img src="resources/image/hkPhoto.jpg" class="img-responsive"
+							style="height: 200px" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>강현규</h2>
+							<br> H.P. 010-8994-9346<br> E-mail. yoyo238@naver.com
 						</div>
-				</div>
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img style="height: 200px" src="resources/image/jhPhoto.JPG"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>조재훈</h2><br>
-						H.P. 010-7923-6932<br>
-						E-mail. whwogns1122@naver.com
+					</div>
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img style="height: 200px" src="resources/image/jhPhoto.JPG"
+							class="img-responsive" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>조재훈</h2>
+							<br> H.P. 010-7923-6932<br> E-mail.
+							whwogns1122@naver.com
 						</div>
+					</div>
+
 				</div>
-				
-			</div>
-				<div style="padding-top: 50px" class="col-lg-8 col-lg-offset-2 text-center">
+				<div style="padding-top: 50px"
+					class="col-lg-8 col-lg-offset-2 text-center">
 					<h3>개발자의 이력서를 다운받아보세요!</h3>
 					<a href="#" class="btn btn-lg btn-outline"> <i
 						class="fa fa-download"></i> Download Resume
@@ -505,7 +513,8 @@ function check(event) {
 				<div class="col-lg-12 text-center">
 					<h2>Contact Us</h2>
 					<hr class="star-primary">
-					<p>문의사항이 생기시면 언제든지 연락하세요!</p><br>
+					<p>문의사항이 생기시면 언제든지 연락하세요!</p>
+					<br>
 				</div>
 			</div>
 			<div class="row">
@@ -516,29 +525,27 @@ function check(event) {
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="name">이름</label> <input style="font-size: 20px" class="form-control"  type="text"
-									 placeholder="이름" id="name" required
-									data-validation-required-message="이름을 입력해 주세요.">
+								<label for="name">이름</label> <input style="font-size: 20px"
+									class="form-control" type="text" placeholder="이름" id="name"
+									required data-validation-required-message="이름을 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="email">이메일</label> <input  style="font-size: 20px" type="email"
-									class="form-control" placeholder="이메일" id="email"
-									required
-									data-validation-required-message="이메일을 입력해 주세요.">
+								<label for="email">이메일</label> <input style="font-size: 20px"
+									type="email" class="form-control" placeholder="이메일" id="email"
+									required data-validation-required-message="이메일을 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="phone">전화번호</label> <input  style="font-size: 20px" type="tel"
-									class="form-control" placeholder="전화번호" id="phone"
-									required
-									data-validation-required-message="전화번호를 입력해 주세요.">
+								<label for="phone">전화번호</label> <input style="font-size: 20px"
+									type="tel" class="form-control" placeholder="전화번호" id="phone"
+									required data-validation-required-message="전화번호를 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -556,7 +563,8 @@ function check(event) {
 						<div id="success"></div>
 						<div class="row">
 							<div class="form-group col-xs-12">
-								<button id="btnSubmit" type="submit" class="btn btn-success btn-lg">보내기</button>
+								<button id="btnSubmit" type="submit"
+									class="btn btn-success btn-lg">보내기</button>
 							</div>
 						</div>
 					</form>
@@ -579,28 +587,26 @@ function check(event) {
 					<div class="footer-col col-md-4">
 						<h3>Around the Web</h3>
 						<ul class="list-inline">
-							<li><a href="http://www.facebook.com" class="btn-social btn-outline"><span
-									class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-							</li>
-							<li><a href="http://www.google.com" class="btn-social btn-outline"><span
-									class="sr-only">Google Plus</span><i
-									class="fa fa-fw fa-google-plus"></i></a></li>
-							<li><a href="http://www.twitter.com" class="btn-social btn-outline"><span
-									class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-							</li>
-							<li><a href="http://www.linkedin.com" class="btn-social btn-outline"><span
-									class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-							</li>
-							<li><a href="http://www.dribble.com" class="btn-social btn-outline"><span
-									class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-							</li>
+							<li><a href="http://www.facebook.com"
+								class="btn-social btn-outline"><span class="sr-only">Facebook</span><i
+									class="fa fa-fw fa-facebook"></i></a></li>
+							<li><a href="http://www.google.com"
+								class="btn-social btn-outline"><span class="sr-only">Google
+										Plus</span><i class="fa fa-fw fa-google-plus"></i></a></li>
+							<li><a href="http://www.twitter.com"
+								class="btn-social btn-outline"><span class="sr-only">Twitter</span><i
+									class="fa fa-fw fa-twitter"></i></a></li>
+							<li><a href="http://www.linkedin.com"
+								class="btn-social btn-outline"><span class="sr-only">Linked
+										In</span><i class="fa fa-fw fa-linkedin"></i></a></li>
+							<li><a href="http://www.dribble.com"
+								class="btn-social btn-outline"><span class="sr-only">Dribble</span><i
+									class="fa fa-fw fa-dribbble"></i></a></li>
 						</ul>
 					</div>
 					<div class="footer-col col-md-4">
 						<h3>About Project</h3>
-						<p>
-							본 사이트는 한국소프트웨어산업협회 IoT엔지니어 양성과정 최종프로젝트 프로토타입입니다.
-						</p>
+						<p>본 사이트는 한국소프트웨어산업협회 IoT엔지니어 양성과정 최종프로젝트 프로토타입입니다.</p>
 					</div>
 				</div>
 			</div>
@@ -906,6 +912,8 @@ function check(event) {
 		src="<%=application.getContextPath()%>/resources/js/snap.svg-min.js"></script>
 	<script src="<%=application.getContextPath()%>/resources/js/main_2.js"></script>
 	<script src="<%=application.getContextPath()%>/resources/js/main_3.js"></script>
+	<script
+		src="<%=application.getContextPath()%>/resources/js/list_view.js"></script>
 	<!-- Resource jQuery -->
 
 </body>

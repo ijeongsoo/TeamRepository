@@ -16,4 +16,15 @@
 
 	</select>
 	
+	
+	<update id="update" parameterType="com.mycompany.myapp.dto.Member">
+ 		<if test="moriginalfilename!=null">
+ 			update member set mname=#{mname}, mpassword=#{mpassword}, moriginalfilename=#{moriginalfilename}, msavedfilename=#{msavedfilename}, mfiletype=#{mfiletype}  where mid=#{mid}
+ 		</if>
+ 		<if test="moriginalfilename==null">
+ 			update member set mname=#{mname}, mpassword=#{mpassword} where mid=#{mid}
+ 		</if>
+ 	
+ 	</update>
+	
 </mapper>

@@ -33,8 +33,7 @@
 <!-- CSS reset -->
 <link rel="stylesheet"
 	href="<%=application.getContextPath()%>/resources/css/style_3.css">
-<link rel="stylesheet"
-	href="<%=application.getContextPath()%>/resources/css/style_4.css">
+
 <!-- Resource style -->
 
 
@@ -56,71 +55,118 @@
 
 <script
 	src="<%=application.getContextPath()%>/resources/js/modernizr.js"></script>
-	<script
+<script
 	src="<%=application.getContextPath()%>/resources/js/modernizr_3.js"></script>
 <!-- Modernizr -->
 
 <script>
-function login_check(event) {
+	function login_check(event) {
 		event.preventDefault();
 		var formModal = $('.cd-user-modal');
 		var formLogin = formModal.find('#cd-login');
-		$.ajax({
-			'url' : "login",
-			'data' : {
-				'mid' : $("#mid").val(),
-				'mpassword' : $("#mpassword").val()
-			},
-			'type' : "POST",
-			'async' : false,
-			'success' : function(data) {
-				if (data.result == 0) {
-					formLogin.find('input[type="email"]').addClass('has-error').next('span').addClass('is-visible');
-					formLogin.find('input[type="password"]').removeClass('has-error').next().next('span').removeClass('is-visible')
-				} else if (data.result == 1) {
-					formLogin.find('input[type="email"]').removeClass('has-error').next('span').removeClass('is-visible');
-					formLogin.find('input[type="password"]').addClass('has-error').next().next('span').addClass('is-visible');
-				} else {
-					document.getElementById('loginForm').submit();
-				} 
+		$
+				.ajax({
+					'url' : "login",
+					'data' : {
+						'mid' : $("#mid").val(),
+						'mpassword' : $("#mpassword").val()
+					},
+					'type' : "POST",
+					'async' : false,
+					'success' : function(data) {
+						if (data.result == 0) {
+							formLogin.find('input[type="email"]').addClass(
+									'has-error').next('span').addClass(
+									'is-visible');
+							formLogin.find('input[type="password"]')
+									.removeClass('has-error').next().next(
+											'span').removeClass('is-visible')
+						} else if (data.result == 1) {
+							formLogin.find('input[type="email"]').removeClass(
+									'has-error').next('span').removeClass(
+									'is-visible');
+							formLogin.find('input[type="password"]').addClass(
+									'has-error').next().next('span').addClass(
+									'is-visible');
+						} else {
+							document.getElementById('loginForm').submit();
+						}
 
-			}
-		}); 
-}
+					}
+				});
+	}
 
-function pwchange_check(event) {
-	event.preventDefault();
-	var formModal = $('.cd-user-modal');
-	var formLogin = formModal.find('#cd-login');
-	$.ajax({
-		'url' : "passwdChange",
-		'data' : {
-			'reset_mid' : $("#reset_mid").val()
-		},
-		'type' : "POST",
-		'async' : false,
-		'success' : function(data) {
-			/* if (data.result == 0) {
-				formLogin.find('input[type="email"]').addClass('has-error').next('span').addClass('is-visible');
-				formLogin.find('input[type="password"]').removeClass('has-error').next().next('span').removeClass('is-visible')
-			} else if (data.result == 1) {
-				formLogin.find('input[type="email"]').removeClass('has-error').next('span').removeClass('is-visible');
-				formLogin.find('input[type="password"]').addClass('has-error').next().next('span').addClass('is-visible');
-			} else {
-				document.getElementById('loginForm').submit();
-			}  */
+	function pwchange_check(event) {
+		$("#btn_pwChange").attr("disabled", true);
+		event.preventDefault();
+		$('#success_pwChange').html(
+				"<img width='30px' src='resources/image/loading.gif' />");
+		var formModal = $('.cd-user-modal');
+		var formPWChange = formModal.find('#cd-reset-password');
+		formPWChange.find('input[type="email"]').removeClass('has-error').next(
+				'span').removeClass('is-visible');
+		formPWChange.find('input[type="email"]').removeClass('has-error')
+				.next().next('span').removeClass('is-visible');
+		$
+				.ajax({
+					'url' : "passwdChange",
+					'data' : {
+						'reset_mid' : $("#reset_mid").val()
+					},
+					'type' : "POST",
+					'success' : function(data) {
+						if (data.result == "fail") {
+							$('#success_pwChange').html("");
+							formPWChange.find('input[type="email"]')
+									.removeClass('has-error').next().next(
+											'span').removeClass('is-visible');
+							formPWChange.find('input[type="email"]').addClass(
+									'has-error').next('span').addClass(
+									'is-visible');
+							$("#btn_pwChange").attr("disabled", false);
+						} else if (data.result == "already") {
+							$('#success_pwChange').html("");
+							formPWChange.find('input[type="email"]')
+									.removeClass('has-error').next('span')
+									.removeClass('is-visible');
+							formPWChange.find('input[type="email"]').addClass(
+									'has-error').next().next('span').addClass(
+									'is-visible');
+							$("#btn_pwChange").attr("disabled", false);
+						} else {
+							formPWChange.find('input[type="email"]')
+									.removeClass('has-error').next('span')
+									.removeClass('is-visible');
+							formPWChange.find('input[type="email"]')
+									.removeClass('has-error').next().next(
+											'span').removeClass('is-visible');
 
-		}
-	}); 
-}
+							$("#btn_pwChange").attr("disabled", false);
+							$('#success_pwChange').html(
+									"<div class='alert alert-success'>");
+							$('#success_pwChange > .alert-success')
+									.html(
+											"<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
+									.append("</button>");
+							$('#success_pwChange > .alert-success').append(
+									"<strong>메일이 성공적으로 발송 되었습니다. </strong>");
+							$('#success_pwChange > .alert-success').append(
+									'</div>');
 
-function joinRequest(){
-	location.href="join";
-}
+							$('#pwChangeForm').trigger("reset");
+						}
 
-function communityRequest(){
-	
-}
+					}
+				});
+	}
+
+	function joinRequest() {
+		location.href = "join";
+	}
+
+	function communityRequest() {
+		location.href = "community";
+	}
 </script>
 
 </head>
@@ -149,9 +195,10 @@ function communityRequest(){
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li class="page-scroll"><a href="join" onclick="joinRequest()" >회원가입</a></li>
+					<li class="page-scroll"><a href="join" onclick="joinRequest()">회원가입</a></li>
 					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
-					<li class="page-scroll"><a href="comunity" onclick="communityRequest()" >Community</a></li>
+					<li class="page-scroll"><a href="comunity"
+						onclick="communityRequest()">Community</a></li>
 
 				</ul>
 
@@ -168,29 +215,33 @@ function communityRequest(){
 		<!-- this is the entire modal form, including the background -->
 		<div class="cd-user-modal-container">
 			<!-- this is the container wrapper -->
-			<ul style="text-align: center; background-color: #FF625D; color: white; height: 65px; font-weight: bold; font-size: 40px; padding-top: 10px; padding-bottom: 10px">
+			<ul
+				style="text-align: center; background-color: #FF625D; color: white; height: 65px; font-weight: bold; font-size: 40px; padding-top: 10px; padding-bottom: 10px">
 				<li>로그인</li>
 			</ul>
 
 			<div id="cd-login">
 				<!-- log in form -->
-				<form id="loginForm" method="post" action="<%=application.getContextPath()%>/login" class="cd-form" onsubmit="login_check(event)">
+				<form id="loginForm" method="post"
+					action="<%=application.getContextPath()%>/login" class="cd-form"
+					onsubmit="login_check(event)">
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="signin-email">이메일</label>
-						<input class="full-width has-padding has-border" id="mid" name="mid"
-							type="email" placeholder="이메일"> <span
+						<input class="full-width has-padding has-border" id="mid"
+							name="mid" type="email" placeholder="이메일"> <span
 							class="cd-error-message">이메일을 확인해주세요!</span>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signin-password">비밀번호</label>
-						<input class="full-width has-padding has-border"
-							id="mpassword" name="mpassword" type="password" placeholder="비밀번호"><a href="#0" class="hide-password">보기</a> <span
+						<input class="full-width has-padding has-border" id="mpassword"
+							name="mpassword" type="password" placeholder="비밀번호"><a
+							href="#0" class="hide-password">보기</a> <span
 							class="cd-error-message">비밀번호를 확인해주세요!</span>
-						
+
 					</p>
 
-					
+
 
 					<p class="fieldset">
 						<input class="full-width" type="submit" value="로그인">
@@ -246,19 +297,23 @@ function communityRequest(){
 
 			<div id="cd-reset-password">
 				<!-- reset password form -->
-				<p class="cd-form-message">비밀번호를 잊으셨나요? 이메일을 입력하시면 해당 메일로 비밀번호변경 링크를 보내드립니다.</p>
+				<p class="cd-form-message">비밀번호를 잊으셨나요? 이메일을 입력하시면 해당 메일로 비밀번호변경
+					링크를 보내드립니다.</p>
 
-				<form class="cd-form" method="post" action="<%=application.getContextPath()%>/passwdChange" onsubmit="pwchange_check(event)">
+				<form id="pwChangeForm" class="cd-form" method="post"
+					action="<%=application.getContextPath()%>/passwdChange"
+					onsubmit="pwchange_check(event)">
 					<p class="fieldset">
 						<label class="image-replace cd-email" for="reset-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="reset_mid" name="reset_mid"
-							type="email" placeholder="E-mail"> <span
-							class="cd-error-message">Error message here!</span>
+						<input class="full-width has-padding has-border" id="reset_mid"
+							name="reset_mid" type="email" placeholder="E-mail"> <span
+							class="cd-error-message">존재하지 않는 회원입니다.</span><span
+							class="cd-error-message">이미 링크가 발송되었습니다.</span>
 					</p>
-
+					<div align="center" id="success_pwChange"></div>
 					<p class="fieldset">
-						<input class="full-width has-padding" type="submit"
-							value="비밀번호 변경 링크보내기">
+						<input id="btn_pwChange" class="full-width has-padding"
+							type="submit" value="비밀번호 변경 링크보내기">
 					</p>
 				</form>
 
@@ -273,8 +328,8 @@ function communityRequest(){
 	</div>
 	<!-- cd-user-modal -->
 
-	
-	
+
+
 
 	<header class="cd-slider-wrapper">
 		<ul class="cd-slider">
@@ -426,6 +481,9 @@ function communityRequest(){
 				<div class="col-lg-12 text-center">
 					<h2>Garfish 소개</h2>
 					<hr class="star-primary">
+					<div style="margin-bottom: 50px" align="center">
+						<p>garfish로 IoT장비를 구축하세요.</p>
+					</div>
 				</div>
 			</div>
 			<div class="row">
@@ -436,13 +494,16 @@ function communityRequest(){
 							<div class="caption-content">
 								<i class="fa fa-search-plus fa-3x"></i>
 							</div>
-						</div> <img src="resources/image/iot.png"
-						class="img-responsive" alt="Cabin" ><br><div align="center" style="color: #343434"><h2>IoT</h2><br>
-						garfish는 별도의 RC조종기 필요없이 인터넷을 통하여 드론을 제어할 수 있도록 도와줍니다.
-						이는 기존의 RC 조종기를 완전히 대체하는 것을 의미하며 IoT장비로 인터넷이 되는 곳이라면
-						어디서든 드론을 제어할 수 있음을 의미합니다.
-						
-						</div></a>
+						</div> <img src="resources/image/iot.png" class="img-responsive"
+						alt="Cabin"><br>
+						<div align="center" style="color: #343434">
+							<h2>IoT</h2>
+							<br> garfish는 별도의 RC조종기 필요없이 인터넷을 통하여 드론을 제어할 수 있도록 도와줍니다.
+							이는 기존의 RC 조종기를 완전히 대체하는 것을 의미하며 IoT장비로 인터넷이 되는 곳이라면 어디서든 드론을 제어할
+							수 있음을 의미합니다.
+
+						</div>
+					</a>
 				</div>
 				<div class="col-sm-4 portfolio-item">
 					<a href="#portfolioModal2" class="portfolio-link"
@@ -451,13 +512,14 @@ function communityRequest(){
 							<div class="caption-content">
 								<i class="fa fa-search-plus fa-3x"></i>
 							</div>
-						</div> <img src="resources/image/many.png"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #343434"><h2>범용성</h2><br>
-						garfish는 드론의 종류, 항법장치, 오픈소스에 구애를 받지 않고 RC를 이용하여 조종하는 
-						드론이라면 모든 곳에 이용될 수 있습니다. 또한 드론 뿐만 아니라 RC 신호로 제어하는 모든
-						종류의 장비에서 사용될 수 있습니다.  
-						
+						</div> <img src="resources/image/many.png" class="img-responsive"
+						alt="Slice of cake"><br>
+						<div align="center" style="color: #343434">
+							<h2>범용성</h2>
+							<br> garfish는 드론의 종류, 항법장치, 오픈소스에 구애를 받지 않고 RC를 이용하여 조종하는
+							드론이라면 모든 곳에 이용될 수 있습니다. 또한 드론 뿐만 아니라 RC 신호로 제어하는 모든 종류의 장비에서 사용될
+							수 있습니다.
+
 						</div>
 					</a>
 				</div>
@@ -468,17 +530,18 @@ function communityRequest(){
 							<div class="caption-content">
 								<i class="fa fa-search-plus fa-3x"></i>
 							</div>
-						</div> <img src="resources/image/gear.png"
-						class="img-responsive" alt="Circus tent"><br>
-						<div align="center" style="color: #343434"><h2 >응용성</h2><br>
-						garfish는 회원가입과 설치만으로 장비를 제어할 수 있도록 플랫폼을 제공 합니다. 컴퓨터를
-						잘 모르는 사람도 설명서를 통해 쉽고 간편하게 이용할수 있습니다. 또한 개발자를 위한
-						라이브러리를 제공해 다양한 분야에 응용할 수 있습니다.
-						
+						</div> <img src="resources/image/gear.png" class="img-responsive"
+						alt="Circus tent"><br>
+						<div align="center" style="color: #343434">
+							<h2>응용성</h2>
+							<br> garfish는 회원가입과 설치만으로 장비를 제어할 수 있도록 플랫폼을 제공 합니다. 컴퓨터를 잘
+							모르는 사람도 설명서를 통해 쉽고 간편하게 이용할수 있습니다. 또한 개발자를 위한 라이브러리를 제공해 다양한 분야에
+							응용할 수 있습니다.
+
 						</div>
 					</a>
 				</div>
-				
+
 			</div>
 		</div>
 	</section>
@@ -497,34 +560,40 @@ function communityRequest(){
 					<p>garfish를 개발한 개발자를 소개합니다.</p>
 				</div>
 				<div class="row">
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img style="height: 200px" src="resources/image/jsPhoto.jpg"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>이정수</h2><br>
-						H.P. 010-9895-5986<br>
-						E-mail. quintessence6083@gmail.com
-						
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img style="height: 200px" src="resources/image/jsPhoto.jpg"
+							class="img-responsive" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>이정수</h2>
+							<br> H.P. 010-9895-5986<br> E-mail.
+							quintessence6083@gmail.com
+
 						</div>
-				</div>
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img src="resources/image/hkPhoto.jpg"
-						class="img-responsive" style="height: 200px" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>강현규</h2><br>
-						H.P. 010-8994-9346<br>
-						E-mail. yoyo238@naver.com
+					</div>
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img src="resources/image/hkPhoto.jpg" class="img-responsive"
+							style="height: 200px" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>강현규</h2>
+							<br> H.P. 010-8994-9346<br> E-mail. yoyo238@naver.com
 						</div>
-				</div>
-				<div class="col-sm-4 portfolio-item" align="center" style="padding-top: 50px">
-					 <img style="height: 200px" src="resources/image/jhPhoto.JPG"
-						class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF"><h2>조재훈</h2><br>
-						H.P. 010-7923-6932<br>
-						E-mail. whwogns1122@naver.com
+					</div>
+					<div class="col-sm-4 portfolio-item" align="center"
+						style="padding-top: 50px">
+						<img style="height: 200px" src="resources/image/jhPhoto.JPG"
+							class="img-responsive" alt="Slice of cake"><br>
+						<div align="center" style="color: #FFFFFF">
+							<h2>조재훈</h2>
+							<br> H.P. 010-7923-6932<br> E-mail.
+							whwogns1122@naver.com
 						</div>
+					</div>
+
 				</div>
-				
-			</div>
-				<div style="padding-top: 50px" class="col-lg-8 col-lg-offset-2 text-center">
+				<div style="padding-top: 50px"
+					class="col-lg-8 col-lg-offset-2 text-center">
 					<h3>개발자의 이력서를 다운받아보세요!</h3>
 					<a href="#" class="btn btn-lg btn-outline"> <i
 						class="fa fa-download"></i> Download Resume
@@ -541,7 +610,8 @@ function communityRequest(){
 				<div class="col-lg-12 text-center">
 					<h2>Contact Us</h2>
 					<hr class="star-primary">
-					<p>문의사항이 생기시면 언제든지 연락하세요!</p><br>
+					<p>문의사항이 생기시면 언제든지 연락하세요!</p>
+					<br>
 				</div>
 			</div>
 			<div class="row">
@@ -552,29 +622,27 @@ function communityRequest(){
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="name">이름</label> <input style="font-size: 20px" class="form-control"  type="text"
-									 placeholder="이름" id="name" required
-									data-validation-required-message="이름을 입력해 주세요.">
+								<label for="name">이름</label> <input style="font-size: 20px"
+									class="form-control" type="text" placeholder="이름" id="name"
+									required data-validation-required-message="이름을 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="email">이메일</label> <input  style="font-size: 20px" type="email"
-									class="form-control" placeholder="이메일" id="email"
-									required
-									data-validation-required-message="이메일을 입력해 주세요.">
+								<label for="email">이메일</label> <input style="font-size: 20px"
+									type="email" class="form-control" placeholder="이메일" id="email"
+									required data-validation-required-message="이메일을 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
 						<div class="row control-group">
 							<div
 								class="form-group col-xs-12 floating-label-form-group controls">
-								<label for="phone">전화번호</label> <input  style="font-size: 20px" type="tel"
-									class="form-control" placeholder="전화번호" id="phone"
-									required
-									data-validation-required-message="전화번호를 입력해 주세요.">
+								<label for="phone">전화번호</label> <input style="font-size: 20px"
+									type="tel" class="form-control" placeholder="전화번호" id="phone"
+									required data-validation-required-message="전화번호를 입력해 주세요.">
 								<p style="color: red" class="help-block text-danger"></p>
 							</div>
 						</div>
@@ -592,7 +660,8 @@ function communityRequest(){
 						<div id="success"></div>
 						<div class="row">
 							<div class="form-group col-xs-12">
-								<button id="btnSubmit" type="submit" class="btn btn-success btn-lg">보내기</button>
+								<button id="btnSubmit" type="submit"
+									class="btn btn-success btn-lg">보내기</button>
 							</div>
 						</div>
 					</form>
@@ -615,28 +684,26 @@ function communityRequest(){
 					<div class="footer-col col-md-4">
 						<h3>Around the Web</h3>
 						<ul class="list-inline">
-							<li><a href="http://www.facebook.com" class="btn-social btn-outline"><span
-									class="sr-only">Facebook</span><i class="fa fa-fw fa-facebook"></i></a>
-							</li>
-							<li><a href="http://www.google.com" class="btn-social btn-outline"><span
-									class="sr-only">Google Plus</span><i
-									class="fa fa-fw fa-google-plus"></i></a></li>
-							<li><a href="http://www.twitter.com" class="btn-social btn-outline"><span
-									class="sr-only">Twitter</span><i class="fa fa-fw fa-twitter"></i></a>
-							</li>
-							<li><a href="http://www.linkedin.com" class="btn-social btn-outline"><span
-									class="sr-only">Linked In</span><i class="fa fa-fw fa-linkedin"></i></a>
-							</li>
-							<li><a href="http://www.dribble.com" class="btn-social btn-outline"><span
-									class="sr-only">Dribble</span><i class="fa fa-fw fa-dribbble"></i></a>
-							</li>
+							<li><a href="http://www.facebook.com"
+								class="btn-social btn-outline"><span class="sr-only">Facebook</span><i
+									class="fa fa-fw fa-facebook"></i></a></li>
+							<li><a href="http://www.google.com"
+								class="btn-social btn-outline"><span class="sr-only">Google
+										Plus</span><i class="fa fa-fw fa-google-plus"></i></a></li>
+							<li><a href="http://www.twitter.com"
+								class="btn-social btn-outline"><span class="sr-only">Twitter</span><i
+									class="fa fa-fw fa-twitter"></i></a></li>
+							<li><a href="http://www.linkedin.com"
+								class="btn-social btn-outline"><span class="sr-only">Linked
+										In</span><i class="fa fa-fw fa-linkedin"></i></a></li>
+							<li><a href="http://www.dribble.com"
+								class="btn-social btn-outline"><span class="sr-only">Dribble</span><i
+									class="fa fa-fw fa-dribbble"></i></a></li>
 						</ul>
 					</div>
 					<div class="footer-col col-md-4">
 						<h3>About Project</h3>
-						<p>
-							본 사이트는 한국소프트웨어산업협회 IoT엔지니어 양성과정 최종프로젝트 프로토타입입니다.
-						</p>
+						<p>본 사이트는 한국소프트웨어산업협회 IoT엔지니어 양성과정 최종프로젝트 프로토타입입니다.</p>
 					</div>
 				</div>
 			</div>

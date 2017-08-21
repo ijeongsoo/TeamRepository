@@ -12,10 +12,11 @@ public class Member {
 	private String mfiletype;
 	
 	
-	public String getMfileType() {
+	
+	public String getMfiletype() {
 		return mfiletype;
 	}
-	public void setMfileType(String mfiletype) {
+	public void setMfiletype(String mfiletype) {
 		this.mfiletype = mfiletype;
 	}
 	public String getMpassword() {

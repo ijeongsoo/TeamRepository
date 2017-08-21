@@ -7,7 +7,7 @@
 	
 	<insert id="insert" parameterType="com.mycompany.myapp.dto.PasswdChange" >
 		insert into passwdchange(mid, plink) 
-		values (#{mid}, #{plink});
+		values (#{mid}, #{plink})
 	</insert>
 	
 	
@@ -15,5 +15,9 @@
 	<select id= "selectByMid" resultType="com.mycompany.myapp.dto.PasswdChange" parameterType="string">
 		select mid, plink from passwdchange where mid=#{mid}	
 	</select>
+	
+	<delete id="delete" parameterType="string">
+ 		delete from passwdchange where mid=#{mid}
+ 	</delete>
 	
 </mapper>
