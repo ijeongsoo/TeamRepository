@@ -36,7 +36,6 @@
 
 <!-- Resource style -->
 
-
 <!-- Theme CSS -->
 <link
 	href="<%=application.getContextPath()%>/resources/css/freelancer.min.css"
