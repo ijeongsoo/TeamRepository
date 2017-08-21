@@ -37,7 +37,6 @@
 	href="<%=application.getContextPath()%>/resources/css/style_4.css">
 <!-- Resource style -->
 
-
 <!-- Theme CSS -->
 <link
 	href="<%=application.getContextPath()%>/resources/css/freelancer.min.css"

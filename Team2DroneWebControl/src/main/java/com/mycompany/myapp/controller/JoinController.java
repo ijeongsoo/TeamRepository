@@ -23,8 +23,8 @@ import com.mycompany.myapp.service.Service;
 
 @Controller
 
-public class LoginJoinController {
-	private static final Logger logger = LoggerFactory.getLogger(LoginJoinController.class);
+public class JoinController {
+	private static final Logger logger = LoggerFactory.getLogger(JoinController.class);
 
 	@Autowired
 	private Service service;
@@ -32,27 +32,7 @@ public class LoginJoinController {
 	@Autowired
 	private ServletContext servletContext;
 
-	
-	
-	//로그인
-//	@RequestMapping(value = "login", method = RequestMethod.POST)
-//	public String login(@ModelAttribute Member login_info, String mid, String mpassword, Model model) {
-//		Member member = service.login(mid, mpassword);
-//		if (member == null) {
-//			model.addAttribute("result", 0);
-//			return "home";
-//		} else {
-//			model.addAttribute("login_info", member);
-//			return "redirect:loginHome";
-//		}
-//	}
-	
 
-	
-	
-	//회원가입
-
-	
 	
 	
 	@RequestMapping(value = "/joinPost", method = RequestMethod.POST)

@@ -12,7 +12,10 @@
 <!-- CSS reset -->
 <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css">
 <!-- Resource style -->
-<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style.css" type="text/css">
+<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style.css"type="text/css">
+<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_3.css"type="text/css">
+<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_4.css"type="text/css">
+<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_5.css" type="text/css">
 <!-- Modernizr -->
 <script src="<%=application.getContextPath()%>/resources/js/modernizr.js" type="text/javascript"></script>
 
@@ -45,6 +48,69 @@
 
 <title>Garfish Project</title>
 <script>
+$(document).ready(
+		function() {
+			$("#mid").keyup(function() {
+				$("#canUse").removeClass("alert-danger");
+				$("#canUse").removeClass("alert-warning");
+				$("#canUse").removeClass("alert-info");
+				$("#canUse").text('중복확인해주세요');
+			});
+
+			$("#checkButton").click(
+					function() {
+						var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
+						if (idReg.test($("#joinMid").val())
+								&& $("#joinMid").val().length <= 100) {
+							$.ajax({
+										'url' : "check_id",
+										'data' : {
+											'mid' : $("#joinMid").val()
+										},
+										'type' : "POST",
+										'success' : function(data) {
+											if (data.result == 1) {
+												alert('사용 가능한 아이디 입니다.');
+												$("#canUse").removeClass(
+														"alert-danger");
+												$("#canUse").removeClass(
+														"alert-warning");
+												$("#canUse").addClass(
+														"alert-info");
+												$("#canUse").text(
+														'중복확인 되었습니다.');
+
+											} else if (data.result == 0) {
+												alert('사용 불가능한 아이디 입니다. ');
+												$("#canUse").removeClass(
+														"alert-info");
+												$("#canUse").removeClass(
+														"alert-warning");
+												$("#canUse").addClass(
+														"alert-danger");
+												$("#canUse").text(
+														'다시 입력해주세요');
+											} else {
+												alert('아이디를 입력해 주세요 ');
+												$("#canUse").removeClass(
+														"alert-info");
+												$("#canUse").removeClass(
+														"alert-danger");
+												$("#canUse").addClass(
+														"alert-warning");
+												$("#canUse").text(
+														'아이디를 입력해주세요.');
+											}
+										}
+									});
+						} else {
+							$("#canUse").addClass("alert-danger");
+							$("#canUse").text(
+									'ID는 영어, 숫자 조합 6~20자리이어야 합니다.');
+						}
+					});
+		});
+
 	$(function() {
 		var pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}/;
 		$("#mPasswordCheck")
@@ -108,69 +174,7 @@
 
 	});
 
-	$(document).ready(
-			function() {
-				$("#mid").keyup(function() {
-					$("#canUse").removeClass("alert-danger");
-					$("#canUse").removeClass("alert-warning");
-					$("#canUse").removeClass("alert-info");
-					$("#canUse").text('중복확인해주세요');
-				});
-
-				$("#checkButton").click(
-						function() {
-							var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
-							if (idReg.test($("#joinMid").val())
-									&& $("#joinMid").val().length <= 20) {
-								$
-										.ajax({
-											'url' : "check_id",
-											'data' : {
-												'mid' : $("#joinMid").val()
-											},
-											'type' : "POST",
-											'success' : function(data) {
-												if (data.result == 1) {
-													alert('사용 가능한 아이디 입니다.');
-													$("#canUse").removeClass(
-															"alert-danger");
-													$("#canUse").removeClass(
-															"alert-warning");
-													$("#canUse").addClass(
-															"alert-info");
-													$("#canUse").text(
-															'중복확인 되었습니다.');
-
-												} else if (data.result == 0) {
-													alert('사용 불가능한 아이디 입니다. ');
-													$("#canUse").removeClass(
-															"alert-info");
-													$("#canUse").removeClass(
-															"alert-warning");
-													$("#canUse").addClass(
-															"alert-danger");
-													$("#canUse").text(
-															'다시 입력해주세요');
-												} else {
-													alert('아이디를 입력해 주세요 ');
-													$("#canUse").removeClass(
-															"alert-info");
-													$("#canUse").removeClass(
-															"alert-danger");
-													$("#canUse").addClass(
-															"alert-warning");
-													$("#canUse").text(
-															'아이디를 입력해주세요.');
-												}
-											}
-										});
-							} else {
-								$("#canUse").addClass("alert-danger");
-								$("#canUse").text(
-										'ID는 영어, 숫자 조합 6~20자리이어야 합니다.');
-							}
-						});
-			});
+	
 </script>
 
 
@@ -230,7 +234,7 @@
 
 	<!-- Navigation -->
 	<nav id="mainNav"
-		class="navbar navbar-default navbar-fixed-top navbar-custom">
+		class="navbar navbar-default navbar-fixed-top navbar-custom main-nav">
 		<div class="container">
 			<!-- Brand and toggle get grouped for better mobile display -->
 			<div class="navbar-header page-scroll">
@@ -239,7 +243,7 @@
 					<span class="sr-only">Toggle navigation</span> Menu <i
 						class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="" >Garfish Project</a>
+				<a class="navbar-brand" href="<%=application.getContextPath()%>/" >Garfish Project</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
@@ -247,9 +251,6 @@
 				id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="hidden"><a href="#page-top"></a></li>
-					<li class="page-scroll"><a href="join">회원가입</a></li>
-					<li class="page-scroll"><a href="#about">About</a></li>
-					<li class="page-scroll"><a href="#contact">Contact</a></li>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->
@@ -265,8 +266,11 @@
 					<img class="img-responsive" src="resources/image/profile.png"
 						alt="">
 					<div class="intro-text">
-						<h1 class="name">회원가입</h1>
-						<hr class="star-light">
+						<div class="col-lg-12 text-center">
+							<h2>회원가입</h2>
+							<hr class="star-light1">
+						</div>
+						
 						<span class="skills">회원가입 후, 드론에 첫 발을 내딛어보세요!</span>
 					</div>
 				</div>
