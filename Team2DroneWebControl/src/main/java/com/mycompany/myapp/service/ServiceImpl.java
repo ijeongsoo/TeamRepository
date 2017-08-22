@@ -60,9 +60,13 @@ public class ServiceImpl implements Service{
 		if (member == null) {
 			result = 1;
 		}
+		
+		String num = String.valueOf(result);
+		logger.info(num);
+		
 		return result;
 	}
-
+	
 	
 
 	@Override

@@ -108,5 +108,11 @@ public class NotNeedSessionController {
 
 	
 	
+	@RequestMapping("/manual")
+	public String manual(@ModelAttribute Member login_info) {
+		return "manual";
+	}
+	
+	
 
 }

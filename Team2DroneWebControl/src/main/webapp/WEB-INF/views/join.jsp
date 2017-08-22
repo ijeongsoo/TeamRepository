@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/reset.css" type="text/css">
 <!-- Resource style -->
 <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style.css"type="text/css">
-<link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_3.css"type="text/css">
+
 <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_4.css"type="text/css">
 <link rel="stylesheet" href="<%=application.getContextPath()%>/resources/css/style_5.css" type="text/css">
 <!-- Modernizr -->
@@ -59,14 +59,14 @@ $(document).ready(
 
 			$("#checkButton").click(
 					function() {
-						var idReg = /^[a-z]+[a-z0-9]{5,19}$/g;
-						if (idReg.test($("#joinMid").val())
-								&& $("#joinMid").val().length <= 100) {
+						var idReg = /[0-9a-zA-Z][_0-9a-zA-Z-]*@[_0-9a-zA-Z-]+(\.[_0-9a-zA-Z-]+){1,2}$/;
+						
+						if (idReg.test($("#joinMid").val()) && $("#joinMid").val().length <= 100) {
 							$.ajax({
 										'url' : "check_id",
 										'data' : {
 											'mid' : $("#joinMid").val()
-										},
+											   },
 										'type' : "POST",
 										'success' : function(data) {
 											if (data.result == 1) {
@@ -104,9 +104,9 @@ $(document).ready(
 										}
 									});
 						} else {
+							alert('ID는 Email형식에 맞춰 작성해주세요.');
 							$("#canUse").addClass("alert-danger");
-							$("#canUse").text(
-									'ID는 영어, 숫자 조합 6~20자리이어야 합니다.');
+							$("#canUse").text('ID는 Email형식에 맞춰 작성해주세요.');
 						}
 					});
 		});
@@ -199,8 +199,7 @@ $(document).ready(
 	function fileChange(event) {
 		if ($("#mattach")[0].files.length != 0) {
 			var moriginalfilename = $("#mattach")[0].files[0].name;
-			$("#imgFileView")[0].src = URL
-					.createObjectURL(event.target.files[0]);
+			$("#imgFileView")[0].src = URL.createObjectURL(event.target.files[0]);
 			$("#imgFileView").attr("style", "height:100px");
 			$("#sattachBtn").text("수정");
 			$("#imgcheck").removeClass("alert-danger");
@@ -288,9 +287,8 @@ $(document).ready(
 		<fieldset>
 			<legend>회원가입 양식</legend>
 			<div class="icon">
-				<label class="cd-label" for="joinMid">ID</label>
+				<label class="cd-label" for="joinMid">ID (E-mail)</label>
 				<input class="user" name="mid" id="joinMid" type="text" required>
-				<br>
 				<a id="checkButton" class="btn btn-warning">ID 중복확인</a>
 			</div>
 			
@@ -314,16 +312,16 @@ $(document).ready(
 			
 			
 
-			<span>
+			<div class="icon">
 				<span>
-				<img id="imgFileView" /> 
+				<img id="imgFileView"/> 
 				<label for="mattach" id="checkButton" class="btn btn-warning">사진등록</label> 
 				<input type="file" id="mattach" style="visibility: hidden" onchange="fileChange(event)" name="mattach" /> 
 				</span>
 				<span>
 				<label class="help-block" id="imgcheck" name="imgcheck">사진을 반드시 첨부해 주세요.</label>
 				</span>
-			</span>
+			</div>
 
 
 			<span>
