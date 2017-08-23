@@ -26,5 +26,9 @@
 
 	</select>
 	
+	<delete id="delete" parameterType="String">
+ 		delete from drone where dmacaddr=#{dmacaddr}
+ 	</delete>
+	
 	
 </mapper>

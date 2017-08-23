@@ -67,7 +67,7 @@ Main components
   width: 150px;
   margin: 0 auto;
   cursor: pointer;
-  z-index: 10;
+  z-index: 7;
 }
 .cd-filter::after {
   /* small arrow icon */
@@ -240,13 +240,13 @@ xgallery
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border-radius: 0.25em;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
-.cd-gallery .cd-item-wrapper > li img {
+/* .cd-gallery .cd-item-wrapper > li img {
   display: block;
   width: 100%;
   border-radius: 0.25em;
-}
+}  */
 .cd-gallery li.is-visible {
   /* the front item, visible by default */
   position: relative;

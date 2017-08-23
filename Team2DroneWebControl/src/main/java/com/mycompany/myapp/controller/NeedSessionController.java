@@ -43,8 +43,9 @@ public class NeedSessionController {
 
 
 	@RequestMapping("/control")
-	public String control(@ModelAttribute Member login_info) {
-		return "controlPage";
+	public String control(@ModelAttribute Member login_info, Model model, String dmacaddr) {
+		model.addAttribute("dmacaddr", dmacaddr);
+		return "control";
 	}
 
 	@RequestMapping("/loginHome")
@@ -58,6 +59,23 @@ public class NeedSessionController {
 		model.addAttribute("roverList", roverList);
 		model.addAttribute("planeList", planeList);
 		return "loginHome";
+	}
+	
+	@RequestMapping("/deleteConfirm")
+	public String deleteConfirm(@ModelAttribute Member login_info, Model model,String dmacaddr) {
+		System.out.println(dmacaddr);
+		model.addAttribute("dmacaddr", dmacaddr);
+		
+		return "deleteConfirm";
+	}
+	
+	@RequestMapping("/deleteDevice")
+	public String deleteDevice(@ModelAttribute Member login_info, Model model,String dmacaddr) {
+		
+		System.out.println(dmacaddr+"aaa");
+		service.deleteDevice(dmacaddr);
+		
+		return "redirect:/";
 	}
 
 
