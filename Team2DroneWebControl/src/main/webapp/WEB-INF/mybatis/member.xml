@@ -5,18 +5,26 @@
 
 <mapper namespace="member">
 	
-	<insert id="insert" parameterType="com.mycompany.myapp.dto.Member" >
-		insert into member(mid, mname, mpassword, memail, moriginalfilename, msavedfilename, mfiletype) 
-		values (#{mid}, #{mname}, #{mpassword}, #{memail}, #{moriginalfileName}, #{msavedfileName}, #{mfileType});
+	<insert id="insert" parameterType="com.mycompany.myapp.dto.Member" useGeneratedKeys="true" keyColumn="mid" keyProperty="mid">
+		insert into member(mid,mname,mpassword,moriginalfilename,msavedfilename,mfiletype) 
+		values (#{mid},#{mname},#{mpassword},#{moriginalfilename},#{msavedfilename},#{mfiletype})
 	</insert>
 	
-	<!--  
-	<select id= "selectExistMid" resultType="int">
-		select count(*) from member where mid=#{mid};	
-	</select>
 	
 	<select id= "selectByMid" resultType="com.mycompany.myapp.dto.Member" parameterType="string">
-		select mid, mname, mpassword, memail, moriginalfilename, msavedfilename, mfiletype from member where mid=#{mid};	
+		select mid, mname, mpassword, moriginalfilename, msavedfilename, mfiletype from member where mid=#{mid}	
+
 	</select>
-	-->
+	
+	
+	<update id="update" parameterType="com.mycompany.myapp.dto.Member">
+ 		<if test="moriginalfilename!=null">
+ 			update member set mname=#{mname}, mpassword=#{mpassword}, moriginalfilename=#{moriginalfilename}, msavedfilename=#{msavedfilename}, mfiletype=#{mfiletype}  where mid=#{mid}
+ 		</if>
+ 		<if test="moriginalfilename==null">
+ 			update member set mname=#{mname}, mpassword=#{mpassword} where mid=#{mid}
+ 		</if>
+ 	
+ 	</update>
+	
 </mapper>

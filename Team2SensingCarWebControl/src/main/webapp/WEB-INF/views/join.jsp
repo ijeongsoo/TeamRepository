@@ -264,8 +264,7 @@
 							required> <label id="canUse" style="margin-top: 5px">중복확인해주세요</label>
 					</div>
 					<div class="2u$ 12u$(small)">
-						<a id="checkButton" class="btn btn-primary"
-							style="font-size: 23px">중복확인</a>
+						<a id="checkButton" class="btn btn-primary" style="font-size: 23px">중복확인</a>
 					</div>
 
 					<label style="font-size: 23px" class="2u 12u$(small)"
@@ -273,7 +272,6 @@
 					<div class="10u$ 12u$(small)" style="text-align: left">
 						<input id="joinMpassword" name="joinMpassword" type="password"
 							placeholder="비밀번호" required>
-
 					</div>
 
 

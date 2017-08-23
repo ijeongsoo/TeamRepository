@@ -6,6 +6,7 @@
 /Garfish/build/
 /Garfish/dist/
 */target/**
+*/pom.properties
 =======
 /SensingCarFXApplication/nbproject/private/
 /SensingCarFXApplication/build/

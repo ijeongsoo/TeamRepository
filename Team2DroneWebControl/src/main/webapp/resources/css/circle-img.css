@@ -1,0 +1,45 @@
+.photo3 {
+	width: 175px;
+	height: 175px;
+	object-fit: cover;
+	margin-bottom:20px;
+	border-radius: 50%;
+}
+
+.thumbnail {
+  position: relative;
+  padding-top: 60%;
+  overflow: hidden;
+}
+.thumbnail img {
+  position: absolute;
+  top:0;
+  left: 0;
+}
+
+.thumbnail .centered  {
+  position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  -webkit-transform: translate(50%,50%);
+    -ms-transform: translate(50%,50%);
+    transform: translate(50%,50%);
+}
+.thumbnail .centered img {
+  -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.thumbnail img.portrait {
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+.thumbnail img.landscape {
+  width: auto;
+  max-width: none;
+  height: 100%;
+}
