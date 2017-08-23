@@ -363,7 +363,7 @@
 							- Yaw : 좌향변경 또는 우향변경
 							<br>
 							<br>
-							<img src="<%=application.getContextPath()%>/resources/image/throttlePitchYawRoll.png">
+							<img src="<%=application.getContextPath()%>/resources/image/manual/throttlePitchYawRoll.png">
 							<br>
 							<br>
 							드론에서 모터의 프로펠러가 돌아갈 경우 모두 같은 방향으로 돌지 않습니다.
@@ -430,18 +430,45 @@
 				<li><a class="cd-faq-trigger" href="#0">구성 부품</a>
 					<div class="cd-faq-content">
 						<p>
-							<h4> FPV 250 Kit 구성 </h4><br>
-							 프레임틀 / 변속기(ESC) / 브러시리스모터(brushless motor) / 드론배터리(리포배터리) / 프로펠러 / 배터리 전압분배 케이블
-							<img src="<%=application.getContextPath()%>/resources/image/component_1.png">
-							<img src="<%=application.getContextPath()%>/resources/image/component_2.png">
-							<img src="<%=application.getContextPath()%>/resources/image/component_3.png">
+							<span style="font-size:20px"> [ FPV 250 Kit ] </span><br>
+							 프레임틀 / 변속기(ESC) / 브러시리스모터(brushless motor) / 드론배터리(리포배터리) / 프로펠러 / 배터리 전압분배 케이블<br>  
+							<img src="<%=application.getContextPath()%>/resources/image/manual/component_1.png"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/component_2.png"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/component_3.png"><br><br><br>
+							<span style="font-size:20px"> Navio2(항법쉴드) </span><br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/Navio2.png"><br><br><br>
+							<span style="font-size:20px"> 라즈베리파이 </span><br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br><br>
+							
+							<span style="font-size:20px">[ 기타 추가 구성품 ]</span><br>
+							배터리 체커<br>
+						    <img src="<%=application.getContextPath()%>/resources/image/manual/checker.png"><br><br><br>
+							리시버(원격제어 수신기)<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/receiver.png"><br><br><br>
+							PPM encoder<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ppm.jpg"><br>
+							PCA9685 <br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/PCA9685.jpg"><br>
+							
+							
 						</p>
 					</div> <!-- cd-faq-content --></li>
 					
 					<li><a class="cd-faq-trigger" href="#0">주요 부품 제원</a>
 					<div class="cd-faq-content">
 						<p>
-							<h4> 브러쉬리스 모터(brushless motor) - BLDC </h4><br><br>
+							<span style="font-size:20px">[ 1.Navio2 ]</span><br><br>
+							드론 제어에 필수적인 센서와 gps등을 내장한 모듈로써 라즈베리파이에 쉴드로써 장착됩니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/Navio2.png"><br><br>
+							
+							
+							<span style="font-size:20px">[ 2.라즈베리 파이 ]</span><br><br>
+							드론을 제어하기 위한 모듈로써 역할을 수행합니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br>
+							
+							
+						
+							<span style="font-size:20px">[ 3.브러쉬리스 모터(brushless motor) - BLDC ]</span><br><br>
 							
 							1. 장점 <br>
 							- 브러쉬가 없어서 수명이 길다.<br>
@@ -452,16 +479,16 @@
 							- 가격이 비싸다.<br>
 							- 변속기 셋팅이 비교적 어렵다.<br><br>
 							3. 모터 동작 원리<br>
-							<img src="<%=application.getContextPath()%>/resources/image/brushless.gif">       
-							<img src="<%=application.getContextPath()%>/resources/image/brushless.jpg"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.gif">       
+							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.jpg"><br>
 							DC모터와 달리 도선측이 고정되어 있고, 영구자석측이 회전하는 구조입니다. 자력선이 공기중에는 통과하기 어려우나 금속은
 							통과하기 쉽기때문에 회전력을 더욱 강하게 할 수 있습니다. 위 이미지처럼 바깥 축이 회전하고 가운데 축은 전자회로로 전극을 
 							빠르게 바꿔주며 회전력이 발생합니다.
 							<br><br><br><br>
 							
 							
-							<h4> 전자변속기(ESC) </h4><br><br>
-							 <img src="<%=application.getContextPath()%>/resources/image/esc_1.jpg"><br><br>
+							<span style="font-size:20px">[ 4.전자변속기(ESC) ]</span><br><br>
+							 <img src="<%=application.getContextPath()%>/resources/image/manual/esc_1.jpg"><br><br>
 							1. 전자변속기 종류<br><br>
 							- OPTO type : Optoisolator의 약자로 전자 신호를 전기로 연결하지 않고 전달할 수 있는 전자 회로입니다.
 							입력 전자 신호는 일련의 빛으로 변환된다. 이 빛을 반대편에 있는 광 검출기가 감지를 합니다. 일종의 모르스 부호를 통신하는 것으로 볼 수 있습니다.
@@ -471,7 +498,7 @@
 							 만약 비행컨트롤러를 배터리와 직접 연결하면 비행컨트롤러가 타버리게 됩니다. 따라서 배터리와 비행컨트롤러 사이에 BEC/UBEC를 두어 적절한 수준으로 전압을
 							  떨어뜨려야 합니다.<br><br>
 							2. 전자변속기(BEC/UBEC)의 원리<br><br>
-							<img src="<%=application.getContextPath()%>/resources/image/ESC_1.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ESC_1.png"><br><br>
 							전자변속기는 모터와 배터리, 수신모듈 사이에 전선으로 연결하여 사용되는데, 모터(BLDC)쪽으로는 3선으로 연결하며, 배터리로는 전원을 받고 수신모듈쪽에서는 3선(VCC, GND, DATA)이 공급됩니다.
 							수신모듈쪽으로 공급되는 3선(VCC, GND, DATA)은 전원은 5V이며 DATA는 PWM 2ms 주기의 아날로그 신호(수신기에서 전자변속기로의 신호)입니다.<br>
 							즉, 배터리에서 전력을 공급받고 수신기의 명령을 받아 BLDC모터의 속도 및 방향을 제어하는 것입니다.<br><br>
@@ -480,11 +507,16 @@
 							<br><br><br><br>
 							
 							
-							<h4> 배터리 </h4><br><br>
+							<span style="font-size:20px"> [ 4-1.브러쉬리스 모터와 ESC의 호환 ]</span><br><br>
+							보통 ESC: 20~30A 이렇게 표시하는데 ESC가 허용가능한 전류량입니다.
+							모터스펙에서 제시하는 ESC 전류량 이상의 ESC 스펙의 것을 선택해야 합니다.<br><br><br><br>	
+							
+							<span style="font-size:20px">[ 5.배터리 ]</span><br><br>
 							1. 배터리 종류<br><br>
 							니켈수소, 리튬철, 리튬폴리머 등이 있으며, 드론이나 멀티콥터에 가장 적합한 배터리는 단연 리튬폴리머(LiPo)배터리입니다. 왜냐하면 배터리 자체 무게 대비 전압 및 방전율이 월등하기 때문입니다.
 							<br><br>
-							2. 배터리 제원 보는 방법<br><br>
+							2. 배터리 제원 보는 방법<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/battery.png"><br><br>
 							리튬폴리머 배터리는 1Cell 즉 2S라고 표기하며, 1셀당 3.7V 전압을 가집니다. 이 셀을 여러 개로 직렬 또는 병렬로 연결하여 사용합니다.
 							멀티콥터에서 보통 동력원으로 3셀, 4셀, 5셀, 6셀 정도로 사용됩니다. 3셀이면 3.7V x 3s = 11.1v가 됩니다.
 							배터리에는 용량이 표기되어 있는데, 예를 들어 3700mAh라고 표시되어 있으면 이것은 3.7A(=3700mA)로 뽑아 쓸 때 1(1hour)시간 쓸 수 있는 양입니다.<br><br>
@@ -498,8 +530,9 @@
 							
 							만약 셀당 전압이 2.8v아래로 떨어지면 배터리는 전력공급을 멈춥니다. 
 							리튬폴리머 건전지의 특징입니다. 
+							
 							<br><br>
-							[주의사항]<br><br>
+							<span style="font-size:20px">[5-1.배터리 사용 주의사항]</span><br><br>
 							리튬계열의 배터리를 쓰는 핸드폰, 노트북 등 여러가지 전자기기들이 있는데, 거기엔 일정 전압이 내려가면 컷오프시키는 회로가 내장되어 있습니다. 그렇기 때문에 배터리가 보호됩니다.							
 							그러나 멀티콥터나 RC(Remote Controller)에 쓰이는 이러한 배터리는 그런 보호회로가 없습니다. 
 							왜냐하면 일반 전자기기에 사용하는 방전율과 비교가 되지 않을 만큼 엄청난 방전율로 소비하기 때문에 그런 회로를 넣으면 배터리가 제 성능을 낼 수 없고 성능을 낸다 해도 비효율적이기 때문입니다.
@@ -516,37 +549,80 @@
 							이렇게 비싼 리폴 배터리 구매해서 한번 비행하고 완전 사망시키는 일이 발생하지 않도록 너무 욕심 내면 안됩니다.
 							<br><br><br>
 							
+							<span style="font-size:20px">[ 6.프로펠러 ]</span><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/prop.jpg"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/prop_2.jpg"><br>
+							프로펠러에 대한 제원을 보기 위해서 위의 예를 살펴봅니다.
+							재질은 섬유유리 나일론 프로펠러입니다.
+							치수와 피치는 5040입니다. 길이가 5인치, 피치가 4.5인치인 프로펠러입니다.<br>
+							cf) 피치는 프로펠러가 1회전할 때 나가는 길이(추력)이라고 합니다.
+							쉽게 말하면 날개이 날이 휜 정도라고 생각하면 됩니다. 
+							<br><br>
+							<span style="font-size:20px">[ 6-1.프로펠러 선택 주의사항 ]</span><br><br>
+							멀티콥터가 호버링(정지비행) 상태에서 프롭의 상태와 비행중 또는 맞바람이 불 때 프롭의 상태는 다릅니다. 
+							따라서 일정 고도의 호버링 상태는 안정된 상태로 프롭의 부하가 아주 적습니다. 
+							비행 중일 때는 프롭에 가해지는 부하로 인해 약한 재질의 프롭은 여기저기 휘어지고 밸런싱이 틀어져 기체에 진동을 발생시킵니다. 
+							물론 기체의 무게에 비해 약한 재질이면 호버링 상태에서도 진동이 발생할 수 있습니다.
+							프로펠러도 결국은 모터와 기체의 무게와의 조합입니다. 최적의 조함을 위해선 최종적으로 데이터 시트(주로 모터의 데이터시트)를 살펴보는 것이 좋습니다.
+							
+							
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">드론조립 및 조립시 주의사항</a>
+				<li><a class="cd-faq-trigger" href="#0">PPM 수신단 </a>
 					<div class="cd-faq-content">
 						<p>
-							<h4> 드론 조립 </h4> <br><br>
+							<span style="font-size:20px">[ 드론 조립 ]</span> <br><br>
 							1. 드론 프레임에 모터를 고정시킵니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_1.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_1.png"><br><br>
 							2. 모터를 모두 틀에 연결시킵니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_2.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_2.png"><br><br>
 							3. 프로펠러를 모터에 연결 시켜 줍니다.<br>
 							[주의: 후에 캘리브레이션 설정시 제거해야 하므로 굳이 지금 달 필요는 없습니다. 또한 드론의 앞 뒤 분간을 위해 위와같이 앞뒤로
 							나눠 프로펠러를 색깔로 달아주면 좋습니다. 프로펠러를 거꾸로 달지 않도록 주의하세요! 거꾸로 달면 날개를 뒤집어서 돌리는 것과 같이 바람이
 							밑이 아닌 위로 향합니다.]<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_3.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_3.png"><br><br>
 							4. 모터에 베어링을 조립합니다.<br>
 							[주의: 프로펠러의 기울기가 2쌍씩 다르게 생겼습니다. 이는 모터의 회전방향이 CW 2개, CCW 2개 이므로 이에 따라 바람을 밑으로 보내기 
 							위하여 기울기가 다릅니다. 어떻게 끼는지 모르겠다 싶으면 후에 모터를 돌려난 후 끼면 됩니다. ]<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_4.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_4.png"><br><br>
 							5. ESC를 모터에 연결시켜 줍니다. 모터의 3개의 케이블선에 임의로 연결해도 상관없습니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_5.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_5.png"><br><br>
 							6. ESC는 모터의 기능선, +선, -선을 자기가 알아서 처리해줍니다. 따라서 아무렇게나 연결해도 CW, CWW방향으로 돌아가게 해줍니다.
 							또한 모터의 방향을 바꿔주고 싶을 땐 임의의 2선을 교차해서 꼽아주면 방향이 거꾸로 돌아갑니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_6.png"><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_6.png"><br><br>
 							7. 프레임틀에 거치대를 연결해줍니다. 후에 비행 시 거치대가 잘 떨어지므로 본드나 접착제로 고정시켜줍니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/assembly_7.png"><br>	
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_7.png"><br><br>
+							8. 라즈베리 파이에 Navio2 연결하기<br>
+							- 라스베리 파이의 윗면에 스페이서를 설치하고 바닥에서 나사로 고정하십시오.<br>
+							- 확장 헤더를 40 핀 gpio 포트에 연결하십시오.<br>
+							- Navio2를 확장 헤더에 연결하십시오.<br>
+							- 나사를 사용하여 Navio2를 고정하십시오.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_8.png"><br><br>
+							9. Navio2의 Power 포트에 연결된 전원 모듈로 전원을 공급받습니다. 또한 Navio2는 결합된 라즈베리파이에 전원을 공급합니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_9.png"><br><br>
+							10. 서보 전원 공급하기<br>
+							- 서보 레일에 전원을 공급하여 무인 항공기의 BEC를 서보 레일의 자유 채널에 연결합니다.<br> 
+							- 4.8-5.3V 범위의 전압을 제공하는 BEC를 사용하도록 합니다. <br>
+							- 고전압 서보를 사용하려면 전원 분리 보드를 사용하십시오.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_10.png"><br><br>
+							11. GNSS 안테나가 Navio2 상단의 MCX포트에 연결됩니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_11.png"><br><br>
+							12. Navio2의 수신단 연결<br>
+							- 기존의 수신기(Receiver)대신 드론 제어 수신단의 범용성을 구현할 목적입니다.<br>
+							- 라즈베리파이에서 pwm신호를 발생시켜 pca9685로 전송되도록 연결합니다.<br>(이는 기존의 RC transmitter에서 발생되는 원격제어 채널신호인 pwm 신호를 그대로 구현한 신호)<br>
+							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
+							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+							13. 1~7에서의 조립(드론 차체)과 8~12에서의 조립(Navio2+RaspberryPi)을 결합합니다.<br><br>
+							14. 배터리를 전원모듈에 연결하여 조립을 마무리 합니다.<br>
+							
+							
+						
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">How do I link to a file or folder?</a>
+				<li><a class="cd-faq-trigger" href="#0"></a>
 					<div class="cd-faq-content">
 						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
 							Blanditiis provident officiis, reprehenderit numquam. Praesentium
