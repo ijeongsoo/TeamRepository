@@ -196,8 +196,7 @@
 					<li class="hidden"><a href="#page-top"></a></li>
 					<li class="page-scroll"><a href="join" onclick="joinRequest()">회원가입</a></li>
 					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
-					<li class="page-scroll"><a href="comunity"
-						onclick="communityRequest()">Community</a></li>
+					<li class="page-scroll"><a href="comunity" onclick="communityRequest()">Community</a></li>
 
 				</ul>
 
@@ -397,7 +396,7 @@
 					<p>설치파일 및 플랫폼 사용 설명서입니다.</p>
 					<p>하드웨어 구축부터 설치까지 모든 과정을 손쉽게 따라하고 플랫폼을 통해 여러분의 장비를 제어해 보세요.</p>
 					<div class="pc_view">
-						<a href="http://codyhouse.co/?p=854" class="cd-btn">
+						<a href="manual" class="cd-btn">
 							<div>
 								<div style="display: inline-block;">
 									<img height="100px"
