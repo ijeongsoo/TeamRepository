@@ -622,12 +622,12 @@
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0"></a>
+				<li><a class="cd-faq-trigger" href="#0">PPM 수신단</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
+						<p>
+							PPM수신단은 Gar드론 프로젝트의 핵심 파트(Core Part)입니다.
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+						</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
 			<!-- cd-faq-group -->
