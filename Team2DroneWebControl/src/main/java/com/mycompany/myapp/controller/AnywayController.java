@@ -9,6 +9,7 @@ import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.mycompany.myapp.dto.Drone;
 import com.mycompany.myapp.dto.Member;
 import com.mycompany.myapp.dto.PasswdChange;
 import com.mycompany.myapp.service.Service;
@@ -341,6 +343,41 @@ public class AnywayController {
 
 	}
 	
+	
+	@RequestMapping("/getList")
+	public void getDroneList(String mid, HttpServletResponse response, Model model) throws IOException {
+		List<Drone> allList = service.allList(mid);
+		List<Drone> droneList = service.droneList(mid);
+		List<Drone> roverList = service.roverList(mid);
+		List<Drone> planeList = service.planeList(mid);
+
+		try {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put("allList", allList);
+			jsonObject.put("droneList", droneList);
+			jsonObject.put("roverList", roverList);
+			jsonObject.put("planeList", planeList);
+			String json = jsonObject.toString();
+
+			response.setContentType("application/json; charset=UTF-8");
+			PrintWriter pw;
+
+			pw = response.getWriter();
+			pw.write(json);
+			pw.flush();
+			pw.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
 	@RequestMapping("/throttleAndYaw")
 	public void throttleAndYaw(String throttle, String yaw, HttpServletResponse response) throws MqttException {
 
@@ -389,7 +426,7 @@ public class AnywayController {
 	}
 
 	@RequestMapping("/camera")
-	public void camera(String leftRight, String upDown, HttpServletResponse response) throws MqttException {
+	public void camera(String dmacaddr, String leftRight, String upDown, HttpServletResponse response) throws MqttException {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -400,7 +437,8 @@ public class AnywayController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/cameraServo", message);
+		System.out.println(dmacaddr);
+		mqttClient.publish("/"+dmacaddr+"/cameraServo", message);
 
 	}
 	

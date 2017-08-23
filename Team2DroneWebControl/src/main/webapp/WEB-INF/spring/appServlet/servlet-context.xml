@@ -32,8 +32,10 @@
 	
 	<!-- AOP 설정 -->
 	<aop:aspectj-autoproxy/>	
+	
 	<websocket:handlers>
 	
-	<websocket:mapping handler="cameraHandler" path="/websocket/camera" />
+		<websocket:mapping handler="cameraHandler" path="/websocket/camera" />
+		
 	</websocket:handlers>
 </beans:beans>

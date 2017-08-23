@@ -105,5 +105,10 @@ public class ServiceImpl implements Service{
 		List<Drone> list = dao.planeSelect(mid);
 		return list;
 	}
+
+	@Override
+	public void deleteDevice(String dmacaddr) {
+		dao.deleteDevice(dmacaddr);
+	}
 	
 }

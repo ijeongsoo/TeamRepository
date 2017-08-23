@@ -72,4 +72,9 @@ public class DaoImpl implements Dao {
 		return list;
 	}
 
+	@Override
+	public void deleteDevice(String dmacaddr) {
+		sst.delete("drone.delete", dmacaddr);
+	}
+
 }

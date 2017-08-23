@@ -1,6 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 
 <!DOCTYPE html>
@@ -34,8 +35,11 @@
 <link rel="stylesheet"
 	href="<%=application.getContextPath()%>/resources/css/style_3.css">
 
+<!-- Resource style -->
+
 <link rel="stylesheet"
 	href="<%=application.getContextPath()%>/resources/css/list_view_style.css">
+
 <link
 	href="<%=application.getContextPath()%>/resources/css/circle-img.css"
 	rel="stylesheet" type="text/css" />
@@ -57,13 +61,125 @@
 	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
 	rel="stylesheet" type="text/css">
 
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
 
+<script>
+	$(document).ready(function() {
+		$('#delete').on('hidden.bs.modal', function() {
+			$(this).remove('bs.modal');
+			$('.modal-backdrop').remove();
+			$("#viewModalContent").empty();
+		});
+	});
+</script>
+
+<script>
+	
+
+		$('#delete').on('hidden.bs.modal', function() {
+			$(this).removeData('bs.modal');
+		});
+	
+</script>
+
+
+<script>
+	var client = new Paho.MQTT.Client("106.253.56.122", Number(61614),"clientID"+parseInt(Math.random() * 100, 10));
+	var message2json;
+	var communicationList= new Array();
+	setInterval("listCheckAndClear()", 3000);
+	client.onConnectionLost = onConnectionLost;
+	client.onMessageArrived=onMessageArrived;
+	client.connect({onSuccess:onConnect});
+	
+	function onConnect() {
+		//client.subscribe("/B8:27:EB:54:10:0B/communicationCheck");
+		<c:forEach var="d" items="${allList}" varStatus="status">
+			client.subscribe("/${d.dmacaddr}/communicationCheck");
+		</c:forEach> 
+	}
+	function onConnectionLost(responseObject) {
+		if(responseObject.errorCode !=0){
+			console.log(responseObject.errorCode);
+		}
+	}
+	function onMessageArrived(message) {
+		message2json= eval("("+message.payloadString+")");
+		if(communicationList==0){
+			communicationList.push(message2json.comm);
+		}else{
+			for(i=0; i<communicationList.length;i++){
+				if(communicationList[i]==message2json.comm){
+					continue;
+				}
+				communicationList.push(message2json.comm);
+			}
+		}
+		
+		
+	}
+	
+	function listCheckAndClear(){
+		var a=$("p[class='available']");
+		var existList=new Array();
+		var noCommunicationList=new Array();
+		for(var i=0; i<a.length; i++){
+			existList.push(a[i].id);
+		}
+		for(var i=0; i<existList.length; i++){
+			if(communicationList.length==0){
+				noCommunicationList=existList;
+			}
+			for(var j=0; j<communicationList.length; j++){
+				console.log(communicationList[j]);
+				if(existList[i]==communicationList[j]){					
+					continue;
+				}
+				if(noCommunicationList.length==0){
+					noCommunicationList.push(existList[i]);
+				}else{
+					for(k=0; k<noCommunicationList.length;k++){
+						if(noCommunicationList[k]==existList[i]){
+							continue;
+						}
+						noCommunicationList.push(existList[i]);
+					}
+				}
+			}
+		} 
+		
+		for(var d in communicationList){
+			$("p[id='"+communicationList[d]+"']").html("접속가능 <img width='15px' src='resources/image/green.png'/>");
+		}
+		for(var d in noCommunicationList){
+			$("p[id='"+noCommunicationList[d]+"']").html("접속불가능 <img width='15px' src='resources/image/red.png'/>");
+		}
+		communicationList.length=new Array();
+	}
+</script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/modernizr.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/modernizr_3.js"></script>
 <script
 	src="<%=application.getContextPath()%>/resources/js/list_view_modernizr.js"></script>
+
+<script
+	src="<%=application.getContextPath()%>/resources/highcharts/code/highcharts.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/chartTheme.js"></script>
+
+
+<script
+	src="<%=application.getContextPath()%>/resources/js/deviceInfoChart1.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/deviceInfoChart3.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/deviceInfoChart2.js"></script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/deviceInfoChart4.js"></script>
+
 <!-- Modernizr -->
 
 <script>
@@ -74,43 +190,139 @@
 	function logoutRequest() {
 		location.href = "logout";
 	}
+
 	$(function() {
+		
 		<c:forEach var="d" items="${droneList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='1' class='is-visible' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count },${d.dname }</p><br></li>");
+			$('#device${status.count}').append("<li data-type='1' class='is-visible' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr=${d.dmacaddr}' class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
 	$(function() {
 		<c:forEach var="d" items="${roverList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='2' class='is-hidden' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}'><p>${status.count },${d.dname }</p></li>");
+			$('#device${status.count}').append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}'><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
 	$(function() {
 		<c:forEach var="d" items="${planeList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='3' class='is-hidden' align='center'><img  src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count },${d.dname }</p></li>");
+			$('#device${status.count}').append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
+	var totalDeviceNum=${fn:length(allList)};
+	var droneNum=${fn:length(droneList)};
+	var roverNum=${fn:length(roverList)};
+	var planeNum=${fn:length(planeList)};
+	function getList(value){
+		$.ajax({
+			'url' : "getList",
+			'data' : {
+				'mid' : '${login_info.mid}'
+			},
+			'type' : "POST",
+			'success' : function(data) {
+				if(data.allList.length!=totalDeviceNum){
+					totalDeviceNum=data.allList.length;
+					$('#listContainer').html("");
+					for(var d in data.allList){
+						var index=Number(d)+1;
+						client.subscribe("/"+data.allList[d].dmacaddr+"/communicationCheck");
+						$('#listContainer').append("<li><ul class='cd-item-wrapper' id='device"+index+"'></ul></li>");
+					}
+					
+					if(data.droneList.length!=droneNum){
+						droneNum=data.droneList.length;
+						for(var d in data.droneList){
+							console.log('a');
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.roverList){
+							console.log('b');
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.planeList){
+							console.log('c');
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><<br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a>/li>");
+						}
+					}else if(data.roverList.length!=roverNum){
+						roverNum=data.roverList.length;
+						for(var d in data.droneList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.roverList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.planeList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+					}else if(data.planeList.length!=planeNum){
+						planeNum=data.planeList.length;
+						for(var d in data.droneList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.roverList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+						for(var d in data.planeList){
+							var index=Number(d)+1;
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+						}
+					}
+					
+					if(value==1){
+						console.log($('li[data-type="1"]'));
+						
+						$('li[data-type="1"]').each(function(index){
+							$(this).attr('class','is_visible');
+						});
+						
+						
+					}else if(value==2){
+						$('li[data-type="2"]').each(function(index){
+							$(this).attr('class', 'is_visible');
+						});
+					}else if(value==3){
+						$('li[data-type="3"]').each(function(index){
+							$(this).attr('class', 'is_visible');
+						});
+					}
+					
+				}
+		
+			}
+		});
+	}
+	
 </script>
 
+<script type="text/javascript">
+
+/* $(function () {
+    //var ws = new WebSocket("ws://192.168.8.32:8888/MavenWeb/chat");
+    // 인터셉터에 파라미터를 전달하려는 경우에는 아래처럼 할 수도 있다
+    
+    var ws = new WebSocket("ws://"+window.location.host+"/Team2DroneWebControl/websocket/communicationCheck?dmacaddr=B8:27:EB:54:10:0B");
+    ws.onopen = function () {
+    };
+    ws.onmessage = function (event) {
+    	console.log(event.data);
+    };
+    ws.onclose = function (event) {
+    };
+}); */
+</script>
+<script
+	src="<%=application.getContextPath()%>/resources/js/list_view.js"></script>
 
 <script type="text/javascript">
-	$(function() {
-		var ws = new WebSocket("ws://" + location.host
-				+ "/Team2DroneWebControl/websocket/camera");
-		// 함수를 바로 대입해도 괜찮음.메시지가 도착했을 때 시행
-		var beforTime= new Date().getMilliseconds();
-		var currnetTime;
-		var duration;
-		ws.onmessage = function(event) {
-			currentTime= new Date().getMilliseconds();
-			duration= currentTime-beforTime;
-			if(duration<1){
-				
-			}else if(duration>1 && duration <3){
-				
-			}
-			
-		};
-	});
+
+
 </script>
 
 </head>
@@ -156,6 +368,14 @@
 	</nav>
 
 	<!-- Header -->
+	<div class="modal fade" id="delete" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="overflow: auto;">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content" id="viewModalContent"></div>
+		</div>
+	</div> 
+	
 
 
 	<div class="cd-user-modal">
@@ -363,6 +583,10 @@
 						<hr class="star-primary">
 					</div>
 				</div>
+				<div align="center">
+					<p>아래 버튼을 클릭하여 장비종류를 선택하세요.</p>
+					<br> <br> <br>
+				</div>
 				<nav class="cd-filter">
 					<ul>
 						<li class="placeholder"><a data-type="1" href="#0">드론</a> <!-- selected option on mobile --></li>
@@ -375,7 +599,7 @@
 					</ul>
 				</nav>
 
-				<ul class="cd-gallery cd-container">
+				<ul id="listContainer" class="cd-gallery cd-container">
 
 					<%-- <c:forEach var="s" items="${list}">
 						<div class="4u 12u$(medium)">
@@ -404,46 +628,12 @@
 						</li>
 					</c:forEach>
 
-
-
-					<%-- <li data-type="0" class="is-visible"><img
-						src="img/thumb-red.jpg" alt="thumbnail">
-						<p>${status.count },${d.dname }</p></li> --%>
-
-					<!-- <li>
-						<ul class="cd-item-wrapper">
-							<li data-type="0" class="is-visible"><img
-								src="img/thumb-red.jpg" alt="thumbnail">
-								<p></p></li>
-
-						</ul>
-					</li>
-
-					<li>
-						<ul class="cd-item-wrapper">
-							<li data-type="0" class="is-visible"><img
-								src="img/thumb-red.jpg" alt="thumbnail"></li>
-
-						</ul>
-					</li>
-
-					<li>
-						<ul class="cd-item-wrapper">
-							<li data-type="0" class="is-visible"><img
-								src="img/thumb-red.jpg" alt="thumbnail"></li>
-
-						</ul>
-					</li>
-
-					<li>
-						<ul class="cd-item-wrapper">
-
-
-						</ul>
-					</li> -->
-
 				</ul>
 				<!-- cd-gallery -->
+			</div>
+			<br> <br> <br> <br>
+			<div align="center">
+				<p>장비에서 프로그램이 실행되면 자동으로 추가 또는 삭제됩니다.</p>
 			</div>
 			<!-- cd-gallery-container -->
 		</div>
@@ -454,53 +644,45 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12 text-center">
-					<h2>About Developer</h2>
+					<h2>장비 요약정보</h2>
 					<hr class="star-light1">
 				</div>
 			</div>
 			<div class="row">
 				<div align="center">
-					<p>garfish를 개발한 개발자를 소개합니다.</p>
+					<p>현재 등록된 장비들의 요약정보입니다.</p>
 				</div>
-				<div class="row">
-					<div class="col-sm-4 portfolio-item" align="center"
-						style="padding-top: 50px">
-						<img style="height: 200px" src="resources/image/jsPhoto.jpg"
-							class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF">
-							<h2>이정수</h2>
-							<br> H.P. 010-9895-5986<br> E-mail.
-							quintessence6083@gmail.com
+				<div class="row" style="margin: 0 auto; text-align: center">
+					<div class="6u 12u$(medium)"
+						style="display: inline-block; margin: 0 auto; padding-top: 50px; padding-bottom: 50px">
+						<div class="container" id="sensingcarInfoChartContainer1"
+							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
+					</div>
 
-						</div>
-					</div>
-					<div class="col-sm-4 portfolio-item" align="center"
-						style="padding-top: 50px">
-						<img src="resources/image/hkPhoto.jpg" class="img-responsive"
-							style="height: 200px" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF">
-							<h2>강현규</h2>
-							<br> H.P. 010-8994-9346<br> E-mail. yoyo238@naver.com
-						</div>
-					</div>
-					<div class="col-sm-4 portfolio-item" align="center"
-						style="padding-top: 50px">
-						<img style="height: 200px" src="resources/image/jhPhoto.JPG"
-							class="img-responsive" alt="Slice of cake"><br>
-						<div align="center" style="color: #FFFFFF">
-							<h2>조재훈</h2>
-							<br> H.P. 010-7923-6932<br> E-mail.
-							whwogns1122@naver.com
-						</div>
+					<div class="6u 12u$(medium)"
+						style="display: inline-block; margin: 0 auto; padding-top: 50px; padding-bottom: 50px">
+						<div class="container" id="sensingcarInfoChartContainer2"
+							style="min-width: 310px; height: 400px; max-width: 500px; margin: 0 auto"></div>
 					</div>
 
 				</div>
-				<div style="padding-top: 50px"
-					class="col-lg-8 col-lg-offset-2 text-center">
-					<h3>개발자의 이력서를 다운받아보세요!</h3>
-					<a href="#" class="btn btn-lg btn-outline"> <i
-						class="fa fa-download"></i> Download Resume
-					</a>
+
+				<div class="row" style="margin: 0 auto; text-align: center">
+					<div class="6u 12u$(medium)"
+						style="display: inline-block; margin: 0 auto; padding-top: 50px; padding-bottom: 50px">
+						<div class="container" id="sensingcarInfoChartContainer3"
+							style="min-width: 310px; height: 350px; max-width: 500px; margin: 0 auto"></div>
+					</div>
+
+					<div class="6u 12u$(medium)"
+						style="display: inline-block; margin: 0 auto; padding-top: 50px; padding-bottom: 50px">
+						<div class="container" id="sensingcarInfoChartContainer4"
+							style="min-width: 310px; height: 350px; max-width: 500px; margin: 0 auto"></div>
+					</div>
+
+				</div>
+				<div align="center">
+					<p>요약정보는 현재 실시간 정보이며 수초 정도 차이를 보일수 있습니다.</p>
 				</div>
 			</div>
 		</div>
@@ -914,6 +1096,7 @@
 	<script src="<%=application.getContextPath()%>/resources/js/main_3.js"></script>
 	<script
 		src="<%=application.getContextPath()%>/resources/js/list_view.js"></script>
+
 	<!-- Resource jQuery -->
 
 </body>

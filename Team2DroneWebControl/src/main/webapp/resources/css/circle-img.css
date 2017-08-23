@@ -1,7 +1,8 @@
 .photo3 {
-	width: 145px;
-	height: 145px;
+	width: 175px;
+	height: 175px;
 	object-fit: cover;
+	margin-bottom:20px;
 	border-radius: 50%;
 }
 

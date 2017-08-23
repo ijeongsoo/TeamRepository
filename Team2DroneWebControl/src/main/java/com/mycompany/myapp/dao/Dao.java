@@ -25,4 +25,5 @@ public interface Dao {
 	public List<Drone> droneSelect(String mid);
 	public List<Drone> roverSelect(String mid);
 	public List<Drone> planeSelect(String mid);
+	public void deleteDevice(String dmacaddr);
 }

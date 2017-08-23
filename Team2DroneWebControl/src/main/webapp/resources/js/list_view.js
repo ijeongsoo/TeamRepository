@@ -3,6 +3,9 @@ jQuery(document).ready(function($){
 	bouncy_filter($('.cd-gallery-container'));
 
 	function bouncy_filter($container) {
+		var drone;
+		var rover;
+		var plane;
 		$container.each(function(){
 			var $this = $(this);
 			var filter_list_container = $this.children('.cd-filter'),
@@ -19,15 +22,34 @@ jQuery(document).ready(function($){
 				gallery_elements[filter_type] = gallery_item_wrapper.find('li[data-type="'+filter_type+'"]');
 			});
 
+			readInterval=setInterval("getList("+filter_list_placeholder.data('type')+")", 3000);
 			//detect click event
 			filter_list_container.on('click', function(event){
 				event.preventDefault();
+				
+				gallery_item_wrapper = $this.children('.cd-gallery').find('.cd-item-wrapper');
+				filter_values.each(function(){
+					filter_type = $(this).data('type');
+					gallery_elements[filter_type] = gallery_item_wrapper.find('li[data-type="'+filter_type+'"]');
+				});
+				
 				//detect which filter item was selected
 				var selected_filter = $(event.target).data('type');
+				
+				if (selected_filter==1)	{
+					clearInterval(readInterval);
+					readInterval=setInterval("getList(1)", 1000);
+				}else if(selected_filter==2){
 					
+					clearInterval(readInterval);
+					readInterval=setInterval("getList(2)", 1000);
+				}else if(selected_filter==3){
+					clearInterval(readInterval);
+					readInterval=setInterval("getList(3)", 1000);
+				}
 				//check if user has clicked the placeholder item (for mobile version)
 				if( $(event.target).is(filter_list_placeholder) || $(event.target).is(filter_list_container) ) {
-
+					
 					(filter_list_placeholder_default_value == filter_list_placeholder.text()) ? filter_list_placeholder.text(filter_list_placeholder_text) : filter_list_placeholder.text(filter_list_placeholder_default_value) ;
 					filter_list_container.toggleClass('is-open');
 
@@ -38,6 +60,8 @@ jQuery(document).ready(function($){
 					filter_list_container.removeClass('is-open');	
 
 				} else {
+					
+
 					//close the dropdown (mobile version) and change placeholder text/data-type value
 					filter_list_container.removeClass('is-open');
 					filter_list_placeholder.text($(event.target).text()).data('type', selected_filter);
@@ -57,10 +81,12 @@ jQuery(document).ready(function($){
 					var is_explorer_9 = navigator.userAgent.indexOf('MSIE 9') > -1;
 					
 					if( is_explorer_9 ) {
+						
 						hide_not_selected_items(gallery_elements, selected_filter);
 						gallery_item_wrapper.removeClass('is-switched');
 					} else {
-						gallery_item_wrapper.addClass('is-switched').eq(0).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {		
+						console.log('test');
+						gallery_item_wrapper.addClass('is-switched').eq(0).one('webkitAnimationEnd oanimationend msAnimationEnd animationend', function() {	
 							hide_not_selected_items(gallery_elements, selected_filter);
 							gallery_item_wrapper.removeClass('is-switched');
 						});
@@ -72,14 +98,15 @@ jQuery(document).ready(function($){
 });
 
 function show_selected_items(selected_elements) {
+	
 	selected_elements.addClass('is-selected');
 }
 
 function hide_not_selected_items(gallery_containers, filter) {
+	
 	$.each(gallery_containers, function(key, value){
   		if ( key != filter ) {	
 			$(this).removeClass('is-visible is-selected').addClass('is-hidden');
-
 		} else {
 			$(this).addClass('is-visible').removeClass('is-hidden is-selected');
 		}
