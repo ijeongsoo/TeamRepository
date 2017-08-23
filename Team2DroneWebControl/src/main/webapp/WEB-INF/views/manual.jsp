@@ -324,23 +324,91 @@
 			
 
 	<section class="cd-faq">
+	
+		
 		<ul class="cd-faq-categories">
-			<li><a class="selected" href="#basics">드론 소개</a></li>
-			<li><a href="#mobile">하드웨어 설정</a></li>
-			<li><a href="#account">소프트웨어 설정</a></li>
-			<li><a href="#payments">웹페이지 안내</a></li>
-			<li><a href="#privacy">기타</a></li>
-			<li><a href="#delivery"></a></li>
+		<li><a class="selected" href="#basics">RC 소개</a></li>
+			<li><a href="#mobile">드론 소개</a></li>
+			<li><a href="#account">하드웨어 설정</a></li>
+			<li><a href="#payments">소프트웨어 설정</a></li>
+			<li><a href="#privacy">웹페이지 안내</a></li>
+			<li><a href="#delivery">기타</a></li>
+			
 		</ul>
 		<!-- cd-faq-categories -->
 
 		<div class="cd-faq-items">
-			<ul id="basics" class="cd-faq-group">
+		<ul id="basics" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>RC 소개</h2></li>
+				<li><a class="cd-faq-trigger" href="#0">RC 개요</a>
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ RC란 ]</span> <br><br>
+							 Remote Control로도 해석하는데, RC세계에서는 (전파를 통한) 무선조종을 말하기에 Remote(원격)보다는 Radio(무선)이라는 단어를 사용합니다. 
+							 우리가 생각하는 RC는 Radio Control에 더 가깝다 생각하면 좋습니다.
+							RC는 단순히 Car 뿐만 아니라 헬기, 비행기, 보트, 탱크 최근에는 드론까지 나오고 있습니다.
+							또한 RC는 크게 완구와 하비로 나눌수도 있습니다. 완구는 어린이 장난감 수준의 RC 이며, 하비는 어른들의 RC라고 보면 됩니다.
+						</p>
+					</div> <!-- cd-faq-content --></li>
+
+				<li><a class="cd-faq-trigger" href="#0">RC 종류</a>
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ RC Drone ]</span> <br><br>
+							드론에 대해서는 '드론 개요'에서 자세히 서술하도록 하겠습니다.<br><br>
+							<span style="font-size:20px">[ RC Rover ]</span> <br><br>
+								전동RC카 : 전기+모터<br>
+								엔진RC카 : 연료+엔진<br>
+								전기를 먹고 달리냐, 유류를 먹고 달리냐의 차이점인데 각각의 장단점이 있습니다.
+								엔진 RC카는 전동 RC카에 비해 속도도 빠르고, 주유만 하면 달릴 수 있다는 장점이 있지만, 상대적으로 주행을 위한 절차나 비싼 유류비와 소음 등은 초보 입문자가 다루기에는 어려운 부분이 많습니다.
+								초보 입문자에게는 전동RC카를 권하는 경우가 많습니다. 우선 엔진 보다 접근성이 용이하고 소음도 없습니다. 또한 크게 장소에 구애 받지 않습니다. 집안, 주차장, 공원, 운동장등 모든 장소가 RC카의 놀이터가 될 수 있습니다.
+								전동RC카를 어느정도 다룬후에 강력한 엔진소리를 뿜어내는 엔진RC카의 매력에 빠집니다. 매연을 날리며 박진감을 즐길 수 있는 장점이 있으니
+								장소가 한정적인 단점이 있습니다. 또한 연료구입비등 비용이 부담되기도 합니다.
+								<br><br>
+							<span style="font-size:20px">[ RC Plane ]</span> <br><br>
+								무선 조종 항공기 (종종 불리는 RC 항공기 또는 RC 평면 ) 휴대용 무선하여 지상에 조작자에 의해 원격 제어되는 비행 송신기입니다.
+								송신기 는 조종 장치 내의 조이스틱 의 위치에 따라 조종면 을 움직이는 서보 장치 (서보)에 신호를 보내는 선박 내의 수신기 와 통신 합니다. 컨트롤 서페이스는 평면의 방향에 영향을 줍니다.
+								모터 사이클, 배터리 및 전자 제품 의 비용, 무게, 성능 및 기능이 향상되어 취미 로 RC 항공기가 급속히 성장했습니다 . 다양한 모델과 스타일을 사용할 수 있습니다.
+								과학, 정부 및 군대에서도 기상 관측, 공기 역학 모델링 및 테스트를 위해 RC 항공기를 실험에 사용 하고 있습니다. 무인 공중 차량 (무인 항공기) 또는 스파이 비행기는 비디오 또는 자율 기능을 추가하며 무장 할 수 있습니다. 
+								<br><br>
+							<span style="font-size:20px">[ 기타 RC ]</span> <br><br>
+								RC로봇  <br>
+								RC탱크
+						</p>
+					</div> <!-- cd-faq-content --></li>
+
+				<li><a class="cd-faq-trigger" href="#0">Garfish 프로젝트 방향</a>
+					<div class="cd-faq-content">
+						<p>
+							Garfish 프로젝트의 경우 모든 RC에 대한 제어가 가능하도록 RC의 수신단의 범용성을 구현한 것이 핵심입니다. <br>
+							해당 프로젝트의 도큐먼트는 RC드론을 위주로 서술되어 있으며, 이를 참고하시어 어떠한 RC인지를 불문하고 커스터마이징 할 수 있을 것입니다.<br>
+						
+						</p>
+					</div>
+					</li>
+			</ul>
+			
+			
+			
+			
+			
+			<ul id="mobile" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>드론 소개</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">드론 개요</a>
 					<div class="cd-faq-content">
 						<p>
-							[ 쿼드 콥터 ]
+							<span style="font-size:20px">[ RC드론 이란 ]</span> <br><br>
+							드론(Drone)이란 사람이 직접 타지 않으며 임무를 수행하는 무인비행기(UAV)로서 원격지에서 무인비행기에 설치된 카메라 영상을 통하여 조종을 하는데
+							최근에는 GPS시스템과 연계하여 지상에서 컴퓨터로도 완벽한 조종이 가능하게 되었습니다. <br><br>
+							기존의 단순 원격조종(RC)이라는 개념을 탈피한 드론은 관련 첨단 기술이 군사부분에서 민간부문으로 이관되었고 고가의 정밀 제어장치 등이 싼가격으로
+							 보급되면서 급속도로 발전을 거듭하고 있습니다. 각종 첨담기술이 집약된 드론을 즐기는 매니아들은 최근 스마트폰과도 같아 누구나 쉽게 드론을 배우고
+							  즐길 수 있다고 알려집니다. 최근에 3D 로보틱스사에서는 약 500달러 정도이면 누구나 구입하여 15분내에 즐길 수 있는 수준이 되었다고 합니다.<br><br>
+							  최근 미국 오바마 대통령은 2015년경에 드론의 상업적 이용에 대한 법안에 서명하면서 미 관련전문가들은 5년내에 7500개의 상업적 드론이 운용될 것이고
+							  약 7만개의 새로운 일자리가 창출되어 새로운 미래산업으로 자리매김할 것으로 기대합니다. <br><br>
+							  하지만 가장 도입을 서두르는 경찰치안 유지 및 민간 분야의 각종 사업에 무분별한 사용은 사생활 침해와 시민의 안전을 위협할 것이라는 우려의 목소리도 커지고 있습니다. 
+							  간단한 장치의 추가로 이 드론은 하늘의 감시자로서 군림하며 정해진 곳으로 이동하여 지상의 사람 얼굴을 인신하고 사진을 촬영하며 물건도 전해줄 수 있기 때문입니다.
+							  초기에 대테러 목적이나 군사적으로 사용된 만큼 첨단 드론이 각종 시위현장에서 사용된다면 개인 사생활은 물론이고 차후에 인권 침해의 논란도 잠식시킬 수 없을 것입니다.<br><br><br>
+							<span style="font-size:20px">[ 쿼드콥터 ]</span> <br><br>
 							<br>
 							<br>
 							   쿼드콥터란 영어 접두사 quad(4개)를 의미하며 모터가 4개로 돌아가는 드론을 말합니다.
@@ -425,7 +493,7 @@
 			</ul>
 			<!-- cd-faq-group -->
 
-			<ul id="mobile" class="cd-faq-group">
+			<ul id="account" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>하드웨어 설정</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">구성 부품</a>
 					<div class="cd-faq-content">
@@ -436,7 +504,7 @@
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_2.png"><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_3.png"><br><br><br>
 							<span style="font-size:20px"> Navio2(항법쉴드) </span><br><br><br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/Navio2.png"><br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/navio.png"><br><br><br>
 							<span style="font-size:20px"> 라즈베리파이 </span><br><br><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br><br>
 							
@@ -569,7 +637,7 @@
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">PPM 수신단 </a>
+				<li><a class="cd-faq-trigger" href="#0">드론 조립 및 주의사항</a>
 					<div class="cd-faq-content">
 						<p>
 							<span style="font-size:20px">[ 드론 조립 ]</span> <br><br>
@@ -609,11 +677,7 @@
 							11. GNSS 안테나가 Navio2 상단의 MCX포트에 연결됩니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_11.png"><br><br>
 							12. Navio2의 수신단 연결<br>
-							- 기존의 수신기(Receiver)대신 드론 제어 수신단의 범용성을 구현할 목적입니다.<br>
-							- 라즈베리파이에서 pwm신호를 발생시켜 pca9685로 전송되도록 연결합니다.<br>(이는 기존의 RC transmitter에서 발생되는 원격제어 채널신호인 pwm 신호를 그대로 구현한 신호)<br>
-							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
-							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+							이는 중요한 부분으로써, 자세한 내용은 아래 "PPM 수신단"에서 서술되어 있습니다.<br><br>
 							13. 1~7에서의 조립(드론 차체)과 8~12에서의 조립(Navio2+RaspberryPi)을 결합합니다.<br><br>
 							14. 배터리를 전원모듈에 연결하여 조립을 마무리 합니다.<br>
 							
@@ -625,14 +689,23 @@
 				<li><a class="cd-faq-trigger" href="#0">PPM 수신단</a>
 					<div class="cd-faq-content">
 						<p>
-							PPM수신단은 Gar드론 프로젝트의 핵심 파트(Core Part)입니다.
+							<span style="font-size:20px">[ Navio2의 수신단의 범용성 ]</span> <br><br>
+							PPM수신단은 Garfish의 드론 프로젝트의 핵심 파트(Core Part)입니다.<br>
+							먼저 기존의 4채널 RC transmitter를 통해 제어되는 원리를 살펴보면 throttle, pitch, roll, yaw는 채널
+							PWM신호
+							이는 수신단의 범용성을 구현한 것으로 자세한 내용은 아래 그림을 참고해 봅니다.<br><br>
+							<span style="font-size:20px">[ Navio2의 수신단 연결 ]</span> <br><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+							- 기존의 수신기(Receiver)대신 드론 제어 수신단의 범용성을 구현할 목적입니다.<br>
+							- 라즈베리파이에서 pwm신호를 발생시켜 pca9685로 전송되도록 연결합니다.<br>(이는 기존의 RC transmitter에서 발생되는 원격제어 채널신호인 pwm 신호를 그대로 구현한 신호)<br>
+							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
+							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
 						</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
 			<!-- cd-faq-group -->
 
-			<ul id="account" class="cd-faq-group">
+			<ul id="payments" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>Account</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">How do I change my
 						password?</a>
