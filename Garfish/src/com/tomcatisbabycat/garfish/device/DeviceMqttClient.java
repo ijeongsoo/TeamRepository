@@ -66,11 +66,15 @@ public class DeviceMqttClient {
 			dInfo.getServoCamLeftRight().setAngle(dInfo.getAngleLeftRight());
 			dInfo.getServoCamUpDown().setAngle(dInfo.getAngleUpDown());
 			
+			LOG.info("Throttle - " + dInfo.getPwmThrottle());
+			LOG.info("Yaw - " + dInfo.getPwmYaw());
+			LOG.info("Pitch - " + dInfo.getPwmPitch());
+			LOG.info("Roll - " + dInfo.getPwmRoll());
 		}
 
 		@Override
 		public void deliveryComplete(IMqttDeliveryToken imdt) {
-			LOG.info("DeliveryComplete");
+//			LOG.info("DeliveryComplete");
 		}
 	};
 	

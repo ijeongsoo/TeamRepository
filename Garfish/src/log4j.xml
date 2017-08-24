@@ -12,7 +12,7 @@
 	
 	<!-- Application Loggers -->
 	<logger name="com.tomcatisbabycat.garfish">
-		<level value="info" />
+		<level value="warn" />
 	</logger>
 
 	<!-- Root Logger -->
