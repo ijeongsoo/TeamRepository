@@ -731,10 +731,94 @@
 					<div class="cd-faq-content">
 						<p>
 							<span style="font-size:20px">[ 1. Raspbian 설치(Navio 제공) ]</span> <br><br>
+							- Emlid raspbian 이미지 다운로드<br>
+							Navio는 Emlid에서 제공하는 Raspbian을 실행해야 합니다.
+							Emild는 Raspberry Pi 2 및 3에 대한 통합 SD 카드 이미지를 제공합니다. 
+							OS는 headless이므로 무인 항공기 애플리케이션에 필요하지 않으므로 GUI없이 제공됩니다.<br>
+							아래 링크를 통해 image파일을 다운로드 하시기 바랍니다.<br>
+							<a href="https://docs.emlid.com/navio2/common/ardupilot/configuring-raspberry-pi/">SD카드 이미지 제공페이지로 가기</a><br><br>
+							- SD카드에 이미지 쓰기<br>
+							 USB카드 리더기에  MicroSD 카드 삽입<br>
+							 win32DiskImager 설치파일 다운로드 후 설치<br>
+							 win32DiskImager 실행후 이미지를 MicroSD카드에 쓰기<br>
+							 아래 참고 영상을 보면 더 쉽게 이해하실 수 있습니다.<br>
+							<a href="https://youtu.be/i8_TFYWYt_M">SD카드에 이미지 넣기</a><br><br><br>
+							
+							
 							<span style="font-size:20px">[ 2. 무선 wifi 설정  ]</span> <br><br>
+							Raspberry Pi3에는 내부 wi-fi모듈이 있고 Raspberry Pi2에는 외부 USB wi-fi동글이 필요합니다.<br>
+							wi-fi 네트워크는 SD카드(/boot파티션)에 있는 wpa_supplicant.conf파일을 편집하여 구성할 수 있습니다.
+							
+							<br><br>
+							네트워크를 추가하려면 다음 행을 추가하십시오.
+							
+								<span style="background-color: #F7F7F7; height: 100px; width: 100%;">
+									<br>
+									network={<br>
+									ssid="yourssid"<br>
+									psk="yourpasskey"<br>
+									key_mgmt=WPA-PSK<br>
+									}
+								</span><br><br>
+								
+								wpa_supplicant.conf 파일에 액세스하려면 다음 방법 중 하나를 사용하십시오<br><br>
+								# SD 카드의 구성 편집 <br>
+								컴퓨터에 SD 카드를 꽂기 만하면됩니다.
+								SD 카드 내용에 액세스 한 후  boot 파티션에있는 wpa_supplicant.conf를 열고 (Linux의 경우 루트 권한으로) 위에서 설명한대로 파일을 편집하십시오.
+								<br><br>						
+								# 모니터와 키보드 사용<br>
+								HDMI 모니터와 USB 키보드를 라즈베리에 연결하고 전원을 켜면 콘솔에 액세스 할 수 있습니다. 여기서 텍스트 편집기를 사용하여 wpa_supplicant를 수정할 수 있습니다.
+								wpa_supplicant.conf파일은 다음 명령을 통해 접근할 수 있습니다.<br><br>
+							
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+								sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+								</span>
+								<br><br><br>
+								
+								
 							<span style="font-size:20px">[ 3. System upgrade ]</span> <br><br>
+							필요한 경우 다음을 실행하여 시스템을 업그레이드 할 수 있습니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+									sudo apt-get update && sudo apt-get dist-upgrade
+								</span>
+								
+								<br><br><br>
+								
+								
+								
 							<span style="font-size:20px">[ 4. 아두파일럿 setting ]</span> <br><br>
+							ArduPilot은 Navio와 함께 Raspberry Pi 3 또는 2에서 실행할 수 있습니다. 자동 조종 장치의 코드는 Raspberry Pi에서 직접 작동합니다. 
+							ArduPilot이 제대로 작동하려면 Emlid가 제공하는 구성된 Raspbian 배포판을 사용해야 합니다.<br>
+							Emlid Raspbian은  ArduPilot을 사전 설치하였습니다. 다음은 각 RC의 버젼입니다.<br>
+							ArduPlane : 3.7.1<br>
+							ArduRover : 3.1.2<br>
+							ArduCopter : 3.4.6<br><br>
+							라즈베리 파이로 ssh하면 다음과 같은 메세지로 greeted됩니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_1.png"><br><br>
+							
+							# RC의 버전 및 보드 선택<br><br>
+							아래의 예제에서 우리는 arducopter를 사용 하겠지만 arduplane 또는 ardurover 일 수도 있습니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+									pi@navio: ~ sudo update-alternatives --config arducopter
+								</span><br><br>
+								위의 명령어를 입력하면 다음과 같은 arducopter의 버전 및 보드 선택창이 실행됩니다.<br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_2.png"><br>
+							첫 번째 줄에는 기본적으로 실행되는 차량이 표시됩니다. 다른 프레임, 보드 또는 버전을 선택하려면 해당 프레임, 보드 또는 버전을 선택해야합니다.
+							예를 들어 Navio 2에서 쿼드를 작성하고 ArduCopter-3.4를 사용하려면 15를 입력 한 다음  Enter키를 누릅니다. (*표시된 것은 default)<br><br><br>
+							
 							<span style="font-size:20px">[ 5. Launching option ]</span> <br><br>
+							ardupilot을 실행하기 위해 파일을 엽니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										pi@navio: ~ $ sudo nano /etc/default/arducopter
+								</span><br><br>
+								다음을 통해 현재 GCS(Ground Control Station)의 IP를 지정할 수 있습니다.<br>
+								<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_3.png"><br>
+								'#'으로 표시된 모든 줄은 주석이며 아무런 효과가 없습니다.<br>
+								예를 들어, 다음과 같이 IP를 가리 키도록 TELEM1을 수정해야합니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										TELEM1= "- udp : 192.168.1.2 : 14550"
+								</span><br>
+								"192.168.1.2"는 GCS가 있는 장치(노트북, 스마트 폰 등)의 IP 주소입니다.<br><br>
 							<span style="font-size:20px">[ 6. GCS의 연결]</span> <br><br>
 							<span style="font-size:20px">[ 7. Drone configuration ]</span> <br><br>
 						</p>
