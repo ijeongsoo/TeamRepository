@@ -324,29 +324,103 @@
 			
 
 	<section class="cd-faq">
+	
+		
 		<ul class="cd-faq-categories">
-			<li><a class="selected" href="#basics">드론 소개</a></li>
-			<li><a href="#mobile">하드웨어 설정</a></li>
-			<li><a href="#account">소프트웨어 설정</a></li>
-			<li><a href="#payments">웹페이지 안내</a></li>
-			<li><a href="#privacy">기타</a></li>
-			<li><a href="#delivery"></a></li>
+		<li><a class="selected" href="#basics">RC 소개</a></li>
+			<li><a href="#mobile">드론 소개</a></li>
+			<li><a href="#account">하드웨어 설정</a></li>
+			<li><a href="#payments">소프트웨어 설정</a></li>
+			<li><a href="#privacy">웹페이지 안내</a></li>
+			<li><a href="#delivery">기타</a></li>
+			
 		</ul>
 		<!-- cd-faq-categories -->
 
 		<div class="cd-faq-items">
-			<ul id="basics" class="cd-faq-group">
+		<ul id="basics" class="cd-faq-group">
+			<li class="cd-faq-title"><h2>RC 소개</h2></li>
+				<li><a class="cd-faq-trigger" href="#0">RC 개요</a>
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ RC란 ]</span> <br><br>
+							 Remote Control로도 해석하는데, RC세계에서는 (전파를 통한) 무선조종을 말하기에 Remote(원격)보다는 Radio(무선)이라는 단어를 사용합니다. 
+							 우리가 생각하는 RC는 Radio Control에 더 가깝다 생각하면 좋습니다.
+							RC는 단순히 Car 뿐만 아니라 헬기, 비행기, 보트, 탱크 최근에는 드론까지 나오고 있습니다.
+							또한 RC는 크게 완구와 하비로 나눌수도 있습니다. 완구는 어린이 장난감 수준의 RC 이며, 하비는 어른들의 RC라고 보면 됩니다.
+						</p>
+					</div> <!-- cd-faq-content --></li>
+
+				<li><a class="cd-faq-trigger" href="#0">RC 종류</a>
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ RC Drone ]</span> <br><br>
+							드론에 대해서는 '드론 개요'에서 자세히 서술하도록 하겠습니다.<br><br>
+							<span style="font-size:20px">[ RC Rover ]</span> <br><br>
+								전동RC카 : 전기+모터<br>
+								엔진RC카 : 연료+엔진<br>
+								전기를 먹고 달리냐, 유류를 먹고 달리냐의 차이점인데 각각의 장단점이 있습니다.
+								엔진 RC카는 전동 RC카에 비해 속도도 빠르고, 주유만 하면 달릴 수 있다는 장점이 있지만, 상대적으로 주행을 위한 절차나 비싼 유류비와 소음 등은 초보 입문자가 다루기에는 어려운 부분이 많습니다.
+								초보 입문자에게는 전동RC카를 권하는 경우가 많습니다. 우선 엔진 보다 접근성이 용이하고 소음도 없습니다. 또한 크게 장소에 구애 받지 않습니다. 집안, 주차장, 공원, 운동장등 모든 장소가 RC카의 놀이터가 될 수 있습니다.
+								전동RC카를 어느정도 다룬후에 강력한 엔진소리를 뿜어내는 엔진RC카의 매력에 빠집니다. 매연을 날리며 박진감을 즐길 수 있는 장점이 있으니
+								장소가 한정적인 단점이 있습니다. 또한 연료구입비등 비용이 부담되기도 합니다.
+								<br><br>
+							<span style="font-size:20px">[ RC Plane ]</span> <br><br>
+								무선 조종 항공기 (종종 불리는 RC 항공기 또는 RC 평면 ) 휴대용 무선하여 지상에 조작자에 의해 원격 제어되는 비행 송신기입니다.
+								송신기 는 조종 장치 내의 조이스틱 의 위치에 따라 조종면 을 움직이는 서보 장치 (서보)에 신호를 보내는 선박 내의 수신기 와 통신 합니다. 컨트롤 서페이스는 평면의 방향에 영향을 줍니다.
+								모터 사이클, 배터리 및 전자 제품 의 비용, 무게, 성능 및 기능이 향상되어 취미 로 RC 항공기가 급속히 성장했습니다 . 다양한 모델과 스타일을 사용할 수 있습니다.
+								과학, 정부 및 군대에서도 기상 관측, 공기 역학 모델링 및 테스트를 위해 RC 항공기를 실험에 사용 하고 있습니다. 무인 공중 차량 (무인 항공기) 또는 스파이 비행기는 비디오 또는 자율 기능을 추가하며 무장 할 수 있습니다. 
+								<br><br>
+							<span style="font-size:20px">[ 기타 RC ]</span> <br><br>
+								RC로봇  <br>
+								RC탱크
+						</p>
+					</div> <!-- cd-faq-content --></li>
+
+				<li><a class="cd-faq-trigger" href="#0">Garfish 프로젝트 방향</a>
+					<div class="cd-faq-content">
+						<p>
+							Garfish 프로젝트의 경우 모든 RC에 대한 제어가 가능하도록 RC의 수신단의 범용성을 구현한 것이 핵심입니다. <br>
+							해당 프로젝트의 도큐먼트는 RC드론을 위주로 서술되어 있으며, 이를 참고하시어 어떠한 RC인지를 불문하고 커스터마이징 할 수 있을 것입니다.<br>
+						
+						</p>
+					</div>
+					</li>
+			</ul>
+			
+			
+			
+			
+			
+			<ul id="mobile" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>드론 소개</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">드론 개요</a>
 					<div class="cd-faq-content">
 						<p>
-							[ 쿼드 콥터 ]
-							<br>
-							<br>
+							<span style="font-size:20px">[ RC드론 이란 ]</span> <br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/Drone_1.jpg"><br><br>
+							
+							드론(Drone)이란 사람이 직접 타지 않으며 임무를 수행하는 무인비행기(UAV)로서 원격지에서 무인비행기에 설치된 카메라 영상을 통하여 조종을 하는데
+							최근에는 GPS시스템과 연계하여 지상에서 컴퓨터로도 완벽한 조종이 가능하게 되었습니다. <br><br>
+							기존의 단순 원격조종(RC)이라는 개념을 탈피한 드론은 관련 첨단 기술이 군사부분에서 민간부문으로 이관되었고 고가의 정밀 제어장치 등이 싼가격으로
+							 보급되면서 급속도로 발전을 거듭하고 있습니다. 각종 첨담기술이 집약된 드론을 즐기는 매니아들은 최근 스마트폰과도 같아 누구나 쉽게 드론을 배우고
+							  즐길 수 있다고 알려집니다. 최근에 3D 로보틱스사에서는 약 500달러 정도이면 누구나 구입하여 15분내에 즐길 수 있는 수준이 되었다고 합니다.<br><br>
+							  최근 미국 오바마 대통령은 2015년경에 드론의 상업적 이용에 대한 법안에 서명하면서 미 관련전문가들은 5년내에 7500개의 상업적 드론이 운용될 것이고
+							  약 7만개의 새로운 일자리가 창출되어 새로운 미래산업으로 자리매김할 것으로 기대합니다. <br><br>
+							  하지만 가장 도입을 서두르는 경찰치안 유지 및 민간 분야의 각종 사업에 무분별한 사용은 사생활 침해와 시민의 안전을 위협할 것이라는 우려의 목소리도 커지고 있습니다. 
+							  간단한 장치의 추가로 이 드론은 하늘의 감시자로서 군림하며 정해진 곳으로 이동하여 지상의 사람 얼굴을 인신하고 사진을 촬영하며 물건도 전해줄 수 있기 때문입니다.
+							  초기에 대테러 목적이나 군사적으로 사용된 만큼 첨단 드론이 각종 시위현장에서 사용된다면 개인 사생활은 물론이고 차후에 인권 침해의 논란도 잠식시킬 수 없을 것입니다.<br><br><br>
+							<span style="font-size:20px">[ 쿼드콥터 ]</span> <br><br>
 							   쿼드콥터란 영어 접두사 quad(4개)를 의미하며 모터가 4개로 돌아가는 드론을 말합니다.
 							  따라서 앞에 붙는 어원에 따라[Tri(3개), quad(4개), hexa(6개)]날개의 개수를
 							  알 수 있습니다. 그 다음 콥터 뒤에 나오는 +,x,H등은 드론의 모양을 설명해주는 것이므로
-							  날개의 배치 모양을 통해 +인지 x인지 기호를 써서 알려줍니다.
+							  날개의 배치 모양을 통해 +인지 x인지 기호를 써서 알려줍니다.<br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/quadcopter_2.png"><br>
+							[쿼드콥터의 모식도]<br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/quadcopter.jpg"><br>
+							[쿼드콥터의  4채널 Transmitter]
+						
+							
 							
 						</p>
 					</div> <!-- cd-faq-content --></li>
@@ -425,50 +499,57 @@
 			</ul>
 			<!-- cd-faq-group -->
 
-			<ul id="mobile" class="cd-faq-group">
+			<ul id="account" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>하드웨어 설정</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">구성 부품</a>
 					<div class="cd-faq-content">
 						<p>
-							<span style="font-size:20px"> [ FPV 250 Kit ] </span><br>
+
+							<span style="font-size:20px"> [ 드론의 기본 구성 ] </span><br>
 							 프레임틀 / 변속기(ESC) / 브러시리스모터(brushless motor) / 드론배터리(리포배터리) / 프로펠러 / 배터리 전압분배 케이블<br>  
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_1.png"><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_2.png"><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_3.png"><br><br><br>
 							<span style="font-size:20px"> Navio2(항법쉴드) </span><br><br><br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/Navio2.png"><br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/navio.png"><br><br><br>
 							<span style="font-size:20px"> 라즈베리파이 </span><br><br><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br><br>
 							
-							<span style="font-size:20px">[ 기타 추가 구성품 ]</span><br>
+							<span style="font-size:20px">[ 기타 추가 구성품 ]</span><br><br>
+
 							배터리 체커<br>
 						    <img src="<%=application.getContextPath()%>/resources/image/manual/checker.png"><br><br><br>
 							리시버(원격제어 수신기)<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/receiver.png"><br><br><br>
 							PPM encoder<br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/ppm.jpg"><br>
+
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ppm.jpg"><br><br><br>
 							PCA9685 <br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/PCA9685.jpg"><br>
-							
-							
+							<img src="<%=application.getContextPath()%>/resources/image/manual/PCA9685.jpg"><br><br>
+	
 						</p>
 					</div> <!-- cd-faq-content --></li>
 					
 					<li><a class="cd-faq-trigger" href="#0">주요 부품 제원</a>
 					<div class="cd-faq-content">
 						<p>
+
 							<span style="font-size:20px">[ 1.Navio2 ]</span><br><br>
+
 							드론 제어에 필수적인 센서와 gps등을 내장한 모듈로써 라즈베리파이에 쉴드로써 장착됩니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/Navio2.png"><br><br>
 							
 							
+
 							<span style="font-size:20px">[ 2.라즈베리 파이 ]</span><br><br>
+
 							드론을 제어하기 위한 모듈로써 역할을 수행합니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br>
-							
-							
-						
+	
+	
+	
 							<span style="font-size:20px">[ 3.브러쉬리스 모터(brushless motor) - BLDC ]</span><br><br>
+
 							
 							1. 장점 <br>
 							- 브러쉬가 없어서 수명이 길다.<br>
@@ -480,13 +561,13 @@
 							- 변속기 셋팅이 비교적 어렵다.<br><br>
 							3. 모터 동작 원리<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.gif">       
-							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.jpg"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.jpg"><br><br>
 							DC모터와 달리 도선측이 고정되어 있고, 영구자석측이 회전하는 구조입니다. 자력선이 공기중에는 통과하기 어려우나 금속은
 							통과하기 쉽기때문에 회전력을 더욱 강하게 할 수 있습니다. 위 이미지처럼 바깥 축이 회전하고 가운데 축은 전자회로로 전극을 
 							빠르게 바꿔주며 회전력이 발생합니다.
 							<br><br><br><br>
 							
-							
+
 							<span style="font-size:20px">[ 4.전자변속기(ESC) ]</span><br><br>
 							 <img src="<%=application.getContextPath()%>/resources/image/manual/esc_1.jpg"><br><br>
 							1. 전자변속기 종류<br><br>
@@ -506,12 +587,13 @@
 							수신기에서 변속기쪽으로 유입되는 선이 있는데, 여기로 PWM출력이 나오며 또한 변속기에 붙은 배터리의 전원이 변속기를 지나 수신모듈에 공급됩니다.
 							<br><br><br><br>
 							
-							
+
 							<span style="font-size:20px"> [ 4-1.브러쉬리스 모터와 ESC의 호환 ]</span><br><br>
 							보통 ESC: 20~30A 이렇게 표시하는데 ESC가 허용가능한 전류량입니다.
 							모터스펙에서 제시하는 ESC 전류량 이상의 ESC 스펙의 것을 선택해야 합니다.<br><br><br><br>	
 							
 							<span style="font-size:20px">[ 5.배터리 ]</span><br><br>
+
 							1. 배터리 종류<br><br>
 							니켈수소, 리튬철, 리튬폴리머 등이 있으며, 드론이나 멀티콥터에 가장 적합한 배터리는 단연 리튬폴리머(LiPo)배터리입니다. 왜냐하면 배터리 자체 무게 대비 전압 및 방전율이 월등하기 때문입니다.
 							<br><br>
@@ -548,7 +630,7 @@
 							이렇게 배터리가 상처를 입습니다. 
 							이렇게 비싼 리폴 배터리 구매해서 한번 비행하고 완전 사망시키는 일이 발생하지 않도록 너무 욕심 내면 안됩니다.
 							<br><br><br>
-							
+
 							<span style="font-size:20px">[ 6.프로펠러 ]</span><br><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/prop.jpg"><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/prop_2.jpg"><br>
@@ -564,14 +646,18 @@
 							비행 중일 때는 프롭에 가해지는 부하로 인해 약한 재질의 프롭은 여기저기 휘어지고 밸런싱이 틀어져 기체에 진동을 발생시킵니다. 
 							물론 기체의 무게에 비해 약한 재질이면 호버링 상태에서도 진동이 발생할 수 있습니다.
 							프로펠러도 결국은 모터와 기체의 무게와의 조합입니다. 최적의 조함을 위해선 최종적으로 데이터 시트(주로 모터의 데이터시트)를 살펴보는 것이 좋습니다.
-							
+	
 							
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">PPM 수신단 </a>
+				<li><a class="cd-faq-trigger" href="#0">드론 조립 및 주의사항</a>
 					<div class="cd-faq-content">
 						<p>
+							<span style="font-size:20px">[ 회로 구성도 ]</span> <br><br>
+							Garfish 프로젝트의 드론 연결 구성도는 다음과 같습니다.
+							<img src="<%=application.getContextPath()%>/resources/image/manual/hardware.png"><br><br>
+							
 							<span style="font-size:20px">[ 드론 조립 ]</span> <br><br>
 							1. 드론 프레임에 모터를 고정시킵니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_1.png"><br><br>
@@ -599,6 +685,7 @@
 							- Navio2를 확장 헤더에 연결하십시오.<br>
 							- 나사를 사용하여 Navio2를 고정하십시오.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_8.png"><br><br>
+
 							9. Navio2의 Power 포트에 연결된 전원 모듈로 전원을 공급받습니다. 또한 Navio2는 결합된 라즈베리파이에 전원을 공급합니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_9.png"><br><br>
 							10. 서보 전원 공급하기<br>
@@ -609,30 +696,138 @@
 							11. GNSS 안테나가 Navio2 상단의 MCX포트에 연결됩니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_11.png"><br><br>
 							12. Navio2의 수신단 연결<br>
-							- 기존의 수신기(Receiver)대신 드론 제어 수신단의 범용성을 구현할 목적입니다.<br>
-							- 라즈베리파이에서 pwm신호를 발생시켜 pca9685로 전송되도록 연결합니다.<br>(이는 기존의 RC transmitter에서 발생되는 원격제어 채널신호인 pwm 신호를 그대로 구현한 신호)<br>
-							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
-							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+
+							이는 중요한 부분으로써, 자세한 내용은 아래 "PPM 수신단"에서 서술되어 있습니다.<br><br>
 							13. 1~7에서의 조립(드론 차체)과 8~12에서의 조립(Navio2+RaspberryPi)을 결합합니다.<br><br>
 							14. 배터리를 전원모듈에 연결하여 조립을 마무리 합니다.<br>
+
 							
 							
 						
 						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0"></a>
+				<li><a class="cd-faq-trigger" href="#0">PPM 수신단</a>
+
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
+						<p>
+							<span style="font-size:20px">[ Navio2의 수신단의 범용성 ]</span> <br><br>
+							PPM수신단은 Garfish의 드론 프로젝트의 핵심 파트(Core Part)입니다.<br>
+							먼저 기존의 4채널 RC transmitter를 통해 제어되는 원리를 살펴보면 throttle, pitch, roll, yaw는 채널
+							PWM신호
+							이는 수신단의 범용성을 구현한 것으로 자세한 내용은 아래 그림을 참고해 봅니다.<br><br>
+							<span style="font-size:20px">[ Navio2의 수신단 연결 ]</span> <br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_12.png"><br><br>
+							- 기존의 수신기(Receiver)대신 드론 제어 수신단의 범용성을 구현할 목적입니다.<br>
+							- 라즈베리파이에서 pwm신호를 발생시켜 pca9685로 전송되도록 연결합니다.<br>(이는 기존의 RC transmitter에서 발생되는 원격제어 채널신호인 pwm 신호를 그대로 구현한 신호)<br>
+							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
+							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
+						</p>
+					</div> 
+					</li>
+					
+					<li><a class="cd-faq-trigger" href="#0">하드웨어 설정</a>
+
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ 1. Raspbian 설치(Navio 제공) ]</span> <br><br>
+							- Emlid raspbian 이미지 다운로드<br>
+							Navio는 Emlid에서 제공하는 Raspbian을 실행해야 합니다.
+							Emild는 Raspberry Pi 2 및 3에 대한 통합 SD 카드 이미지를 제공합니다. 
+							OS는 headless이므로 무인 항공기 애플리케이션에 필요하지 않으므로 GUI없이 제공됩니다.<br>
+							아래 링크를 통해 image파일을 다운로드 하시기 바랍니다.<br>
+							<a href="https://docs.emlid.com/navio2/common/ardupilot/configuring-raspberry-pi/">SD카드 이미지 제공페이지로 가기</a><br><br>
+							- SD카드에 이미지 쓰기<br>
+							 USB카드 리더기에  MicroSD 카드 삽입<br>
+							 win32DiskImager 설치파일 다운로드 후 설치<br>
+							 win32DiskImager 실행후 이미지를 MicroSD카드에 쓰기<br>
+							 아래 참고 영상을 보면 더 쉽게 이해하실 수 있습니다.<br>
+							<a href="https://youtu.be/i8_TFYWYt_M">SD카드에 이미지 넣기</a><br><br><br>
+							
+							
+							<span style="font-size:20px">[ 2. 무선 wifi 설정  ]</span> <br><br>
+							Raspberry Pi3에는 내부 wi-fi모듈이 있고 Raspberry Pi2에는 외부 USB wi-fi동글이 필요합니다.<br>
+							wi-fi 네트워크는 SD카드(/boot파티션)에 있는 wpa_supplicant.conf파일을 편집하여 구성할 수 있습니다.
+							
+							<br><br>
+							네트워크를 추가하려면 다음 행을 추가하십시오.
+							
+								<span style="background-color: #F7F7F7; height: 100px; width: 100%;">
+									<br>
+									network={<br>
+									ssid="yourssid"<br>
+									psk="yourpasskey"<br>
+									key_mgmt=WPA-PSK<br>
+									}
+								</span><br><br>
+								
+								wpa_supplicant.conf 파일에 액세스하려면 다음 방법 중 하나를 사용하십시오<br><br>
+								# SD 카드의 구성 편집 <br>
+								컴퓨터에 SD 카드를 꽂기 만하면됩니다.
+								SD 카드 내용에 액세스 한 후  boot 파티션에있는 wpa_supplicant.conf를 열고 (Linux의 경우 루트 권한으로) 위에서 설명한대로 파일을 편집하십시오.
+								<br><br>						
+								# 모니터와 키보드 사용<br>
+								HDMI 모니터와 USB 키보드를 라즈베리에 연결하고 전원을 켜면 콘솔에 액세스 할 수 있습니다. 여기서 텍스트 편집기를 사용하여 wpa_supplicant를 수정할 수 있습니다.
+								wpa_supplicant.conf파일은 다음 명령을 통해 접근할 수 있습니다.<br><br>
+							
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+								sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+								</span>
+								<br><br><br>
+								
+								
+							<span style="font-size:20px">[ 3. System upgrade ]</span> <br><br>
+							필요한 경우 다음을 실행하여 시스템을 업그레이드 할 수 있습니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+									sudo apt-get update && sudo apt-get dist-upgrade
+								</span>
+								
+								<br><br><br>
+								
+								
+								
+							<span style="font-size:20px">[ 4. 아두파일럿 setting ]</span> <br><br>
+							ArduPilot은 Navio와 함께 Raspberry Pi 3 또는 2에서 실행할 수 있습니다. 자동 조종 장치의 코드는 Raspberry Pi에서 직접 작동합니다. 
+							ArduPilot이 제대로 작동하려면 Emlid가 제공하는 구성된 Raspbian 배포판을 사용해야 합니다.<br>
+							Emlid Raspbian은  ArduPilot을 사전 설치하였습니다. 다음은 각 RC의 버젼입니다.<br>
+							ArduPlane : 3.7.1<br>
+							ArduRover : 3.1.2<br>
+							ArduCopter : 3.4.6<br><br>
+							라즈베리 파이로 ssh하면 다음과 같은 메세지로 greeted됩니다.<br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_1.png"><br><br>
+							
+							# RC의 버전 및 보드 선택<br><br>
+							아래의 예제에서 우리는 arducopter를 사용 하겠지만 arduplane 또는 ardurover 일 수도 있습니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+									pi@navio: ~ sudo update-alternatives --config arducopter
+								</span><br><br>
+								위의 명령어를 입력하면 다음과 같은 arducopter의 버전 및 보드 선택창이 실행됩니다.<br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_2.png"><br>
+							첫 번째 줄에는 기본적으로 실행되는 차량이 표시됩니다. 다른 프레임, 보드 또는 버전을 선택하려면 해당 프레임, 보드 또는 버전을 선택해야합니다.
+							예를 들어 Navio 2에서 쿼드를 작성하고 ArduCopter-3.4를 사용하려면 15를 입력 한 다음  Enter키를 누릅니다. (*표시된 것은 default)<br><br><br>
+							
+							<span style="font-size:20px">[ 5. Launching option ]</span> <br><br>
+							ardupilot을 실행하기 위해 파일을 엽니다.<br><br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										pi@navio: ~ $ sudo nano /etc/default/arducopter
+								</span><br><br>
+								다음을 통해 현재 GCS(Ground Control Station)의 IP를 지정할 수 있습니다.<br>
+								<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_3.png"><br>
+								'#'으로 표시된 모든 줄은 주석이며 아무런 효과가 없습니다.<br>
+								예를 들어, 다음과 같이 IP를 가리 키도록 TELEM1을 수정해야합니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										TELEM1= "- udp : 192.168.1.2 : 14550"
+								</span><br>
+								"192.168.1.2"는 GCS가 있는 장치(노트북, 스마트 폰 등)의 IP 주소입니다.<br><br>
+							<span style="font-size:20px">[ 6. GCS의 연결]</span> <br><br>
+							<span style="font-size:20px">[ 7. Drone configuration ]</span> <br><br>
+						</p>
+					</div> 
+					</li>
 			</ul>
 			<!-- cd-faq-group -->
 
-			<ul id="account" class="cd-faq-group">
+			<ul id="payments" class="cd-faq-group">
 				<li class="cd-faq-title"><h2>Account</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">How do I change my
 						password?</a>
