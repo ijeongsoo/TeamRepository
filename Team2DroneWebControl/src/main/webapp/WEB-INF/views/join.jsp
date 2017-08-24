@@ -242,7 +242,7 @@ $(document).ready(
 					<span class="sr-only">Toggle navigation</span> Menu <i
 						class="fa fa-bars"></i>
 				</button>
-				<a class="navbar-brand" href="<%=application.getContextPath()%>/" >Garfish Project</a>
+				<a class="navbar-brand" href="http://localhost:8080/Team2DroneWebControl/" >Garfish Project</a>
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
