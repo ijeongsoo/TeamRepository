@@ -29,6 +29,20 @@
 	<delete id="delete" parameterType="String">
  		delete from drone where dmacaddr=#{dmacaddr}
  	</delete>
+ 	
+ 	<select id= "select" resultType="com.mycompany.myapp.dto.Drone" parameterType="string">
+		select dname, member_mid, dmacaddr, nvl(doriginalfilename,'none1.jpg') doriginalfilename,  nvl(dsavedfilename,'none1.jpg') dsavedfilename, dtype, nvl(dfilecontent,'img/jpeg') dfilecontent from drone where dmacaddr=#{dmacaddr}	
+	</select>
+	
+	<update id="update" parameterType="com.mycompany.myapp.dto.Drone">
+ 		<if test="doriginalfilename!=null">
+ 			update drone set dname=#{dname},dtype=#{dtype}, doriginalfilename=#{doriginalfilename}, dsavedfilename=#{dsavedfilename}, dfilecontent=#{dfilecontent}  where dmacaddr=#{dmacaddr}
+ 		</if>
+ 		<if test="doriginalfilename==null">
+ 			update drone set dname=#{dname},dtype=#{dtype} where dmacaddr=#{dmacaddr}
+ 		</if>
+ 	
+ 	</update>
 	
 	
 </mapper>

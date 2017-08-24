@@ -91,8 +91,7 @@ public class NotNeedSessionController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(@ModelAttribute Member login_info, String mid, String mpassword, Model model) {
-		logger.info("aaa");
-		logger.info(mpassword);
+		
 		Member member = service.login(mid, mpassword);
 		if (member == null) {
 			model.addAttribute("result", 0);

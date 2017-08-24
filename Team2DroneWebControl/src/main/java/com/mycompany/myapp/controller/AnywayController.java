@@ -379,7 +379,7 @@ public class AnywayController {
 	
 	
 	@RequestMapping("/throttleAndYaw")
-	public void throttleAndYaw(String throttle, String yaw, HttpServletResponse response) throws MqttException {
+	public void throttleAndYaw(String dmacaddr, String throttle, String yaw, HttpServletResponse response) throws MqttException {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -390,12 +390,12 @@ public class AnywayController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/throttleAndYaw", message);
+		mqttClient.publish("/"+dmacaddr+"/throttleAndYaw", message);
 
 	}
 
 	@RequestMapping("/pitchAndRoll")
-	public void pitchAndRoll(String pitch, String roll, HttpServletResponse response) throws MqttException {
+	public void pitchAndRoll(String dmacaddr,String pitch, String roll, HttpServletResponse response) throws MqttException {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -406,12 +406,12 @@ public class AnywayController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/pitchAndRoll", message);
+		mqttClient.publish("/"+dmacaddr+"/pitchAndRoll", message);
 
 	}
 
 	@RequestMapping("/mode")
-	public void pitchAndRoll(String mode, HttpServletResponse response) throws MqttException {
+	public void mode(String mode, HttpServletResponse response, String dmacaddr) throws MqttException {
 
 		JSONObject jsonObject = new JSONObject();
 
@@ -421,7 +421,52 @@ public class AnywayController {
 
 		MqttMessage message = new MqttMessage(reqJson.getBytes());
 		// MQTT 브로커로 메시지 보냄
-		mqttClient.publish("/devices/drone/mode", message);
+		mqttClient.publish("/"+dmacaddr+"/mode", message);
+
+	}
+	
+	@RequestMapping("/ch6")
+	public void ch6(String ch6, HttpServletResponse response, String dmacaddr) throws MqttException {
+
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("ch6", ch6);
+
+		String reqJson = jsonObject.toString();
+
+		MqttMessage message = new MqttMessage(reqJson.getBytes());
+		// MQTT 브로커로 메시지 보냄
+		mqttClient.publish("/"+dmacaddr+"/ch6", message);
+
+	}
+	
+	@RequestMapping("/ch7")
+	public void ch7(String ch7, HttpServletResponse response, String dmacaddr) throws MqttException {
+
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("ch7", ch7);
+
+		String reqJson = jsonObject.toString();
+
+		MqttMessage message = new MqttMessage(reqJson.getBytes());
+		// MQTT 브로커로 메시지 보냄
+		mqttClient.publish("/"+dmacaddr+"/ch7", message);
+
+	}
+	
+	@RequestMapping("/ch8")
+	public void ch8(String ch8, HttpServletResponse response, String dmacaddr) throws MqttException {
+
+		JSONObject jsonObject = new JSONObject();
+
+		jsonObject.put("ch8", ch8);
+
+		String reqJson = jsonObject.toString();
+
+		MqttMessage message = new MqttMessage(reqJson.getBytes());
+		// MQTT 브로커로 메시지 보냄
+		mqttClient.publish("/"+dmacaddr+"/ch8", message);
 
 	}
 

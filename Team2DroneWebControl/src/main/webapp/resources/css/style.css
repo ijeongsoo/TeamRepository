@@ -66,6 +66,7 @@ Slider
   
 }
 .cd-slider > li:first-of-type {
+
   background-color: #18BC9C;
 }
 .cd-slider > li:nth-of-type(3) {
@@ -195,6 +196,7 @@ Slider navigation
 .cd-slider-navigation li.selected:first-of-type a {
   /* change custom icon using image sprites */
   background-position: -10px -70px;
+
 }
 .cd-slider-navigation li:nth-of-type(2) a {
   background-position: -70px -10px;

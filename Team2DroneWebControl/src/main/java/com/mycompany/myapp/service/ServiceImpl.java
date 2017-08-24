@@ -114,5 +114,16 @@ public class ServiceImpl implements Service{
 	public void deleteDevice(String dmacaddr) {
 		dao.deleteDevice(dmacaddr);
 	}
+
+	@Override
+	public Drone getDrone(String dmacaddr) {
+		Drone drone = dao.selectDevice(dmacaddr);
+		return drone;
+	}
+
+	@Override
+	public void deviceUpdate(Drone drone) {
+		dao.droneUpdate(drone);		
+	}
 	
 }

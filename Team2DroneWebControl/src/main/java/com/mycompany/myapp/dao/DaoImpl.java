@@ -77,4 +77,15 @@ public class DaoImpl implements Dao {
 		sst.delete("drone.delete", dmacaddr);
 	}
 
+	@Override
+	public Drone selectDevice(String dmacaddr) {
+		Drone drone = sst.selectOne("drone.select", dmacaddr);
+		return drone;
+	}
+
+	@Override
+	public void droneUpdate(Drone drone) {
+		sst.update("drone.update", drone);		
+	}
+
 }

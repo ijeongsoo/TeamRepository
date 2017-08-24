@@ -65,22 +65,110 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.min.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('#delete').on('hidden.bs.modal', function() {
-			$(this).remove('bs.modal');
-			$('.modal-backdrop').remove();
-			$("#viewModalContent").empty();
-		});
-	});
+   $(document).on('hidden.bs.modal', '.modal', function () {
+	   var modalData = $(this).data('bs.modal');
+	   // Destroy modal if has remote source – don't want to destroy modals with static content.
+	   if (modalData && modalData.options.remote) {
+	   // Destroy component. Next time new component is created and loads fresh content
+	   $(this).removeData('bs.modal');
+	   // Also clear loaded content, otherwise it would flash before new one is loaded.
+	   $(this).find(".modal-content").empty();
+	     }
+	   });
+</script>
+
+
+<script type="text/javascript">
+	
+
+	function fileChange(event) {
+		if ($("#mattach")[0].files.length != 0) {
+
+			$("#imgFileView")[0].src = URL
+					.createObjectURL(event.target.files[0]);
+
+		}
+	}
 </script>
 
 <script>
-	
+	$(function() {
+		var pwReg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,20}/;
+		$("#mPasswordCheck")
+				.keyup(
+						function() {
+							if ($("#mPasswordCheck").val() == ''
+									|| $("#mpassword").val() == '') {
+								$("#pwcheck").removeClass("alert-danger");
+								$("#pwcheck").removeClass("alert-info");
+								$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
+							} else if ($("#mPasswordCheck").val() == $(
+									"#mpassword").val()) {
 
-		$('#delete').on('hidden.bs.modal', function() {
-			$(this).removeData('bs.modal');
-		});
+								if (pwReg.test($("#mpassword").val()) && $("#mpassword").val().length<=20) {
+									$("#pwcheck").removeClass("alert-danger");
+									$("#pwcheck").removeClass("alert-info");
+									$("#pwcheck").addClass("alert-info");
+									$("#pwcheck").text('비밀번호가 일치합니다.');
+								} else {
+									$("#pwcheck").addClass("alert-danger");
+									$("#pwcheck")
+											.text(
+													'비밀번호는 영어, 숫자, 특수문자 조합 8~20자리 이어야 합니다.');
+								}
+							} else {
+								$("#pwcheck").addClass("alert-danger");
+								$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
+							}
+						});
+
+		$("#mpassword")
+				.keyup(
+						function() {
+							if ($("#mPasswordCheck").val() == ''
+									|| $("#mpassword").val() == '') {
+								$("#pwcheck").removeClass("alert-danger");
+								$("#pwcheck").removeClass("alert-info");
+								$("#pwcheck").text('비밀번호를 한번 더 입력해주세요.');
+							} else if ($("#mPasswordCheck").val() == $(
+									"#mpassword").val()) {
+								if (pwReg.test($("#mpassword").val()) && $("#mpassword").val().length<=20) {
+									$("#pwcheck").removeClass("alert-danger");
+									$("#pwcheck").removeClass("alert-info");
+									$("#pwcheck").addClass("alert-info");
+									$("#pwcheck").text('비밀번호가 일치합니다.');
+								} else {
+									
+									$("#pwcheck").addClass("alert-danger");
+									$("#pwcheck")
+											.text(
+													'비밀번호는 영어, 숫자, 특수문자 조합 8~20자리 이어야 합니다.');
+								}
+								
+
+							} else {
+								$("#pwcheck").addClass("alert-danger");
+								$("#pwcheck").text('비밀번호가 일치하지 않습니다.');
+							}
+
+						});
+
+	});
 	
+	
+</script>
+
+
+<script>
+	function check() {
+		if ($("#pwcheck").text() != "비밀번호가 일치합니다.") {
+			alert('비밀번호불일치');
+			return false;
+		} else {
+			alert('수정이 완료되었습니다.');
+			return true;
+		}
+	}
 </script>
 
 
@@ -194,17 +282,17 @@
 	$(function() {
 		
 		<c:forEach var="d" items="${droneList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='1' class='is-visible' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr=${d.dmacaddr}' class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
+			$('#device${status.count}').append("<li data-type='1' class='is-visible' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr=${d.dmacaddr}' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#delete' class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
 	$(function() {
 		<c:forEach var="d" items="${roverList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}'><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+			$('#device${status.count}').append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr=${d.dmacaddr}' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
 	$(function() {
 		<c:forEach var="d" items="${planeList}" varStatus="status">
-			$('#device${status.count}').append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+			$('#device${status.count}').append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename=${d.dsavedfilename}&mfiletype=${d.dfilecontent}' ><p>${status.count }.${d.dname }</p><br><p class='available' id='${d.dmacaddr}'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr=${d.dmacaddr}' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr=${d.dmacaddr}' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 		</c:forEach>
 	});
 	var totalDeviceNum=${fn:length(allList)};
@@ -233,45 +321,45 @@
 						for(var d in data.droneList){
 							console.log('a');
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+"' ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.droneList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.roverList){
 							console.log('b');
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+"' ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.roverList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.planeList){
 							console.log('c');
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><<br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a>/li>");
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+"' ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><<br><a href='control?dmacaddr="+data.planeList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a>/li>");
 						}
 					}else if(data.roverList.length!=roverNum){
 						roverNum=data.roverList.length;
 						for(var d in data.droneList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+"' ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.droneList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.roverList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+"' ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.roverList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.planeList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+"' ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.planeList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 					}else if(data.planeList.length!=planeNum){
 						planeNum=data.planeList.length;
 						for(var d in data.droneList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+" ><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='1' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.droneList[d].dsavedfilename+"&mfiletype="+data.droneList[d].dfilecontent+"'><p> "+index+"."+data.droneList[d].dname+"</p><br><p class='available' id='"+data.droneList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.droneList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.droneList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.roverList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+" ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='2' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.roverList[d].dsavedfilename+"&mfiletype="+data.roverList[d].dfilecontent+"' ><p> "+index+"."+data.roverList[d].dname+"</p><br><p class='available' id='"+data.roverList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.roverList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.roverList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 						for(var d in data.planeList){
 							var index=Number(d)+1;
-							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src="+'<%=application.getContextPath()%>'+"/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+" ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a class='btn btn-primary'>접속</a><a class='btn btn-warning'>수정</a><a class='btn btn-danger'>삭제</a></li>");
+							$('#device'+index).append("<li data-type='3' class='is-hidden' align='center'><img class='photo3' src='<%=application.getContextPath()%>/file?msavedfilename="+data.planeList[d].dsavedfilename+"&mfiletype="+data.planeList[d].dfilecontent+"' ><p> "+index+"."+data.planeList[d].dname+"</p><br><p class='available' id='"+data.planeList[d].dmacaddr+"'><img width='15px' src='resources/image/loading.gif' /></p><br><a href='control?dmacaddr="+data.planeList[d].dmacaddr+"' class='btn btn-primary'>접속</a><a href='deviceUpdate?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#deviceUpdate' class='btn btn-warning'>수정</a><a href='deleteConfirm?dmacaddr="+data.planeList[d].dmacaddr+"' data-toggle='modal' data-target='#delete'class='btn btn-danger'>삭제</a></li>");
 						}
 					}
 					
@@ -374,8 +462,15 @@
 		<div class="modal-dialog modal-sm">
 			<div class="modal-content" id="viewModalContent"></div>
 		</div>
-	</div> 
-	
+	</div>
+	<div class="modal fade" id="deviceUpdate" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true"
+		style="overflow: auto;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content" id="deviceUpdateModalContent"></div>
+		</div>
+	</div>
+
 
 
 	<div class="cd-user-modal">
@@ -390,37 +485,56 @@
 
 			<div id="cd-signup">
 				<!-- sign up form -->
-				<form class="cd-form">
+				<form class="cd-form" action="updateMember" method="post"
+			enctype="multipart/form-data" onsubmit="return check()">
+					<div class="form-group">
+						<div id="imgFileViewContainer" style="padding: 5px;"
+							align="center">
+							<img id="imgFileView" width="300px"
+								src="file?msavedfilename=${login_info.msavedfilename}&mfiletype=${login_info.mfiletype}" />
+						</div>
+						<div class="input-group col-lg-12 ">
+							<label for="mattach" id="mattachBtn"
+								class="col-lg-12 btn btn-default"><span
+								class="glyphicon glyphicon-camera"></span> 사진 변경하기</label><input
+								type="file" id="mattach" style="visibility: hidden"
+								onchange="fileChange(event)" name="mattach" />
+						</div>
+					</div>
+					
+					
 					<p class="fieldset">
 						<label class="image-replace cd-username" for="signup-username">Username</label>
-						<input class="full-width has-padding has-border"
-							id="signup-username" type="text" placeholder="Username">
-						<span class="cd-error-message">Error message here!</span>
+						<input class="full-width has-padding has-border" id="mname"
+							name="mname" type="text" placeholder="Username"
+							value="${login_info.mname }" required> <span
+							class="cd-error-message">Error message here!</span>
 					</p>
+					<input type="hidden" name="mid" id="mid" value='${login_info.mid }'>
+
 
 					<p class="fieldset">
-						<label class="image-replace cd-email" for="signup-email">E-mail</label>
-						<input class="full-width has-padding has-border" id="signup-email"
-							type="email" placeholder="E-mail"> <span
+						<label class="image-replace cd-password" for="signup-password">Password</label>
+						<input class="full-width has-padding has-border" id="mpassword"
+							name="mpassword" type="password" placeholder="Password" value="${login_info.mpassword }" required>
+						<a href="#0" class="hide-password">보기</a> <span
 							class="cd-error-message">Error message here!</span>
 					</p>
 
 					<p class="fieldset">
 						<label class="image-replace cd-password" for="signup-password">Password</label>
 						<input class="full-width has-padding has-border"
-							id="signup-password" type="text" placeholder="Password">
-						<a href="#0" class="hide-password">Hide</a> <span
-							class="cd-error-message">Error message here!</span>
+							id="mPasswordCheck" type="password"
+							placeholder="Password Confirm" value="${login_info.mpassword }" required> <a href="#0"
+							class="hide-password">보기</a> <span class="cd-error-message">Error
+							message here!</span>
 					</p>
+					<label
+							style="margin-top: ; margin-bottom: " id="pwcheck" name="pwcheck" class="alert-info">비밀번호가 일치합니다.</label>
+
 
 					<p class="fieldset">
-						<input type="checkbox" id="accept-terms"> <label
-							for="accept-terms">I agree to the <a href="#0">Terms</a></label>
-					</p>
-
-					<p class="fieldset">
-						<input class="full-width has-padding" type="submit"
-							value="Create account">
+						<input class="full-width has-padding" type="submit" value="정보 수정">
 					</p>
 				</form>
 
@@ -472,13 +586,13 @@
 					<div class="pc_view">
 						<br>
 						<div style="display: inline-block;">
-							<a class="cd-btn" href="#"><img height="130px"
+							<a class="cd-btn" href="<%=application.getContextPath()%>/file?msavedfilename=test.jpg&mfiletype=image/jpeg"><img height="130px"
 								src="<%=application.getContextPath()%>/resources/image/settings.png">
 								설치파일</a>
 						</div>
 
 						<div style="display: inline-block;">
-							<a href="http://codyhouse.co/?p=854" class="cd-btn"><img
+							<a href="<%=application.getContextPath()%>/file?msavedfilename=test.jpg&mfiletype=image/jpeg" class="cd-btn"><img
 								height="130px"
 								src="<%=application.getContextPath()%>/resources/image/library.png">
 
@@ -600,25 +714,6 @@
 				</nav>
 
 				<ul id="listContainer" class="cd-gallery cd-container">
-
-					<%-- <c:forEach var="s" items="${list}">
-						<div class="4u 12u$(medium)">
-							<a href='javascript:void(0);' onclick='controlYet();'>
-								<section class="box">
-									<img
-										src="<%=application.getContextPath()%>/file?ssavedfilename=${s.ssavedfilename}&sfilecontent=${s.sfilecontent}"
-										class="photo3" />
-									<h3>${s.sip}</h3>
-
-									<h3>${s.sname}</h3>
-									<h4 class="checkMid">${s.sregistor}</h4>
-									<p class="available" id="${s.sregistor}${s.sno}">
-										<img width="15px" src="resources/images/loading.gif" />
-									</p>
-								</section>
-							</a>
-						</div>
-					</c:forEach> --%>
 
 					<c:forEach var="d" items="${allList}" varStatus="status">
 						<li>
