@@ -401,7 +401,7 @@ function listRequest() {
 		ctx.stroke(); //테두리
 		
 		var json = {
-				"pitch" : String((5 * y) + 1000),
+				"pitch" : String(3000 - ((5 * y) + 1000)),
 				"roll" : String((5 * x) + 1000),
 				"dmacaddr" : '${drone.dmacaddr}'
 			};
@@ -412,7 +412,7 @@ function listRequest() {
 				data : json,
 				method : "post",
 				success : function(data) {
-					$("#ch2").html(String((5 * y) + 1000));
+					$("#ch2").html(String(3000 - ((5 * y) + 1000)));
 					$("#ch1").html(String((5 * x) + 1000));
 				}
 			});
@@ -442,7 +442,7 @@ function listRequest() {
 					ctx.stroke(); //테두리
 
 					var json = {
-						"pitch" : String((5 * y) + 1000),
+						"pitch" : String(3000 - ((5 * y) + 1000)),
 						"roll" : String((5 * x) + 1000),
 						"dmacaddr" : '${drone.dmacaddr}'
 					};
@@ -454,7 +454,7 @@ function listRequest() {
 						method : "post",
 						success : function(data) {
 							$("#ch2").html(
-									String((5 * y) + 1000));
+									String(3000 - ((5 * y) + 1000)));
 							$("#ch1").html(String((5 * x) + 1000));
 
 
@@ -486,7 +486,7 @@ function listRequest() {
 						ctx.fill(); //채우기
 						ctx.stroke(); //테두리
 						var json = {
-							"pitch" : String((5 * y) + 1000),
+							"pitch" : String(3000 - ((5 * y) + 1000)),
 							"roll" : String((5 * x) + 1000),
 							"dmacaddr" : '${drone.dmacaddr}'
 						};
@@ -498,7 +498,7 @@ function listRequest() {
 							method : "post",
 							success : function(data) {
 								$("#ch2").html(
-										String((5 * y) + 1000));
+										String(3000 - ((5 * y) + 1000)));
 								$("#ch1").html(String((5 * x) + 1000));
 
 
@@ -531,7 +531,7 @@ function listRequest() {
 					ctx.fill(); //채우기
 					ctx.stroke(); //테두리
 					var json = {
-							"pitch" : String((5 * y) + 1000),
+							"pitch" : String(3000 - ((5 * y) + 1000)),
 							"roll" : String((5 * x) + 1000),
 							"dmacaddr" : '${drone.dmacaddr}'
 					};
@@ -543,7 +543,7 @@ function listRequest() {
 						method : "post",
 						success : function(data) {
 							$("#ch2").html(
-									String((5 * y) + 1000));
+									String(3000 - ((5 * y) + 1000)));
 							$("#ch1").html(String((5 * x) + 1000));
 						}
 					});
@@ -574,7 +574,7 @@ function listRequest() {
 						ctx.fill(); //채우기
 						ctx.stroke(); //테두리
 						var json = {
-								"pitch" : String((5 * y) + 1000),
+								"pitch" : String(3000 - ((5 * y) + 1000)),
 								"roll" : String((5 * x) + 1000),
 								"dmacaddr" : '${drone.dmacaddr}'
 						};
@@ -586,7 +586,7 @@ function listRequest() {
 							method : "post",
 							success : function(data) {
 								$("#ch2").html(
-										String((5 * y) + 1000));
+										String(3000 - ((5 * y) + 1000)));
 								$("#ch1").html(String((5 * x) + 1000));
 							}
 						});
@@ -602,7 +602,7 @@ function listRequest() {
 	$(function() {
 		var isDragging = false;
 		var x = 50;
-		var y = 50;
+		var y = 0;
 		var cnvs = document.getElementById('myCanvas4');
 		var ctx = document.getElementById('myCanvas4').getContext("2d");
 
