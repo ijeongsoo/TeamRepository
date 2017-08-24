@@ -32,7 +32,7 @@ public class UdpThread implements Runnable{
 	public void run() {
 		try {
 			udpReceiver.getUdpStream();
-			System.out.printf("Listening on UDP :%s:%d%n", InetAddress.getLocalHost().getHostAddress(), udpReceiver.getLocalPort());
+//			System.out.printf("Listening on UDP :%s:%d%n", InetAddress.getLocalHost().getHostAddress(), udpReceiver.getLocalPort());
 			
 			while(true){
 				byte[] data = udpReceiver.readDataBlock();
@@ -76,10 +76,10 @@ public class UdpThread implements Runnable{
 			dInfo.setGroundSpeed(token[5]);
 			dInfo.setAltitude(token[7]);
 			dInfo.setHeading(token[11]);
-//			System.out.println(token[3]);
-//			System.out.println(token[5]);
+			System.out.println(token[3]);
+			System.out.println(token[5]);
 			System.out.println(token[7]);
-//			System.out.println(token[11]);
+			System.out.println(token[11]);
 		}
 		
 		if(msg.msgid == 178){
@@ -88,11 +88,11 @@ public class UdpThread implements Runnable{
 			dInfo.setYawSensor(token[7]);
 			dInfo.setLatitude(token[11]);
 			dInfo.setLongitude(token[13]);
-//			System.out.println(token[3]);
-//			System.out.println(token[5]);
-//			System.out.println(token[7]);
-//			System.out.println(token[11]);
-//			System.out.println(token[13]);
+			System.out.println(token[3]);
+			System.out.println(token[5]);
+			System.out.println(token[7]);
+			System.out.println(token[11]);
+			System.out.println(token[13]);
 		}
 	}
 }

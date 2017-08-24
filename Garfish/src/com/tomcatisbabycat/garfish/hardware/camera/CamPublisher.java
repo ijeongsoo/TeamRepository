@@ -1,6 +1,5 @@
 package com.tomcatisbabycat.garfish.hardware.camera;
 
-import com.tomcatisbabycat.garfish.device.DeviceInfo;
 import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.net.HttpURLConnection;
@@ -60,10 +59,10 @@ public class CamPublisher {
 					Hashtable httpHeaders = StreamSplit.readHeaders(httpURLConnection);		
 					
 					if(debug) {
-						System.err.println("<HTTP Header>");
+//						System.err.println("<HTTP Header>");
 						Set<String> kes = httpHeaders.keySet();
 						for(String key : kes) {
-							System.out.println(key + " = " + httpHeaders.get(key));
+//							System.out.println(key + " = " + httpHeaders.get(key));
 						}
 					}						
 					
@@ -77,7 +76,7 @@ public class CamPublisher {
 					
 					if (debug) {
 						Thread.sleep(500);
-						System.err.println("<HTTP Body>");
+//						System.err.println("<HTTP Body>");
 					}
 					
 					while (true) {
@@ -89,16 +88,16 @@ public class CamPublisher {
 						byte[] imageBytes = streamSplit.readToBoundary(boundary);
 						
 						if (debug) {
-							System.out.println(boundary);
+//							System.out.println(boundary);
 							for (Enumeration enm = partHeaders.keys(); enm.hasMoreElements();) {
 								String hkey = (String) enm.nextElement();
-								System.out.println(hkey + " = " + partHeaders.get(hkey));
+//								System.out.println(hkey + " = " + partHeaders.get(hkey));
 							}
-							System.out.println();
+//							System.out.println();
 							for(int i=0; i<50; i++) {
-								System.out.print(imageBytes[i]);
+//								System.out.print(imageBytes[i]);
 							}
-							System.out.println();
+//							System.out.println();
 						}
 						String base64 = encoder.encodeToString(imageBytes);
 						MqttMessage message = new MqttMessage(base64.getBytes("UTF-8"));
@@ -120,10 +119,5 @@ public class CamPublisher {
 			mqttClient.disconnect();
 			mqttClient.close();
 		} catch(Exception e) {}
-	}
-
-	public static void main(String[] args) throws Exception {
-		CamPublisher camPublisher = new CamPublisher("http://127.0.0.1:50001/?action=stream", "tcp://106.253.56.122:1883", "/camera", true);
-		camPublisher.start();
 	}
 }
