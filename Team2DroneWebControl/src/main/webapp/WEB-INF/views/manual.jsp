@@ -398,6 +398,8 @@
 					<div class="cd-faq-content">
 						<p>
 							<span style="font-size:20px">[ RC드론 이란 ]</span> <br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/Drone_1.jpg"><br><br>
+							
 							드론(Drone)이란 사람이 직접 타지 않으며 임무를 수행하는 무인비행기(UAV)로서 원격지에서 무인비행기에 설치된 카메라 영상을 통하여 조종을 하는데
 							최근에는 GPS시스템과 연계하여 지상에서 컴퓨터로도 완벽한 조종이 가능하게 되었습니다. <br><br>
 							기존의 단순 원격조종(RC)이라는 개념을 탈피한 드론은 관련 첨단 기술이 군사부분에서 민간부문으로 이관되었고 고가의 정밀 제어장치 등이 싼가격으로
@@ -409,12 +411,16 @@
 							  간단한 장치의 추가로 이 드론은 하늘의 감시자로서 군림하며 정해진 곳으로 이동하여 지상의 사람 얼굴을 인신하고 사진을 촬영하며 물건도 전해줄 수 있기 때문입니다.
 							  초기에 대테러 목적이나 군사적으로 사용된 만큼 첨단 드론이 각종 시위현장에서 사용된다면 개인 사생활은 물론이고 차후에 인권 침해의 논란도 잠식시킬 수 없을 것입니다.<br><br><br>
 							<span style="font-size:20px">[ 쿼드콥터 ]</span> <br><br>
-							<br>
-							<br>
 							   쿼드콥터란 영어 접두사 quad(4개)를 의미하며 모터가 4개로 돌아가는 드론을 말합니다.
 							  따라서 앞에 붙는 어원에 따라[Tri(3개), quad(4개), hexa(6개)]날개의 개수를
 							  알 수 있습니다. 그 다음 콥터 뒤에 나오는 +,x,H등은 드론의 모양을 설명해주는 것이므로
-							  날개의 배치 모양을 통해 +인지 x인지 기호를 써서 알려줍니다.
+							  날개의 배치 모양을 통해 +인지 x인지 기호를 써서 알려줍니다.<br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/quadcopter_2.png"><br>
+							[쿼드콥터의 모식도]<br><br><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/quadcopter.jpg"><br>
+							[쿼드콥터의  4채널 Transmitter]
+						
+							
 							
 						</p>
 					</div> <!-- cd-faq-content --></li>
@@ -499,7 +505,7 @@
 					<div class="cd-faq-content">
 						<p>
 
-							<span style="font-size:20px"> [ FPV 250 Kit ] </span><br>
+							<span style="font-size:20px"> [ 드론의 기본 구성 ] </span><br>
 							 프레임틀 / 변속기(ESC) / 브러시리스모터(brushless motor) / 드론배터리(리포배터리) / 프로펠러 / 배터리 전압분배 케이블<br>  
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_1.png"><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/component_2.png"><br>
@@ -509,17 +515,17 @@
 							<span style="font-size:20px"> 라즈베리파이 </span><br><br><br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/raspberryPi.jpg"><br><br><br>
 							
-							<span style="font-size:20px">[ 기타 추가 구성품 ]</span><br>
+							<span style="font-size:20px">[ 기타 추가 구성품 ]</span><br><br>
 
 							배터리 체커<br>
 						    <img src="<%=application.getContextPath()%>/resources/image/manual/checker.png"><br><br><br>
 							리시버(원격제어 수신기)<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/receiver.png"><br><br><br>
 							PPM encoder<br>
-<
-							<img src="<%=application.getContextPath()%>/resources/image/manual/ppm.jpg"><br>
+
+							<img src="<%=application.getContextPath()%>/resources/image/manual/ppm.jpg"><br><br><br>
 							PCA9685 <br>
-							<img src="<%=application.getContextPath()%>/resources/image/manual/PCA9685.jpg"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/PCA9685.jpg"><br><br>
 	
 						</p>
 					</div> <!-- cd-faq-content --></li>
@@ -555,7 +561,7 @@
 							- 변속기 셋팅이 비교적 어렵다.<br><br>
 							3. 모터 동작 원리<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.gif">       
-							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.jpg"><br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/brushless.jpg"><br><br>
 							DC모터와 달리 도선측이 고정되어 있고, 영구자석측이 회전하는 구조입니다. 자력선이 공기중에는 통과하기 어려우나 금속은
 							통과하기 쉽기때문에 회전력을 더욱 강하게 할 수 있습니다. 위 이미지처럼 바깥 축이 회전하고 가운데 축은 전자회로로 전극을 
 							빠르게 바꿔주며 회전력이 발생합니다.
@@ -648,7 +654,10 @@
 				<li><a class="cd-faq-trigger" href="#0">드론 조립 및 주의사항</a>
 					<div class="cd-faq-content">
 						<p>
-
+							<span style="font-size:20px">[ 회로 구성도 ]</span> <br><br>
+							Garfish 프로젝트의 드론 연결 구성도는 다음과 같습니다.
+							<img src="<%=application.getContextPath()%>/resources/image/manual/hardware.png"><br><br>
+							
 							<span style="font-size:20px">[ 드론 조립 ]</span> <br><br>
 							1. 드론 프레임에 모터를 고정시킵니다.<br>
 							<img src="<%=application.getContextPath()%>/resources/image/manual/assembly_1.png"><br><br>
@@ -714,7 +723,23 @@
 							- 라즈베리파이에서 발생된 pwm신호가 pca9685에서 ppm encoder로 전달되도록 연결합니다.<br>
 							- ppm encoder에서 ppm송신단과 Navio2의 ppm수신단을 연결합니다.<br>
 						</p>
-					</div> <!-- cd-faq-content --></li>
+					</div> 
+					</li>
+					
+					<li><a class="cd-faq-trigger" href="#0">하드웨어 설정</a>
+
+					<div class="cd-faq-content">
+						<p>
+							<span style="font-size:20px">[ 1. Raspbian 설치(Navio 제공) ]</span> <br><br>
+							<span style="font-size:20px">[ 2. 무선 wifi 설정  ]</span> <br><br>
+							<span style="font-size:20px">[ 3. System upgrade ]</span> <br><br>
+							<span style="font-size:20px">[ 4. 아두파일럿 setting ]</span> <br><br>
+							<span style="font-size:20px">[ 5. Launching option ]</span> <br><br>
+							<span style="font-size:20px">[ 6. GCS의 연결]</span> <br><br>
+							<span style="font-size:20px">[ 7. Drone configuration ]</span> <br><br>
+						</p>
+					</div> 
+					</li>
 			</ul>
 			<!-- cd-faq-group -->
 
