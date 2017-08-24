@@ -730,7 +730,7 @@
 
 					<div class="cd-faq-content">
 						<p>
-							<span style="font-size:20px">[ 1. Raspbian 설치(Navio 제공) ]</span> <br><br>
+							<span style="font-size:20px">[ 1. Raspbian 설치  ]</span> <br><br>
 							- Emlid raspbian 이미지 다운로드<br>
 							Navio는 Emlid에서 제공하는 Raspbian을 실행해야 합니다.
 							Emild는 Raspberry Pi 2 및 3에 대한 통합 SD 카드 이미지를 제공합니다. 
@@ -807,20 +807,110 @@
 							예를 들어 Navio 2에서 쿼드를 작성하고 ArduCopter-3.4를 사용하려면 15를 입력 한 다음  Enter키를 누릅니다. (*표시된 것은 default)<br><br><br>
 							
 							<span style="font-size:20px">[ 5. Launching option ]</span> <br><br>
-							ardupilot을 실행하기 위해 파일을 엽니다.<br><br>
+							- ardupilot 설정 <br><br>
+							ardupilot을 실행하기 위해 파일을 엽니다.<br>
 								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
 										pi@navio: ~ $ sudo nano /etc/default/arducopter
 								</span><br><br>
 								다음을 통해 현재 GCS(Ground Control Station)의 IP를 지정할 수 있습니다.<br>
 								<img src="<%=application.getContextPath()%>/resources/image/manual/ardu_3.png"><br>
-								'#'으로 표시된 모든 줄은 주석이며 아무런 효과가 없습니다.<br>
+								('#'으로 표시된 모든 줄은 주석이며 아무런 효과가 없습니다.)<br>
+								위 설정창은 GCS가 필요로 하는 Navio2의 data를 지정된 GCS의 IP로 보내줄 것을 설정하는 것입니다.<br>
 								예를 들어, 다음과 같이 IP를 가리 키도록 TELEM1을 수정해야합니다.<br>
 								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
 										TELEM1= "- udp : 192.168.1.2 : 14550"
 								</span><br>
 								"192.168.1.2"는 GCS가 있는 장치(노트북, 스마트 폰 등)의 IP 주소입니다.<br><br>
+								
+								<span style="color: #DE5246; font-weight:bold">
+										[ 주의사항 ]
+								</span>
+								<br>
+								 여러개 TELEM을 등록하는 것은 가능하지만 실제 사용시, 등록된 TELEM을 처음으로 접속한 TELEM에게만 data가 전송됩니다.
+								 이와 같은 특성을 고려하여, 우리의 프로그램을 사용할 때에는 local GCS가 됩니다. 
+								 즉 자신의 IP를 TELEM으로 지정하고 해당 data를  MAV proxy를 통해 여러 GCS에 전달해줍니다.<br><br>
+								  *MAV proxy는 이후 자세히 설명될 예정입니다.<br><br>
+							- ardupilot configuration reload<br>
+							이전 단계에서 무언가를 변경 한 경우, systemd가 제대로 작동하도록 configuration을 reload해야합니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ sudo systemctl daemon-reload
+								</span><br><br>
+							- ardupilot 시작하기	<br>
+							이제 ArduPilot을 시작할 수 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ sudo systemctl start arducopter
+								</span><br><br>
+								다음을 통해 실행을 중지할 수 있습니다<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ sudo systemctl stop arducopter
+								</span><br><br>
+							- 부팅시 ardupilot 자동실행<br>
+							부팅시 ArduPilot을 자동으로 시작하려면 다음을 활성화해야합니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ sudo systemctl enable arducopter
+								</span><br><br>
+							자동 시작을 비활성화하려면 다음을 수행하십시오.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ sudo systemctl disable arducopter
+								</span><br><br>
+							ArduPilot이 이미 활성화되어 있는지 확인할 수 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pi@navio: ~ $ systemctl is-enabled arducopter
+								</span><br><br>
+								  
+								 <br>
 							<span style="font-size:20px">[ 6. GCS의 연결]</span> <br><br>
+							
+							GCS의 종류 <br> <br>
+							<span style=" font-weight:bold">
+							Mission Planner
+							</span><br>
+							Windows 전용 GCS이며, 가장 널리 쓰입니다.<br><br>
+							
+							<span style=" font-weight:bold">
+							QGroundControl 
+							</span><br>
+							Mavlink 기반 비행 스택 (Ardupilot와 같은)을 위한 crossplatform GCS입니다.<br><br>
+							
+							<span style=" font-weight:bold">
+							APM Planner 
+							</span><br>
+							APM Planner는 ArduPilot의 GCS소프트웨어입니다. <br>
+							
+							<a href="https://docs.emlid.com/navio2/common/ardupilot/configuring-raspberry-pi/">ardupilot.com</a>
+							에서 다운로드 할 수 있습니다.<br>
+							APM Planner는 UDP 포트 14550에서 수신하므로 무인 항공기의 원격 측정을 자동으로 포착해야합니다.<br><br>
+
+							<span style=" font-weight:bold">
+							MAVProxy 
+							</span><br><br>
+							- MAVProxy란<br>
+							MAVProxy는 Python으로 작성된 콘솔 기반의 GCS소프트웨어이며, 고급 사용자 및 개발자에게 적합합니다.<br><br>
+							
+							- MAVProxy 설치 및 실행  <br>
+								
+								<a href="http://ardupilot.github.io/MAVProxy/html/getting_started/download_and_installation.html">MAVProxy 설치 및 실행</a>
+								하려면 다운로드 및 설치 지침을 사용하십시오.<br><br>
+								[리눅스일때 MAVProxy 설치법]<br>
+								첫째, 몇 가지 사전 필수 패키지를 설치해야합니다.<br>
+								데비안 기반의 시스템에서, 아래 사항을 입력한다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											sudo apt-get install python-dev python-opencv python-wxgtk3.0 python-pip python-matplotlib python-pygame python-lxml
+								</span><br><br>
+							
+								실행하려면 직렬 포트, TCP 포트 또는 UDP 포트가 될 수있는 --master 포트를 지정하십시오. 또한 --out 옵션을 사용하여 데이터 패스 스루를 수행 할 수 있습니다.
+								<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										pi@navio: ~ $ mavproxy.py --master 192.168.1.2:14550 --console
+								</span><br>
+								(여기서 192.168.1.2는 RPi가 아니라 GCS의 IP 주소입니다.)
+								
+								<br><br><br>
+							
 							<span style="font-size:20px">[ 7. Drone configuration ]</span> <br><br>
+							참고 링크 : 
+							<a href="https://hackaday.io/project/16352/instructions">MAVProxy 설치 및 실행</a>
+							<br><br>
 						</p>
 					</div> 
 					</li>
