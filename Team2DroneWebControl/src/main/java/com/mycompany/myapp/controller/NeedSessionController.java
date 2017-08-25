@@ -1,5 +1,8 @@
 package com.mycompany.myapp.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletContext;
@@ -44,7 +47,8 @@ public class NeedSessionController {
 
 	@RequestMapping("/control")
 	public String control(@ModelAttribute Member login_info, Model model, String dmacaddr) {
-		model.addAttribute("dmacaddr", dmacaddr);
+		Drone drone = service.getDrone(dmacaddr);
+		model.addAttribute("drone", drone);
 		return "control";
 	}
 
@@ -69,10 +73,55 @@ public class NeedSessionController {
 		return "deleteConfirm";
 	}
 	
+	@RequestMapping("/deviceUpdate")
+	public String deviceUpdate(@ModelAttribute Member login_info, Model model,String dmacaddr) {
+		Drone drone = service.getDrone(dmacaddr);
+		model.addAttribute("drone", drone);
+		
+		return "deviceUpdate";
+	}
+	
+	@RequestMapping("/updateDevice")
+	public String updateDevice(@ModelAttribute Member login_info, Drone drone) throws IllegalStateException, IOException {
+		if (!drone.getDattach().isEmpty()) {
+			drone.setDoriginalfilename(drone.getDattach().getOriginalFilename());
+			drone.setDfilecontent(drone.getDattach().getContentType());
+			String fileName = new Date().getTime() + "-" + drone.getDoriginalfilename();
+			drone.setDsavedfilename(fileName);
+
+			String realPath = servletContext.getRealPath("/WEB-INF/upload/");
+			File file = new File(realPath + fileName);
+			drone.getDattach().transferTo(file);
+		}
+
+		service.deviceUpdate(drone);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/updateMember")
+	public String updateMember(@ModelAttribute Member login_info, Member member, Model model) throws IllegalStateException, IOException {
+		if (!member.getMattach().isEmpty()) {
+			member.setMoriginalfilename(member.getMattach().getOriginalFilename());
+			member.setMfiletype(member.getMattach().getContentType());
+			String fileName = new Date().getTime() + "-" + member.getMoriginalfilename();
+			member.setMsavedfilename(fileName);
+
+			String realPath = servletContext.getRealPath("/WEB-INF/upload/");
+			File file = new File(realPath + fileName);
+			member.getMattach().transferTo(file);
+		}
+
+		service.memberUpdate(member);
+		member = service.getMember(member.getMid());
+		model.addAttribute("login_info",member);
+		return "redirect:/";
+	}
+	
+	
+	
 	@RequestMapping("/deleteDevice")
 	public String deleteDevice(@ModelAttribute Member login_info, Model model,String dmacaddr) {
 		
-		System.out.println(dmacaddr+"aaa");
 		service.deleteDevice(dmacaddr);
 		
 		return "redirect:/";

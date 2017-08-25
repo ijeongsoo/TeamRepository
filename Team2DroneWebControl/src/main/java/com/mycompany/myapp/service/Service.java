@@ -28,6 +28,9 @@ public interface Service {
 	public List<Drone> roverList(String mid);
 	public List<Drone> planeList(String mid);
 	public void deleteDevice(String dmacaddr);
+	public Drone getDrone(String dmacaddr);
+	public void deviceUpdate(Drone drone);
+
 
 
 }
