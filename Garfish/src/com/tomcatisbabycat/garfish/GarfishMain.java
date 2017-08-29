@@ -37,7 +37,7 @@ public class GarfishMain {
 			System.out.println("프로그램을 시작합니다.");
 			deviceInfo.makeTopic();
 			deviceInfo.setLocalUsedIP();
-			camPublisher = new CamPublisher("http://192.168.0.3:50001/?action=stream", "tcp://106.253.56.122:1883", deviceInfo.getMtCamera(), true);
+			camPublisher = new CamPublisher("http://localhost/?action=stream", "tcp://106.253.56.122:1883", deviceInfo.getMtCamera(), true);
 			camPublisher.start();
 			
 			new Thread(udp).start();
@@ -69,7 +69,7 @@ public class GarfishMain {
 				System.out.println("프로그램을 시작합니다.");
 				deviceInfo.makeTopic();
 				deviceInfo.setLocalUsedIP();
-				camPublisher = new CamPublisher("http://192.168.0.3:50001/?action=stream", "tcp://106.253.56.122:1883", deviceInfo.getMtCamera(), true);
+				camPublisher = new CamPublisher("http://localhost:50001/?action=stream", "tcp://106.253.56.122:1883", deviceInfo.getMtCamera(), true);
 				camPublisher.start();
 				
 				new Thread(udp).start();
