@@ -193,6 +193,38 @@
 		<a href="#maincontent">Skip to main content</a>
 	</div>
 
+	<!-- Navigation -->
+	<nav id="mainNav"
+		class="navbar navbar-default navbar-fixed-top navbar-custom main-nav">
+		<div class="container">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header page-scroll">
+				<button type="button" class="navbar-toggle" data-toggle="collapse"
+					data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span> Menu <i
+						class="fa fa-bars"></i>
+				</button>
+				<a class="navbar-brand" href="<%=application.getContextPath()%>/">Garfish Project</a>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="hidden"><a href="#page-top"></a></li>
+					<li class="page-scroll"><a href="join" onclick="joinRequest()">회원가입</a></li>
+					<li class="page-scroll"><a class="cd-signin" href="#0">로그인</a></li>
+					<li class="page-scroll"><a href="comunity" onclick="communityRequest()">Community</a></li>
+
+				</ul>
+
+			</div>
+			<!-- /.navbar-collapse -->
+		</div>
+		<!-- /.container-fluid -->
+	</nav>
+
+
 	
 
 	
@@ -326,7 +358,7 @@
 	<section class="cd-faq">
 	
 		
-		<ul class="cd-faq-categories">
+		<ul class="cd-faq-categories" >
 		<li><a class="selected" href="#basics">RC 소개</a></li>
 			<li><a href="#mobile">드론 소개</a></li>
 			<li><a href="#account">하드웨어 설정</a></li>
@@ -897,9 +929,33 @@
 								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
 											sudo apt-get install python-dev python-opencv python-wxgtk3.0 python-pip python-matplotlib python-pygame python-lxml
 								</span><br><br>
-							
-								실행하려면 직렬 포트, TCP 포트 또는 UDP 포트가 될 수있는 --master 포트를 지정하십시오. 또한 --out 옵션을 사용하여 데이터 패스 스루를 수행 할 수 있습니다.
-								<br>
+								그런 다음 Pypi를 통해 MAVProxy를 다운로드하고 설치하십시오. 선결제도 자동으로 다운로드됩니다. 설치가 오류를 생성하는 경우에는 경우에 따라 sudo가 필요할 수 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											pip  install  MAVProxy
+								</span><br><br>
+								사용자 및 시스템 설정에 따라 약간의 추가 구성이 필요할 수 있습니다. 아직 설정하지 않은 경우 MAVProxy가 시스템 경로에 있어야합니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											echo  "export PATH = $ PATH : $ HOME / .local / bin"  >>  ~ /. bashrc
+								</span><br><br>
+								직렬 장치에 대한 액세스를 허용하려면 사용자 권한을 변경해야 할 수도 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+											sudo adduser &lt;username&gt; dialout
+								</span><br><br>
+								위의 두 가지 변경 사항을 적용하려면 시스템을 로그 아웃하고 다시 로그인해야합니다.
+								<br><br>
+								[리눅스일때 MAVProxy 실행법]<br>
+								 MAVProxy는 연결할 USB 포트 또는 네트워크 주소의 주소 만 필요합니다.<br>
+								직렬 포트, TCP 포트 또는 UDP 포트가 될 수있는 --master 포트를 지정하십시오. 또한 --out 옵션을 사용하여 data passthrough를 수행 할 수 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										mavproxy . py  - master = / dev / ttyUSB0
+								</span><br><br>
+								
+								일반적으로 MAVProxy는 올바른 baud rate를 자동 감지합니다. 필요한 경우 전송 속도를 수동으로 지정할 수 있습니다.<br>
+								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
+										mavproxy.py --master=/dev/ttyUSB0 --baudrate=57600
+								</span><br><br>
+								
+								다음을 통해 MAVProxy를 실행합니다.<br>
 								<span style="background-color: #F7F7F7; height: 25px; width: 100%;">
 										pi@navio: ~ $ mavproxy.py --master 192.168.1.2:14550 --console
 								</span><br>
@@ -907,10 +963,56 @@
 								
 								<br><br><br>
 							
-							<span style="font-size:20px">[ 7. Drone configuration ]</span> <br><br>
-							참고 링크 : 
-							<a href="https://hackaday.io/project/16352/instructions">MAVProxy 설치 및 실행</a>
-							<br><br>
+							<span style="font-size:20px">[ 7. Mission planner를 이용한 Drone configuration ]</span> <br><br>
+							
+							
+							Mission planner를 이용하여 드론 configuration할때, 
+							참고링크에서는 transmitter를 이용하지만 Garfish프로젝트에서는 웹페이지상에 제어페이지에서 가능하도록 설계되어 있습니다.
+							그러므로 캘리브레이션이나 간단한 테스트 및 실제 주행테스트 등을 할때에도 해당 제어페이지를 이용할 수 있습니다.<br><br>
+							
+							<span style=" font-weight:bold">
+							[리시버 바인딩 작업]
+							</span><br><br>
+							<a href="https://hackaday.io/project/16352/instructions">유튜브 영상</a>을 참고하여 수신기 바인딩(receiver binding) 작업을 수행합니다.<br><br>
+							
+							<span style=" font-weight:bold">
+							[캘리브레이션(calibration)]
+							</span><br><br>
+							RC와 TX가 바운드되면 자동 조종 장치를 캘리브레이션 할 차례입니다.<br>
+							1. USB 포트에서 라즈베리 파이를 켭니다.<br>
+							2. ardupilot이 자동으로 시작되는지 확인하십시오. NAVIO2 상단의 LED가 깜박이기 시작해야합니다.<br>
+							3. 노트북에 원격 측정을 전송하는지 확인하십시오. 아직 수행하지 않았다면 이전 단계를 참조하십시오.<br>							
+							4. Mission Planner(또는 바람직한 GCS) 실행합니다.<br>							
+							5. 송신기가 작동하고 X8R LED가 녹색인지 확인하십시오. (참고 : RX와 TX 간의 연결이 서로 너무 가까우면 연결이 잘못 될 수 있습니다).<br>							
+							6. 초기 설정 -> 필수 하드웨어 -> 
+							<a href="http://ardupilot.org/copter/docs/common-radio-control-calibration.html">캘리브레이션</a>
+							 으로 이동하십시오.<br>
+							 <img src="<%=application.getContextPath()%>/resources/image/manual/calibration.png"><br><br>
+							 
+							 <span style=" font-weight:bold">
+							[가속도계 및 나침반 교정의 교정]
+							</span><br><br>
+							다음 설정을 구성하는 것이 필요합니다. (Initial Setup-> Mandatory)<br>
+							1. 프레임 유형 : 우리의 경우 'X'형 드론<br>
+							2. Accel calibration.<br>
+							가속도계를 성공적으로 구성하려면 매끄러운 표면이 필요합니다. 측정 수준을 사용하는 것이 좋습니다. "Calibrate Accel"버튼을 누른 후 지침을 따르십시오.<br>
+							(주의사항 : Accel calibration은 APMPlanner가 작동하지 않을 수 있습니다. 이 GCS로 헬리콥터를 조정할 수 없었습니다.)<br>
+							3. 나침반 설정 <br>
+							<img src="<%=application.getContextPath()%>/resources/image/manual/calibration_1.png"><br><br>
+							필수 하드웨어의 "Compass"로 이동하고 "General Compass Settings"에서 Primary Compass의 Compass2를 선택하십시오. 그런 다음 Compass1에서 "이 Compass 사용"의 선택을 해제하고 Compass2에 대해이 매개 변수를 선택하십시오. 이를 캘리브레이션하려면 "Onboard Mag Calibration"에서 "Start"를 누르십시오. 그런 다음 NAVIO2로 다음 영상에서처럼 헬기를 움직입니다.  
+								<br><br>
+							[ 나침반 설정 참고 영상 : <a href="https://youtu.be/DmsueBS0J3E">나침반 설정</a> ]
+								<br><br>
+							캘리브레이션 후 Raspberry Pi를 재부팅하십시오. Ardupilot이 Mission Planner에 다시 연결될 때까지 재부팅하는 동안 Compass창에 있어야합니다.
+							비행 데이터 창에서 캘리브레이션이 성공적으로 이루어지면 경고 메시지가 표시되지 않습니다.
+							<br><br><br>
+					
+							Drone configuration의 참고 링크 : 
+							<a href="https://hackaday.io/project/16352/instructions">
+							 <span style=" font-weight:bold">
+							Mission planner 이용 참고 페이지
+							</span>
+							</a><br><br>
 						</p>
 					</div> 
 					</li>
@@ -918,7 +1020,7 @@
 			<!-- cd-faq-group -->
 
 			<ul id="payments" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Account</h2></li>
+				<li class="cd-faq-title"><h2>소프트웨어 설정</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">How do I change my
 						password?</a>
 					<div class="cd-faq-content">
@@ -983,57 +1085,77 @@
 			<!-- cd-faq-group -->
 
 			<ul id="payments" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Payments</h2></li>
-				<li><a class="cd-faq-trigger" href="#0">Can I have an
-						invoice for my subscription?</a>
+				<li class="cd-faq-title"><h2>웹페이지 안내</h2></li>
+				<li><a class="cd-faq-trigger" href="#0">웹페이지 소개</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
+						<p>
+							<span style=" font-weight:bold">
+							Welcome to Garfish Webpage 
+							</span>	<br>
+							RC에 관심이 있고 이용중인 사람이라면 누구라도 해당 웹페이지에 가입 후, 자신의 RC를 등록하여 제어할 수 있는 오픈 제어 홈페이지 입니다.	
+							자신의 RC의 IP만 안다면 어느 장소에서든 해당 홈페이지로 제어가 가능합니다. 원격으로 RC를 조작할 수 있고 실시간 현황을 받아볼 수 있는 진정한 IoT프로젝트 구현 페이지입니다.<br><br>
+							지금부터 홈페이지 이용방법에 대해 알아봅시다.
+							<img src="<%=application.getContextPath()%>/resources/image/manual/web_2.png"><br>
+						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">Why did my credit
-						card or PayPal payment fail?</a>
+				<li><a class="cd-faq-trigger" href="#0">메인 홈</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Tenetur accusantium dolorem vel, ad, nostrum natus eos, nemo
-							placeat quos nisi architecto rem dolorum amet consectetur
-							molestiae reprehenderit cum harum commodi beatae necessitatibus.
-							Mollitia a nostrum enim earum minima doloribus illum autem,
-							provident vero et, aspernatur quae sunt illo dolorem. Corporis
-							blanditiis, unde, neque, adipisci debitis quas ullam accusantium
-							repudiandae eum nostrum quis! Velit esse harum qui, modi ratione
-							debitis alias laboriosam minus eaque, quod, itaque labore illo
-							totam aut quia fuga nemo. Perferendis ipsa laborum atque
-							assumenda tempore aspernatur a eos harum non id commodi excepturi
-							quaerat ullam, explicabo, incidunt ipsam, accusantium quo magni
-							ut! Ratione, magnam. Delectus nesciunt impedit praesentium sed,
-							aliquam architecto dolores quae, distinctio consectetur obcaecati
-							esse, consequuntur vel sit quis blanditiis possimus dolorum.
-							Eaque architecto doloremque aliquid quae cumque, vitae
-							perferendis enim, iure fugiat, soluta aut!</p>
+						<p>
+						[상단바 메뉴]<br>아래 그림에 해당하는 번호대로 설명하겠습니다.<br><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_1.png"><br>
+						1. 홈페이지 이름 - 클릭시 메인홈으로 이동<br><br>
+						
+						2. 회원가입 메뉴 - 클릭시 회원가입창으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_3.png"><br>
+						2-1. 회원가입양식에 맞게 작성후 가입버튼을 누르면 메인 홈으로 넘어갑니다. <br>
+						2-2. 회원가입 아이디는 편의상 이메일로 작성합니다.<br><br>
+						
+						3. 로그인 메뉴 - 클릭시 로그인 모달창이 활성화<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_4.png"><br><br>
+						3-1. 로그인을 마치면 아래 화면으로 로그인 됩니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_5.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_7.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_6.png"><br><br>
+						3-2. 회원정보수정 버튼을 누르면 아래의 모달창이 활성화됩니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_8.png"><br><br>
+						
+						
+						
+						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">Why does my bank
-						statement show multiple charges for one upgrade?</a>
+				<li><a class="cd-faq-trigger" href="#0">제어 및 현황 페이지</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
+						<p>
+						1. 로그인 후 다음과 같은 창이 뜬 후에 등록된 RC를 클릭하여 제어를 할 수 있습니다.
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_5.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_7.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_6.png"><br>
+						</p>
+					</div> <!-- cd-faq-content --></li>
+					
+					<li><a class="cd-faq-trigger" href="#0">기타 페이지</a>
+					<div class="cd-faq-content">
+						<p>
+						[기타페이지]<br>아래 그림에 해당하는 번호대로 설명하겠습니다.<br><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_9.png"><br><br>
+						1. 홈버튼 <br><br>
+						2. 설치파일 및 라이브러리 다운로드 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_10.png"><br><br>
+						3. 사용설명서 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_11.png"><br><br>
+						3-1. Learn more를 클릭하면 아래 페이지로 링크됩니다. 해당 페이지에서는 프로젝트의 개요에서 설정 및 주의사항 까지 자세하게 안내되어 있습니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_12.png"><br><br>
+						4. 개발자 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_13.png"><br><br>
+						</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
 			<!-- cd-faq-group -->
 
 			<ul id="privacy" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Privacy</h2></li>
+				<li class="cd-faq-title"><h2>기타</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">Can I specify my
 						own private key?</a>
 					<div class="cd-faq-content">
@@ -1086,103 +1208,7 @@
 							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
-			<!-- cd-faq-group -->
-
-			<ul id="delivery" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Delivery</h2></li>
-				<li><a class="cd-faq-trigger" href="#0">What should I do if
-						my order hasn't been delivered yet?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How can I find your
-						international delivery information?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">Who takes care of
-						shipping?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How do returns or
-						refunds work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How do I use
-						shipping profiles?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How does your UK
-						Next Day Delivery service work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How does your Next
-						Day Delivery service work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">When will my order
-						arrive?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">When will my order
-						ship?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-			</ul>
+		
 			<!-- cd-faq-group -->
 		</div>
 		<!-- cd-faq-items -->

@@ -487,5 +487,10 @@ public class AnywayController {
 
 	}
 	
+	@RequestMapping("/manual")
+	public String manual() {
+		return "manual";
+	}
+	
 
 }
