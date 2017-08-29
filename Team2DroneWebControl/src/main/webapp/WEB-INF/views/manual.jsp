@@ -358,7 +358,7 @@
 	<section class="cd-faq">
 	
 		
-		<ul class="cd-faq-categories" style="top:30">
+		<ul class="cd-faq-categories" >
 		<li><a class="selected" href="#basics">RC 소개</a></li>
 			<li><a href="#mobile">드론 소개</a></li>
 			<li><a href="#account">하드웨어 설정</a></li>
@@ -1020,7 +1020,7 @@
 			<!-- cd-faq-group -->
 
 			<ul id="payments" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Account</h2></li>
+				<li class="cd-faq-title"><h2>소프트웨어 설정</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">How do I change my
 						password?</a>
 					<div class="cd-faq-content">
@@ -1085,57 +1085,77 @@
 			<!-- cd-faq-group -->
 
 			<ul id="payments" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Payments</h2></li>
-				<li><a class="cd-faq-trigger" href="#0">Can I have an
-						invoice for my subscription?</a>
+				<li class="cd-faq-title"><h2>웹페이지 안내</h2></li>
+				<li><a class="cd-faq-trigger" href="#0">웹페이지 소개</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
+						<p>
+							<span style=" font-weight:bold">
+							Welcome to Garfish Webpage 
+							</span>	<br>
+							RC에 관심이 있고 이용중인 사람이라면 누구라도 해당 웹페이지에 가입 후, 자신의 RC를 등록하여 제어할 수 있는 오픈 제어 홈페이지 입니다.	
+							자신의 RC의 IP만 안다면 어느 장소에서든 해당 홈페이지로 제어가 가능합니다. 원격으로 RC를 조작할 수 있고 실시간 현황을 받아볼 수 있는 진정한 IoT프로젝트 구현 페이지입니다.<br><br>
+							지금부터 홈페이지 이용방법에 대해 알아봅시다.
+							<img src="<%=application.getContextPath()%>/resources/image/manual/web_2.png"><br>
+						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">Why did my credit
-						card or PayPal payment fail?</a>
+				<li><a class="cd-faq-trigger" href="#0">메인 홈</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Tenetur accusantium dolorem vel, ad, nostrum natus eos, nemo
-							placeat quos nisi architecto rem dolorum amet consectetur
-							molestiae reprehenderit cum harum commodi beatae necessitatibus.
-							Mollitia a nostrum enim earum minima doloribus illum autem,
-							provident vero et, aspernatur quae sunt illo dolorem. Corporis
-							blanditiis, unde, neque, adipisci debitis quas ullam accusantium
-							repudiandae eum nostrum quis! Velit esse harum qui, modi ratione
-							debitis alias laboriosam minus eaque, quod, itaque labore illo
-							totam aut quia fuga nemo. Perferendis ipsa laborum atque
-							assumenda tempore aspernatur a eos harum non id commodi excepturi
-							quaerat ullam, explicabo, incidunt ipsam, accusantium quo magni
-							ut! Ratione, magnam. Delectus nesciunt impedit praesentium sed,
-							aliquam architecto dolores quae, distinctio consectetur obcaecati
-							esse, consequuntur vel sit quis blanditiis possimus dolorum.
-							Eaque architecto doloremque aliquid quae cumque, vitae
-							perferendis enim, iure fugiat, soluta aut!</p>
+						<p>
+						[상단바 메뉴]<br>아래 그림에 해당하는 번호대로 설명하겠습니다.<br><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_1.png"><br>
+						1. 홈페이지 이름 - 클릭시 메인홈으로 이동<br><br>
+						
+						2. 회원가입 메뉴 - 클릭시 회원가입창으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_3.png"><br>
+						2-1. 회원가입양식에 맞게 작성후 가입버튼을 누르면 메인 홈으로 넘어갑니다. <br>
+						2-2. 회원가입 아이디는 편의상 이메일로 작성합니다.<br><br>
+						
+						3. 로그인 메뉴 - 클릭시 로그인 모달창이 활성화<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_4.png"><br><br>
+						3-1. 로그인을 마치면 아래 화면으로 로그인 됩니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_5.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_7.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_6.png"><br><br>
+						3-2. 회원정보수정 버튼을 누르면 아래의 모달창이 활성화됩니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_8.png"><br><br>
+						
+						
+						
+						</p>
 					</div> <!-- cd-faq-content --></li>
 
-				<li><a class="cd-faq-trigger" href="#0">Why does my bank
-						statement show multiple charges for one upgrade?</a>
+				<li><a class="cd-faq-trigger" href="#0">제어 및 현황 페이지</a>
 					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
+						<p>
+						1. 로그인 후 다음과 같은 창이 뜬 후에 등록된 RC를 클릭하여 제어를 할 수 있습니다.
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_5.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_7.png"><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_6.png"><br>
+						</p>
+					</div> <!-- cd-faq-content --></li>
+					
+					<li><a class="cd-faq-trigger" href="#0">기타 페이지</a>
+					<div class="cd-faq-content">
+						<p>
+						[기타페이지]<br>아래 그림에 해당하는 번호대로 설명하겠습니다.<br><br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_9.png"><br><br>
+						1. 홈버튼 <br><br>
+						2. 설치파일 및 라이브러리 다운로드 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_10.png"><br><br>
+						3. 사용설명서 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_11.png"><br><br>
+						3-1. Learn more를 클릭하면 아래 페이지로 링크됩니다. 해당 페이지에서는 프로젝트의 개요에서 설정 및 주의사항 까지 자세하게 안내되어 있습니다.<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_12.png"><br><br>
+						4. 개발자 버튼 - 클릭시 아래 화면으로 이동<br>
+						<img src="<%=application.getContextPath()%>/resources/image/manual/web_13.png"><br><br>
+						</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
 			<!-- cd-faq-group -->
 
 			<ul id="privacy" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Privacy</h2></li>
+				<li class="cd-faq-title"><h2>기타</h2></li>
 				<li><a class="cd-faq-trigger" href="#0">Can I specify my
 						own private key?</a>
 					<div class="cd-faq-content">
@@ -1188,103 +1208,7 @@
 							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
 					</div> <!-- cd-faq-content --></li>
 			</ul>
-			<!-- cd-faq-group -->
-
-			<ul id="delivery" class="cd-faq-group">
-				<li class="cd-faq-title"><h2>Delivery</h2></li>
-				<li><a class="cd-faq-trigger" href="#0">What should I do if
-						my order hasn't been delivered yet?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How can I find your
-						international delivery information?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">Who takes care of
-						shipping?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How do returns or
-						refunds work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Impedit quidem delectus rerum eligendi mollitia, repudiandae quae
-							beatae. Et repellat quam atque corrupti iusto architecto impedit
-							explicabo repudiandae qui similique aut iure ipsum quis inventore
-							nulla error aliquid alias quia dolorem dolore, odio excepturi
-							veniam odit veritatis. Quo iure magnam, et cum. Laudantium, eaque
-							non? Tempore nihil corporis cumque dolor ipsum accusamus sapiente
-							aliquid quis ea assumenda deserunt praesentium voluptatibus,
-							accusantium a mollitia necessitatibus nostrum voluptatem numquam
-							modi ab, sint rem.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How do I use
-						shipping profiles?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How does your UK
-						Next Day Delivery service work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">How does your Next
-						Day Delivery service work?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">When will my order
-						arrive?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-
-				<li><a class="cd-faq-trigger" href="#0">When will my order
-						ship?</a>
-					<div class="cd-faq-content">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-							Blanditiis provident officiis, reprehenderit numquam. Praesentium
-							veritatis eos tenetur magni debitis inventore fugit, magnam,
-							reiciendis, saepe obcaecati ex vero quaerat distinctio velit.</p>
-					</div> <!-- cd-faq-content --></li>
-			</ul>
+		
 			<!-- cd-faq-group -->
 		</div>
 		<!-- cd-faq-items -->
