@@ -586,13 +586,13 @@
 					<div class="pc_view">
 						<br>
 						<div style="display: inline-block;">
-							<a class="cd-btn" href="<%=application.getContextPath()%>/file?msavedfilename=test.jpg&mfiletype=image/jpeg"><img height="130px"
+							<a class="cd-btn" href="<%=application.getContextPath()%>/file?msavedfilename=Garfish.tar.gz&mfiletype=application/x-gzip"><img height="130px"
 								src="<%=application.getContextPath()%>/resources/image/settings.png">
 								설치파일</a>
 						</div>
 
 						<div style="display: inline-block;">
-							<a href="<%=application.getContextPath()%>/file?msavedfilename=test.jpg&mfiletype=image/jpeg" class="cd-btn"><img
+							<a href="<%=application.getContextPath()%>/file?msavedfilename=Garfish.jar&mfiletype=application/java-archive" class="cd-btn"><img
 								height="130px"
 								src="<%=application.getContextPath()%>/resources/image/library.png">
 

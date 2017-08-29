@@ -71,6 +71,7 @@ public class NotNeedSessionController {
 		member.setMfiletype(member.getMattach().getContentType());
 		String fileName = new Date().getTime() + "-" + member.getMoriginalfilename();
 		member.setMsavedfilename(fileName);
+		System.out.println(member.getMfiletype());
 		
 		String realPath = servletContext.getRealPath("/WEB-INF/upload/");
 		File file = new File(realPath +"/"+ fileName);
