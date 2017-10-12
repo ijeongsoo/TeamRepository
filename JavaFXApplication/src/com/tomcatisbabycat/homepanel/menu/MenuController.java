@@ -67,6 +67,17 @@ public class MenuController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		System.gc();
+		
+		btnCCTV.setFocusTraversable(false);
+		btnCondition.setFocusTraversable(false);
+		btnConsume.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		btnLight.setFocusTraversable(false);
+		btnNotice.setFocusTraversable(false);
+		btnSchedule.setFocusTraversable(false);
+		btnSetting.setFocusTraversable(false);
+		
 		btnControlHome.setOnAction(event -> {
 			handleBtnControlHome(event);
 		});

@@ -73,6 +73,15 @@ public class ScheduleController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		lblHide.toFront();
+		
+		btnAdd.setFocusTraversable(false);
+		btnAirCondition.setFocusTraversable(false);
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		btnLight.setFocusTraversable(false);
+		btnTV.setFocusTraversable(false);
+		btnWashingMachine.setFocusTraversable(false);
 
 		btnControlLock.setOnAction(event -> {
 			handleBtnControlLock(event);

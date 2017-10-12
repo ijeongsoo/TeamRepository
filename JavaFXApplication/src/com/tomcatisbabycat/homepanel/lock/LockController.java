@@ -146,7 +146,7 @@ public class LockController implements Initializable {
 		animationTL.setCycleCount(Animation.INDEFINITE);
 		animationTL.play();
 
-		PauseTransition delay = new PauseTransition(Duration.seconds(10000));
+		PauseTransition delay = new PauseTransition(Duration.seconds(5));
 		PauseTransition delay2 = new PauseTransition(Duration.seconds(5));
 		delay2.setOnFinished((e2) -> {
 			MainController.mainThreadInterrupt();
@@ -155,7 +155,8 @@ public class LockController implements Initializable {
 
 			} else if (((StackPane) lockRootPane.getChildren().get(0)).getId().equals("consumeStackPane")) {
 				ConsumeController.stopthread();
-
+			}else if(((StackPane) lockRootPane.getChildren().get(0)).getId().equals("lightStackPane")){
+				((StackPane) lockRootPane.getChildren().get(0)).setVisible(false);
 			}
 			LockController.lockRootPane.getChildren().remove(0);
 		});

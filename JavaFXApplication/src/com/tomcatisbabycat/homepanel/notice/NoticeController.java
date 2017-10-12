@@ -46,51 +46,63 @@ import javafx.util.Duration;
  * @author kang
  */
 public class NoticeController implements Initializable {
+	@FXML
+	private StackPane noticeStackPane;
+	@FXML
+	private Button btnControlHome;
+	@FXML
+	private Button btnControlLock;
+	@FXML
+	private Button btnControlBack;
+	@FXML
+	private Button btnControlAdd;
+	@FXML
+	private TableView<Memo> noticeTableView;
 
-      @FXML
-      private StackPane noticeStackPane;
-      @FXML
-      private Button btnControlHome;
-      @FXML
-      private Button btnControlLock;
-      @FXML
-      private Button btnControlBack;
-      @FXML
-      private Button btnControlAdd;
-      @FXML
-      private TableView<Memo> noticeTableView;
-      @FXML
-      private TextArea addTextArea;
-      @FXML
-      private Button btnControlDelete;
-      @FXML
-      private DatePicker dataPick;
+	@FXML
+	private Rectangle menuBack;
 
-      private NoticeList noticeList = NoticeList.getInstance();
-      private ObservableList<Memo> list;
-      Parent parent;
+	@FXML
+	private TextArea addTextArea;
+	private String writeDate;
+	private ObservableList<Memo> list;
+	@FXML
+	private Button btnControlDelete;
 
-      /**
-       * Initializes the controller class.
-       */
-      @Override
-      public void initialize(URL url, ResourceBundle rb) {
+	private TextArea regTextArea;
 
-            btnControlLock.setOnAction(event -> {
-                  handleBtnControlLock(event);
-            });
-            btnControlHome.setOnAction(event -> {
-                  handleBtnControlHome(event);
-            });
-            btnControlBack.setOnAction(event -> {
-                  handleBtnControlBack(event);
-            });
-            btnControlAdd.setOnAction(event -> {
-                  handleBtnControlAdd(event);
-            });
-            btnControlDelete.setOnAction(event -> {
-                  handleBtnControlDelete(event);
-            });
+	private NoticeList noticeList = NoticeList.getInstance();
+
+	Parent parent;
+	@FXML
+	private DatePicker dataPick;
+
+	/**
+	 * Initializes the controller class.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		btnControlAdd.setFocusTraversable(false);
+		btnControlBack.setFocusTraversable(false);
+		btnControlDelete.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+
+		btnControlLock.setOnAction(event -> {
+			handleBtnControlLock(event);
+		});
+		btnControlHome.setOnAction(event -> {
+			handleBtnControlHome(event);
+		});
+		btnControlBack.setOnAction(event -> {
+			handleBtnControlBack(event);
+		});
+		btnControlAdd.setOnAction(event -> {
+			handleBtnControlAdd(event);
+		});
+		btnControlDelete.setOnAction(event -> {
+			handleBtnControlDelete(event);
+		});
 
 //            noticeTableView.getFocusModel().getFocusedItem().setContents(editTextArea.getText());
 //            noticeTableView.getFocusModel().getFocusedItem().setDate(regYearCombo.getValue() + regMonthCombo.getValue() + regDayCombo.getValue());

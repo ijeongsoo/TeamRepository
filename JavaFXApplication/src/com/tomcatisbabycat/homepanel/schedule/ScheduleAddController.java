@@ -92,6 +92,16 @@ public class ScheduleAddController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnAdd.setFocusTraversable(false);
+		btnFri.setFocusTraversable(false);
+		btnMon.setFocusTraversable(false);
+		btnOnOff.setFocusTraversable(false);
+		btnSat.setFocusTraversable(false);
+		btnSun.setFocusTraversable(false);
+		btnThu.setFocusTraversable(false);
+		btnTue.setFocusTraversable(false);
+		btnWen.setFocusTraversable(false);
+		
 		Timeline timeline = new Timeline();
 		popupBackground.setOpacity(0);
 		addAnchorPane.setOpacity(0);

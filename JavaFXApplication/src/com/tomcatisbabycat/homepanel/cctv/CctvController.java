@@ -80,7 +80,12 @@ public class CctvController implements Initializable {
        */
       @Override
       public void initialize(URL url, ResourceBundle rb) {
-		
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlBack.setFocusTraversable(false);
+		btnControlImage2.setFocusTraversable(false);
+		btnControlImage3.setFocusTraversable(false);
+		btnControlImage4.setFocusTraversable(false);
 		
             btnControlLock.setOnAction(event -> {
                   handleBtnControlLock(event);

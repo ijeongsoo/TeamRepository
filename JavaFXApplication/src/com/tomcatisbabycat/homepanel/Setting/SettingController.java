@@ -31,34 +31,38 @@ import javafx.util.Duration;
  */
 public class SettingController implements Initializable {
 
-      @FXML
-      private StackPane settingStackPane;
-      @FXML
-      private Button btnControlHome;
-      @FXML
-      private Button btnControlLock;
-      @FXML
-      private Button btnControlBack;
+	@FXML
+	private StackPane settingStackPane;
+	@FXML
+	private Button btnControlHome;
+	@FXML
+	private Button btnControlLock;
+	@FXML
+	private Button btnControlBack;
 
-      /**
-       * Initializes the controller class.
-       */
-      @Override
-      public void initialize(URL url, ResourceBundle rb) {
-           btnControlHome.setOnAction(event->{
-                 handleBtnControlHome(event);
-           });
-           btnControlLock.setOnAction(event->{
-                 handleBtnControlLock(event);
-           });
-           btnControlBack.setOnAction(event->{
-                 handleBtnControlBack(event);
-           });
-      }
+	/**
+	 * Initializes the controller class.
+	 */
+	@Override
+	public void initialize(URL url, ResourceBundle rb) {
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
 
-      private void handleBtnControlHome(ActionEvent event) {
-           
-            try {
+		btnControlHome.setOnAction(event -> {
+			handleBtnControlHome(event);
+		});
+		btnControlLock.setOnAction(event -> {
+			handleBtnControlLock(event);
+		});
+		btnControlBack.setOnAction(event -> {
+			handleBtnControlBack(event);
+		});
+	}
+
+	private void handleBtnControlHome(ActionEvent event) {
+
+		try {
 			StackPane parent = FXMLLoader.load(MainController.class.getResource("main.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
 			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
 			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
@@ -87,17 +91,17 @@ public class SettingController implements Initializable {
 			timeline.play();
 		} catch (IOException ex) {
 		}
-      }
+	}
 
-      private void handleBtnControlLock(ActionEvent event) {
-           
-            LockController.lockRootPane.getChildren().remove(settingStackPane);
-           
-      }
+	private void handleBtnControlLock(ActionEvent event) {
 
-      private void handleBtnControlBack(ActionEvent event) {
-            
-            try {
+		LockController.lockRootPane.getChildren().remove(settingStackPane);
+
+	}
+
+	private void handleBtnControlBack(ActionEvent event) {
+
+		try {
 			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
 			LockController.lockRootPane.getChildren().add(LockController.lockRootPane.getChildren().size(), parent);
 			// 추가를한 이순간에는 리스트의 사이즈가 3이다. 아래코드에서 메인페이지를 제거하면 사이즈가 2로 바뀐다
@@ -126,7 +130,6 @@ public class SettingController implements Initializable {
 			timeline.play();
 		} catch (IOException ex) {
 		}
-      }
-      
-      
+	}
+
 }

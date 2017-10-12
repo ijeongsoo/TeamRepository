@@ -14,7 +14,7 @@
         <Rectangle fx:id="menuBack" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="480.0" stroke="WHITE" strokeType="INSIDE" width="800.0" />
         <AnchorPane prefHeight="480.0" prefWidth="800.0" style="-fx-background-color: white;">
             <children>
-                <Label layoutX="40.0" layoutY="27.0" text="Schedule">
+                <Label layoutX="55.0" layoutY="35.0" styleClass="mainFont" text="Schedule">
                     <font>
                         <Font name="Arial Bold" size="24.0" />
                     </font>
@@ -74,7 +74,7 @@
                                 <ListView fx:id="scheduleListview" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: white;" BorderPane.alignment="CENTER" />
                             </center>
                         </BorderPane>
-                  <Label fx:id="lblHide" layoutX="55.0" layoutY="180.0" visible="false" text="항목이 없습니다. ">
+                  <Label fx:id="lblHide" layoutX="55.0" layoutY="180.0" text="항목이 없습니다. " visible="false">
                      <font>
                         <Font size="32.0" />
                      </font>

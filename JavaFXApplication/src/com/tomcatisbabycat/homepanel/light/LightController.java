@@ -76,8 +76,81 @@ public class LightController implements Initializable {
 	/**
 	 * Initializes the controller class.
 	 */
+	
+	private void lightThread(){
+		if (!light.isNum2Room()) {
+			num2Room.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			num2Room.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isNum1Room()) {
+			num1Room.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			num1Room.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isMultiRoom()) {
+			multiRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			multiRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isBoilRoom()) {
+			boilRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			boilRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isLivingRoom()) {
+			livingRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			livingRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isKeachinRoom()) {
+			kichinRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			kichinRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isInnerRoom()) {
+			innerRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			innerRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isDoorRoom()) {
+			doorRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			doorRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		if (!light.isBathRoom()) {
+			bathRoom.setStyle("-fx-background-color:#c0c0c0;");
+		} else {
+			bathRoom.setStyle("-fx-background-color:#FFCC66;");
+		}
+
+		lblLight.setText(String.valueOf(countLight()));
+		imgLight.setOpacity(((double) countLight()) / 9);
+	}
+	
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		btnControlBack.setFocusTraversable(false);
+		btnControlHome.setFocusTraversable(false);
+		btnControlLock.setFocusTraversable(false);
+		num1Room.setFocusTraversable(false);
+		num2Room.setFocusTraversable(false);
+		bathRoom.setFocusTraversable(false);
+		doorRoom.setFocusTraversable(false);
+		multiRoom.setFocusTraversable(false);
+		kichinRoom.setFocusTraversable(false);
+		livingRoom.setFocusTraversable(false);
+		innerRoom.setFocusTraversable(false);
+		boilRoom.setFocusTraversable(false);
+		
 		if (!light.isNum2Room()) {
 			num2Room.setStyle("-fx-background-color:#c0c0c0;");
 		} else {
@@ -286,6 +359,25 @@ public class LightController implements Initializable {
 				imgLight.setOpacity(((double) Integer.parseInt(newValue)) / 9);
 			}
 		});
+		
+		Thread thread = new Thread(){
+			@Override
+			public void run() {
+				while(lightStackPane.isVisible()){
+					Platform.runLater(() -> {
+						lightThread();
+					});
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException ex) {
+					}
+				}
+				System.out.println("light쓰레드 죽음");
+			}
+			
+		};
+		thread.setDaemon(true);
+		thread.start();
 
 	}
 
@@ -323,7 +415,6 @@ public class LightController implements Initializable {
 	}
 
 	private void handleBtnControlBack(ActionEvent event) {
-		
 
 		try {
 			StackPane parent = FXMLLoader.load(MenuController.class.getResource("menu.fxml")); // css와 같은방식으로 클래스를 import해서 해당 패키지 리소스에 접근
@@ -343,6 +434,7 @@ public class LightController implements Initializable {
 				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
 				timeline2.getKeyFrames().add(keyFrame2);
 				timeline2.play();
+				lightStackPane.setVisible(false);
 				LockController.lockRootPane.getChildren().remove(1);
 			}, keyValueStackPane);
 
@@ -359,9 +451,9 @@ public class LightController implements Initializable {
 	}
 
 	private void handleBtnControlLock(ActionEvent event) {
-		
+		lightStackPane.setVisible(false);
 		LockController.lockRootPane.getChildren().remove(lightStackPane);
-			
+
 	}
 
 	private void handleBtnControlHome(ActionEvent event) {
@@ -384,6 +476,7 @@ public class LightController implements Initializable {
 				KeyFrame keyFrame2 = new KeyFrame(Duration.millis(500), keyvalue2);
 				timeline2.getKeyFrames().add(keyFrame2);
 				timeline2.play();
+				lightStackPane.setVisible(false);
 				LockController.lockRootPane.getChildren().remove(1);
 			}, keyValueStackPane);
 
